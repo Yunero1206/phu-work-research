@@ -1650,6 +1650,7 @@ const DEFAULT_SERVER_GEMINI_KEY = "AQ.Ab8RN6LVbYTojcA_vki2Onou_yVbLWtrId4wTz31tR
 const DEFAULT_SERVER_TAVILY_KEY = "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";
 
 
+
 async function handleApiIntake(request, env = {}) {
   const securityApiHeaders = {
     "Content-Type": "application/json; charset=utf-8",
@@ -1684,58 +1685,56 @@ async function handleApiIntake(request, env = {}) {
   }
 
   const geminiApiKey = env?.GEMINI_API_KEY || "AQ.Ab8RN6LVbYTojcA_vki2Onou_yVbLWtrId4wTz31tRlvWoQpSQ";
-  const nowIso = new Date().toISOString();
+  const now = new Date();
+  const nowIso = now.toISOString();
 
   const systemInstruction = `You are Explainable Trust Intelligence Engine (Ledger V3).
-Reconstruct the input statement into a structured, contestable proposal.
+Analyze the user statement and reconstruct a structured proposal.
 Return ONLY valid JSON matching this schema:
 {
   "explanation": {
-    "text": "Detailed summary of the situation and what the record supports",
+    "text": "Detailed factual summary of the reported situation",
     "user_goal": "The core objective of the user"
   },
   "operations": [
     {
       "operation_type": "add_claim",
       "local_ref": "new_claim_1",
-      "proposition": "Precise statement of what is reported",
-      "actor": "Actor involved",
-      "action": "reported / performed",
-      "target": "target object or issue",
-      "domain_time": "Time of event",
+      "proposition": "Statement of reported proposition",
+      "actor": "User / Customer",
+      "action": "reported",
+      "target": "target issue",
+      "domain_time": "As reported by user",
       "assessment": "Reported",
-      "reasoning": "Basis in the user report",
+      "reasoning": "Direct user statement",
       "scope": "Submitted statement",
-      "limits": ["Limit of evidence"]
+      "limits": ["No independent documentary record has been accepted yet"]
     },
     {
       "operation_type": "add_event",
       "local_ref": "new_event_1",
-      "domain_time": "Time of event",
-      "actor": "Actor",
-      "action": "action",
-      "target": "target",
-      "effect": "Consequence",
-      "assessment": "Reported",
-      "finding_refs": ["new_claim_1"]
+      "domain_time": "As reported by user",
+      "actor": "User / Customer",
+      "action": "reported receiving",
+      "target": "restriction or issue",
+      "effect": "Requires verification",
+      "assessment": "Reported"
     },
     {
       "operation_type": "add_gap",
       "local_ref": "new_gap_1",
       "question": "What documentation or evidence is missing?",
-      "relevance": "Why it matters",
-      "resolving_evidence": "Specific artifact needed",
-      "acquisition_guidance": "How to obtain",
-      "collection_boundary": "What not to collect",
-      "target_claim_refs": ["new_claim_1"]
+      "relevance": "Why it is material to resolution",
+      "resolving_evidence": "Specific document or log needed",
+      "acquisition_guidance": "How to obtain from platform support",
+      "collection_boundary": "Do not submit unrelated identity or payment credentials"
     },
     {
       "operation_type": "add_action",
       "local_ref": "new_action_1",
       "title": "Actionable next step",
-      "description": "Specific guidance",
-      "priority": "high",
-      "target_gap_refs": ["new_gap_1"]
+      "description": "Specific guidance for the user",
+      "priority": "high"
     }
   ]
 }`;
@@ -1769,67 +1768,90 @@ Return ONLY valid JSON matching this schema:
     try {
       proposalObj = JSON.parse(rawText);
     } catch (e) {
-      proposalObj = { explanation: { text: message, user_goal: "Resolve issue" }, operations: [] };
+      proposalObj = {
+        explanation: { text: message, user_goal: "Resolve reported issue" },
+        operations: []
+      };
     }
 
-    // Synthesize structured V3 Ledger
-    const caseId = prior_ledger?.id || "CASE_" + crypto.randomUUID().replace(/-/g, "_");
-    const caseNum = prior_ledger?.case_number || "CASE-001";
-    const revNum = (prior_ledger?.revisions?.length || 0) + 1;
-    const revId = "R" + String(revNum).padStart(2, "0");
-    const intakeId = "IN" + String(revNum).padStart(2, "0");
-    const statementId = "U" + String(revNum).padStart(2, "0");
-    const modelRunId = "MR" + String(revNum).padStart(2, "0");
+    // Allocate IDs strictly matching Zod RegExes:
+    // RevisionId: /^R[0-9]{2,}$/
+    // IntakeId: /^IN[0-9]{2,}$/
+    // StatementId: /^U[0-9]{2,}$/
+    // ClaimId: /^C[0-9]{2,}$/
+    // EventId: /^EV[0-9]{2,}$/
+    // GapId: /^G[0-9]{2,}$/
+    // ActionId: /^A[0-9]{2,}$/
+    // RelationshipId: /^REL[0-9]{2,}$/
+    // ModelRunId: /^MR[0-9]{2,}$/
 
-    const claims = (proposalObj.operations || []).filter(o => o.operation_type === "add_claim").map((c, i) => ({
-      id: "C" + String(revNum) + "_" + (i+1),
-      local_ref: c.local_ref || "new_claim_" + (i+1),
-      source_intake_id: intakeId,
-      proposition: c.proposition || message,
-      actor: c.actor || "User",
-      action: c.action || "reported",
-      target: c.target || "issue",
-      domain_time: c.domain_time || "Recent",
-      assessment: c.assessment || "Reported",
-      reasoning: c.reasoning || "Direct user statement",
-      scope: c.scope || "Current intake",
-      limits: c.limits || []
-    }));
+    const revIndex = (prior_ledger?.revisions?.length || 0) + 1;
+    const revId = "R" + String(revIndex).padStart(2, "0");
+    const intakeId = "IN" + String(revIndex).padStart(2, "0");
+    const statementId = "U" + String(revIndex).padStart(2, "0");
+    const claimId = "C" + String(revIndex).padStart(2, "0");
+    const eventId = "EV" + String(revIndex).padStart(2, "0");
+    const gapId = "G" + String(revIndex).padStart(2, "0");
+    const actionId = "A" + String(revIndex).padStart(2, "0");
+    const relId = "REL" + String(revIndex).padStart(2, "0");
+    const modelRunId = "MR" + String(revIndex).padStart(2, "0");
+    const caseId = prior_ledger?.id || ("CASE_" + crypto.randomUUID().replace(/[^a-zA-Z0-9]/g, "").slice(0, 16));
+    const caseNum = prior_ledger?.case_number || "DEMO-001";
 
-    const events = (proposalObj.operations || []).filter(o => o.operation_type === "add_event").map((e, i) => ({
-      id: "E" + String(revNum) + "_" + (i+1),
-      local_ref: e.local_ref || "new_event_" + (i+1),
-      source_intake_id: intakeId,
-      domain_time: e.domain_time || "Recent",
-      actor: e.actor || "User",
-      action: e.action || "reported",
-      target: e.target || "issue",
-      effect: e.effect || "Requires review",
-      assessment: e.assessment || "Reported",
-      finding_refs: ["C" + String(revNum) + "_1"]
-    }));
+    const promptClaim = (proposalObj.operations || []).find(o => o.operation_type === "add_claim") || {};
+    const promptEvent = (proposalObj.operations || []).find(o => o.operation_type === "add_event") || {};
+    const promptGap = (proposalObj.operations || []).find(o => o.operation_type === "add_gap") || {};
+    const promptAction = (proposalObj.operations || []).find(o => o.operation_type === "add_action") || {};
 
-    const gaps = (proposalObj.operations || []).filter(o => o.operation_type === "add_gap").map((g, i) => ({
-      id: "G" + String(revNum) + "_" + (i+1),
-      local_ref: g.local_ref || "new_gap_" + (i+1),
-      source_intake_id: intakeId,
-      question: g.question || "What corroborating record exists?",
-      relevance: g.relevance || "Material to resolution",
-      resolving_evidence: g.resolving_evidence || "Official log or receipt",
-      acquisition_guidance: g.acquisition_guidance || "Obtain from platform support",
-      collection_boundary: g.collection_boundary || "Do not submit sensitive credentials",
-      target_claim_refs: ["C" + String(revNum) + "_1"]
-    }));
+    const claimObj = {
+      id: claimId,
+      proposition: promptClaim.proposition || message,
+      actor: promptClaim.actor || "User",
+      action: promptClaim.action || "reported",
+      target: promptClaim.target || "issue",
+      domain_time: promptClaim.domain_time || "As reported by user",
+      assessment: "Reported",
+      reasoning: promptClaim.reasoning || "Direct user statement",
+      scope: promptClaim.scope || "Submitted statement",
+      limits: promptClaim.limits && promptClaim.limits.length > 0 ? promptClaim.limits : ["No independent documentary verification accepted yet"],
+      supporting_source_ids: [statementId],
+      qualifying_source_ids: [],
+      conflicting_source_ids: []
+    };
 
-    const actions = (proposalObj.operations || []).filter(o => o.operation_type === "add_action").map((a, i) => ({
-      id: "A" + String(revNum) + "_" + (i+1),
-      local_ref: a.local_ref || "new_action_" + (i+1),
-      source_intake_id: intakeId,
-      title: a.title || "Next Step",
-      description: a.description || "Follow up on evidence gap",
-      priority: a.priority || "high",
-      target_gap_refs: ["G" + String(revNum) + "_1"]
-    }));
+    const eventObj = {
+      id: eventId,
+      domain_time: promptEvent.domain_time || "As reported by user",
+      actor: promptEvent.actor || "User",
+      action: promptEvent.action || "reported",
+      target: promptEvent.target || "issue",
+      effect: promptEvent.effect || "Requires verification",
+      source_support_ids: [statementId],
+      finding_ids: [claimId],
+      assessment: "Reported"
+    };
+
+    const gapObj = {
+      id: gapId,
+      question: promptGap.question || "What contemporaneous record shows the situation?",
+      relevance: promptGap.relevance || "Material to resolving the reported issue",
+      resolving_evidence: promptGap.resolving_evidence || "Official receipt or support message",
+      acquisition_guidance: promptGap.acquisition_guidance || "Submit relevant support transcript with personal data redacted",
+      collection_boundary: promptGap.collection_boundary || "Do not submit unrelated identity or payment credentials",
+      target_claim_ids: [claimId],
+      status: "open",
+      transition: null
+    };
+
+    const actionObj = {
+      id: actionId,
+      title: promptAction.title || "Add one supporting record",
+      description: promptAction.description || "Upload relevant screenshot or response tied to this issue",
+      target_gap_ids: [gapId],
+      priority: "high",
+      status: "pending",
+      transition: null
+    };
 
     const nextRevision = {
       id: revId,
@@ -1838,34 +1860,10 @@ Return ONLY valid JSON matching this schema:
       model_run_id: modelRunId,
       objective: proposalObj.explanation?.user_goal || "Assess what the submitted record supports.",
       explanation: proposalObj.explanation?.text || message,
-      claims: claims.length > 0 ? claims : [{
-        id: "C" + String(revNum) + "_1",
-        local_ref: "new_claim_1",
-        source_intake_id: intakeId,
-        proposition: message,
-        actor: "User",
-        action: "reported",
-        target: "matter",
-        domain_time: "Recent",
-        assessment: "Reported",
-        reasoning: "User statement intake",
-        scope: "Intake",
-        limits: []
-      }],
-      events: events.length > 0 ? events : [{
-        id: "E" + String(revNum) + "_1",
-        local_ref: "new_event_1",
-        source_intake_id: intakeId,
-        domain_time: "Recent",
-        actor: "User",
-        action: "reported",
-        target: "matter",
-        effect: "Record registered",
-        assessment: "Reported",
-        finding_refs: ["C" + String(revNum) + "_1"]
-      }],
-      gaps,
-      actions
+      claims: [claimObj],
+      events: [eventObj],
+      gaps: [gapObj],
+      actions: [actionObj]
     };
 
     const nextLedger = {
@@ -1877,7 +1875,11 @@ Return ONLY valid JSON matching this schema:
       current_revision_id: revId,
       intake_ledger: [
         ...(prior_ledger?.intake_ledger || []),
-        { id: intakeId, received_at: nowIso, parts: [{ kind: "statement", statement_id: statementId, raw_text: message }] }
+        {
+          id: intakeId,
+          received_at: nowIso,
+          parts: [{ kind: "statement", statement_id: statementId, raw_text: message }]
+        }
       ],
       revisions: [
         ...(prior_ledger?.revisions || []),
@@ -1890,7 +1892,14 @@ Return ONLY valid JSON matching this schema:
       evidence: prior_ledger?.evidence || [],
       relationships: [
         ...(prior_ledger?.relationships || []),
-        { source_id: statementId, target_id: "C" + String(revNum) + "_1", relationship_type: "supports_claim", reason: "Direct source" }
+        {
+          id: relId,
+          relationship_type: "supports_claim",
+          source_id: statementId,
+          target_id: claimId,
+          reason: "Direct statement source",
+          created_in_revision_id: revId
+        }
       ]
     };
 
@@ -1904,7 +1913,7 @@ Return ONLY valid JSON matching this schema:
       run_mode: run_mode,
       provider: "google-gemini",
       model_id: "gemini-3.5-flash-lite",
-      prompt_version: "3.0.0",
+      prompt_version: "explainable-trust-analysis-v4",
       started_at: nowIso,
       finished_at: nowIso,
       status: "accepted",
