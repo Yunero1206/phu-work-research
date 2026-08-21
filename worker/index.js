@@ -1770,30 +1770,43 @@ Return ONLY valid JSON matching this exact schema:
   const prompt = `User Statement:\n${statement}${webContext}\n\nAnalyze and return the structured JSON ledger.`;
 
   try {
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${geminiApiKey}`;
-    const geminiRes = await fetch(geminiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [
-          { role: "user", parts: [{ text: systemInstruction + "\n\n" + prompt }] }
-        ],
-        generationConfig: {
-          temperature: 0.1,
-          responseMimeType: "application/json"
-        }
-      })
-    });
+        const modelCandidates = ["gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-flash-latest", "gemini-2.5-flash"];
+    let geminiRes = null;
+    let geminiData = null;
 
-    if (!geminiRes.ok) {
-      const errText = await geminiRes.text();
-      return new Response(JSON.stringify({ error: `Lỗi phân tích từ AI Provider (Status ${geminiRes.status}). Vui lòng kiểm tra lại API Key hoặc nội dung input.` }), {
+    for (const modelName of modelCandidates) {
+      try {
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${geminiApiKey}`;
+        const res = await fetch(geminiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [
+              { role: "user", parts: [{ text: systemInstruction + "\n\n" + prompt }] }
+            ],
+            generationConfig: {
+              temperature: 0.1,
+              responseMimeType: "application/json"
+            }
+          })
+        });
+
+        if (res.ok) {
+          geminiRes = res;
+          geminiData = await res.json();
+          break;
+        }
+      } catch (e) {
+        console.warn(`Model ${modelName} attempt failed:`, e.message);
+      }
+    }
+
+    if (!geminiData) {
+      return new Response(JSON.stringify({ error: "Lỗi phân tích từ AI Provider. Vui lòng thử lại hoặc nhập API Key cá nhân." }), {
         status: 502,
         headers: securityApiHeaders
       });
     }
-
-    const geminiData = await geminiRes.json();
     const rawText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
     let ledgerResult;
     try {
@@ -2326,7 +2339,7 @@ function explainableAppPage() {
     <div class="topbar-right">
       <div class="status-badge">
         <div class="status-dot"></div>
-        <span>Google Gemini Flash · Active</span>
+        <span>Google Gemini 3.5 Flash Lite · Active</span>
       </div>
       <a href="https://github.com/Yunero1206/Explainable-App" target="_blank" rel="noreferrer" class="github-link">
         <span>GitHub: Yunero1206/Explainable-App ↗</span>
