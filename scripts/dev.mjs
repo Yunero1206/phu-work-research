@@ -35,6 +35,27 @@ const server = http.createServer(async (req, res) => {
       init.body = Buffer.concat(chunks);
     }
 
+    // Proxy /api/intake and /api/health to Explainable-App server on port 3002
+    if (url.pathname === "/api/intake" || url.pathname === "/api/health") {
+      try {
+        const backendRes = await fetch(`http://localhost:3002${url.pathname}`, {
+          method: req.method,
+          headers,
+          body: init.body
+        });
+        res.statusCode = backendRes.status;
+        for (const [k, v] of backendRes.headers.entries()) {
+          res.setHeader(k, v);
+        }
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        const buf = await backendRes.arrayBuffer();
+        res.end(Buffer.from(buf));
+        return;
+      } catch (proxyErr) {
+        console.error("Backend proxy error:", proxyErr.message);
+      }
+    }
+
     const webReq = new Request(url, init);
     const webRes = await workerModule.default.fetch(webReq, {}, {});
 

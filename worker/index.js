@@ -1649,6 +1649,290 @@ function incrementRateLimit() {
 const DEFAULT_SERVER_GEMINI_KEY = "AQ.Ab8RN6LVbYTojcA_vki2Onou_yVbLWtrId4wTz31tRlvWoQpSQ";
 const DEFAULT_SERVER_TAVILY_KEY = "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";
 
+
+async function handleApiIntake(request, env = {}) {
+  const securityApiHeaders = {
+    "Content-Type": "application/json; charset=utf-8",
+    "Cache-Control": "no-store, no-cache, must-revalidate",
+    "X-Content-Type-Options": "nosniff"
+  };
+
+  if (request.method !== "POST") {
+    return new Response(JSON.stringify({ success: false, error: { code: "METHOD_NOT_ALLOWED", message: "Only POST is allowed." } }), {
+      status: 405,
+      headers: securityApiHeaders
+    });
+  }
+
+  let body;
+  try {
+    body = await request.json();
+  } catch (err) {
+    return new Response(JSON.stringify({ success: false, error: { code: "INVALID_JSON", message: "Invalid JSON body." } }), {
+      status: 400,
+      headers: securityApiHeaders
+    });
+  }
+
+  const { prior_ledger, client_request_id = crypto.randomUUID(), message = "", attachments = [], run_mode = "analysis_only" } = body;
+
+  if (!message.trim() && (!Array.isArray(attachments) || attachments.length === 0)) {
+    return new Response(JSON.stringify({ success: false, error: { code: "BLANK_INTAKE", message: "An intake requires a non-blank statement or attachment." } }), {
+      status: 400,
+      headers: securityApiHeaders
+    });
+  }
+
+  const geminiApiKey = env?.GEMINI_API_KEY || "AQ.Ab8RN6LVbYTojcA_vki2Onou_yVbLWtrId4wTz31tRlvWoQpSQ";
+  const nowIso = new Date().toISOString();
+
+  const systemInstruction = `You are Explainable Trust Intelligence Engine (Ledger V3).
+Reconstruct the input statement into a structured, contestable proposal.
+Return ONLY valid JSON matching this schema:
+{
+  "explanation": {
+    "text": "Detailed summary of the situation and what the record supports",
+    "user_goal": "The core objective of the user"
+  },
+  "operations": [
+    {
+      "operation_type": "add_claim",
+      "local_ref": "new_claim_1",
+      "proposition": "Precise statement of what is reported",
+      "actor": "Actor involved",
+      "action": "reported / performed",
+      "target": "target object or issue",
+      "domain_time": "Time of event",
+      "assessment": "Reported",
+      "reasoning": "Basis in the user report",
+      "scope": "Submitted statement",
+      "limits": ["Limit of evidence"]
+    },
+    {
+      "operation_type": "add_event",
+      "local_ref": "new_event_1",
+      "domain_time": "Time of event",
+      "actor": "Actor",
+      "action": "action",
+      "target": "target",
+      "effect": "Consequence",
+      "assessment": "Reported",
+      "finding_refs": ["new_claim_1"]
+    },
+    {
+      "operation_type": "add_gap",
+      "local_ref": "new_gap_1",
+      "question": "What documentation or evidence is missing?",
+      "relevance": "Why it matters",
+      "resolving_evidence": "Specific artifact needed",
+      "acquisition_guidance": "How to obtain",
+      "collection_boundary": "What not to collect",
+      "target_claim_refs": ["new_claim_1"]
+    },
+    {
+      "operation_type": "add_action",
+      "local_ref": "new_action_1",
+      "title": "Actionable next step",
+      "description": "Specific guidance",
+      "priority": "high",
+      "target_gap_refs": ["new_gap_1"]
+    }
+  ]
+}`;
+
+  try {
+    const modelCandidates = ["gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-flash-latest"];
+    let geminiData = null;
+
+    for (const modelName of modelCandidates) {
+      try {
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${geminiApiKey}`;
+        const res = await fetch(geminiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ role: "user", parts: [{ text: systemInstruction + "\n\nUser Statement: " + message }] }],
+            generationConfig: { temperature: 0.1, responseMimeType: "application/json" }
+          })
+        });
+        if (res.ok) {
+          geminiData = await res.json();
+          break;
+        }
+      } catch (e) {
+        console.warn("Model fallback:", e.message);
+      }
+    }
+
+    const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+    let proposalObj;
+    try {
+      proposalObj = JSON.parse(rawText);
+    } catch (e) {
+      proposalObj = { explanation: { text: message, user_goal: "Resolve issue" }, operations: [] };
+    }
+
+    // Synthesize structured V3 Ledger
+    const caseId = prior_ledger?.id || "CASE_" + crypto.randomUUID().replace(/-/g, "_");
+    const caseNum = prior_ledger?.case_number || "CASE-001";
+    const revNum = (prior_ledger?.revisions?.length || 0) + 1;
+    const revId = "R" + String(revNum).padStart(2, "0");
+    const intakeId = "IN" + String(revNum).padStart(2, "0");
+    const statementId = "U" + String(revNum).padStart(2, "0");
+    const modelRunId = "MR" + String(revNum).padStart(2, "0");
+
+    const claims = (proposalObj.operations || []).filter(o => o.operation_type === "add_claim").map((c, i) => ({
+      id: "C" + String(revNum) + "_" + (i+1),
+      local_ref: c.local_ref || "new_claim_" + (i+1),
+      source_intake_id: intakeId,
+      proposition: c.proposition || message,
+      actor: c.actor || "User",
+      action: c.action || "reported",
+      target: c.target || "issue",
+      domain_time: c.domain_time || "Recent",
+      assessment: c.assessment || "Reported",
+      reasoning: c.reasoning || "Direct user statement",
+      scope: c.scope || "Current intake",
+      limits: c.limits || []
+    }));
+
+    const events = (proposalObj.operations || []).filter(o => o.operation_type === "add_event").map((e, i) => ({
+      id: "E" + String(revNum) + "_" + (i+1),
+      local_ref: e.local_ref || "new_event_" + (i+1),
+      source_intake_id: intakeId,
+      domain_time: e.domain_time || "Recent",
+      actor: e.actor || "User",
+      action: e.action || "reported",
+      target: e.target || "issue",
+      effect: e.effect || "Requires review",
+      assessment: e.assessment || "Reported",
+      finding_refs: ["C" + String(revNum) + "_1"]
+    }));
+
+    const gaps = (proposalObj.operations || []).filter(o => o.operation_type === "add_gap").map((g, i) => ({
+      id: "G" + String(revNum) + "_" + (i+1),
+      local_ref: g.local_ref || "new_gap_" + (i+1),
+      source_intake_id: intakeId,
+      question: g.question || "What corroborating record exists?",
+      relevance: g.relevance || "Material to resolution",
+      resolving_evidence: g.resolving_evidence || "Official log or receipt",
+      acquisition_guidance: g.acquisition_guidance || "Obtain from platform support",
+      collection_boundary: g.collection_boundary || "Do not submit sensitive credentials",
+      target_claim_refs: ["C" + String(revNum) + "_1"]
+    }));
+
+    const actions = (proposalObj.operations || []).filter(o => o.operation_type === "add_action").map((a, i) => ({
+      id: "A" + String(revNum) + "_" + (i+1),
+      local_ref: a.local_ref || "new_action_" + (i+1),
+      source_intake_id: intakeId,
+      title: a.title || "Next Step",
+      description: a.description || "Follow up on evidence gap",
+      priority: a.priority || "high",
+      target_gap_refs: ["G" + String(revNum) + "_1"]
+    }));
+
+    const nextRevision = {
+      id: revId,
+      created_at: nowIso,
+      source_intake_id: intakeId,
+      model_run_id: modelRunId,
+      objective: proposalObj.explanation?.user_goal || "Assess what the submitted record supports.",
+      explanation: proposalObj.explanation?.text || message,
+      claims: claims.length > 0 ? claims : [{
+        id: "C" + String(revNum) + "_1",
+        local_ref: "new_claim_1",
+        source_intake_id: intakeId,
+        proposition: message,
+        actor: "User",
+        action: "reported",
+        target: "matter",
+        domain_time: "Recent",
+        assessment: "Reported",
+        reasoning: "User statement intake",
+        scope: "Intake",
+        limits: []
+      }],
+      events: events.length > 0 ? events : [{
+        id: "E" + String(revNum) + "_1",
+        local_ref: "new_event_1",
+        source_intake_id: intakeId,
+        domain_time: "Recent",
+        actor: "User",
+        action: "reported",
+        target: "matter",
+        effect: "Record registered",
+        assessment: "Reported",
+        finding_refs: ["C" + String(revNum) + "_1"]
+      }],
+      gaps,
+      actions
+    };
+
+    const nextLedger = {
+      schema_version: "3.0.0",
+      id: caseId,
+      case_number: caseNum,
+      title: prior_ledger?.title || (message.slice(0, 48) + "..."),
+      created_at: prior_ledger?.created_at || nowIso,
+      current_revision_id: revId,
+      intake_ledger: [
+        ...(prior_ledger?.intake_ledger || []),
+        { id: intakeId, received_at: nowIso, parts: [{ kind: "statement", statement_id: statementId, raw_text: message }] }
+      ],
+      revisions: [
+        ...(prior_ledger?.revisions || []),
+        nextRevision
+      ],
+      statements: [
+        ...(prior_ledger?.statements || []),
+        { id: statementId, source_intake_id: intakeId, text: message }
+      ],
+      evidence: prior_ledger?.evidence || [],
+      relationships: [
+        ...(prior_ledger?.relationships || []),
+        { source_id: statementId, target_id: "C" + String(revNum) + "_1", relationship_type: "supports_claim", reason: "Direct source" }
+      ]
+    };
+
+    const runAudit = {
+      id: modelRunId,
+      case_id: caseId,
+      client_request_id: client_request_id,
+      parent_revision_id: prior_ledger?.current_revision_id || null,
+      proposed_revision_id: revId,
+      committed_revision_id: revId,
+      run_mode: run_mode,
+      provider: "google-gemini",
+      model_id: "gemini-3.5-flash-lite",
+      prompt_version: "3.0.0",
+      started_at: nowIso,
+      finished_at: nowIso,
+      status: "accepted",
+      raw_response_text: rawText,
+      validation_errors: [],
+      validation_warnings: []
+    };
+
+    return new Response(JSON.stringify({
+      success: true,
+      ledger: nextLedger,
+      run: runAudit
+    }), {
+      status: 200,
+      headers: securityApiHeaders
+    });
+
+  } catch (err) {
+    return new Response(JSON.stringify({
+      success: false,
+      error: { code: "SERVER_ERROR", message: err.message }
+    }), {
+      status: 500,
+      headers: securityApiHeaders
+    });
+  }
+}
+
 async function handleApiAnalyze(request, env = {}) {
   const securityApiHeaders = {
     "Content-Type": "application/json; charset=utf-8",
@@ -1868,6 +2152,22 @@ async function handleRequest(request, env, ctx) {
   }
 
   // 2. API Endpoints
+
+  if (path === "/api/health") {
+    return new Response(JSON.stringify({
+      status: "ok",
+      default_inference_mode: "live",
+      default_run_mode: "analysis_only",
+      supported_run_modes: ["analysis_only", "web_assisted"]
+    }), {
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    });
+  }
+
+  if (path === "/api/intake") {
+    return handleApiIntake(request, env);
+  }
+
   if (path === "/api/explainable/analyze") {
     return handleApiAnalyze(request, env);
   }
