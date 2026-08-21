@@ -40,8 +40,13 @@ const server = http.createServer(async (req, res) => {
 
     res.statusCode = webRes.status;
     for (const [k, v] of webRes.headers.entries()) {
-      res.setHeader(k, v);
+      if (k.toLowerCase() === "cache-control") {
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0");
+      } else {
+        res.setHeader(k, v);
+      }
     }
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0");
 
     const arrayBuffer = await webRes.arrayBuffer();
     res.end(Buffer.from(arrayBuffer));
