@@ -1130,6 +1130,206 @@ const siteCss = `
   }
   @keyframes f-spin { to { transform: rotate(360deg); } }
 
+  
+  /* ==========================================================================
+     About Page Styles (Restored & Perfected)
+     ========================================================================== */
+  .f-about-hero-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+    gap: 40px 48px;
+    align-items: center;
+  }
+  .f-about-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .f-about-chip {
+    display: inline-block;
+    padding: 3px 9px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 4px;
+    font-family: var(--ui);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #e6eceb;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .f-about-profile-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .f-about-profile-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    flex-shrink: 0;
+  }
+  .f-about-profile-info strong {
+    display: block;
+    color: #f7f3ea;
+    font-size: 1.15rem;
+    font-family: var(--cm);
+  }
+  .f-about-profile-info span {
+    display: block;
+    color: #cbd7d5;
+    font-size: 0.8rem;
+    font-family: var(--ui);
+    line-height: 1.4;
+    margin-top: 4px;
+  }
+
+  .f-about-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 56px;
+    padding: 54px 0 80px;
+    align-items: start;
+  }
+  .f-about-sidebar {
+    position: sticky;
+    top: 84px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .f-sidebar-box {
+    background: #ffffff;
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(19, 38, 47, 0.04);
+  }
+  .f-sidebar-box h3 {
+    margin: 0 0 12px;
+    font-size: 0.76rem;
+    font-family: var(--ui);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line-subtle);
+    padding-bottom: 6px;
+  }
+  .f-sidebar-stat {
+    margin-bottom: 12px;
+  }
+  .f-sidebar-stat:last-child {
+    margin-bottom: 0;
+  }
+  .f-sidebar-stat b {
+    display: block;
+    font-size: 1.25rem;
+    color: var(--navy);
+    font-family: var(--cm);
+    line-height: 1.1;
+  }
+  .f-sidebar-stat span {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-family: var(--ui);
+    margin-top: 2px;
+  }
+
+  .f-sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .f-sidebar-nav a {
+    color: var(--navy);
+    font-size: 0.88rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.15s ease;
+  }
+  .f-sidebar-nav a:hover {
+    color: var(--copper);
+  }
+
+  .f-about-content section {
+    border-top: 1px solid var(--ink);
+    padding-top: 28px;
+    margin-bottom: 44px;
+  }
+  .f-about-content section:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .f-about-content h2 {
+    margin: 0 0 16px;
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.15;
+  }
+  .f-about-content p {
+    font-size: 1.02rem;
+    line-height: 1.74;
+    color: #2b3336;
+    margin: 0 0 16px;
+  }
+
+  .f-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0 28px; }
+  .f-fact { padding: 18px; background: #ffffff; border: 1px solid var(--ink); border-radius: 4px; box-shadow: 0 2px 6px rgba(19,38,47,0.04); }
+  .f-fact strong { display: block; font-size: 1.35rem; font-weight: 700; color: var(--navy); line-height: 1.1; margin-bottom: 6px; }
+  .f-fact span { display: block; font-size: 0.8rem; line-height: 1.5; color: #435155; }
+  
+  .f-about-creds {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .f-cred-box {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--navy);
+    border-radius: 4px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 6px rgba(19, 38, 47, 0.04);
+  }
+  .f-cred-box strong {
+    display: block;
+    font-family: var(--cm);
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .f-cred-box span {
+    display: block;
+    font-size: 0.84rem;
+    color: #4b5250;
+    line-height: 1.45;
+  }
+
+  .f-contact { display: flex; flex-wrap: wrap; gap: 14px 24px; margin-top: 28px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--ui); }
+  .f-contact a { text-decoration: underline; text-underline-offset: 4px; color: var(--navy); }
+  .f-contact a:hover { color: var(--copper); }
+
+  /* Footer */
+  .f-footer { border-top: 1px solid var(--ink); padding: 22px 0 32px; font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em; }
+  .f-footer-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .f-footer-row a { text-decoration: underline; text-underline-offset: 4px; }
+
   /* Responsive Queries */
   @media (max-width: 920px) {
     .f-home-grid, .f-routes-grid, .f-case-reading { grid-template-columns: 1fr; gap: 36px; }
@@ -1174,8 +1374,8 @@ function layoutHeader(active = "") {
     <nav class="f-nav f-wrap" aria-label="Primary navigation">
       <a class="f-brand" href="/">Phạm Thanh Phú <span>Work & Research</span></a>
       <div class="f-links">
-        <a href="/work"${active === "work" ? ' aria-current="page"' : ""}>Work</a>
-        <a href="/apps/explainable-trust"${active === "app" ? ' aria-current="page"' : ""}>Explainable Trust ⚡</a>
+        <a href="/work"${active === "work" ? ' aria-current="page"' : ""}>Work Library</a>
+        <a href="/apps/explainable-trust"${active === "app" ? ' aria-current="page"' : ""}>Explainable Trust</a>
         <a href="/about"${active === "about" ? ' aria-current="page"' : ""}>About</a>
       </div>
     </nav>
@@ -2168,238 +2368,900 @@ Return ONLY valid JSON matching this exact schema:
 }
 
 function explainableAppPage() {
-  const appHtml = `<!doctype html>
+  return `<!doctype html>
 <html lang="en">
-${layoutHead("Explainable Trust — Interactive Intelligence Application", "Interactive workspace for traceable case reconstruction, DAG reasoning, W3C PROV-O audit trails, and live web query verification by Pham Thanh Phu.")}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explainable Trust — Interactive Decision Intelligence Workspace</title>
+  <meta name="description" content="Contestable AI Decision Engine & Traceable Case Reconstruction Workspace by Pham Thanh Phu. Powered by Google Gemini Flash & Tavily Search.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.3/cmu-serif.css">
+  <style>
+    :root {
+      --navy: #0f172a;
+      --navy-dark: #020617;
+      --panel-bg: #1e293b;
+      --panel-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --copper: #f97316;
+      --success: #22c55e;
+      --warning: #eab308;
+      --danger: #ef4444;
+      --card-bg: #0f172a;
+      --ui: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--navy-dark);
+      color: var(--text);
+      font-family: var(--ui);
+      font-size: 14px;
+      line-height: 1.5;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* App Top Navigation */
+    .app-header {
+      height: 56px;
+      min-height: 56px;
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      gap: 16px;
+      z-index: 10;
+    }
+    .app-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .app-back-btn {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--panel-border);
+      background: rgba(255, 255, 255, 0.04);
+      transition: all 0.15s ease;
+    }
+    .app-back-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .app-title-group {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .app-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .app-badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .app-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .engine-status-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--panel-border);
+      border-radius: 20px;
+    }
+    .engine-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--success);
+    }
+
+    /* Main App Layout */
+    .app-main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 380px minmax(0, 1fr);
+      overflow: hidden;
+    }
+
+    /* Left Sidebar: Intake & Presets */
+    .app-sidebar {
+      background: var(--panel-bg);
+      border-right: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 20px;
+      gap: 20px;
+    }
+    .sidebar-section-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .preset-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .preset-chip {
+      padding: 8px 12px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 12.5px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s ease;
+    }
+    .preset-chip:hover {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .app-textarea {
+      width: 100%;
+      height: 160px;
+      background: var(--card-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 12px;
+      color: #fff;
+      font-family: var(--ui);
+      font-size: 13px;
+      line-height: 1.5;
+      resize: vertical;
+    }
+    .app-textarea:focus {
+      outline: 2px solid var(--accent);
+      border-color: var(--accent);
+    }
+
+    .mode-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .mode-btn {
+      padding: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .mode-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .byok-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .byok-input {
+      width: 100%;
+      background: #020617;
+      border: 1px solid var(--panel-border);
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: #fff;
+      margin-top: 6px;
+    }
+
+    .run-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border: 1px solid #38bdf8;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+      transition: all 0.18s ease;
+    }
+    .run-btn:hover {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      transform: translateY(-1px);
+    }
+    .run-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Right Workspace */
+    .app-workspace {
+      background: #090d16;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .workspace-topbar {
+      height: 48px;
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: var(--panel-bg);
+    }
+    .workspace-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 100%;
+    }
+    .workspace-tab {
+      padding: 0 14px;
+      height: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .workspace-tab:hover {
+      color: #fff;
+    }
+    .workspace-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .workspace-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .action-btn {
+      padding: 5px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--panel-border);
+      border-radius: 4px;
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .action-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .workspace-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+    }
+
+    /* Output Views */
+    .view-empty {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-align: center;
+      gap: 12px;
+    }
+    .empty-icon {
+      font-size: 42px;
+      opacity: 0.6;
+    }
+    .empty-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .empty-desc {
+      font-size: 13px;
+      max-width: 440px;
+      line-height: 1.5;
+    }
+
+    .view-loading {
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .spinner {
+      width: 42px;
+      height: 42px;
+      border: 3px solid rgba(56, 189, 248, 0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .view-result {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* Target & Goal Banner */
+    .ledger-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+      border: 1px solid var(--panel-border);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+    .ledger-goal {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .ledger-summary {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    /* DAG Visual Flow */
+    .dag-container {
+      background: #020617;
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .dag-node {
+      display: grid;
+      grid-template-columns: 140px 1fr 100px;
+      gap: 16px;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+    }
+    .dag-node-time {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .dag-node-event {
+      font-size: 13px;
+      color: #f1f5f9;
+    }
+    .dag-node-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .dag-node-tag.verified { background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.4); }
+    .dag-node-tag.unverified { background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.4); }
+    .dag-node-tag.contested { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
+
+    /* Findings Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .finding-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .finding-claim {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .finding-basis {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .finding-conf {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      align-self: flex-start;
+      padding: 2px 6px;
+      background: rgba(56, 189, 248, 0.1);
+      border-radius: 4px;
+    }
+
+    /* Gaps Alert Cards */
+    .gap-card {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      border-left: 4px solid var(--danger);
+      border-radius: 6px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .gap-missing {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #fca5a5;
+    }
+    .gap-action {
+      font-size: 12.5px;
+      color: #cbd5e1;
+    }
+
+    /* Recovery Steps */
+    .recovery-step {
+      display: grid;
+      grid-template-columns: 36px 1fr 140px;
+      gap: 14px;
+      align-items: center;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+      padding: 12px 16px;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #86efac;
+      border-radius: 50%;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+    .step-action {
+      font-size: 13px;
+      color: #f8fafc;
+    }
+    .step-owner {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    /* Code & JSON Pre */
+    .json-code {
+      background: #020617;
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 900px) {
+      .app-main { grid-template-columns: 1fr; }
+      .app-sidebar { border-right: none; border-bottom: 1px solid var(--panel-border); max-height: 45vh; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .dag-node { grid-template-columns: 1fr; gap: 6px; }
+      .recovery-step { grid-template-columns: 32px 1fr; }
+      .step-owner { grid-column: 2; text-align: left; }
+    }
+  </style>
+</head>
 <body>
-  <a class="f-skip" href="#app-root">Skip to application workspace</a>
-  ${layoutHeader("app")}
-  <main id="app-root">
-    <section class="f-case-hero" style="background:var(--navy);padding:40px 0 32px;">
-      <div class="f-wrap">
-        <div class="f-crumb" style="color:#cbd5e1;">
-          <a href="/work" style="color:#f8fafc;">Work Library</a> <span>/</span> <span>Interactive Decision Engine</span>
-        </div>
-        <h1 style="font-size:clamp(2.2rem, 3.8vw, 3.2rem);color:#f8fafc;">Explainable Trust Intelligence Application</h1>
-        <p class="f-case-dek" style="max-width:840px;color:#cbd5e1;">
-          Reconstruct situations under uncertainty without losing the distinction between evidence, reported claims, inferences, and open gaps.
-        </p>
-      </div>
-    </section>
-
-    <div class="f-wrap" style="padding:32px 0 64px;">
-      <div style="background:#ffffff;border:1px solid var(--ink);border-radius:6px;padding:16px 20px;margin-bottom:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;">
-        <div>
-          <span style="font-family:var(--ui);font-size:0.76rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">System Engine Status:</span>
-          <strong style="margin-left:8px;color:var(--navy);">Live Google Gemini + Tavily Search Active</strong>
-          <span style="display:block;font-size:0.82rem;color:#4b5250;margin-top:2px;">Miễn phí 100 lượt đối soát/ngày qua hệ thống. Bạn có thể nhập Gemini API Key riêng (BYOK) nếu cần.</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <input type="password" id="user-gemini-key" placeholder="Nhập Gemini API Key (Tùy chọn)" style="padding:8px 12px;border:1px solid var(--line);border-radius:4px;font-size:0.82rem;width:220px;" aria-label="Gemini API Key">
-          <button id="save-key-btn" style="padding:8px 14px;background:var(--navy);color:#fff;border:none;border-radius:4px;font-size:0.8rem;font-weight:700;cursor:pointer;">Lưu Key</button>
-        </div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:minmax(0, 1.1fr) minmax(0, 1.4fr);gap:32px;align-items:start;">
-        <div style="background:#ffffff;border:1px solid var(--ink);border-radius:8px;padding:24px;box-shadow:0 4px 16px rgba(19,38,47,0.05);">
-          <h2 style="margin:0 0 12px;font-size:1.35rem;color:var(--navy);">1. Nhập sự việc / Vấn đề cần đối soát</h2>
-          <p style="font-size:0.88rem;color:#4b5250;margin:0 0 16px;line-height:1.5;">
-            Mô tả tình huống tranh chấp tài khoản, sự cố giao dịch, hoặc quyết định tự động cần bóc tách ranh giới chứng cứ.
-          </p>
-
-          <textarea id="app-statement" rows="7" style="width:100%;padding:12px;border:1px solid var(--ink);border-radius:4px;font-family:var(--ui);font-size:0.9rem;line-height:1.5;resize:vertical;" placeholder="Ví dụ: Tài khoản Shopee của tôi bị khóa vĩnh viễn lúc 14:20 ngày 05/08 vì nghi ngờ vi phạm chính sách voucher. Tôi còn 2 đơn hàng đang giao trị giá 1.200.000 VNĐ và số dư Ví ShopeePay 450.000 VNĐ chưa rút được. Nhân viên hỗ trợ báo không thể cung cấp lý do cụ thể..."></textarea>
-
-          <div style="margin:12px 0 18px;display:flex;flex-wrap:wrap;gap:8px;">
-            <button class="app-preset-btn" data-preset="shopee" style="padding:4px 10px;background:var(--mist);border:1px solid var(--line);border-radius:3px;font-size:0.74rem;font-weight:700;cursor:pointer;">Mẫu: Khóa tài khoản Shopee</button>
-            <button class="app-preset-btn" data-preset="adobe" style="padding:4px 10px;background:var(--mist);border:1px solid var(--line);border-radius:3px;font-size:0.74rem;font-weight:700;cursor:pointer;">Mẫu: Gián đoạn SaaS Adobe</button>
-            <button class="app-preset-btn" data-preset="diamond" style="padding:4px 10px;background:var(--mist);border:1px solid var(--line);border-radius:3px;font-size:0.74rem;font-weight:700;cursor:pointer;">Mẫu: Tranh chấp Giám định Kim cương</button>
-          </div>
-
-          <div style="margin-bottom:20px;padding:12px;background:var(--paper);border:1px solid var(--line);border-radius:4px;">
-            <span style="display:block;font-family:var(--ui);font-size:0.76rem;font-weight:800;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Chế độ Phân tích:</span>
-            <label style="display:flex;align-items:center;gap:8px;font-size:0.86rem;margin-bottom:6px;cursor:pointer;">
-              <input type="radio" name="app-mode" value="analysis_only" checked>
-              <strong>Analysis Only</strong> — Phân tích nội tại & bóc tách logic từ văn bản cung cấp.
-            </label>
-            <label style="display:flex;align-items:center;gap:8px;font-size:0.86rem;cursor:pointer;">
-              <input type="radio" name="app-mode" value="web_assisted">
-              <strong>Web-Assisted (Tavily)</strong> — Tra cứu thêm điều khoản & chính sách công khai thời gian thực.
-            </label>
-          </div>
-
-          <button id="app-analyze-btn" style="width:100%;padding:12px 20px;background:var(--navy);color:#ffffff;border:none;border-radius:6px;font-family:var(--ui);font-size:0.95rem;font-weight:700;cursor:pointer;transition:background-color 0.15s ease;">
-            ⚡ Bắt đầu Phân tích & Tái lập Hồ sơ
-          </button>
-        </div>
-
-        <div style="background:#ffffff;border:1px solid var(--ink);border-radius:8px;padding:24px;min-height:520px;box-shadow:0 4px 16px rgba(19,38,47,0.05);display:flex;flex-direction:column;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line);">
-            <h2 style="margin:0;font-size:1.35rem;color:var(--navy);">2. Hồ sơ Tái lập (Case Ledger V3)</h2>
-            <button id="copy-ledger-btn" style="padding:4px 10px;background:transparent;border:1px solid var(--line);border-radius:4px;font-size:0.75rem;font-weight:700;cursor:pointer;" hidden>📋 Sao chép JSON</button>
-          </div>
-
-          <div id="app-output-empty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);text-align:center;padding:40px 20px;">
-            <span style="font-size:2.4rem;margin-bottom:12px;">📊</span>
-            <strong style="color:var(--navy);font-size:1.05rem;">Chưa có dữ liệu phân tích</strong>
-            <p style="font-size:0.86rem;max-width:320px;margin:6px 0 0;line-height:1.5;">Nhập sự việc ở cột bên trái và bấm Bắt đầu để hệ thống tự động bóc tách sự kiện, phát hiện chứng cứ, và lập chu trình phục hồi.</p>
-          </div>
-
-          <div id="app-output-loading" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:40px 20px;">
-            <div class="f-spin-circle" style="border-top-color:var(--copper);width:40px;height:40px;"></div>
-            <span style="font-family:var(--ui);font-size:0.9rem;font-weight:700;color:var(--navy);">Đang gọi mô hình AI và tái lập hiện trường T0...</span>
-          </div>
-
-          <div id="app-output-result" style="display:none;flex-direction:column;gap:18px;font-size:0.9rem;line-height:1.6;">
-            <div style="background:var(--mist);padding:14px 16px;border-left:4px solid var(--navy);border-radius:4px;">
-              <strong style="display:block;color:var(--navy);font-size:0.95rem;margin-bottom:4px;" id="out-goal">Mục tiêu</strong>
-              <p style="margin:0;color:#2b3336;font-size:0.88rem;" id="out-summary">Tóm tắt</p>
-            </div>
-
-            <div>
-              <strong style="display:block;font-family:var(--ui);font-size:0.78rem;font-weight:800;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">1. Dòng sự kiện (Timeline Events):</strong>
-              <div id="out-timeline" style="display:flex;flex-direction:column;gap:6px;"></div>
-            </div>
-
-            <div>
-              <strong style="display:block;font-family:var(--ui);font-size:0.78rem;font-weight:800;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">2. Nhận định & Ranh giới Chứng cứ:</strong>
-              <div id="out-findings" style="display:flex;flex-direction:column;gap:6px;"></div>
-            </div>
-
-            <div>
-              <strong style="display:block;font-family:var(--ui);font-size:0.78rem;font-weight:800;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">3. Khoảng trống Chứng cứ (Evidence Gaps):</strong>
-              <div id="out-gaps" style="display:flex;flex-direction:column;gap:6px;"></div>
-            </div>
-
-            <div>
-              <strong style="display:block;font-family:var(--ui);font-size:0.78rem;font-weight:800;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">4. Chu trình Phục hồi Hành động (Recovery Path):</strong>
-              <div id="out-recovery" style="display:flex;flex-direction:column;gap:6px;"></div>
-            </div>
-          </div>
-        </div>
+  <!-- Standalone App Header -->
+  <header class="app-header">
+    <div class="app-header-left">
+      <a href="/work" class="app-back-btn">← Trở về Work Library</a>
+      <div class="app-title-group">
+        <h1 class="app-title">Explainable Trust Intelligence Application</h1>
+        <span class="app-badge">Ledger Engine V3</span>
       </div>
     </div>
-  </main>
-  ${layoutFooter("Interactive Application")}
+
+    <div class="app-header-right">
+      <div class="engine-status-pill">
+        <div class="engine-dot"></div>
+        <span>Google Gemini Flash · Active</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Standalone App Workspace -->
+  <div class="app-main">
+    <!-- Left Panel: Input & Control -->
+    <aside class="app-sidebar">
+      <div>
+        <div class="sidebar-section-title">
+          <span>Kịch bản tình huống mẫu</span>
+        </div>
+        <div class="preset-chips">
+          <button class="preset-chip" data-preset="shopee">
+            <span>🛒 Khóa tài khoản Shopee (Voucher / Kẹt tiền)</span>
+            <span>→</span>
+          </button>
+          <button class="preset-chip" data-preset="adobe">
+            <span>🎨 Gián đoạn Creative Cloud Adobe (SaaS)</span>
+            <span>→</span>
+          </button>
+          <button class="preset-chip" data-preset="diamond">
+            <span>💎 Tranh chấp Chứng thư Giám định Kim cương</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="sidebar-section-title">
+          <span>Nội dung sự việc / Tranh chấp</span>
+          <span id="char-count" style="font-size:10px;font-weight:normal;">0 / 10,000</span>
+        </div>
+        <textarea id="statement-input" class="app-textarea" placeholder="Dán văn bản khiếu nại, email thông báo khóa tài khoản, hoặc mô tả tình huống sự cố cần đối soát ranh giới chứng cứ..."></textarea>
+      </div>
+
+      <div>
+        <div class="sidebar-section-title">
+          <span>Chế độ đối soát</span>
+        </div>
+        <div class="mode-selector">
+          <button class="mode-btn active" data-mode="analysis_only">
+            🧠 Analysis Only<br><span style="font-size:10px;opacity:0.8;">Bóc tách logic nội tại</span>
+          </button>
+          <button class="mode-btn" data-mode="web_assisted">
+            🌐 Web-Assisted<br><span style="font-size:10px;opacity:0.8;">Tra cứu Tavily Search</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="byok-box">
+        <div class="sidebar-section-title" style="margin-bottom:2px;">
+          <span>BYOK (Tùy chọn API Key cá nhân)</span>
+        </div>
+        <input type="password" id="byok-input" class="byok-input" placeholder="Dán Gemini API Key riêng của bạn">
+      </div>
+
+      <button id="run-btn" class="run-btn">
+        <span>⚡ Bắt đầu Phân tích & Tái lập T0</span>
+      </button>
+    </aside>
+
+    <!-- Right Workspace: Multi-tab Results Canvas -->
+    <main class="app-workspace">
+      <div class="workspace-topbar">
+        <div class="workspace-tabs">
+          <button class="workspace-tab active" data-tab="dag">📊 Dòng Sự kiện (DAG)</button>
+          <button class="workspace-tab" data-tab="findings">🔍 Nhận định & Chứng cứ</button>
+          <button class="workspace-tab" data-tab="recovery">⚙️ Lộ trình Phục hồi</button>
+          <button class="workspace-tab" data-tab="provo">📜 W3C PROV-O Audit</button>
+          <button class="workspace-tab" data-tab="json">📋 Raw JSON</button>
+        </div>
+
+        <div class="workspace-actions">
+          <button id="copy-btn" class="action-btn" hidden>📋 Sao chép Kết quả</button>
+          <button id="reset-btn" class="action-btn">↺ Làm mới</button>
+        </div>
+      </div>
+
+      <div class="workspace-body">
+        <!-- 1. Empty State -->
+        <div id="view-empty" class="view-empty">
+          <div class="empty-icon">🛡️</div>
+          <div class="empty-title">Sẵn sàng đối soát & tái lập hiện trường T0</div>
+          <p class="empty-desc">
+            Chọn một kịch bản mẫu ở cột bên trái hoặc nhập trực tiếp tình huống sự cố. Hệ thống sẽ bóc tách dòng sự kiện, phân lập ranh giới chứng cứ, và đề xuất chu trình phục hồi contestable.
+          </p>
+        </div>
+
+        <!-- 2. Loading State -->
+        <div id="view-loading" class="view-loading">
+          <div class="spinner"></div>
+          <div style="font-weight:700;color:#fff;">Đang gọi mô hình Google Gemini Flash & đối soát Tavily...</div>
+          <div style="font-size:12px;color:var(--text-muted);">Tái lập chuỗi sự kiện, phân tách dữ kiện đã báo cáo và ranh giới suy luận...</div>
+        </div>
+
+        <!-- 3. Result State -->
+        <div id="view-result" class="view-result">
+          <!-- Target & Summary Banner -->
+          <div class="ledger-banner">
+            <div id="out-goal" class="ledger-goal">🎯 Quyền lợi / Mục tiêu cốt lõi</div>
+            <div id="out-summary" class="ledger-summary">Tóm tắt sự việc</div>
+          </div>
+
+          <!-- Tab Content Panels -->
+          <div id="tab-dag-panel" class="tab-panel">
+            <div class="sidebar-section-title" style="margin-bottom:12px;">Chuỗi sự kiện tái lập (Event Flow):</div>
+            <div id="out-timeline" class="dag-container"></div>
+          </div>
+
+          <div id="tab-findings-panel" class="tab-panel" style="display:none;">
+            <div class="sidebar-section-title" style="margin-bottom:12px;">Nhận định & Cơ sở Chứng cứ:</div>
+            <div id="out-findings" class="cards-grid" style="margin-bottom:20px;"></div>
+
+            <div class="sidebar-section-title" style="margin-bottom:12px;color:#f87171;">Khoảng trống Chứng cứ (Evidence Gaps):</div>
+            <div id="out-gaps" style="display:flex;flex-direction:column;gap:10px;"></div>
+          </div>
+
+          <div id="tab-recovery-panel" class="tab-panel" style="display:none;">
+            <div class="sidebar-section-title" style="margin-bottom:12px;">Lộ trình Hành động & Phục hồi Quyền lợi:</div>
+            <div id="out-recovery" style="display:flex;flex-direction:column;gap:8px;"></div>
+          </div>
+
+          <div id="tab-provo-panel" class="tab-panel" style="display:none;">
+            <div class="sidebar-section-title" style="margin-bottom:12px;">W3C PROV-O Provenance Metadata:</div>
+            <div id="out-provo" class="json-code"></div>
+          </div>
+
+          <div id="tab-json-panel" class="tab-panel" style="display:none;">
+            <div class="sidebar-section-title" style="margin-bottom:12px;">Complete Structured Case Ledger (JSON):</div>
+            <pre id="out-json" class="json-code"></pre>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 
   <script>
     (()=>{
-      const statementEl = document.getElementById('app-statement');
-      const analyzeBtn = document.getElementById('app-analyze-btn');
-      const emptyEl = document.getElementById('app-output-empty');
-      const loadingEl = document.getElementById('app-output-loading');
-      const resultEl = document.getElementById('app-output-result');
-      const copyBtn = document.getElementById('copy-ledger-btn');
-      const keyInput = document.getElementById('user-gemini-key');
-      const saveKeyBtn = document.getElementById('save-key-btn');
-
-      const savedKey = localStorage.getItem('user_gemini_key') || '';
-      if (savedKey) keyInput.value = savedKey;
-
-      saveKeyBtn.addEventListener('click', () => {
-        const val = keyInput.value.trim();
-        localStorage.setItem('user_gemini_key', val);
-        alert(val ? 'Đã lưu Gemini API Key vào trình duyệt!' : 'Đã xóa Key lưu trữ.');
-      });
-
       const presets = {
         shopee: "Tài khoản Shopee của tôi bị khóa vĩnh viễn lúc 14:20 ngày 05/08 vì nghi ngờ vi phạm chính sách voucher. Tôi còn 2 đơn hàng đang giao trị giá 1.200.000 VNĐ và số dư Ví ShopeePay 450.000 VNĐ chưa rút được. Nhân viên hỗ trợ báo không thể cung cấp lý do cụ thể và yêu cầu chờ 7 ngày làm việc.",
         adobe: "Gói thuê bao Adobe Creative Cloud của studio bị tạm ngưng đột ngột vào sáng nay do ngân hàng gắn cờ thanh toán định kỳ là giao dịch bất thường. Chúng tôi đang có 3 dự án dựng phim Premiere và Illustrator cần xuất bản giao khách trong 24 giờ tới nhưng không thể mở file đám mây.",
         diamond: "Khách hàng mua viên kim cương 1.2 carat kèm chứng thư kiểm định tại cửa hàng với cam kết thu đổi 95% sau 1 năm. Khi khách mang lại thu đổi, nhân viên từ chối do vết xước nhỏ ở cạnh và yêu cầu gửi đi giám định lại tại trung tâm độc lập với chi phí khách tự chịu."
       };
 
-      document.querySelectorAll('.app-preset-btn').forEach(btn => {
+      const statementInput = document.getElementById('statement-input');
+      const charCount = document.getElementById('char-count');
+      const runBtn = document.getElementById('run-btn');
+      const byokInput = document.getElementById('byok-input');
+      const viewEmpty = document.getElementById('view-empty');
+      const viewLoading = document.getElementById('view-loading');
+      const viewResult = document.getElementById('view-result');
+      const copyBtn = document.getElementById('copy-btn');
+      const resetBtn = document.getElementById('reset-btn');
+
+      let currentMode = 'analysis_only';
+      let currentLedger = null;
+
+      // BYOK Memory
+      const savedKey = localStorage.getItem('user_gemini_key') || '';
+      if (savedKey) byokInput.value = savedKey;
+      byokInput.addEventListener('change', () => {
+        localStorage.setItem('user_gemini_key', byokInput.value.trim());
+      });
+
+      // Char Counter
+      statementInput.addEventListener('input', () => {
+        const len = statementInput.value.length;
+        charCount.textContent = len.toLocaleString() + ' / 10,000';
+      });
+
+      // Presets
+      document.querySelectorAll('.preset-chip').forEach(btn => {
         btn.addEventListener('click', () => {
           const type = btn.dataset.preset;
-          if (presets[type]) statementEl.value = presets[type];
+          if (presets[type]) {
+            statementInput.value = presets[type];
+            statementInput.dispatchEvent(new Event('input'));
+          }
         });
       });
 
-      let currentLedgerJson = null;
+      // Mode switch
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentMode = btn.dataset.mode;
+        });
+      });
 
-      analyzeBtn.addEventListener('click', async () => {
-        const statement = statementEl.value.trim();
+      // Tabs switch
+      document.querySelectorAll('.workspace-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.workspace-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          const target = tab.dataset.tab;
+          document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+          const activePanel = document.getElementById('tab-' + target + '-panel');
+          if (activePanel) activePanel.style.display = 'block';
+        });
+      });
+
+      // Reset
+      resetBtn.addEventListener('click', () => {
+        statementInput.value = '';
+        statementInput.dispatchEvent(new Event('input'));
+        viewResult.style.display = 'none';
+        viewLoading.style.display = 'none';
+        viewEmpty.style.display = 'flex';
+        copyBtn.hidden = true;
+        currentLedger = null;
+      });
+
+      // Run Analysis
+      runBtn.addEventListener('click', async () => {
+        const statement = statementInput.value.trim();
         if (!statement) {
-          alert('Vui lòng nhập nội dung sự việc cần phân tích.');
+          alert('Vui lòng nhập nội dung sự việc hoặc chọn kịch bản mẫu.');
           return;
         }
 
-        const mode = document.querySelector('input[name="app-mode"]:checked')?.value || 'analysis_only';
-        const userKey = keyInput.value.trim();
-
-        emptyEl.style.display = 'none';
-        resultEl.style.display = 'none';
-        loadingEl.style.display = 'flex';
-        analyzeBtn.disabled = true;
+        viewEmpty.style.display = 'none';
+        viewResult.style.display = 'none';
+        viewLoading.style.display = 'flex';
+        runBtn.disabled = true;
 
         try {
           const res = await fetch('/api/explainable/analyze', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ statement, mode, userKey })
+            body: JSON.stringify({
+              statement,
+              mode: currentMode,
+              userKey: byokInput.value.trim()
+            })
           });
 
-          const resData = await res.json();
-          loadingEl.style.display = 'none';
-          analyzeBtn.disabled = false;
+          const data = await res.json();
+          viewLoading.style.display = 'none';
+          runBtn.disabled = false;
 
-          if (!res.ok || resData.error) {
-            alert('Lỗi: ' + (resData.error || 'Không thể hoàn tất phân tích'));
-            emptyEl.style.display = 'flex';
+          if (!res.ok || data.error) {
+            alert('Lỗi: ' + (data.error || 'Không thể hoàn tất phân tích'));
+            viewEmpty.style.display = 'flex';
             return;
           }
 
-          currentLedgerJson = resData.data;
-          renderLedger(resData.data);
+          currentLedger = data.data;
+          renderResults(data.data);
         } catch (err) {
-          loadingEl.style.display = 'none';
-          analyzeBtn.disabled = false;
-          emptyEl.style.display = 'flex';
+          viewLoading.style.display = 'none';
+          runBtn.disabled = false;
+          viewEmpty.style.display = 'flex';
           alert('Lỗi kết nối máy chủ: ' + err.message);
         }
       });
 
-      function renderLedger(d) {
-        document.getElementById('out-goal').textContent = '🎯 Mục tiêu: ' + (d.goal || 'Xác định quyền lợi');
+      function renderResults(d) {
+        document.getElementById('out-goal').textContent = '🎯 ' + (d.goal || 'Mục tiêu / Quyền lợi cốt lõi');
         document.getElementById('out-summary').textContent = d.summary || '';
 
+        // Timeline DAG
         const tEl = document.getElementById('out-timeline');
         tEl.innerHTML = '';
         (d.timeline || []).forEach(t => {
           const div = document.createElement('div');
-          div.style.cssText = 'padding:8px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;display:flex;justify-content:space-between;align-items:center;';
-          div.innerHTML = '<span><strong>' + escape(t.time) + ':</strong> ' + escape(t.event) + '</span><span style="font-size:0.72rem;padding:2px 6px;background:#e2e8f0;border-radius:3px;font-weight:700;">' + escape(t.status) + '</span>';
+          div.className = 'dag-node';
+          const statusClass = (t.status || '').toLowerCase().includes('verified') ? 'verified' : ((t.status || '').toLowerCase().includes('contest') ? 'contested' : 'unverified');
+          div.innerHTML = '<span class="dag-node-time">⏱ ' + escape(t.time) + '</span><span class="dag-node-event">' + escape(t.event) + '</span><span class="dag-node-tag ' + statusClass + '">' + escape(t.status || 'REPORTED') + '</span>';
           tEl.appendChild(div);
         });
 
+        // Findings
         const fEl = document.getElementById('out-findings');
         fEl.innerHTML = '';
         (d.findings || []).forEach(f => {
-          const div = document.createElement('div');
-          div.style.cssText = 'padding:8px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;';
-          div.innerHTML = '<strong style="color:var(--navy);">' + escape(f.claim) + '</strong><div style="font-size:0.82rem;color:#4b5250;margin-top:2px;">Cơ sở: ' + escape(f.basis) + ' · Độ tin cậy: <b>' + escape(f.confidence) + '</b></div>';
-          fEl.appendChild(div);
+          const card = document.createElement('div');
+          card.className = 'finding-card';
+          card.innerHTML = '<div class="finding-claim">' + escape(f.claim) + '</div><div class="finding-basis">Cơ sở: ' + escape(f.basis) + '</div><div class="finding-conf">Độ tin cậy: ' + escape(f.confidence) + '</div>';
+          fEl.appendChild(card);
         });
 
+        // Gaps
         const gEl = document.getElementById('out-gaps');
         gEl.innerHTML = '';
         (d.gaps || []).forEach(g => {
-          const div = document.createElement('div');
-          div.style.cssText = 'padding:8px 12px;background:#fff1f2;border:1px solid #fecdd3;border-radius:4px;';
-          div.innerHTML = '<strong style="color:#9f1239;">Thiếu: ' + escape(g.missing) + '</strong><div style="font-size:0.82rem;color:#4c0519;margin-top:2px;">Hành động: ' + escape(g.action) + '</div>';
-          gEl.appendChild(div);
+          const card = document.createElement('div');
+          card.className = 'gap-card';
+          card.innerHTML = '<div class="gap-missing">⚠️ Khoảng trống: ' + escape(g.missing) + '</div><div class="gap-action">↳ Hành động đề xuất: ' + escape(g.action) + '</div>';
+          gEl.appendChild(card);
         });
 
+        // Recovery Path
         const rEl = document.getElementById('out-recovery');
         rEl.innerHTML = '';
         (d.recoveryPath || []).forEach(r => {
-          const div = document.createElement('div');
-          div.style.cssText = 'padding:8px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;display:flex;justify-content:space-between;align-items:center;';
-          div.innerHTML = '<span><b>Bước ' + (r.step || '') + ':</b> ' + escape(r.action) + ' (' + escape(r.owner) + ')</span><span style="font-size:0.75rem;font-weight:700;color:#166534;">SLA: ' + escape(r.sla) + '</span>';
-          rEl.appendChild(div);
+          const card = document.createElement('div');
+          card.className = 'recovery-step';
+          card.innerHTML = '<div class="step-num">' + (r.step || '•') + '</div><div class="step-action"><strong>' + escape(r.action) + '</strong></div><div class="step-owner">Chủ trì: ' + escape(r.owner) + '<br><span style="color:#86efac;">SLA: ' + escape(r.sla) + '</span></div>';
+          rEl.appendChild(card);
         });
 
+        // PROV-O
+        document.getElementById('out-provo').textContent = JSON.stringify(d.provO || {
+          "@context": "http://www.w3.org/ns/prov#",
+          "entity": "CaseLedger_V3",
+          "generatedAt": new Date().toISOString(),
+          "wasAttributedTo": "Google_Gemini_Flash_Engine"
+        }, null, 2);
+
+        // Raw JSON
+        document.getElementById('out-json').textContent = JSON.stringify(d, null, 2);
+
         copyBtn.hidden = false;
-        resultEl.style.display = 'flex';
+        viewResult.style.display = 'flex';
       }
 
       function escape(s) {
@@ -2407,19 +3269,18 @@ ${layoutHead("Explainable Trust — Interactive Intelligence Application", "Inte
       }
 
       copyBtn.addEventListener('click', () => {
-        if (!currentLedgerJson) return;
-        navigator.clipboard.writeText(JSON.stringify(currentLedgerJson, null, 2)).then(() => {
-          copyBtn.textContent = '✓ Đã chép!';
-          setTimeout(() => { copyBtn.textContent = '📋 Sao chép JSON'; }, 2000);
+        if (!currentLedger) return;
+        navigator.clipboard.writeText(JSON.stringify(currentLedger, null, 2)).then(() => {
+          const prev = copyBtn.textContent;
+          copyBtn.textContent = '✓ Đã sao chép!';
+          setTimeout(() => { copyBtn.textContent = prev; }, 2000);
         });
       });
     })();
   </script>
 </body>
 </html>`;
-  return appHtml;
 }
-
 // ============================================================================
 // Main HTTP Request Handler & Router
 // ============================================================================
