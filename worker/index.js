@@ -3,6 +3,9 @@
 // Synchronized 1-to-1 with Notion Master Work Library & Google Drive Assets
 // ============================================================================
 
+const HOME_CAT_WEBP = Uint8Array.from(atob("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"), character => character.charCodeAt(0));
+const PHU_PORTRAIT_WEBP = Uint8Array.from(atob("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"), character => character.charCodeAt(0));
+
 const finalModes = [
   {
     "id": "product-ops",
@@ -501,7 +504,6 @@ function renderMarkdownTable(tableText) {
 function renderEditorialNotion(markdown) {
   if (!markdown) return "";
   
-  // 1. Custom <asset-bar> and <diagram-card>
   let html = markdown
     .replace(/<asset-bar>([\s\S]*?)<\/asset-bar>/g, (match, inner) => {
       return `<div class="f-asset-bar"><span class="f-asset-bar-title">📎 Tài liệu đính kèm:</span>${inner}</div>`;
@@ -520,17 +522,14 @@ function renderEditorialNotion(markdown) {
       </div>`;
     });
 
-  // 2. Notion Callouts / Asides
   html = html.replace(/<aside>([\s\S]*?)<\/aside>/g, (match, inner) => {
     return `<div class="f-callout">${inner.trim()}</div>`;
   });
 
-  // 3. Markdown Tables
   html = html.replace(/(\|[^\n]+\|\n\|[\s\-:\|]+\|\n(\|[^\n]+\|\n?)+)/g, (match) => {
     return renderMarkdownTable(match);
   });
 
-  // 4. Headings with Anchors
   html = html.replace(/^(#{1,4})\s+(.+)$/gm, (match, hashes, title) => {
     const level = hashes.length;
     const cleanTitle = title.trim();
@@ -538,23 +537,16 @@ function renderEditorialNotion(markdown) {
     return `<h${level} id="${id}"><a class="f-anchor" href="#${id}">#</a>${cleanTitle}</h${level}>`;
   });
 
-  // 5. Blockquotes
   html = html.replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>');
-
-  // 6. Horizontal Rules
   html = html.replace(/^---$/gm, '<hr class="f-hr">');
-
-  // 7. Details / Summaries
   html = html.replace(/<details><summary>(.*?)<\/summary>/g, '<details class="f-details"><summary>$1</summary><div class="f-details-content">');
   html = html.replace(/<\/details>/g, '</div></details>');
 
-  // 8. Lists
   html = html.replace(/^- \[x\] (.+)$/gm, '<div class="f-bullet">☑ $1</div>');
   html = html.replace(/^- \[ \] (.+)$/gm, '<div class="f-bullet">☐ $1</div>');
   html = html.replace(/^[\*\-]\s+(.+)$/gm, '<div class="f-bullet">$1</div>');
   html = html.replace(/^(\d+)\.\s+(.+)$/gm, '<div class="f-numbered"><b>$1.</b> $2</div>');
 
-  // 9. Paragraphs
   const lines = html.split(/\n\n+/);
   const formatted = lines.map(line => {
     const trimmed = line.trim();
@@ -646,7 +638,7 @@ const siteCss = `
   .f-home-aside p + p { margin-top: 14px; }
   .f-text-link { color: #fff2e8; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
 
-  /* 2x2 Map Grid used for Research Modes & Selected Works */
+  /* 2x2 Map Grid */
   .f-home-modes-section { padding: 42px 0 46px; background: var(--mist); border-bottom: 1px solid var(--ink); }
   .f-home-works-section { padding: 42px 0 46px; background: var(--paper); border-bottom: 1px solid var(--ink); }
   
@@ -672,93 +664,27 @@ const siteCss = `
   .f-map-item h3 { margin: 0 0 6px; font-size: clamp(1.2rem, 1.7vw, 1.48rem); font-weight: 700; line-height: 1.2; color: var(--navy); transition: color 0.15s ease; }
   .f-map-item p { margin: 0; color: #445357; font-size: 0.88rem; line-height: 1.52; }
   .f-map-item:hover h3 { color: var(--copper); }
-  
   .f-tag-pill { display: inline-block; padding: 2px 7px; background: rgba(19, 38, 47, 0.08); border: 1px solid rgba(19, 38, 47, 0.15); border-radius: 3px; font-family: var(--ui); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--navy); margin-bottom: 6px; }
 
-  /* Work Library Page (/work) - Master Notion Layout */
+  /* Work Library Page (/work) */
   .f-work-hero p { margin: 14px 0 0; color: #dce5e4; font-size: 1.08rem; max-width: 780px; line-height: 1.6; }
-  .f-work-quote-bar {
-    background: #ffffff;
-    border-bottom: 1px solid var(--ink);
-    padding: 24px 0;
-  }
-  .f-work-quote-bar blockquote {
-    margin: 0;
-    font-size: 1.12rem;
-    font-weight: 600;
-    line-height: 1.65;
-    color: var(--navy);
-    border-left: 4px solid var(--copper);
-    padding-left: 20px;
-  }
-  .f-work-meta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    margin-top: 14px;
-    font-size: 0.82rem;
-    color: var(--muted);
-    font-family: var(--ui);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
+  .f-work-quote-bar { background: #ffffff; border-bottom: 1px solid var(--ink); padding: 24px 0; }
+  .f-work-quote-bar blockquote { margin: 0; font-size: 1.12rem; font-weight: 600; line-height: 1.65; color: var(--navy); border-left: 4px solid var(--copper); padding-left: 20px; }
+  .f-work-meta-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 14px; font-size: 0.82rem; color: var(--muted); font-family: var(--ui); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
 
-  /* Where to start Routes Box */
-  .f-routes-section {
-    background: var(--mist);
-    border-bottom: 1px solid var(--ink);
-    padding: 28px 0 32px;
-  }
-  .f-routes-section h2 {
-    margin: 0 0 8px;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--navy);
-  }
-  .f-routes-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px 32px;
-    margin-top: 16px;
-  }
-  .f-route-card {
-    background: #ffffff;
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--navy);
-    border-radius: 4px;
-    padding: 14px 18px;
-    font-size: 0.9rem;
-    line-height: 1.55;
-  }
-  .f-route-card strong {
-    display: block;
-    color: var(--navy);
-    font-size: 0.98rem;
-    margin-bottom: 4px;
-  }
-  .f-route-card a {
-    color: var(--copper);
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
+  /* Where to start Routes */
+  .f-routes-section { background: var(--mist); border-bottom: 1px solid var(--ink); padding: 28px 0 32px; }
+  .f-routes-section h2 { margin: 0 0 8px; font-size: 1.4rem; font-weight: 700; color: var(--navy); }
+  .f-routes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 32px; margin-top: 16px; }
+  .f-route-card { background: #ffffff; border: 1px solid var(--line); border-left: 4px solid var(--navy); border-radius: 4px; padding: 14px 18px; font-size: 0.9rem; line-height: 1.55; }
+  .f-route-card strong { display: block; color: var(--navy); font-size: 0.98rem; margin-bottom: 4px; }
+  .f-route-card a { color: var(--copper); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
-  /* Controls & Filter Bar */
+  /* Filter & Search Bar */
   .f-work-controls { padding: 24px 0 16px; border-bottom: 1px solid var(--ink); display: flex; flex-direction: column; gap: 16px; }
   .f-search-row { display: flex; align-items: center; gap: 16px; }
   .f-search-box { position: relative; flex: 1; max-width: 540px; }
-  .f-search-input {
-    width: 100%;
-    padding: 10px 36px 10px 14px;
-    border: 1px solid var(--ink);
-    background: #fff;
-    font-family: var(--ui);
-    font-size: 0.9rem;
-    color: var(--ink);
-    border-radius: 0;
-  }
+  .f-search-input { width: 100%; padding: 10px 36px 10px 14px; border: 1px solid var(--ink); background: #fff; font-family: var(--ui); font-size: 0.9rem; color: var(--ink); border-radius: 0; }
   .f-search-input:focus { outline: 2px solid var(--copper); }
   .f-search-clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: 0; background: transparent; cursor: pointer; color: var(--muted); font-weight: bold; font-size: 1.1rem; }
 
@@ -799,7 +725,7 @@ const siteCss = `
   .f-work-item:hover h3 { color: var(--copper); }
   .f-work-item[hidden] { display: none; }
 
-  /* Case Detail Page (/work/[slug]) */
+  /* Case Detail Page */
   .f-case-hero .f-crumb { color: #dce5e4; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
   .f-case-hero .f-crumb a { color: #fff1e6; text-decoration: none; }
   .f-case-hero .f-crumb span { margin: 0 6px; opacity: 0.6; }
@@ -813,8 +739,6 @@ const siteCss = `
   .f-meta-cell span { font-size: 0.86rem; line-height: 1.4; color: var(--ink); }
 
   .f-case-reading { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 64px; padding: 48px 0 80px; align-items: start; }
-  
-  /* Sticky TOC / Rail */
   .f-case-rail { position: sticky; top: 84px; max-height: calc(100vh - 100px); overflow-y: auto; padding-right: 12px; }
   .f-rail-title { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; font-family: var(--ui); }
   .f-toc-list { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 8px; border-left: 2px solid var(--line); }
@@ -827,7 +751,6 @@ const siteCss = `
   .f-rail-btn { display: inline-flex; align-items: center; justify-content: center; padding: 9px 12px; border: 1px solid var(--ink); background: var(--paper-card); font-size: 0.74rem; font-weight: 700; text-decoration: none; color: var(--ink); cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--ui); }
   .f-rail-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 
-  /* Case Article Prose */
   .f-prose { min-width: 0; font-size: 1.04rem; line-height: 1.75; color: #232a2e; }
   .f-prose h2 { margin: 44px 0 16px; font-size: clamp(1.8rem, 2.8vw, 2.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--navy); position: relative; }
   .f-prose h2:first-child { margin-top: 0; }
@@ -843,7 +766,6 @@ const siteCss = `
   .f-bullet:before { content: "—"; position: absolute; left: 0; color: var(--copper); font-weight: 700; }
   .f-numbered { padding: 8px 0; border-bottom: 1px solid var(--line-subtle); }
 
-  /* Callouts & Tables */
   .f-callout { margin: 24px 0; padding: 18px 22px; background: #ffffff; border: 1px solid var(--line); border-left: 4px solid var(--navy); border-radius: 4px; font-size: 0.96rem; line-height: 1.65; }
   .f-table-wrap { width: 100%; overflow-x: auto; margin: 28px 0; }
   .f-table { width: 100%; border-collapse: collapse; background: #ffffff; border: 1px solid var(--ink); font-size: 0.88rem; line-height: 1.5; }
@@ -851,484 +773,83 @@ const siteCss = `
   .f-table td { padding: 10px 14px; border: 1px solid var(--line); vertical-align: top; }
   .f-table tr:nth-child(even) td { background: #f9f8f5; }
 
-  /* Details Box */
   .f-details { margin: 20px 0; border: 1px solid var(--line); background: var(--paper-card); padding: 14px 18px; border-radius: 4px; }
   .f-details summary { font-weight: 700; cursor: pointer; color: var(--navy); }
   .f-details-content { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line-subtle); font-size: 0.94rem; }
 
   /* Asset Bar */
-  .f-asset-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
-    margin: 24px 0 36px;
-    padding: 16px 20px;
-    background: #ffffff;
-    border: 1px solid var(--ink);
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(19, 38, 47, 0.06);
-  }
-  .f-asset-bar-title {
-    font-family: var(--ui);
-    font-size: 11.5px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-right: 6px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .f-asset-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-family: var(--ui);
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid var(--ink);
-    background: var(--paper);
-    color: var(--navy);
-  }
-  .f-asset-btn:hover {
-    background: var(--navy);
-    color: #ffffff;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(19,38,47,0.15);
-  }
-  .f-asset-btn.primary {
-    background: var(--navy);
-    color: #ffffff;
-    border-color: var(--navy);
-  }
-  .f-asset-btn.primary:hover {
-    background: var(--copper);
-    border-color: var(--copper);
-  }
-  .f-asset-btn.accent {
-    background: var(--copper);
-    color: #ffffff;
-    border-color: var(--copper);
-  }
-  .f-asset-btn.accent:hover {
-    background: #9e391a;
-  }
+  .f-asset-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 24px 0 36px; padding: 16px 20px; background: #ffffff; border: 1px solid var(--ink); border-radius: 8px; box-shadow: 0 4px 16px rgba(19, 38, 47, 0.06); }
+  .f-asset-bar-title { font-family: var(--ui); font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-right: 6px; display: inline-flex; align-items: center; gap: 6px; }
+  .f-asset-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 6px; font-family: var(--ui); font-size: 13px; font-weight: 700; text-decoration: none; cursor: pointer; transition: all 0.18s ease; border: 1px solid var(--ink); background: var(--paper); color: var(--navy); }
+  .f-asset-btn:hover { background: var(--navy); color: #ffffff; transform: translateY(-1px); }
+  .f-asset-btn.primary { background: var(--navy); color: #ffffff; border-color: var(--navy); }
+  .f-asset-btn.primary:hover { background: var(--copper); border-color: var(--copper); }
+  .f-asset-btn.accent { background: var(--copper); color: #ffffff; border-color: var(--copper); }
+  .f-asset-btn.accent:hover { background: #9e391a; }
 
   /* Inline Diagram Card */
-  .f-diagram-card {
-    margin: 36px 0;
-    background: #ffffff;
-    border: 1px solid var(--ink);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(19,38,47,0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .f-diagram-card:hover {
-    box-shadow: 0 10px 28px rgba(19,38,47,0.12);
-  }
-  .f-diagram-header {
-    padding: 12px 18px;
-    background: var(--navy);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--ui);
-    font-size: 12.5px;
-    font-weight: 700;
-  }
-  .f-diagram-body {
-    padding: 16px;
-    text-align: center;
-    background: #fafaf8;
-    position: relative;
-    cursor: zoom-in;
-  }
-  .f-diagram-body img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    display: block;
-    margin: 0 auto;
-    transition: opacity 0.2s ease;
-  }
-  .f-diagram-body:hover img {
-    opacity: 0.95;
-  }
-  .f-diagram-hint {
-    margin-top: 8px;
-    font-family: var(--ui);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .f-diagram-caption {
-    padding: 12px 18px;
-    font-size: 13.5px;
-    color: var(--muted);
-    font-style: italic;
-    background: #ffffff;
-    border-top: 1px solid var(--line-subtle);
-  }
+  .f-diagram-card { margin: 36px 0; background: #ffffff; border: 1px solid var(--ink); border-radius: 8px; overflow: hidden; box-shadow: 0 6px 20px rgba(19,38,47,0.06); }
+  .f-diagram-header { padding: 12px 18px; background: var(--navy); color: #ffffff; display: flex; align-items: center; justify-content: space-between; font-family: var(--ui); font-size: 12.5px; font-weight: 700; }
+  .f-diagram-body { padding: 16px; text-align: center; background: #fafaf8; position: relative; cursor: zoom-in; }
+  .f-diagram-body img { max-width: 100%; height: auto; border-radius: 4px; display: block; margin: 0 auto; }
+  .f-diagram-hint { margin-top: 8px; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--muted); display: inline-flex; align-items: center; gap: 4px; }
+  .f-diagram-caption { padding: 12px 18px; font-size: 13.5px; color: var(--muted); font-style: italic; background: #ffffff; border-top: 1px solid var(--line-subtle); }
 
   /* Dialog Asset Modal */
-  dialog.f-asset-modal {
-    width: 94vw;
-    max-width: 1280px;
-    height: 90vh;
-    max-height: 920px;
-    padding: 0;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 12px;
-    background: #0f172a;
-    color: #f8fafc;
-    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255,255,255,0.08);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  dialog.f-asset-modal::backdrop {
-    background: rgba(10, 18, 26, 0.84);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  dialog.f-asset-modal.is-fullscreen {
-    width: 100vw;
-    max-width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
-    border: 0;
-  }
-  .f-modal-topbar {
-    height: 54px;
-    min-height: 54px;
-    padding: 0 18px;
-    background: #1e293b;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .f-modal-title-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-  }
-  .f-modal-badge {
-    padding: 4px 9px;
-    border-radius: 4px;
-    background: rgba(59, 130, 246, 0.25);
-    color: #60a5fa;
-    border: 1px solid rgba(59, 130, 246, 0.4);
-    font-family: var(--ui);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    flex-shrink: 0;
-  }
-  .f-modal-title {
-    font-family: var(--ui);
-    font-size: 14px;
-    font-weight: 700;
-    color: #f1f5f9;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .f-modal-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-  .f-modal-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 6px;
-    color: #cbd5e1;
-    font-family: var(--ui);
-    font-size: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .f-modal-btn:hover {
-    background: rgba(255,255,255,0.2);
-    color: #ffffff;
-  }
-  .f-modal-btn.close {
-    background: rgba(239, 68, 68, 0.18);
-    border-color: rgba(239, 68, 68, 0.35);
-    color: #fca5a5;
-  }
-  .f-modal-btn.close:hover {
-    background: rgba(239, 68, 68, 0.35);
-    color: #ffffff;
-  }
-  .f-modal-content {
-    flex: 1;
-    position: relative;
-    background: #090d16;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .f-modal-frame {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: #ffffff;
-  }
-  .f-modal-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    padding: 16px;
-  }
-  .f-modal-spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    color: #94a3b8;
-    font-family: var(--ui);
-    font-size: 13px;
-    pointer-events: none;
-  }
-  .f-spin-circle {
-    width: 32px;
-    height: 32px;
-    border: 3px solid rgba(255,255,255,0.15);
-    border-top-color: #38bdf8;
-    border-radius: 50%;
-    animation: f-spin 0.8s linear infinite;
-  }
+  dialog.f-asset-modal { width: 94vw; max-width: 1280px; height: 90vh; max-height: 920px; padding: 0; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; background: #0f172a; color: #f8fafc; box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; overflow: hidden; }
+  dialog.f-asset-modal::backdrop { background: rgba(10, 18, 26, 0.84); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  dialog.f-asset-modal.is-fullscreen { width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; border: 0; }
+  .f-modal-topbar { height: 54px; min-height: 54px; padding: 0 18px; background: #1e293b; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .f-modal-title-wrap { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .f-modal-badge { padding: 4px 9px; border-radius: 4px; background: rgba(59, 130, 246, 0.25); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); font-family: var(--ui); font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; flex-shrink: 0; }
+  .f-modal-title { font-family: var(--ui); font-size: 14px; font-weight: 700; color: #f1f5f9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .f-modal-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .f-modal-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 6px; color: #cbd5e1; font-family: var(--ui); font-size: 12px; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.15s ease; }
+  .f-modal-btn:hover { background: rgba(255,255,255,0.2); color: #ffffff; }
+  .f-modal-btn.close { background: rgba(239, 68, 68, 0.18); border-color: rgba(239, 68, 68, 0.35); color: #fca5a5; }
+  .f-modal-btn.close:hover { background: rgba(239, 68, 68, 0.35); color: #ffffff; }
+  .f-modal-content { flex: 1; position: relative; background: #090d16; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .f-modal-frame { width: 100%; height: 100%; border: 0; background: #ffffff; }
+  .f-modal-img { max-width: 100%; max-height: 100%; object-fit: contain; padding: 16px; }
+  .f-modal-spinner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 12px; color: #94a3b8; font-family: var(--ui); font-size: 13px; pointer-events: none; }
+  .f-spin-circle { width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.15); border-top-color: #38bdf8; border-radius: 50%; animation: f-spin 0.8s linear infinite; }
   @keyframes f-spin { to { transform: rotate(360deg); } }
-
-  
-  /* ==========================================================================
-     About Page Styles (Restored & Perfected)
-     ========================================================================== */
-  .f-about-hero-wrap {
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
-    gap: 40px 48px;
-    align-items: center;
-  }
-  .f-about-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 18px;
-  }
-  .f-about-chip {
-    display: inline-block;
-    padding: 3px 9px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 4px;
-    font-family: var(--ui);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: #e6eceb;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .f-about-profile-card {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    padding: 20px;
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-  .f-about-profile-img {
-    width: 110px;
-    height: 110px;
-    border-radius: 6px;
-    object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    flex-shrink: 0;
-  }
-  .f-about-profile-info strong {
-    display: block;
-    color: #f7f3ea;
-    font-size: 1.15rem;
-    font-family: var(--cm);
-  }
-  .f-about-profile-info span {
-    display: block;
-    color: #cbd7d5;
-    font-size: 0.8rem;
-    font-family: var(--ui);
-    line-height: 1.4;
-    margin-top: 4px;
-  }
-
-  .f-about-layout {
-    display: grid;
-    grid-template-columns: 280px minmax(0, 1fr);
-    gap: 56px;
-    padding: 54px 0 80px;
-    align-items: start;
-  }
-  .f-about-sidebar {
-    position: sticky;
-    top: 84px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  .f-sidebar-box {
-    background: #ffffff;
-    border: 1px solid var(--ink);
-    border-radius: 6px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(19, 38, 47, 0.04);
-  }
-  .f-sidebar-box h3 {
-    margin: 0 0 12px;
-    font-size: 0.76rem;
-    font-family: var(--ui);
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border-bottom: 1px solid var(--line-subtle);
-    padding-bottom: 6px;
-  }
-  .f-sidebar-stat {
-    margin-bottom: 12px;
-  }
-  .f-sidebar-stat:last-child {
-    margin-bottom: 0;
-  }
-  .f-sidebar-stat b {
-    display: block;
-    font-size: 1.25rem;
-    color: var(--navy);
-    font-family: var(--cm);
-    line-height: 1.1;
-  }
-  .f-sidebar-stat span {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--muted);
-    font-family: var(--ui);
-    margin-top: 2px;
-  }
-
-  .f-sidebar-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .f-sidebar-nav a {
-    color: var(--navy);
-    font-size: 0.88rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.15s ease;
-  }
-  .f-sidebar-nav a:hover {
-    color: var(--copper);
-  }
-
-  .f-about-content section {
-    border-top: 1px solid var(--ink);
-    padding-top: 28px;
-    margin-bottom: 44px;
-  }
-  .f-about-content section:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-  .f-about-content h2 {
-    margin: 0 0 16px;
-    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1.15;
-  }
-  .f-about-content p {
-    font-size: 1.02rem;
-    line-height: 1.74;
-    color: #2b3336;
-    margin: 0 0 16px;
-  }
-
-  .f-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0 28px; }
-  .f-fact { padding: 18px; background: #ffffff; border: 1px solid var(--ink); border-radius: 4px; box-shadow: 0 2px 6px rgba(19,38,47,0.04); }
-  .f-fact strong { display: block; font-size: 1.35rem; font-weight: 700; color: var(--navy); line-height: 1.1; margin-bottom: 6px; }
-  .f-fact span { display: block; font-size: 0.8rem; line-height: 1.5; color: #435155; }
-  
-  .f-about-creds {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .f-cred-box {
-    background: #ffffff;
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--navy);
-    border-radius: 4px;
-    padding: 16px 18px;
-    box-shadow: 0 2px 6px rgba(19, 38, 47, 0.04);
-  }
-  .f-cred-box strong {
-    display: block;
-    font-family: var(--cm);
-    font-size: 1.05rem;
-    color: var(--navy);
-    margin-bottom: 4px;
-  }
-  .f-cred-box span {
-    display: block;
-    font-size: 0.84rem;
-    color: #4b5250;
-    line-height: 1.45;
-  }
-
-  .f-contact { display: flex; flex-wrap: wrap; gap: 14px 24px; margin-top: 28px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--ui); }
-  .f-contact a { text-decoration: underline; text-underline-offset: 4px; color: var(--navy); }
-  .f-contact a:hover { color: var(--copper); }
 
   /* Footer */
   .f-footer { border-top: 1px solid var(--ink); padding: 22px 0 32px; font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em; }
   .f-footer-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
   .f-footer-row a { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* ==========================================================================
+     About Page Styles
+     ========================================================================== */
+  .f-about-hero-clean { padding: 64px 0 52px; border-bottom: 1px solid var(--ink); background: var(--paper); }
+  .f-about-hero-clean h1 { font-size: clamp(2.8rem, 5.2vw, 4.5rem); font-weight: 600; line-height: 1.02; letter-spacing: -0.035em; color: var(--navy); margin: 12px 0 18px; max-width: 900px; }
+  .f-about-hero-clean p { font-size: 1.18rem; line-height: 1.65; color: #3b4240; max-width: 780px; margin: 0; }
+
+  .f-about-stats-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); background: #ffffff; margin: 48px 0 56px; }
+  .f-about-stat-cell { padding: 32px 36px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); min-height: 180px; display: flex; flex-direction: column; justify-content: center; }
+  .f-about-stat-cell strong { display: block; font-size: 2.2rem; font-family: var(--cm); font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.1; }
+  .f-about-stat-cell p { margin: 0; color: #4b5250; font-size: 0.95rem; line-height: 1.55; }
+
+  .f-about-story-grid { display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 56px; padding: 48px 0 64px; border-top: 1px solid var(--ink); align-items: start; }
+  .f-about-story-grid h2 { margin: 0; font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 700; line-height: 1.15; color: var(--navy); letter-spacing: -0.02em; }
+  .f-about-story-body { display: flex; flex-direction: column; gap: 24px; }
+  .f-about-story-body p { margin: 0; font-size: 1.04rem; line-height: 1.75; color: #2b3336; }
+
+  .f-about-cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .f-about-mini-card { background: #ffffff; border: 1px solid var(--line); border-left: 4px solid var(--navy); border-radius: 4px; padding: 16px 18px; }
+  .f-about-mini-card strong { display: block; font-size: 1rem; color: var(--navy); margin-bottom: 4px; }
+  .f-about-mini-card span { font-size: 0.85rem; color: #4b5250; line-height: 1.45; display: block; }
+
+  .f-about-actions-row { display: flex; flex-wrap: wrap; gap: 12px 18px; margin-top: 16px; }
+  .f-about-btn { display: inline-flex; align-items: center; padding: 11px 18px; border: 1px solid var(--ink); font-size: 0.82rem; font-weight: 700; font-family: var(--ui); text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; cursor: pointer; transition: all 0.15s ease; }
+  .f-about-btn.primary { background: var(--navy); color: #ffffff; }
+  .f-about-btn.primary:hover { background: var(--copper); border-color: var(--copper); }
+  .f-about-btn.secondary { background: #ffffff; color: var(--navy); }
+  .f-about-btn.secondary:hover { background: var(--mist); }
+
+  .f-about-boundary-note { margin: 40px 0 80px; padding: 20px 24px; border-left: 4px solid var(--copper); background: #ffffff; border: 1px solid var(--line); border-left-width: 4px; border-left-color: var(--copper); color: #4b5250; font-size: 0.92rem; line-height: 1.6; }
 
   /* Responsive Queries */
   @media (max-width: 920px) {
@@ -1340,6 +861,7 @@ const siteCss = `
     .f-case-rail { position: static; max-height: none; }
     .f-work-item { grid-template-columns: 1fr; gap: 8px; }
     .f-work-item .f-item-meta { text-align: left; }
+    .f-about-stats-grid, .f-about-story-grid, .f-about-cards-row { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
     .f-map-grid { grid-template-columns: 1fr; }
@@ -1386,7 +908,7 @@ function layoutFooter(label = "Ho Chi Minh City · 2026") {
   return `<footer class="f-footer">
     <div class="f-wrap f-footer-row">
       <span>Phạm Thanh Phú · ${escapeHtml(label)}</span>
-      <span><a href="mailto:phamthanhphu97@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn</a> · <a href="/work">Work Archive</a></span>
+      <span><a href="mailto:phamthanhphu97@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn</a> · <a href="/work">Work Library</a></span>
     </div>
   </footer>`;
 }
@@ -1427,7 +949,7 @@ function homePage() {
     {
       num: "04",
       path: "/work/pathway-lens-operational-cycles",
-      tag: "AI Drift · Decision Governance · Live App",
+      tag: "AI Drift · Decision Governance",
       title: "Pathway Lens & Explainable Trust",
       desc: "When automated AI systems drift or fail, how to reconstruct the T0 baseline, verify evidence provenance, and execute a structured 10-step recovery cycle."
     }
@@ -1499,17 +1021,17 @@ ${layoutHead("Phạm Thanh Phú — Work & Research", "Evidence-first portfolio 
     </section>
 
     <!-- 3. Operating Principles -->
-    <section class="f-wrap f-home-reading">
-      <h2>Work grounded in the real conditions of getting things done.</h2>
-      <div class="f-home-reading-copy">
-        <article class="f-home-reading-block">
-          <h3>Start from a concrete tension</h3>
-          <p>I start from an observation that does not quite fit: an unexpected account restriction, a quiet store morning, a supplier policy shift, a fan product bottleneck, or an AI output that lacks provenance. Then I map the moving parts behind it.</p>
+    <section class="f-wrap" style="display:grid;grid-template-columns:0.75fr 1.25fr;gap:60px;padding:48px 0 56px;border-bottom:1px solid var(--ink);">
+      <h2 style="margin:0;font-size:clamp(2rem, 3.2vw, 3rem);font-weight:500;line-height:1.08;letter-spacing:-0.03em;color:var(--navy);">Work grounded in the real conditions of getting things done.</h2>
+      <div style="display:grid;gap:26px;">
+        <article style="border-top:1px solid var(--ink);padding-top:4px;">
+          <h3 style="margin:12px 0 8px;font-size:1.4rem;font-weight:700;color:var(--navy);">Start from a concrete tension</h3>
+          <p style="margin:0;color:#3c403d;font-size:0.98rem;line-height:1.7;">I start from an observation that does not quite fit: an unexpected account restriction, a quiet store morning, a supplier policy shift, a fan product bottleneck, or an AI output that lacks provenance. Then I map the moving parts behind it.</p>
         </article>
-        <article class="f-home-reading-block">
-          <h3>Follow the mechanism, not the slogan</h3>
-          <p>I look closely at what happens after apparent agreement: the handoff after payment, the owner of an exception, the data quality behind a recommendation, and the recovery pathway when an assumption breaks down.</p>
-          <p>That is why this library separates confirmed facts, outside-in inferences, working models, and open hypotheses instead of letting them blur together.</p>
+        <article style="border-top:1px solid var(--ink);padding-top:4px;">
+          <h3 style="margin:12px 0 8px;font-size:1.4rem;font-weight:700;color:var(--navy);">Follow the mechanism, not the slogan</h3>
+          <p style="margin:0;color:#3c403d;font-size:0.98rem;line-height:1.7;">I look closely at what happens after apparent agreement: the handoff after payment, the owner of an exception, the data quality behind a recommendation, and the recovery pathway when an assumption breaks down.</p>
+          <p style="margin:12px 0 0;color:#3c403d;font-size:0.98rem;line-height:1.7;">That is why this library separates confirmed facts, outside-in inferences, working models, and open hypotheses instead of letting them blur together.</p>
         </article>
       </div>
     </section>
@@ -1748,13 +1270,10 @@ ${layoutHead("Work Library — Phạm Thanh Phú", "Complete index of 19 works a
 function casePage(item) {
   const doc = caseDocuments[item.path] || { assets: [], body: "" };
   const renderedProse = renderEditorialNotion(doc.body || "");
-  const hasAssets = doc.assets && doc.assets.length > 0;
 
-  // Client TOC and Asset Viewer controller
   const clientScript = `
     <script>
       (()=>{
-        // 1. Reading Progress Bar
         const bar = document.getElementById('f-progress-bar');
         window.addEventListener('scroll', () => {
           const total = document.documentElement.scrollHeight - window.innerHeight;
@@ -1764,7 +1283,6 @@ function casePage(item) {
           }
         }, { passive: true });
 
-        // 2. Dynamic Table of Contents Generation
         const prose = document.getElementById('record');
         const tocList = document.getElementById('f-toc-list');
         if (prose && tocList) {
@@ -1776,12 +1294,11 @@ function casePage(item) {
             const a = document.createElement('a');
             a.className = 'f-toc-link';
             a.href = '#' + h.id;
-            a.textContent = h.textContent.replace(/^#\s*/, '');
+            a.textContent = h.textContent.replace(/^#\\s*/, '');
             li.appendChild(a);
             tocList.appendChild(li);
           });
 
-          // ScrollSpy for TOC
           const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
@@ -1796,7 +1313,6 @@ function casePage(item) {
           headings.forEach(h => observer.observe(h));
         }
 
-        // 3. Citation Copier
         const citeBtn = document.getElementById('f-cite-btn');
         if (citeBtn) {
           citeBtn.addEventListener('click', () => {
@@ -1810,7 +1326,6 @@ function casePage(item) {
           });
         }
 
-        // 4. Asset Viewer Modal Controller
         const modal = document.getElementById('f-asset-modal');
         const modalTitle = document.getElementById('f-modal-title');
         const modalBadge = document.getElementById('f-modal-badge');
@@ -1889,7 +1404,6 @@ function casePage(item) {
           });
         }
 
-        // Attach listener to all trigger buttons
         document.querySelectorAll('.f-asset-trigger').forEach(btn => {
           btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -1967,7 +1481,6 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question)}
       </article>
     </div>
 
-    <!-- Native Asset Viewer Modal -->
     <dialog id="f-asset-modal" class="f-asset-modal">
       <div class="f-modal-topbar">
         <div class="f-modal-title-wrap">
@@ -2000,145 +1513,90 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question)}
 function aboutPage() {
   return `<!doctype html>
 <html lang="en">
-${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú, owner-operator and Business Development & Operations Manager working across commercial operations, product systems, and evidence-first research in Ho Chi Minh City.")}
+${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú, owner-operator and Business Development & Operations Manager working across commercial execution, product operations, and evidence-first systems in Ho Chi Minh City.")}
 <body>
-  <a class="f-skip" href="#about-content">Skip to about content</a>
+  <a class="f-skip" href="#about-story">Skip to about content</a>
   ${layoutHeader("about")}
-  <main id="about">
-    <section class="f-about-hero">
-      <div class="f-wrap f-about-hero-wrap">
-        <div class="f-about-hero-left">
-          <span class="f-overline">Background & Direction</span>
-          <h1>Commercial operations first. Product systems next.</h1>
-          <p>I am an owner-operator and Business Development & Operations Manager based in Ho Chi Minh City. I spend my time connecting fragmented people, information, suppliers, workflows, incentives, and constraints into reliable operating pathways.</p>
-          <div class="f-about-chips">
-            <span class="f-about-chip">B2B Commercial Ops</span>
-            <span class="f-about-chip">Product Operations</span>
-            <span class="f-about-chip">Systems & AI Trust</span>
-            <span class="f-about-chip">Commercial Law</span>
-            <span class="f-about-chip">Ho Chi Minh City</span>
-          </div>
-        </div>
-
-        <div class="f-about-profile-card">
-          <img src="/assets/phu-portrait.webp" alt="Portrait of Phạm Thanh Phú" class="f-about-profile-img">
-          <div class="f-about-profile-info">
-            <strong>Phạm Thanh Phú</strong>
-            <span>Business Development & Operations Manager<br>Phong Phu Stationery (since 2019)</span>
-            <span>📍 Ho Chi Minh City</span>
-          </div>
-        </div>
+  <main>
+    <section class="f-about-hero-clean">
+      <div class="f-wrap">
+        <span class="f-overline" style="color:var(--copper);">About Me · Background & Operating Grounding</span>
+        <h1>I learned systems by running one.</h1>
+        <p>Owner-operator and Business Development & Operations Manager based in Ho Chi Minh City, with hands-on ownership across commercial execution, suppliers, institutional accounts, fulfillment, collections, and long-term partner trust.</p>
       </div>
     </section>
 
-    <div class="f-wrap f-about-layout">
-      <aside class="f-about-sidebar">
-        <div class="f-sidebar-box">
-          <h3>Quick Snapshot</h3>
-          <div class="f-sidebar-stat">
-            <b>6+ Years</b>
-            <span>B2B Commercial Ownership</span>
+    <div class="f-wrap">
+      <div class="f-about-stats-grid">
+        <div class="f-about-stat-cell">
+          <strong>Since 07/2019</strong>
+          <p>Owner-operator / Business Development & Operations Manager at Phong Phu Stationery.</p>
+        </div>
+        <div class="f-about-stat-cell">
+          <strong>~VND 800M / qtr</strong>
+          <p>Average quarterly B2B revenue across 10+ supplier partners with 30-35% operating margin. Business revenue, not personal compensation.</p>
+        </div>
+        <div class="f-about-stat-cell">
+          <strong>50+ Accounts</strong>
+          <p>Recurring institutional clients including schools, public units, SMEs, and corporate branches of Olam & Emivest.</p>
+        </div>
+        <div class="f-about-stat-cell">
+          <strong>~95% Retention</strong>
+          <p>Customer retention earned through reliable execution, visibility, and direct relationship management—not an outbound sales engine.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-wrap" id="about-story">
+      <section class="f-about-story-grid">
+        <div>
+          <h2>Commercial work first.<br>Product & operating systems next.</h2>
+        </div>
+        <div class="f-about-story-body">
+          <p>
+            My operating background began with the ordinary but consequential work of keeping customers, suppliers, pricing, fulfillment, collections, and issue resolution connected in a live market.
+          </p>
+          <p>
+            When a key supplier abruptly reduced our discount from 22% to 15%, I confirmed the policy with supervisors, avoided ungrounded escalation, mobilized five alternative brands, validated samples with clients, and replaced over 80% of affected volume within one week.
+          </p>
+          <p>
+            Over time, my focus expanded from completing individual transactions to designing the operating systems behind them: how information moves, where ownership breaks down, and how ambiguous problems become shared operating maps, practical next actions, and measurable learning.
+          </p>
+
+          <div class="f-about-cards-row">
+            <div class="f-about-mini-card">
+              <strong>Commercial Law & Contracts</strong>
+              <span>Bachelor of Commercial Law & Lawyer Training Certificate. Grounding in risk transfer, obligations, and regulatory boundaries.</span>
+            </div>
+            <div class="f-about-mini-card">
+              <strong>Value Chain Management (UIUC)</strong>
+              <span>Operations Management, Managerial Accounting, Strategic Marketing Mix, and Value Chain Architecture (Aug 2026).</span>
+            </div>
+            <div class="f-about-mini-card">
+              <strong>Analytics, AI & Project Mgmt</strong>
+              <span>Google Project Management, Google Data Analytics, IBM Data Science, and NYIF Risk Management.</span>
+            </div>
+            <div class="f-about-mini-card">
+              <strong>Community & Creator Ops</strong>
+              <span>TikTok @yunero1206 (242K+ likes), Askfm (30K interests), advising indie creators on rights, monetization, and recovery.</span>
+            </div>
           </div>
-          <div class="f-sidebar-stat">
-            <b>~VND 800M</b>
-            <span>Avg. Quarterly B2B Revenue</span>
-          </div>
-          <div class="f-sidebar-stat">
-            <b>50+ Accounts</b>
-            <span>Recurring Clients (~95% Retention)</span>
-          </div>
-          <div class="f-sidebar-stat">
-            <b>&gt;90%</b>
-            <span>Delegated via KiotViet & Team</span>
+
+          <p>
+            I am directing this commercial operations grounding, legal discipline, and systems thinking toward <strong>Business Operations</strong>, <strong>Product Operations</strong>, and <strong>Product Strategy</strong> roles in Ho Chi Minh City.
+          </p>
+
+          <div class="f-about-actions-row">
+            <a href="mailto:phamthanhphu97@gmail.com" class="f-about-btn primary">Email Phú ↗</a>
+            <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
+            <a href="/work" class="f-about-btn secondary">Browse Work Library →</a>
+            <a href="/apps/explainable-trust" class="f-about-btn secondary">Explainable Trust App →</a>
           </div>
         </div>
+      </section>
 
-        <div class="f-sidebar-box">
-          <h3>Navigation</h3>
-          <ul class="f-sidebar-nav">
-            <li><a href="#operating-grounding">1. Operating Grounding</a></li>
-            <li><a href="#how-i-work">2. How I Approach Work</a></li>
-            <li><a href="#credentials">3. Credentials & Toolkit</a></li>
-            <li><a href="#direction">4. Career Direction</a></li>
-          </ul>
-        </div>
-
-        <div class="f-sidebar-box">
-          <h3>Direct Links</h3>
-          <ul class="f-sidebar-nav">
-            <li><a href="mailto:phamthanhphu97@gmail.com">Email Phú ↗</a></li>
-            <li><a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn Profile ↗</a></li>
-            <li><a href="/work">Work Library Archive ↗</a></li>
-            <li><a href="/apps/explainable-trust">Explainable Trust App ⚡</a></li>
-          </ul>
-        </div>
-      </aside>
-
-      <div class="f-about-content" id="about-content">
-        <section id="operating-grounding">
-          <h2>1. Operating Grounding (Phong Phu Stationery)</h2>
-          <p>Since July 2019, I have built and managed an institutional supply business at Phong Phu Stationery. The work is end-to-end: customer discovery, tailored quotations, sourcing, supplier negotiations, fulfillment, payment collection, and account retention.</p>
-          
-          <div class="f-facts">
-            <div class="f-fact">
-              <strong>~VND 800M / qtr</strong>
-              <span>Average quarterly B2B revenue across 10+ supplier partners with 30-35% operating margin.</span>
-            </div>
-            <div class="f-fact">
-              <strong>50+ Accounts</strong>
-              <span>Schools, public-sector units, SMEs, and corporate branches of Olam and Emivest.</span>
-            </div>
-            <div class="f-fact">
-              <strong>~95% Retention</strong>
-              <span>Earned through reliable execution, visibility, and direct relationship management.</span>
-            </div>
-          </div>
-
-          <p>When a key supplier abruptly reduced our discount across an affected product line from 22% to 15%, I confirmed the policy with regional supervisors, avoided ungrounded personal escalation, mobilized five alternative brands, validated samples directly with institutional clients, and replaced over 80% of the affected volume within one week.</p>
-          <p>Since summer 2025, I moved pricing, inventory, invoicing, and corporate records into KiotViet and transferred more than 90% of operational work to an experienced bookstore manager, part-time staff, and logistics partners.</p>
-        </section>
-
-        <section id="how-i-work">
-          <h2>2. How I Approach Work</h2>
-          <p><strong>1. Mechanisms over slogans.</strong> I do not stop at calling something a "trust problem" or "engagement drop." I trace the moving parts: what happens after a purchase, what breaks when an account is restricted, or who owns the handoff when an exception arises.</p>
-          <p><strong>2. Visible evidence boundaries.</strong> The case monographs on this site are outside-in analytical research based on public records, policy documents, and observable events. I separate confirmed facts, working inferences, and open hypotheses cleanly.</p>
-          <p><strong>3. Reversible testing before large commitments.</strong> When organizing acoustic music performances for high school communities in 2024, we ran two free 30-minute pilots before committing to paid three-hour events that generated 400+ drink orders. Test the mechanics small before allocating capital.</p>
-        </section>
-
-        <section id="credentials">
-          <h2>3. Credentials & Toolkit</h2>
-          <div class="f-about-creds">
-            <div class="f-cred-box">
-              <strong>Commercial Law & Legal Training</strong>
-              <span>Bachelor of Commercial Law & Lawyer Training Certificate. Grounding in contract structures, consumer rights, risk transfer, and regulatory boundaries.</span>
-            </div>
-            <div class="f-cred-box">
-              <strong>Value Chain Management (UIUC, Aug 2026)</strong>
-              <span>University of Illinois Urbana-Champaign: Operations Management, Managerial Accounting, Strategic Marketing Mix, and Value Chain Design.</span>
-            </div>
-            <div class="f-cred-box">
-              <strong>Analytics, AI & Project Management</strong>
-              <span>Google Project Management, Google Data Analytics, IBM Data Science, NYIF Risk Management, and Google AI Specialization.</span>
-            </div>
-            <div class="f-cred-box">
-              <strong>Creator & Community Platforms</strong>
-              <span>TikTok @yunero1206 (242K+ likes, 1.2M-view video), Askfm (30K interests), advising indie artists and creators around platform policies, Content ID, and recovery.</span>
-            </div>
-          </div>
-        </section>
-
-        <section id="direction">
-          <h2>4. Career Direction</h2>
-          <p>I am directing this commercial operations grounding, legal discipline, and systems thinking toward <strong>Business Operations</strong>, <strong>Product Operations</strong>, and <strong>Product Strategy</strong> roles in Ho Chi Minh City.</p>
-          <p>My current near-term focus is Amazon Global Selling Vietnam (Business Development Consultant, NSR). The work on this website demonstrates how I diagnose bottlenecks, coordinate partners, and build operational pathways that repeat reliably.</p>
-        </section>
-
-        <div class="f-contact">
-          <a href="mailto:phamthanhphu97@gmail.com">Email Phú ↗</a>
-          <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn Profile ↗</a>
-          <a href="/work">Explore Work Library →</a>
-          <a href="/apps/explainable-trust">Try Explainable Trust App →</a>
-        </div>
+      <div class="f-about-boundary-note">
+        <strong>Career-Page Boundary:</strong> This is a concise operating snapshot and research introduction, not a substitute for a role-specific CV. For detailed employment history and tailored experience records, please connect via LinkedIn or email.
       </div>
     </div>
   </main>
@@ -2148,7 +1606,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú, owner-oper
 }
 
 // ============================================================================
-// Interactive Explainable Trust Intelligence App (Security & Rate Limited)
+// Explainable Trust Standalone App (Exact 3-Column UI of Yunero1206/Explainable-App)
 // ============================================================================
 
 let rateLimitDate = new Date().toISOString().slice(0, 10);
@@ -2373,711 +1831,626 @@ function explainableAppPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Explainable Trust — Interactive Decision Intelligence Workspace</title>
-  <meta name="description" content="Contestable AI Decision Engine & Traceable Case Reconstruction Workspace by Pham Thanh Phu. Powered by Google Gemini Flash & Tavily Search.">
+  <title>Explainable Trust — Contestable Decision Workspace</title>
+  <meta name="description" content="Official Gateway to Explainable-App (github.com/Yunero1206/Explainable-App). Reconstruct situations under uncertainty with Google Gemini Flash & Tavily Search.">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.3/cmu-serif.css">
   <style>
     :root {
-      --navy: #0f172a;
-      --navy-dark: #020617;
-      --panel-bg: #1e293b;
-      --panel-border: #334155;
+      --bg-dark: #0b0f19;
+      --bg-sidebar: #0f172a;
+      --bg-card: #1e293b;
+      --border: #334155;
+      --border-subtle: rgba(255,255,255,0.08);
       --text: #f8fafc;
       --text-muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-hover: #0ea5e9;
-      --copper: #f97316;
-      --success: #22c55e;
-      --warning: #eab308;
-      --danger: #ef4444;
-      --card-bg: #0f172a;
+      --cyan: #38bdf8;
+      --cyan-hover: #0ea5e9;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
       --ui: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--navy-dark);
+      background: var(--bg-dark);
       color: var(--text);
       font-family: var(--ui);
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: 13.5px;
       height: 100vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* App Top Navigation */
-    .app-header {
-      height: 56px;
-      min-height: 56px;
-      background: var(--panel-bg);
-      border-bottom: 1px solid var(--panel-border);
+    /* Top Master App Bar */
+    .app-topbar {
+      height: 52px;
+      min-height: 52px;
+      background: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
-      gap: 16px;
-      z-index: 10;
+      padding: 0 18px;
+      gap: 14px;
+      z-index: 20;
     }
-    .app-header-left {
+    .topbar-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
-    .app-back-btn {
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.03);
+      transition: all 0.15s ease;
+    }
+    .back-link:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+    .app-brand {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .app-version-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+    .github-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+    }
+    .status-badge {
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid var(--panel-border);
-      background: rgba(255, 255, 255, 0.04);
-      transition: all 0.15s ease;
-    }
-    .app-back-btn:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.1);
-    }
-    .app-title-group {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-    }
-    .app-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.01em;
-    }
-    .app-badge {
-      font-size: 11px;
-      font-weight: 800;
-      padding: 2px 7px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 4px;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .app-header-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .engine-status-pill {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--text-muted);
       padding: 4px 10px;
-      background: rgba(0,0,0,0.3);
-      border: 1px solid var(--panel-border);
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
       border-radius: 20px;
     }
-    .engine-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--success);
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--emerald);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--success);
+      box-shadow: 0 0 6px var(--emerald);
     }
 
-    /* Main App Layout */
-    .app-main {
+    /* 3-Column Standalone Workspace Layout */
+    .app-grid {
       flex: 1;
       display: grid;
-      grid-template-columns: 380px minmax(0, 1fr);
+      grid-template-columns: 280px 420px minmax(0, 1fr);
       overflow: hidden;
     }
 
-    /* Left Sidebar: Intake & Presets */
-    .app-sidebar {
-      background: var(--panel-bg);
-      border-right: 1px solid var(--panel-border);
+    /* Column 1: Left Cases Sidebar */
+    .col-sidebar {
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      padding: 20px;
-      gap: 20px;
+      padding: 16px;
+      gap: 16px;
     }
-    .sidebar-section-title {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 8px;
+    .sidebar-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .preset-chips {
+    .sidebar-head h2 {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .new-case-btn {
+      padding: 5px 10px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 5px;
+      color: var(--cyan);
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .new-case-btn:hover {
+      background: var(--cyan);
+      color: #000;
+    }
+
+    .case-list {
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
-    .preset-chip {
-      padding: 8px 12px;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--panel-border);
-      border-radius: 6px;
-      color: var(--text);
-      font-size: 12.5px;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.15s ease;
-    }
-    .preset-chip:hover {
-      background: rgba(56, 189, 248, 0.1);
-      border-color: var(--accent);
-      color: #fff;
-    }
-
-    .app-textarea {
-      width: 100%;
-      height: 160px;
-      background: var(--card-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: 8px;
-      padding: 12px;
-      color: #fff;
-      font-family: var(--ui);
-      font-size: 13px;
-      line-height: 1.5;
-      resize: vertical;
-    }
-    .app-textarea:focus {
-      outline: 2px solid var(--accent);
-      border-color: var(--accent);
-    }
-
-    .mode-selector {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .mode-btn {
-      padding: 10px;
-      background: var(--card-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: 6px;
-      color: var(--text-muted);
-      font-size: 12px;
-      font-weight: 600;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .mode-btn.active {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--accent);
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .byok-box {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--panel-border);
-      border-radius: 6px;
+    .case-card {
       padding: 10px 12px;
-    }
-    .byok-input {
-      width: 100%;
-      background: #020617;
-      border: 1px solid var(--panel-border);
-      border-radius: 4px;
-      padding: 6px 10px;
-      font-size: 12px;
-      color: #fff;
-      margin-top: 6px;
-    }
-
-    .run-btn {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, #0284c7, #0369a1);
-      border: 1px solid #38bdf8;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 700;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px;
       cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+    .case-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--cyan);
+    }
+    .case-card.active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--cyan);
+    }
+    .case-card-top {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
-      transition: all 0.18s ease;
+      margin-bottom: 4px;
     }
-    .run-btn:hover {
-      background: linear-gradient(135deg, #0ea5e9, #0284c7);
-      transform: translateY(-1px);
+    .case-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--cyan);
     }
-    .run-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
+    .case-status {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 5px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border-radius: 3px;
+    }
+    .case-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* Right Workspace */
-    .app-workspace {
-      background: #090d16;
+    /* Column 2: Center Case Intake & Chat */
+    .col-intake {
+      background: var(--bg-dark);
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
-    .workspace-topbar {
+    .intake-topbar {
       height: 48px;
-      border-bottom: 1px solid var(--panel-border);
+      padding: 0 16px;
+      background: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
-      background: var(--panel-bg);
     }
-    .workspace-tabs {
+    .intake-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 8px;
+    }
+    .intake-stream {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .msg-bubble {
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 92%;
+    }
+    .msg-bubble.user {
+      align-self: flex-end;
+      background: #1e3a8a;
+      border: 1px solid #2563eb;
+      color: #eff6ff;
+    }
+    .msg-bubble.system {
+      align-self: flex-start;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: #e2e8f0;
+    }
+
+    .intake-composer {
+      padding: 14px 16px;
+      background: var(--bg-sidebar);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mode-pills {
+      display: flex;
+      gap: 6px;
+    }
+    .mode-pill {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.3);
+      color: var(--text-muted);
+    }
+    .mode-pill.active {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .intake-input {
+      width: 100%;
+      height: 78px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      color: #fff;
+      font-family: var(--ui);
+      font-size: 12.5px;
+      line-height: 1.45;
+      resize: none;
+    }
+    .intake-input:focus {
+      outline: 2px solid var(--cyan);
+    }
+    .intake-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .send-btn {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border: 1px solid var(--cyan);
+      border-radius: 6px;
+      color: #fff;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .send-btn:hover {
+      background: #0284c7;
+    }
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Column 3: Right Inspector & Evidence DAG Canvas */
+    .col-inspector {
+      background: #060913;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .inspector-topbar {
+      height: 48px;
+      padding: 0 16px;
+      background: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .inspector-tabs {
+      display: flex;
+      gap: 2px;
       height: 100%;
     }
-    .workspace-tab {
-      padding: 0 14px;
+    .inspector-tab {
+      padding: 0 12px;
       height: 100%;
       background: transparent;
       border: none;
       border-bottom: 2px solid transparent;
       color: var(--text-muted);
-      font-size: 12.5px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
-    }
-    .workspace-tab:hover {
-      color: #fff;
-    }
-    .workspace-tab.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-      font-weight: 700;
-    }
-
-    .workspace-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .action-btn {
-      padding: 5px 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--panel-border);
-      border-radius: 4px;
-      color: var(--text-muted);
       font-size: 12px;
+      font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 5px;
     }
-    .action-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
+    .inspector-tab:hover {
       color: #fff;
     }
+    .inspector-tab.active {
+      color: var(--cyan);
+      border-bottom-color: var(--cyan);
+      font-weight: 700;
+    }
 
-    .workspace-body {
+    .inspector-body {
       flex: 1;
       overflow-y: auto;
-      padding: 24px;
-      position: relative;
-    }
-
-    /* Output Views */
-    .view-empty {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      text-align: center;
-      gap: 12px;
-    }
-    .empty-icon {
-      font-size: 42px;
-      opacity: 0.6;
-    }
-    .empty-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-    }
-    .empty-desc {
-      font-size: 13px;
-      max-width: 440px;
-      line-height: 1.5;
-    }
-
-    .view-loading {
-      height: 100%;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
-    .spinner {
-      width: 42px;
-      height: 42px;
-      border: 3px solid rgba(56, 189, 248, 0.2);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .view-result {
-      display: none;
-      flex-direction: column;
-      gap: 20px;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    /* Target & Goal Banner */
-    .ledger-banner {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
-      border: 1px solid var(--panel-border);
-      border-left: 4px solid var(--accent);
-      border-radius: 8px;
-      padding: 16px 20px;
-    }
-    .ledger-goal {
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-    .ledger-summary {
-      font-size: 13.5px;
-      color: #cbd5e1;
-      line-height: 1.6;
-    }
-
-    /* DAG Visual Flow */
-    .dag-container {
-      background: #020617;
-      border: 1px solid var(--panel-border);
-      border-radius: 8px;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
     }
-    .dag-node {
-      display: grid;
-      grid-template-columns: 140px 1fr 100px;
-      gap: 16px;
-      align-items: center;
-      padding: 12px 16px;
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: 6px;
-    }
-    .dag-node-time {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    .dag-node-event {
-      font-size: 13px;
-      color: #f1f5f9;
-    }
-    .dag-node-tag {
-      font-size: 11px;
-      font-weight: 700;
-      text-align: center;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-    .dag-node-tag.verified { background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.4); }
-    .dag-node-tag.unverified { background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.4); }
-    .dag-node-tag.contested { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
 
-    /* Findings Grid */
-    .cards-grid {
+    /* DAG & Flow Nodes */
+    .dag-node-item {
+      display: grid;
+      grid-template-columns: 120px 1fr 90px;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .dag-node-item .time { font-size: 11.5px; font-weight: 700; color: var(--cyan); }
+    .dag-node-item .event { font-size: 12.5px; color: #f1f5f9; }
+    .dag-node-item .tag { font-size: 10px; font-weight: 800; text-align: center; padding: 2px 6px; border-radius: 3px; }
+    .dag-node-item .tag.verified { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .dag-node-item .tag.unverified { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .dag-node-item .tag.contested { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
+
+    .claims-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
-    .finding-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: 8px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .finding-claim {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-    }
-    .finding-basis {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-    .finding-conf {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--accent);
-      align-self: flex-start;
-      padding: 2px 6px;
-      background: rgba(56, 189, 248, 0.1);
-      border-radius: 4px;
-    }
-
-    /* Gaps Alert Cards */
-    .gap-card {
-      background: rgba(239, 68, 68, 0.08);
-      border: 1px solid rgba(239, 68, 68, 0.25);
-      border-left: 4px solid var(--danger);
+    .claim-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 14px 16px;
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
-    .gap-missing {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #fca5a5;
-    }
-    .gap-action {
-      font-size: 12.5px;
-      color: #cbd5e1;
-    }
+    .claim-title { font-size: 13px; font-weight: 700; color: #fff; }
+    .claim-basis { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
 
-    /* Recovery Steps */
-    .recovery-step {
-      display: grid;
-      grid-template-columns: 36px 1fr 140px;
-      gap: 14px;
-      align-items: center;
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
+    .gap-alert {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 4px solid var(--rose);
       border-radius: 6px;
-      padding: 12px 16px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
     }
-    .step-num {
-      width: 28px;
-      height: 28px;
-      background: rgba(34, 197, 94, 0.2);
-      border: 1px solid rgba(34, 197, 94, 0.4);
-      color: #86efac;
-      border-radius: 50%;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-    }
-    .step-action {
-      font-size: 13px;
-      color: #f8fafc;
-    }
-    .step-owner {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: right;
-    }
+    .gap-alert-title { font-size: 12.5px; font-weight: 700; color: #fda4af; margin-bottom: 2px; }
+    .gap-alert-desc { font-size: 12px; color: #e2e8f0; }
 
-    /* Code & JSON Pre */
-    .json-code {
+    .recovery-step-row {
+      display: grid;
+      grid-template-columns: 28px 1fr 110px;
+      gap: 12px;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 6px;
+    }
+    .step-badge { width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+
+    .raw-code-box {
       background: #020617;
-      border: 1px solid var(--panel-border);
-      border-radius: 8px;
-      padding: 16px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      font-family: monospace;
+      font-size: 11.5px;
       color: #38bdf8;
       overflow-x: auto;
       white-space: pre-wrap;
     }
 
-    @media (max-width: 900px) {
-      .app-main { grid-template-columns: 1fr; }
-      .app-sidebar { border-right: none; border-bottom: 1px solid var(--panel-border); max-height: 45vh; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .dag-node { grid-template-columns: 1fr; gap: 6px; }
-      .recovery-step { grid-template-columns: 32px 1fr; }
-      .step-owner { grid-column: 2; text-align: left; }
+    @media (max-width: 1080px) {
+      .app-grid { grid-template-columns: 240px 340px minmax(0, 1fr); }
+      .claims-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 820px) {
+      .app-grid { grid-template-columns: 1fr; }
+      .col-sidebar, .col-intake { display: none; }
     }
   </style>
 </head>
 <body>
-  <!-- Standalone App Header -->
-  <header class="app-header">
-    <div class="app-header-left">
-      <a href="/work" class="app-back-btn">← Trở về Work Library</a>
-      <div class="app-title-group">
-        <h1 class="app-title">Explainable Trust Intelligence Application</h1>
-        <span class="app-badge">Ledger Engine V3</span>
+  <!-- Master Standalone Top Bar -->
+  <header class="app-topbar">
+    <div class="topbar-left">
+      <a href="/work" class="back-link">← Work Library</a>
+      <div class="app-brand">
+        <span>Explainable Trust</span>
+        <span class="app-version-badge">Ledger V3</span>
       </div>
     </div>
 
-    <div class="app-header-right">
-      <div class="engine-status-pill">
-        <div class="engine-dot"></div>
+    <div class="topbar-right">
+      <div class="status-badge">
+        <div class="status-dot"></div>
         <span>Google Gemini Flash · Active</span>
       </div>
+      <a href="https://github.com/Yunero1206/Explainable-App" target="_blank" rel="noreferrer" class="github-link">
+        <span>GitHub: Yunero1206/Explainable-App ↗</span>
+      </a>
     </div>
   </header>
 
-  <!-- Standalone App Workspace -->
-  <div class="app-main">
-    <!-- Left Panel: Input & Control -->
-    <aside class="app-sidebar">
-      <div>
-        <div class="sidebar-section-title">
-          <span>Kịch bản tình huống mẫu</span>
+  <!-- 3-Column True App Workspace -->
+  <div class="app-grid">
+    <!-- Col 1: Cases Directory -->
+    <aside class="col-sidebar">
+      <div class="sidebar-head">
+        <h2>Active Cases (Hồ sơ)</h2>
+        <button id="btn-new-case" class="new-case-btn">+ Tạo mới</button>
+      </div>
+
+      <div class="case-list">
+        <div class="case-card active" data-case="shopee">
+          <div class="case-card-top">
+            <span class="case-num">#DEMO-001</span>
+            <span class="case-status">ACTIVE</span>
+          </div>
+          <div class="case-title">Shopee Account Restriction</div>
         </div>
-        <div class="preset-chips">
-          <button class="preset-chip" data-preset="shopee">
-            <span>🛒 Khóa tài khoản Shopee (Voucher / Kẹt tiền)</span>
-            <span>→</span>
-          </button>
-          <button class="preset-chip" data-preset="adobe">
-            <span>🎨 Gián đoạn Creative Cloud Adobe (SaaS)</span>
-            <span>→</span>
-          </button>
-          <button class="preset-chip" data-preset="diamond">
-            <span>💎 Tranh chấp Chứng thư Giám định Kim cương</span>
-            <span>→</span>
-          </button>
+
+        <div class="case-card" data-case="adobe">
+          <div class="case-card-top">
+            <span class="case-num">#DEMO-002</span>
+            <span class="case-status">REVIEW</span>
+          </div>
+          <div class="case-title">Adobe Creative Cloud Outage</div>
+        </div>
+
+        <div class="case-card" data-case="diamond">
+          <div class="case-card-top">
+            <span class="case-num">#DEMO-003</span>
+            <span class="case-status">DISPUTED</span>
+          </div>
+          <div class="case-title">Diamond Certificate Dispute</div>
         </div>
       </div>
 
-      <div>
-        <div class="sidebar-section-title">
-          <span>Nội dung sự việc / Tranh chấp</span>
-          <span id="char-count" style="font-size:10px;font-weight:normal;">0 / 10,000</span>
-        </div>
-        <textarea id="statement-input" class="app-textarea" placeholder="Dán văn bản khiếu nại, email thông báo khóa tài khoản, hoặc mô tả tình huống sự cố cần đối soát ranh giới chứng cứ..."></textarea>
+      <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:700;text-transform:uppercase;">API BYOK (Tùy chọn)</div>
+        <input type="password" id="user-byok-key" placeholder="Nhập Gemini API Key riêng..." style="width:100%;padding:6px 8px;background:#020617;border:1px solid var(--border);border-radius:4px;color:#fff;font-size:11.5px;">
       </div>
-
-      <div>
-        <div class="sidebar-section-title">
-          <span>Chế độ đối soát</span>
-        </div>
-        <div class="mode-selector">
-          <button class="mode-btn active" data-mode="analysis_only">
-            🧠 Analysis Only<br><span style="font-size:10px;opacity:0.8;">Bóc tách logic nội tại</span>
-          </button>
-          <button class="mode-btn" data-mode="web_assisted">
-            🌐 Web-Assisted<br><span style="font-size:10px;opacity:0.8;">Tra cứu Tavily Search</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="byok-box">
-        <div class="sidebar-section-title" style="margin-bottom:2px;">
-          <span>BYOK (Tùy chọn API Key cá nhân)</span>
-        </div>
-        <input type="password" id="byok-input" class="byok-input" placeholder="Dán Gemini API Key riêng của bạn">
-      </div>
-
-      <button id="run-btn" class="run-btn">
-        <span>⚡ Bắt đầu Phân tích & Tái lập T0</span>
-      </button>
     </aside>
 
-    <!-- Right Workspace: Multi-tab Results Canvas -->
-    <main class="app-workspace">
-      <div class="workspace-topbar">
-        <div class="workspace-tabs">
-          <button class="workspace-tab active" data-tab="dag">📊 Dòng Sự kiện (DAG)</button>
-          <button class="workspace-tab" data-tab="findings">🔍 Nhận định & Chứng cứ</button>
-          <button class="workspace-tab" data-tab="recovery">⚙️ Lộ trình Phục hồi</button>
-          <button class="workspace-tab" data-tab="provo">📜 W3C PROV-O Audit</button>
-          <button class="workspace-tab" data-tab="json">📋 Raw JSON</button>
-        </div>
+    <!-- Col 2: Intake & Dialogue -->
+    <section class="col-intake">
+      <div class="intake-topbar">
+        <div id="intake-case-header" class="intake-title">💬 #DEMO-001 · Shopee Account Restriction</div>
+        <span style="font-size:11px;color:var(--cyan);font-weight:700;">Contestable Dialogue</span>
+      </div>
 
-        <div class="workspace-actions">
-          <button id="copy-btn" class="action-btn" hidden>📋 Sao chép Kết quả</button>
-          <button id="reset-btn" class="action-btn">↺ Làm mới</button>
+      <div id="intake-stream" class="intake-stream">
+        <div class="msg-bubble user">
+          Tài khoản Shopee của tôi bị khóa vĩnh viễn lúc 14:20 ngày 05/08 vì nghi ngờ vi phạm chính sách voucher. Tôi còn 2 đơn hàng đang giao trị giá 1.200.000 VNĐ và số dư Ví ShopeePay 450.000 VNĐ chưa rút được.
+        </div>
+        <div class="msg-bubble system">
+          🛡️ <strong>Case Ledger V3 Reconstructed:</strong> Đã ghi nhận báo cáo tranh chấp tài khoản. Tiến hành đối soát ranh giới chứng cứ và lập chu trình phục hồi bên phải.
         </div>
       </div>
 
-      <div class="workspace-body">
-        <!-- 1. Empty State -->
-        <div id="view-empty" class="view-empty">
-          <div class="empty-icon">🛡️</div>
-          <div class="empty-title">Sẵn sàng đối soát & tái lập hiện trường T0</div>
-          <p class="empty-desc">
-            Chọn một kịch bản mẫu ở cột bên trái hoặc nhập trực tiếp tình huống sự cố. Hệ thống sẽ bóc tách dòng sự kiện, phân lập ranh giới chứng cứ, và đề xuất chu trình phục hồi contestable.
-          </p>
+      <div class="intake-composer">
+        <div class="mode-pills">
+          <button class="mode-pill active" data-mode="analysis_only">🧠 Analysis Only</button>
+          <button class="mode-pill" data-mode="web_assisted">🌐 Web-Assisted (Tavily)</button>
+        </div>
+        <textarea id="intake-statement" class="intake-input" placeholder="Nhập thêm dữ kiện, câu hỏi, hoặc tình huống mới cần đối soát..."></textarea>
+        <div class="intake-actions">
+          <span style="font-size:11px;color:var(--text-muted);" id="char-counter">0 ký tự</span>
+          <button id="btn-submit-intake" class="send-btn">⚡ Phân tích & Tái lập</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Col 3: Evidence DAG & Ledger Inspector -->
+    <main class="col-inspector">
+      <div class="inspector-topbar">
+        <div class="inspector-tabs">
+          <button class="inspector-tab active" data-tab="dag">📊 Dòng Sự kiện (DAG)</button>
+          <button class="inspector-tab" data-tab="findings">🔍 Nhận định & Khoảng trống</button>
+          <button class="inspector-tab" data-tab="recovery">⚙️ Lộ trình Phục hồi</button>
+          <button class="inspector-tab" data-tab="provo">📜 W3C PROV-O</button>
+          <button class="inspector-tab" data-tab="json">📋 JSON Ledger</button>
         </div>
 
-        <!-- 2. Loading State -->
-        <div id="view-loading" class="view-loading">
-          <div class="spinner"></div>
-          <div style="font-weight:700;color:#fff;">Đang gọi mô hình Google Gemini Flash & đối soát Tavily...</div>
-          <div style="font-size:12px;color:var(--text-muted);">Tái lập chuỗi sự kiện, phân tách dữ kiện đã báo cáo và ranh giới suy luận...</div>
+        <button id="btn-copy-json" style="padding:4px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:4px;color:var(--text-muted);font-size:11.5px;cursor:pointer;">📋 Copy Ledger</button>
+      </div>
+
+      <div class="inspector-body">
+        <!-- Target Goal Banner -->
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--cyan);border-radius:6px;padding:12px 16px;margin-bottom:16px;">
+          <div id="inspector-goal" style="font-size:13.5px;font-weight:700;color:#fff;margin-bottom:2px;">🎯 Mục tiêu: Khôi phục quyền truy cập và bảo toàn tài sản đang kẹt</div>
+          <div id="inspector-summary" style="font-size:12.5px;color:var(--text-muted);line-height:1.5;">Phân tách giữa sự kiện đã báo cáo và ranh giới chứng cứ cần bổ sung.</div>
         </div>
 
-        <!-- 3. Result State -->
-        <div id="view-result" class="view-result">
-          <!-- Target & Summary Banner -->
-          <div class="ledger-banner">
-            <div id="out-goal" class="ledger-goal">🎯 Quyền lợi / Mục tiêu cốt lõi</div>
-            <div id="out-summary" class="ledger-summary">Tóm tắt sự việc</div>
-          </div>
+        <div id="panel-dag">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Chuỗi sự kiện T0 (Event DAG Sequence):</div>
+          <div id="dag-nodes-list"></div>
+        </div>
 
-          <!-- Tab Content Panels -->
-          <div id="tab-dag-panel" class="tab-panel">
-            <div class="sidebar-section-title" style="margin-bottom:12px;">Chuỗi sự kiện tái lập (Event Flow):</div>
-            <div id="out-timeline" class="dag-container"></div>
-          </div>
+        <div id="panel-findings" style="display:none;">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Nhận định & Cơ sở Chứng cứ:</div>
+          <div id="findings-cards-list" class="claims-grid"></div>
 
-          <div id="tab-findings-panel" class="tab-panel" style="display:none;">
-            <div class="sidebar-section-title" style="margin-bottom:12px;">Nhận định & Cơ sở Chứng cứ:</div>
-            <div id="out-findings" class="cards-grid" style="margin-bottom:20px;"></div>
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:#fda4af;margin-bottom:10px;">Khoảng trống Chứng cứ (Evidence Gaps):</div>
+          <div id="gaps-list"></div>
+        </div>
 
-            <div class="sidebar-section-title" style="margin-bottom:12px;color:#f87171;">Khoảng trống Chứng cứ (Evidence Gaps):</div>
-            <div id="out-gaps" style="display:flex;flex-direction:column;gap:10px;"></div>
-          </div>
+        <div id="panel-recovery" style="display:none;">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Lộ trình Hành động & Phục hồi Quyền lợi:</div>
+          <div id="recovery-steps-list"></div>
+        </div>
 
-          <div id="tab-recovery-panel" class="tab-panel" style="display:none;">
-            <div class="sidebar-section-title" style="margin-bottom:12px;">Lộ trình Hành động & Phục hồi Quyền lợi:</div>
-            <div id="out-recovery" style="display:flex;flex-direction:column;gap:8px;"></div>
-          </div>
+        <div id="panel-provo" style="display:none;">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">W3C PROV-O Provenance Record:</div>
+          <pre id="provo-json" class="raw-code-box"></pre>
+        </div>
 
-          <div id="tab-provo-panel" class="tab-panel" style="display:none;">
-            <div class="sidebar-section-title" style="margin-bottom:12px;">W3C PROV-O Provenance Metadata:</div>
-            <div id="out-provo" class="json-code"></div>
-          </div>
-
-          <div id="tab-json-panel" class="tab-panel" style="display:none;">
-            <div class="sidebar-section-title" style="margin-bottom:12px;">Complete Structured Case Ledger (JSON):</div>
-            <pre id="out-json" class="json-code"></pre>
-          </div>
+        <div id="panel-json" style="display:none;">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Full Structured Ledger:</div>
+          <pre id="raw-ledger-json" class="raw-code-box"></pre>
         </div>
       </div>
     </main>
@@ -3085,202 +2458,281 @@ function explainableAppPage() {
 
   <script>
     (()=>{
-      const presets = {
-        shopee: "Tài khoản Shopee của tôi bị khóa vĩnh viễn lúc 14:20 ngày 05/08 vì nghi ngờ vi phạm chính sách voucher. Tôi còn 2 đơn hàng đang giao trị giá 1.200.000 VNĐ và số dư Ví ShopeePay 450.000 VNĐ chưa rút được. Nhân viên hỗ trợ báo không thể cung cấp lý do cụ thể và yêu cầu chờ 7 ngày làm việc.",
-        adobe: "Gói thuê bao Adobe Creative Cloud của studio bị tạm ngưng đột ngột vào sáng nay do ngân hàng gắn cờ thanh toán định kỳ là giao dịch bất thường. Chúng tôi đang có 3 dự án dựng phim Premiere và Illustrator cần xuất bản giao khách trong 24 giờ tới nhưng không thể mở file đám mây.",
-        diamond: "Khách hàng mua viên kim cương 1.2 carat kèm chứng thư kiểm định tại cửa hàng với cam kết thu đổi 95% sau 1 năm. Khi khách mang lại thu đổi, nhân viên từ chối do vết xước nhỏ ở cạnh và yêu cầu gửi đi giám định lại tại trung tâm độc lập với chi phí khách tự chịu."
+      const sampleData = {
+        shopee: {
+          num: "#DEMO-001",
+          title: "Shopee Account Restriction",
+          statement: "Tài khoản Shopee của tôi bị khóa vĩnh viễn lúc 14:20 ngày 05/08 vì nghi ngờ vi phạm chính sách voucher. Tôi còn 2 đơn hàng đang giao trị giá 1.200.000 VNĐ và số dư Ví ShopeePay 450.000 VNĐ chưa rút được.",
+          goal: "Khôi phục quyền truy cập tài khoản Shopee và đảm bảo quyền lợi nhận hoặc hoàn tiền cho 2 đơn hàng đang giao trị giá 1.200.000 VNĐ.",
+          summary: "Người dùng khiếu nại việc tài khoản bị khóa đột ngột mà không có thông báo vi phạm cụ thể, gây phong tỏa tài sản hiện hữu.",
+          timeline: [
+            { time: "14:20 05/08", event: "Tài khoản nhận thông báo hạn chế vĩnh viễn do nghi ngờ voucher.", source: "user_report", status: "UNVERIFIED" },
+            { time: "15:00 05/08", event: "Liên hệ CSKH qua hotline, yêu cầu giải trình và rút số dư ví 450.000 VNĐ.", source: "user_report", status: "VERIFIED" }
+          ],
+          findings: [
+            { claim: "Tài sản ví ShopeePay bị phong tỏa ngoài ý muốn.", basis: "Ảnh chụp màn hình số dư 450.000 VNĐ", confidence: "Cao" },
+            { claim: "Đơn hàng đang vận chuyển có nguy cơ bị hủy tự động.", basis: "Mã vận đơn 2 đơn hàng đang trung chuyển", confidence: "Trung bình" }
+          ],
+          gaps: [
+            { missing: "Biên bản ghi nhận điều khoản vi phạm cụ thể từ hệ thống rủi ro Shopee.", action: "Gửi đơn yêu cầu CSKH cung cấp log điều khoản vi phạm viện dẫn." }
+          ],
+          recoveryPath: [
+            { step: 1, action: "Thu thập mã đơn hàng, số dư ví và gửi email khiếu nại chính thức", owner: "Khách hàng", sla: "Trong 24h" },
+            { step: 2, action: "Yêu cầu tách riêng quyền rút số dư ví ShopeePay độc lập với tài khoản mua sắm", owner: "CSKH ShopeePay", sla: "3-5 ngày làm việc" }
+          ]
+        },
+        adobe: {
+          num: "#DEMO-002",
+          title: "Adobe Creative Cloud Outage",
+          statement: "Gói thuê bao Adobe Creative Cloud của studio bị tạm ngưng đột ngột do ngân hàng gắn cờ thanh toán định kỳ là giao dịch bất thường. Chúng tôi đang có 3 dự án dựng phim Premiere cần xuất bản giao khách trong 24 giờ tới.",
+          goal: "Mở khóa khẩn cấp quyền truy cập Premiere / Illustrator và thanh toán lại qua thẻ phụ.",
+          summary: "Sự cố gián đoạn dịch vụ SaaS đám mây do rào cản cổng thanh toán ngân hàng gắn cờ sai.",
+          timeline: [
+            { time: "09:00 Hôm nay", event: "Ngân hàng từ chối giao dịch gia hạn tự động của Adobe.", source: "bank_sms", status: "VERIFIED" },
+            { time: "09:15 Hôm nay", event: "Adobe khóa quyền truy cập các ứng dụng Creative Cloud trên desktop.", source: "system_alert", status: "VERIFIED" }
+          ],
+          findings: [
+            { claim: "Thẻ thanh toán chính bị khóa tính năng giao dịch quốc tế tạm thời.", basis: "Thông báo từ App ngân hàng", confidence: "Cao" }
+          ],
+          gaps: [
+            { missing: "Liên kết thẻ tín dụng dự phòng (Backup Payment Method) trong tài khoản Adobe Admin Console.", action: "Đăng nhập web Adobe đổi sang thẻ Visa phụ." }
+          ],
+          recoveryPath: [
+            { step: 1, action: "Đổi phương thức thanh toán sang thẻ dự phòng", owner: "Studio Admin", sla: "Ngay lập tức" },
+            { step: 2, action: "Liên hệ Adobe Support yêu cầu mở Grace Period 48 giờ", owner: "Adobe CS", sla: "Trong 2 giờ" }
+          ]
+        },
+        diamond: {
+          num: "#DEMO-003",
+          title: "Diamond Certificate Dispute",
+          statement: "Khách hàng mua viên kim cương 1.2 carat kèm chứng thư kiểm định tại cửa hàng với cam kết thu đổi 95% sau 1 năm. Khi khách mang lại thu đổi, nhân viên từ chối do vết xước nhỏ ở cạnh và yêu cầu gửi đi giám định lại tại trung tâm độc lập với chi phí khách tự chịu.",
+          goal: "Bảo vệ cam kết thu đổi 95% hoặc làm rõ trách nhiệm chi phí tái giám định chứng thư.",
+          summary: "Tranh chấp ranh giới tình trạng viên đá giữa thời điểm bán ra (T0) và thời điểm thu đổi.",
+          timeline: [
+            { time: "1 năm trước", event: "Giao dịch mua viên kim cương 1.2ct kèm chứng thư kiểm định nguyên seal.", source: "invoice", status: "VERIFIED" },
+            { time: "Hôm nay", event: "Cửa hàng từ chối thu đổi ngay tại quầy vì nghi vấn trầy xước.", source: "user_report", status: "CONTESTED" }
+          ],
+          findings: [
+            { claim: "Chính sách thu đổi có điều khoản trừ phí nếu đá biến dạng cơ học.", basis: "Hợp đồng mua bán ban đầu", confidence: "Trung bình" }
+          ],
+          gaps: [
+            { missing: "Ảnh macro phóng đại giác cắt và cạnh viên đá tại thời điểm giao hàng năm ngoái.", action: "Yêu cầu cửa hàng trích xuất hồ sơ kiểm định lưu trữ gốc." }
+          ],
+          recoveryPath: [
+            { step: 1, action: "Lập biên bản niêm phong đồng kiểm viên kim cương gửi trung tâm độc lập", owner: "Hai bên", sla: "Trong ngày" }
+          ]
+        }
       };
 
-      const statementInput = document.getElementById('statement-input');
-      const charCount = document.getElementById('char-count');
-      const runBtn = document.getElementById('run-btn');
-      const byokInput = document.getElementById('byok-input');
-      const viewEmpty = document.getElementById('view-empty');
-      const viewLoading = document.getElementById('view-loading');
-      const viewResult = document.getElementById('view-result');
-      const copyBtn = document.getElementById('copy-btn');
-      const resetBtn = document.getElementById('reset-btn');
+      let activeCaseKey = 'shopee';
+      let activeMode = 'analysis_only';
+      let currentLedgerData = sampleData.shopee;
 
-      let currentMode = 'analysis_only';
-      let currentLedger = null;
-
-      // BYOK Memory
+      const byokInput = document.getElementById('user-byok-key');
       const savedKey = localStorage.getItem('user_gemini_key') || '';
       if (savedKey) byokInput.value = savedKey;
       byokInput.addEventListener('change', () => {
         localStorage.setItem('user_gemini_key', byokInput.value.trim());
       });
 
-      // Char Counter
-      statementInput.addEventListener('input', () => {
-        const len = statementInput.value.length;
-        charCount.textContent = len.toLocaleString() + ' / 10,000';
-      });
+      function renderCase(c) {
+        document.getElementById('intake-case-header').textContent = '💬 ' + c.num + ' · ' + c.title;
+        document.getElementById('inspector-goal').textContent = '🎯 Mục tiêu: ' + c.goal;
+        document.getElementById('inspector-summary').textContent = c.summary;
 
-      // Presets
-      document.querySelectorAll('.preset-chip').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const type = btn.dataset.preset;
-          if (presets[type]) {
-            statementInput.value = presets[type];
-            statementInput.dispatchEvent(new Event('input'));
-          }
-        });
-      });
+        // Render Stream
+        const stream = document.getElementById('intake-stream');
+        stream.innerHTML = '<div class="msg-bubble user">' + escape(c.statement) + '</div><div class="msg-bubble system">🛡️ <strong>Case Ledger V3 Reconstructed:</strong> Đã ghi nhận và phân tích sự việc. Toàn bộ chuỗi sự kiện và ranh giới chứng cứ đã được tái lập.</div>';
 
-      // Mode switch
-      document.querySelectorAll('.mode-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentMode = btn.dataset.mode;
-        });
-      });
-
-      // Tabs switch
-      document.querySelectorAll('.workspace-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          document.querySelectorAll('.workspace-tab').forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          const target = tab.dataset.tab;
-          document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
-          const activePanel = document.getElementById('tab-' + target + '-panel');
-          if (activePanel) activePanel.style.display = 'block';
-        });
-      });
-
-      // Reset
-      resetBtn.addEventListener('click', () => {
-        statementInput.value = '';
-        statementInput.dispatchEvent(new Event('input'));
-        viewResult.style.display = 'none';
-        viewLoading.style.display = 'none';
-        viewEmpty.style.display = 'flex';
-        copyBtn.hidden = true;
-        currentLedger = null;
-      });
-
-      // Run Analysis
-      runBtn.addEventListener('click', async () => {
-        const statement = statementInput.value.trim();
-        if (!statement) {
-          alert('Vui lòng nhập nội dung sự việc hoặc chọn kịch bản mẫu.');
-          return;
-        }
-
-        viewEmpty.style.display = 'none';
-        viewResult.style.display = 'none';
-        viewLoading.style.display = 'flex';
-        runBtn.disabled = true;
-
-        try {
-          const res = await fetch('/api/explainable/analyze', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              statement,
-              mode: currentMode,
-              userKey: byokInput.value.trim()
-            })
-          });
-
-          const data = await res.json();
-          viewLoading.style.display = 'none';
-          runBtn.disabled = false;
-
-          if (!res.ok || data.error) {
-            alert('Lỗi: ' + (data.error || 'Không thể hoàn tất phân tích'));
-            viewEmpty.style.display = 'flex';
-            return;
-          }
-
-          currentLedger = data.data;
-          renderResults(data.data);
-        } catch (err) {
-          viewLoading.style.display = 'none';
-          runBtn.disabled = false;
-          viewEmpty.style.display = 'flex';
-          alert('Lỗi kết nối máy chủ: ' + err.message);
-        }
-      });
-
-      function renderResults(d) {
-        document.getElementById('out-goal').textContent = '🎯 ' + (d.goal || 'Mục tiêu / Quyền lợi cốt lõi');
-        document.getElementById('out-summary').textContent = d.summary || '';
-
-        // Timeline DAG
-        const tEl = document.getElementById('out-timeline');
-        tEl.innerHTML = '';
-        (d.timeline || []).forEach(t => {
+        // Render DAG Nodes
+        const dagList = document.getElementById('dag-nodes-list');
+        dagList.innerHTML = '';
+        (c.timeline || []).forEach(t => {
           const div = document.createElement('div');
-          div.className = 'dag-node';
-          const statusClass = (t.status || '').toLowerCase().includes('verified') ? 'verified' : ((t.status || '').toLowerCase().includes('contest') ? 'contested' : 'unverified');
-          div.innerHTML = '<span class="dag-node-time">⏱ ' + escape(t.time) + '</span><span class="dag-node-event">' + escape(t.event) + '</span><span class="dag-node-tag ' + statusClass + '">' + escape(t.status || 'REPORTED') + '</span>';
-          tEl.appendChild(div);
+          div.className = 'dag-node-item';
+          const st = (t.status || 'UNVERIFIED').toUpperCase();
+          const tagClass = st.includes('VERIFIED') ? 'verified' : (st.includes('CONTEST') ? 'contested' : 'unverified');
+          div.innerHTML = '<span class="time">⏱ ' + escape(t.time) + '</span><span class="event">' + escape(t.event) + '</span><span class="tag ' + tagClass + '">' + escape(st) + '</span>';
+          dagList.appendChild(div);
         });
 
-        // Findings
-        const fEl = document.getElementById('out-findings');
-        fEl.innerHTML = '';
-        (d.findings || []).forEach(f => {
+        // Render Findings
+        const findingsList = document.getElementById('findings-cards-list');
+        findingsList.innerHTML = '';
+        (c.findings || []).forEach(f => {
           const card = document.createElement('div');
-          card.className = 'finding-card';
-          card.innerHTML = '<div class="finding-claim">' + escape(f.claim) + '</div><div class="finding-basis">Cơ sở: ' + escape(f.basis) + '</div><div class="finding-conf">Độ tin cậy: ' + escape(f.confidence) + '</div>';
-          fEl.appendChild(card);
+          card.className = 'claim-box';
+          card.innerHTML = '<div class="claim-title">' + escape(f.claim) + '</div><div class="claim-basis">Cơ sở: ' + escape(f.basis) + '</div><div style="font-size:10.5px;color:var(--cyan);font-weight:700;">Độ tin cậy: ' + escape(f.confidence) + '</div>';
+          findingsList.appendChild(card);
         });
 
-        // Gaps
-        const gEl = document.getElementById('out-gaps');
-        gEl.innerHTML = '';
-        (d.gaps || []).forEach(g => {
+        // Render Gaps
+        const gapsList = document.getElementById('gaps-list');
+        gapsList.innerHTML = '';
+        (c.gaps || []).forEach(g => {
           const card = document.createElement('div');
-          card.className = 'gap-card';
-          card.innerHTML = '<div class="gap-missing">⚠️ Khoảng trống: ' + escape(g.missing) + '</div><div class="gap-action">↳ Hành động đề xuất: ' + escape(g.action) + '</div>';
-          gEl.appendChild(card);
+          card.className = 'gap-alert';
+          card.innerHTML = '<div class="gap-alert-title">⚠️ Khoảng trống: ' + escape(g.missing) + '</div><div class="gap-alert-desc">↳ Đề xuất: ' + escape(g.action) + '</div>';
+          gapsList.appendChild(card);
         });
 
-        // Recovery Path
-        const rEl = document.getElementById('out-recovery');
-        rEl.innerHTML = '';
-        (d.recoveryPath || []).forEach(r => {
-          const card = document.createElement('div');
-          card.className = 'recovery-step';
-          card.innerHTML = '<div class="step-num">' + (r.step || '•') + '</div><div class="step-action"><strong>' + escape(r.action) + '</strong></div><div class="step-owner">Chủ trì: ' + escape(r.owner) + '<br><span style="color:#86efac;">SLA: ' + escape(r.sla) + '</span></div>';
-          rEl.appendChild(card);
+        // Render Recovery
+        const recoveryList = document.getElementById('recovery-steps-list');
+        recoveryList.innerHTML = '';
+        (c.recoveryPath || []).forEach(r => {
+          const row = document.createElement('div');
+          row.className = 'recovery-step-row';
+          row.innerHTML = '<div class="step-badge">' + (r.step || '•') + '</div><div><strong style="color:#fff;">' + escape(r.action) + '</strong></div><div style="font-size:11px;color:var(--text-muted);text-align:right;">' + escape(r.owner) + '<br><span style="color:#34d399;">' + escape(r.sla) + '</span></div>';
+          recoveryList.appendChild(row);
         });
 
         // PROV-O
-        document.getElementById('out-provo').textContent = JSON.stringify(d.provO || {
+        document.getElementById('provo-json').textContent = JSON.stringify({
           "@context": "http://www.w3.org/ns/prov#",
-          "entity": "CaseLedger_V3",
+          "entity": "CaseLedger_V3_" + c.num.replace("#", ""),
           "generatedAt": new Date().toISOString(),
-          "wasAttributedTo": "Google_Gemini_Flash_Engine"
+          "wasAttributedTo": "Google_Gemini_Flash_Engine",
+          "wasDerivedFrom": c.num
         }, null, 2);
 
         // Raw JSON
-        document.getElementById('out-json').textContent = JSON.stringify(d, null, 2);
-
-        copyBtn.hidden = false;
-        viewResult.style.display = 'flex';
+        document.getElementById('raw-ledger-json').textContent = JSON.stringify(c, null, 2);
       }
 
       function escape(s) {
         return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       }
 
-      copyBtn.addEventListener('click', () => {
-        if (!currentLedger) return;
-        navigator.clipboard.writeText(JSON.stringify(currentLedger, null, 2)).then(() => {
-          const prev = copyBtn.textContent;
-          copyBtn.textContent = '✓ Đã sao chép!';
-          setTimeout(() => { copyBtn.textContent = prev; }, 2000);
+      // Case switching
+      document.querySelectorAll('.case-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.case-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          const key = card.dataset.case;
+          if (sampleData[key]) {
+            activeCaseKey = key;
+            currentLedgerData = sampleData[key];
+            renderCase(sampleData[key]);
+          }
         });
       });
+
+      // Tab switching
+      document.querySelectorAll('.inspector-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.inspector-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          const target = tab.dataset.tab;
+          document.getElementById('panel-dag').style.display = target === 'dag' ? 'block' : 'none';
+          document.getElementById('panel-findings').style.display = target === 'findings' ? 'block' : 'none';
+          document.getElementById('panel-recovery').style.display = target === 'recovery' ? 'block' : 'none';
+          document.getElementById('panel-provo').style.display = target === 'provo' ? 'block' : 'none';
+          document.getElementById('panel-json').style.display = target === 'json' ? 'block' : 'none';
+        });
+      });
+
+      // Mode switching
+      document.querySelectorAll('.mode-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.mode-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          activeMode = pill.dataset.mode;
+        });
+      });
+
+      // Submit new statement
+      const inputEl = document.getElementById('intake-statement');
+      const submitBtn = document.getElementById('btn-submit-intake');
+      const charCounter = document.getElementById('char-counter');
+
+      inputEl.addEventListener('input', () => {
+        charCounter.textContent = inputEl.value.length.toLocaleString() + ' ký tự';
+      });
+
+      submitBtn.addEventListener('click', async () => {
+        const text = inputEl.value.trim();
+        if (!text) {
+          alert('Vui lòng nhập nội dung cần phân tích.');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = '⏳ Đang phân tích...';
+
+        const stream = document.getElementById('intake-stream');
+        stream.innerHTML += '<div class="msg-bubble user">' + escape(text) + '</div><div class="msg-bubble system" id="temp-loading">⏳ Đang gọi Google Gemini Flash và Tavily Search để tái lập hồ sơ...</div>';
+        stream.scrollTop = stream.scrollHeight;
+
+        try {
+          const res = await fetch('/api/explainable/analyze', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              statement: text,
+              mode: activeMode,
+              userKey: byokInput.value.trim()
+            })
+          });
+
+          const data = await res.json();
+          submitBtn.disabled = false;
+          submitBtn.textContent = '⚡ Phân tích & Tái lập';
+
+          const temp = document.getElementById('temp-loading');
+          if (temp) temp.remove();
+
+          if (!res.ok || data.error) {
+            alert('Lỗi: ' + (data.error || 'Không thể phân tích'));
+            return;
+          }
+
+          const result = data.data;
+          const dynamicCase = {
+            num: "#CASE-" + Math.floor(100 + Math.random()*900),
+            title: result.goal || "New Intake Case",
+            statement: text,
+            goal: result.goal || "Xác định quyền lợi",
+            summary: result.summary || "Tình huống đã được bóc tách",
+            timeline: result.timeline || [],
+            findings: result.findings || [],
+            gaps: result.gaps || [],
+            recoveryPath: result.recoveryPath || []
+          };
+
+          currentLedgerData = dynamicCase;
+          renderCase(dynamicCase);
+          inputEl.value = '';
+          charCounter.textContent = '0 ký tự';
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = '⚡ Phân tích & Tái lập';
+          alert('Lỗi kết nối: ' + err.message);
+        }
+      });
+
+      // Copy JSON
+      document.getElementById('btn-copy-json').addEventListener('click', () => {
+        navigator.clipboard.writeText(JSON.stringify(currentLedgerData, null, 2)).then(() => {
+          const btn = document.getElementById('btn-copy-json');
+          btn.textContent = '✓ Copied!';
+          setTimeout(() => { btn.textContent = '📋 Copy Ledger'; }, 2000);
+        });
+      });
+
+      // New case button
+      document.getElementById('btn-new-case').addEventListener('click', () => {
+        inputEl.focus();
+        inputEl.placeholder = 'Nhập tình huống mới cần tạo Case Ledger...';
+      });
+
+      // Initial render
+      renderCase(sampleData.shopee);
     })();
   </script>
 </body>
 </html>`;
 }
+
 // ============================================================================
 // Main HTTP Request Handler & Router
 // ============================================================================
@@ -3289,12 +2741,25 @@ async function handleRequest(request, env, ctx) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, "") || "/";
 
-  // 1. API Endpoints
+  // 1. Static Image WebP Assets
+  if (path === "/assets/home-cat.webp") {
+    return new Response(HOME_CAT_WEBP, {
+      headers: { "Content-Type": "image/webp", "Cache-Control": "public, max-age=31536000, immutable" }
+    });
+  }
+
+  if (path === "/assets/phu-portrait.webp") {
+    return new Response(PHU_PORTRAIT_WEBP, {
+      headers: { "Content-Type": "image/webp", "Cache-Control": "public, max-age=31536000, immutable" }
+    });
+  }
+
+  // 2. API Endpoints
   if (path === "/api/explainable/analyze") {
     return handleApiAnalyze(request, env);
   }
 
-  // 2. Comprehensive Security Headers for HTML Pages
+  // 3. Security Headers for HTML Pages
   const htmlHeaders = {
     "Content-Type": "text/html; charset=utf-8",
     "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
@@ -3307,7 +2772,6 @@ async function handleRequest(request, env, ctx) {
     "X-XSS-Protection": "1; mode=block"
   };
 
-  // 3. Static & Dynamic Routes
   if (path === "/") {
     return new Response(homePage(), { headers: htmlHeaders });
   }
