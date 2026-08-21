@@ -1844,75 +1844,69 @@ function explainableAppPage() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Explainable Trust — Contestable Decision Workspace</title>
-  <meta name="description" content="Official Gateway to Explainable-App (github.com/Yunero1206/Explainable-App). Reconstruct situations under uncertainty with Google Gemini Flash & Tavily Search.">
+  <title>Explainable Trust — Official App Gateway & Workspace</title>
+  <meta name="description" content="Official Gateway to Explainable-App (github.com/Yunero1206/Explainable-App). Reconstruct situations under uncertainty with Google Gemini 3.5 Flash Lite.">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.3/cmu-serif.css">
   <style>
     :root {
-      --bg-dark: #0b0f19;
-      --bg-sidebar: #0f172a;
-      --bg-card: #1e293b;
+      --navy: #0f172a;
+      --navy-dark: #020617;
+      --panel-bg: #1e293b;
       --border: #334155;
-      --border-subtle: rgba(255,255,255,0.08);
       --text: #f8fafc;
       --text-muted: #94a3b8;
       --cyan: #38bdf8;
-      --cyan-hover: #0ea5e9;
-      --emerald: #10b981;
-      --amber: #f59e0b;
-      --rose: #f43f5e;
+      --copper: #c66336;
+      --paper: #f4f0e7;
+      --ink: #172126;
       --ui: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--bg-dark);
+      background: var(--navy-dark);
       color: var(--text);
       font-family: var(--ui);
-      font-size: 13.5px;
+      font-size: 14px;
       height: 100vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      -webkit-font-smoothing: antialiased;
     }
 
-    /* Top Master App Bar */
-    .app-topbar {
-      height: 52px;
-      min-height: 52px;
-      background: var(--bg-sidebar);
+    /* Top Gateway Bar */
+    .gateway-header {
+      height: 54px;
+      min-height: 54px;
+      background: #0f172a;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 18px;
-      gap: 14px;
+      padding: 0 20px;
+      gap: 16px;
       z-index: 20;
     }
-    .topbar-left {
+    .header-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .back-btn {
       color: var(--text-muted);
       text-decoration: none;
       font-size: 12.5px;
       font-weight: 600;
-      padding: 5px 10px;
-      border: 1px solid var(--border);
+      padding: 5px 12px;
       border-radius: 6px;
-      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
       transition: all 0.15s ease;
     }
-    .back-link:hover {
+    .back-btn:hover {
       color: #fff;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.1);
     }
-    .app-brand {
+    .brand-title {
       font-size: 15px;
       font-weight: 700;
       color: #fff;
@@ -1920,832 +1914,274 @@ function explainableAppPage() {
       align-items: center;
       gap: 8px;
     }
-    .app-version-badge {
-      font-size: 10px;
+    .badge {
+      font-size: 10.5px;
       font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 2px 7px;
       background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 4px;
       color: var(--cyan);
+      text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    .topbar-right {
+    .header-right {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .github-link {
+    .btn-action {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: var(--cyan);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
       text-decoration: none;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 10px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: 6px;
+      cursor: pointer;
       transition: all 0.15s ease;
     }
-    .github-link:hover {
-      background: rgba(56, 189, 248, 0.2);
-    }
-    .status-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11.5px;
-      color: var(--text-muted);
-      padding: 4px 10px;
-      background: rgba(0,0,0,0.4);
+    .btn-action.github {
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      color: #cbd5e1;
     }
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--emerald);
-      border-radius: 50%;
-      box-shadow: 0 0 6px var(--emerald);
-    }
-
-    /* 3-Column Standalone Workspace Layout */
-    .app-grid {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 280px 420px minmax(0, 1fr);
-      overflow: hidden;
-    }
-
-    /* Column 1: Left Cases Sidebar */
-    .col-sidebar {
-      background: var(--bg-sidebar);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      padding: 16px;
-      gap: 16px;
-    }
-    .sidebar-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .sidebar-head h2 {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .new-case-btn {
-      padding: 5px 10px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 5px;
-      color: var(--cyan);
-      font-size: 11.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .new-case-btn:hover {
-      background: var(--cyan);
-      color: #000;
-    }
-
-    .case-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .case-card {
-      padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.15s ease;
-    }
-    .case-card:hover {
-      background: rgba(255, 255, 255, 0.07);
-      border-color: var(--cyan);
-    }
-    .case-card.active {
-      background: rgba(56, 189, 248, 0.12);
-      border-color: var(--cyan);
-    }
-    .case-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
-    }
-    .case-num {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--cyan);
-    }
-    .case-status {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 1px 5px;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border-radius: 3px;
-    }
-    .case-title {
-      font-size: 12.5px;
-      font-weight: 600;
+    .btn-action.github:hover {
+      background: rgba(255, 255, 255, 0.15);
       color: #fff;
-      line-height: 1.35;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
-
-    /* Column 2: Center Case Intake & Chat */
-    .col-intake {
-      background: var(--bg-dark);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .intake-topbar {
-      height: 48px;
-      padding: 0 16px;
-      background: var(--bg-sidebar);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .intake-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .intake-stream {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .msg-bubble {
-      padding: 12px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      line-height: 1.55;
-      max-width: 92%;
-    }
-    .msg-bubble.user {
-      align-self: flex-end;
-      background: #1e3a8a;
-      border: 1px solid #2563eb;
-      color: #eff6ff;
-    }
-    .msg-bubble.system {
-      align-self: flex-start;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: #e2e8f0;
-    }
-
-    .intake-composer {
-      padding: 14px 16px;
-      background: var(--bg-sidebar);
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .mode-pills {
-      display: flex;
-      gap: 6px;
-    }
-    .mode-pill {
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,0.3);
-      color: var(--text-muted);
-    }
-    .mode-pill.active {
-      background: rgba(56, 189, 248, 0.2);
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
-    .intake-input {
-      width: 100%;
-      height: 78px;
-      background: var(--bg-dark);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px;
-      color: #fff;
-      font-family: var(--ui);
-      font-size: 12.5px;
-      line-height: 1.45;
-      resize: none;
-    }
-    .intake-input:focus {
-      outline: 2px solid var(--cyan);
-    }
-    .intake-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .send-btn {
-      padding: 8px 16px;
+    .btn-action.launch {
       background: linear-gradient(135deg, #0284c7, #0369a1);
       border: 1px solid var(--cyan);
-      border-radius: 6px;
       color: #fff;
-      font-size: 12.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
-    .send-btn:hover {
+    .btn-action.launch:hover {
       background: #0284c7;
     }
-    .send-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
 
-    /* Column 3: Right Inspector & Evidence DAG Canvas */
-    .col-inspector {
-      background: #060913;
+    /* Main Gateway Workspace Frame */
+    .gateway-frame-container {
+      flex: 1;
+      position: relative;
+      background: #020617;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
     }
-    .inspector-topbar {
-      height: 48px;
-      padding: 0 16px;
-      background: var(--bg-sidebar);
-      border-bottom: 1px solid var(--border);
+    .app-iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #0b0f19;
+    }
+
+    /* Gateway Fallback / Address Bar Info */
+    .gateway-status-bar {
+      height: 36px;
+      min-height: 36px;
+      background: #090d16;
+      border-top: 1px solid var(--border);
+      padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
-    .inspector-tabs {
-      display: flex;
-      gap: 2px;
-      height: 100%;
-    }
-    .inspector-tab {
-      padding: 0 12px;
-      height: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid transparent;
+      font-size: 11.5px;
       color: var(--text-muted);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
+    }
+    .status-indicator {
       display: flex;
       align-items: center;
-      gap: 5px;
-    }
-    .inspector-tab:hover {
-      color: #fff;
-    }
-    .inspector-tab.active {
-      color: var(--cyan);
-      border-bottom-color: var(--cyan);
-      font-weight: 700;
-    }
-
-    .inspector-body {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-    }
-
-    /* DAG & Flow Nodes */
-    .dag-node-item {
-      display: grid;
-      grid-template-columns: 120px 1fr 90px;
-      gap: 12px;
-      align-items: center;
-      padding: 10px 14px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      margin-bottom: 8px;
-    }
-    .dag-node-item .time { font-size: 11.5px; font-weight: 700; color: var(--cyan); }
-    .dag-node-item .event { font-size: 12.5px; color: #f1f5f9; }
-    .dag-node-item .tag { font-size: 10px; font-weight: 800; text-align: center; padding: 2px 6px; border-radius: 3px; }
-    .dag-node-item .tag.verified { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-    .dag-node-item .tag.unverified { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
-    .dag-node-item .tag.contested { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
-
-    .claims-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .claim-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 12px 14px;
-      display: flex;
-      flex-direction: column;
       gap: 6px;
     }
-    .claim-title { font-size: 13px; font-weight: 700; color: #fff; }
-    .claim-basis { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
-
-    .gap-alert {
-      background: rgba(244, 63, 94, 0.08);
-      border: 1px solid rgba(244, 63, 94, 0.25);
-      border-left: 4px solid var(--rose);
-      border-radius: 6px;
-      padding: 12px 14px;
-      margin-bottom: 8px;
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 6px #10b981;
     }
-    .gap-alert-title { font-size: 12.5px; font-weight: 700; color: #fda4af; margin-bottom: 2px; }
-    .gap-alert-desc { font-size: 12px; color: #e2e8f0; }
 
-    .recovery-step-row {
-      display: grid;
-      grid-template-columns: 28px 1fr 110px;
-      gap: 12px;
+    /* Standalone Portal Banner if Iframe is not running locally */
+    .fallback-portal {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 14px;
-      margin-bottom: 6px;
+      justify-content: center;
+      padding: 32px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 30%, #0f172a 0%, #020617 100%);
+      z-index: 1;
     }
-    .step-badge { width: 24px; height: 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-
-    .raw-code-box {
+    .fallback-card {
+      max-width: 640px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+    }
+    .fallback-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+    .fallback-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .fallback-desc {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .app-url-input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .app-url-input {
+      flex: 1;
+      padding: 10px 14px;
       background: #020617;
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 14px;
-      font-family: monospace;
-      font-size: 11.5px;
-      color: #38bdf8;
-      overflow-x: auto;
-      white-space: pre-wrap;
+      color: #fff;
+      font-family: var(--ui);
+      font-size: 13px;
     }
-
-    @media (max-width: 1080px) {
-      .app-grid { grid-template-columns: 240px 340px minmax(0, 1fr); }
-      .claims-grid { grid-template-columns: 1fr; }
+    .app-url-input:focus {
+      outline: 2px solid var(--cyan);
     }
-    @media (max-width: 820px) {
-      .app-grid { grid-template-columns: 1fr; }
-      .col-sidebar, .col-intake { display: none; }
+    .portal-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
   </style>
 </head>
 <body>
-  <!-- Master Standalone Top Bar -->
-  <header class="app-topbar">
-    <div class="topbar-left">
-      <a href="/work" class="back-link">← Work Library</a>
-      <div class="app-brand">
+  <!-- Top Gateway Navigation -->
+  <header class="gateway-header">
+    <div class="header-left">
+      <a href="/work" class="back-btn">← Work Library</a>
+      <div class="brand-title">
         <span>Explainable Trust</span>
-        <span class="app-version-badge">Ledger V3</span>
+        <span class="badge">App Gateway</span>
       </div>
     </div>
 
-    <div class="topbar-right">
-      <div class="status-badge">
-        <div class="status-dot"></div>
-        <span>Google Gemini 3.5 Flash Lite · Active</span>
-      </div>
-      <a href="https://github.com/Yunero1206/Explainable-App" target="_blank" rel="noreferrer" class="github-link">
-        <span>GitHub: Yunero1206/Explainable-App ↗</span>
+    <div class="header-right">
+      <a href="https://github.com/Yunero1206/Explainable-App" target="_blank" rel="noreferrer" class="btn-action github">
+        <span>📂 GitHub: Explainable-App ↗</span>
       </a>
+      <button id="btn-launch-external" class="btn-action launch">
+        <span>⚡ Mở App trong Cửa sổ Mới ↗</span>
+      </button>
     </div>
   </header>
 
-  <!-- 3-Column True App Workspace -->
-  <div class="app-grid">
-    <!-- Col 1: Cases Directory -->
-    <aside class="col-sidebar">
-      <div class="sidebar-head">
-        <h2>Active Cases (Hồ sơ)</h2>
-        <button id="btn-new-case" class="new-case-btn">+ Tạo mới</button>
-      </div>
+  <!-- Main App Workspace Container -->
+  <div class="gateway-frame-container">
+    <!-- Embedded Iframe for Live React/Vite App Instance -->
+    <iframe id="explainable-iframe" class="app-iframe" src="http://localhost:5173" allow="clipboard-read; clipboard-write;" title="Explainable Trust Application"></iframe>
 
-      <div class="case-list">
-        <div class="case-card active" data-case="shopee">
-          <div class="case-card-top">
-            <span class="case-num">#DEMO-001</span>
-            <span class="case-status">ACTIVE</span>
-          </div>
-          <div class="case-title">Shopee Account Restriction</div>
+    <!-- Overlay Helper (Shown if local Vite dev server on port 5173 is not yet started) -->
+    <div id="fallback-overlay" class="fallback-portal" style="display:none;">
+      <div class="fallback-card">
+        <span class="fallback-icon">⚡</span>
+        <h1 class="fallback-title">Cổng truy cập Explainable Trust Workspace</h1>
+        <p class="fallback-desc">
+          Đây là cổng truy cập chính thức của ứng dụng <strong>Explainable-App</strong> (nguyên bản React/Vite & @xyflow/react tại GitHub).
+          <br><br>
+          Nếu bạn đang chạy ứng dụng ở máy local, vui lòng mở terminal chạy <code style="background:#020617;padding:2px 6px;border-radius:4px;color:#38bdf8;">npm run dev</code> trong thư mục <strong>Explainable-App</strong> để hiển thị giao diện trực tiếp bên dưới.
+        </p>
+
+        <div class="app-url-input-group">
+          <input type="text" id="custom-app-url" class="app-url-input" value="http://localhost:5173" placeholder="Nhập địa chỉ URL của app (VD: http://localhost:5173 hoặc link Vercel)...">
+          <button id="btn-connect-url" class="btn-action launch" style="padding:10px 18px;">Kết nối</button>
         </div>
 
-        <div class="case-card" data-case="adobe">
-          <div class="case-card-top">
-            <span class="case-num">#DEMO-002</span>
-            <span class="case-status">REVIEW</span>
-          </div>
-          <div class="case-title">Adobe Creative Cloud Outage</div>
-        </div>
-
-        <div class="case-card" data-case="diamond">
-          <div class="case-card-top">
-            <span class="case-num">#DEMO-003</span>
-            <span class="case-status">DISPUTED</span>
-          </div>
-          <div class="case-title">Diamond Certificate Dispute</div>
+        <div class="portal-actions">
+          <a href="https://github.com/Yunero1206/Explainable-App" target="_blank" rel="noreferrer" class="btn-action github" style="padding:10px 18px;">
+            <span>Xem Mã Nguồn trên GitHub ↗</span>
+          </a>
+          <a href="/work/explainable-trust" class="btn-action github" style="padding:10px 18px;">
+            <span>Đọc Monograph Nghiên cứu ↗</span>
+          </a>
         </div>
       </div>
-
-      <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border);">
-        <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:700;text-transform:uppercase;">API BYOK (Tùy chọn)</div>
-        <input type="password" id="user-byok-key" placeholder="Nhập Gemini API Key riêng..." style="width:100%;padding:6px 8px;background:#020617;border:1px solid var(--border);border-radius:4px;color:#fff;font-size:11.5px;">
-      </div>
-    </aside>
-
-    <!-- Col 2: Intake & Dialogue -->
-    <section class="col-intake">
-      <div class="intake-topbar">
-        <div id="intake-case-header" class="intake-title">💬 #DEMO-001 · Shopee Account Restriction</div>
-        <span style="font-size:11px;color:var(--cyan);font-weight:700;">Contestable Dialogue</span>
-      </div>
-
-      <div id="intake-stream" class="intake-stream">
-        <div class="msg-bubble user">
-          Tài khoản Shopee của tôi bị khóa vĩnh viễn lúc 14:20 ngày 05/08 vì nghi ngờ vi phạm chính sách voucher. Tôi còn 2 đơn hàng đang giao trị giá 1.200.000 VNĐ và số dư Ví ShopeePay 450.000 VNĐ chưa rút được.
-        </div>
-        <div class="msg-bubble system">
-          🛡️ <strong>Case Ledger V3 Reconstructed:</strong> Đã ghi nhận báo cáo tranh chấp tài khoản. Tiến hành đối soát ranh giới chứng cứ và lập chu trình phục hồi bên phải.
-        </div>
-      </div>
-
-      <div class="intake-composer">
-        <div class="mode-pills">
-          <button class="mode-pill active" data-mode="analysis_only">🧠 Analysis Only</button>
-          <button class="mode-pill" data-mode="web_assisted">🌐 Web-Assisted (Tavily)</button>
-        </div>
-        <textarea id="intake-statement" class="intake-input" placeholder="Nhập thêm dữ kiện, câu hỏi, hoặc tình huống mới cần đối soát..."></textarea>
-        <div class="intake-actions">
-          <span style="font-size:11px;color:var(--text-muted);" id="char-counter">0 ký tự</span>
-          <button id="btn-submit-intake" class="send-btn">⚡ Phân tích & Tái lập</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Col 3: Evidence DAG & Ledger Inspector -->
-    <main class="col-inspector">
-      <div class="inspector-topbar">
-        <div class="inspector-tabs">
-          <button class="inspector-tab active" data-tab="dag">📊 Dòng Sự kiện (DAG)</button>
-          <button class="inspector-tab" data-tab="findings">🔍 Nhận định & Khoảng trống</button>
-          <button class="inspector-tab" data-tab="recovery">⚙️ Lộ trình Phục hồi</button>
-          <button class="inspector-tab" data-tab="provo">📜 W3C PROV-O</button>
-          <button class="inspector-tab" data-tab="json">📋 JSON Ledger</button>
-        </div>
-
-        <button id="btn-copy-json" style="padding:4px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:4px;color:var(--text-muted);font-size:11.5px;cursor:pointer;">📋 Copy Ledger</button>
-      </div>
-
-      <div class="inspector-body">
-        <!-- Target Goal Banner -->
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--cyan);border-radius:6px;padding:12px 16px;margin-bottom:16px;">
-          <div id="inspector-goal" style="font-size:13.5px;font-weight:700;color:#fff;margin-bottom:2px;">🎯 Mục tiêu: Khôi phục quyền truy cập và bảo toàn tài sản đang kẹt</div>
-          <div id="inspector-summary" style="font-size:12.5px;color:var(--text-muted);line-height:1.5;">Phân tách giữa sự kiện đã báo cáo và ranh giới chứng cứ cần bổ sung.</div>
-        </div>
-
-        <div id="panel-dag">
-          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Chuỗi sự kiện T0 (Event DAG Sequence):</div>
-          <div id="dag-nodes-list"></div>
-        </div>
-
-        <div id="panel-findings" style="display:none;">
-          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Nhận định & Cơ sở Chứng cứ:</div>
-          <div id="findings-cards-list" class="claims-grid"></div>
-
-          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:#fda4af;margin-bottom:10px;">Khoảng trống Chứng cứ (Evidence Gaps):</div>
-          <div id="gaps-list"></div>
-        </div>
-
-        <div id="panel-recovery" style="display:none;">
-          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Lộ trình Hành động & Phục hồi Quyền lợi:</div>
-          <div id="recovery-steps-list"></div>
-        </div>
-
-        <div id="panel-provo" style="display:none;">
-          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">W3C PROV-O Provenance Record:</div>
-          <pre id="provo-json" class="raw-code-box"></pre>
-        </div>
-
-        <div id="panel-json" style="display:none;">
-          <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Full Structured Ledger:</div>
-          <pre id="raw-ledger-json" class="raw-code-box"></pre>
-        </div>
-      </div>
-    </main>
+    </div>
   </div>
+
+  <!-- Gateway Status Footer -->
+  <footer class="gateway-status-bar">
+    <div class="status-indicator">
+      <div class="dot"></div>
+      <span id="gateway-status-text">Cổng kết nối ứng dụng nguyên bản (github.com/Yunero1206/Explainable-App)</span>
+    </div>
+    <div>
+      <span>Model Engine: <strong>Google Gemini 3.5 Flash Lite</strong></span>
+    </div>
+  </footer>
 
   <script>
     (()=>{
-      const sampleData = {
-        shopee: {
-          num: "#DEMO-001",
-          title: "Shopee Account Restriction",
-          statement: "Tài khoản Shopee của tôi bị khóa vĩnh viễn lúc 14:20 ngày 05/08 vì nghi ngờ vi phạm chính sách voucher. Tôi còn 2 đơn hàng đang giao trị giá 1.200.000 VNĐ và số dư Ví ShopeePay 450.000 VNĐ chưa rút được.",
-          goal: "Khôi phục quyền truy cập tài khoản Shopee và đảm bảo quyền lợi nhận hoặc hoàn tiền cho 2 đơn hàng đang giao trị giá 1.200.000 VNĐ.",
-          summary: "Người dùng khiếu nại việc tài khoản bị khóa đột ngột mà không có thông báo vi phạm cụ thể, gây phong tỏa tài sản hiện hữu.",
-          timeline: [
-            { time: "14:20 05/08", event: "Tài khoản nhận thông báo hạn chế vĩnh viễn do nghi ngờ voucher.", source: "user_report", status: "UNVERIFIED" },
-            { time: "15:00 05/08", event: "Liên hệ CSKH qua hotline, yêu cầu giải trình và rút số dư ví 450.000 VNĐ.", source: "user_report", status: "VERIFIED" }
-          ],
-          findings: [
-            { claim: "Tài sản ví ShopeePay bị phong tỏa ngoài ý muốn.", basis: "Ảnh chụp màn hình số dư 450.000 VNĐ", confidence: "Cao" },
-            { claim: "Đơn hàng đang vận chuyển có nguy cơ bị hủy tự động.", basis: "Mã vận đơn 2 đơn hàng đang trung chuyển", confidence: "Trung bình" }
-          ],
-          gaps: [
-            { missing: "Biên bản ghi nhận điều khoản vi phạm cụ thể từ hệ thống rủi ro Shopee.", action: "Gửi đơn yêu cầu CSKH cung cấp log điều khoản vi phạm viện dẫn." }
-          ],
-          recoveryPath: [
-            { step: 1, action: "Thu thập mã đơn hàng, số dư ví và gửi email khiếu nại chính thức", owner: "Khách hàng", sla: "Trong 24h" },
-            { step: 2, action: "Yêu cầu tách riêng quyền rút số dư ví ShopeePay độc lập với tài khoản mua sắm", owner: "CSKH ShopeePay", sla: "3-5 ngày làm việc" }
-          ]
-        },
-        adobe: {
-          num: "#DEMO-002",
-          title: "Adobe Creative Cloud Outage",
-          statement: "Gói thuê bao Adobe Creative Cloud của studio bị tạm ngưng đột ngột do ngân hàng gắn cờ thanh toán định kỳ là giao dịch bất thường. Chúng tôi đang có 3 dự án dựng phim Premiere cần xuất bản giao khách trong 24 giờ tới.",
-          goal: "Mở khóa khẩn cấp quyền truy cập Premiere / Illustrator và thanh toán lại qua thẻ phụ.",
-          summary: "Sự cố gián đoạn dịch vụ SaaS đám mây do rào cản cổng thanh toán ngân hàng gắn cờ sai.",
-          timeline: [
-            { time: "09:00 Hôm nay", event: "Ngân hàng từ chối giao dịch gia hạn tự động của Adobe.", source: "bank_sms", status: "VERIFIED" },
-            { time: "09:15 Hôm nay", event: "Adobe khóa quyền truy cập các ứng dụng Creative Cloud trên desktop.", source: "system_alert", status: "VERIFIED" }
-          ],
-          findings: [
-            { claim: "Thẻ thanh toán chính bị khóa tính năng giao dịch quốc tế tạm thời.", basis: "Thông báo từ App ngân hàng", confidence: "Cao" }
-          ],
-          gaps: [
-            { missing: "Liên kết thẻ tín dụng dự phòng (Backup Payment Method) trong tài khoản Adobe Admin Console.", action: "Đăng nhập web Adobe đổi sang thẻ Visa phụ." }
-          ],
-          recoveryPath: [
-            { step: 1, action: "Đổi phương thức thanh toán sang thẻ dự phòng", owner: "Studio Admin", sla: "Ngay lập tức" },
-            { step: 2, action: "Liên hệ Adobe Support yêu cầu mở Grace Period 48 giờ", owner: "Adobe CS", sla: "Trong 2 giờ" }
-          ]
-        },
-        diamond: {
-          num: "#DEMO-003",
-          title: "Diamond Certificate Dispute",
-          statement: "Khách hàng mua viên kim cương 1.2 carat kèm chứng thư kiểm định tại cửa hàng với cam kết thu đổi 95% sau 1 năm. Khi khách mang lại thu đổi, nhân viên từ chối do vết xước nhỏ ở cạnh và yêu cầu gửi đi giám định lại tại trung tâm độc lập với chi phí khách tự chịu.",
-          goal: "Bảo vệ cam kết thu đổi 95% hoặc làm rõ trách nhiệm chi phí tái giám định chứng thư.",
-          summary: "Tranh chấp ranh giới tình trạng viên đá giữa thời điểm bán ra (T0) và thời điểm thu đổi.",
-          timeline: [
-            { time: "1 năm trước", event: "Giao dịch mua viên kim cương 1.2ct kèm chứng thư kiểm định nguyên seal.", source: "invoice", status: "VERIFIED" },
-            { time: "Hôm nay", event: "Cửa hàng từ chối thu đổi ngay tại quầy vì nghi vấn trầy xước.", source: "user_report", status: "CONTESTED" }
-          ],
-          findings: [
-            { claim: "Chính sách thu đổi có điều khoản trừ phí nếu đá biến dạng cơ học.", basis: "Hợp đồng mua bán ban đầu", confidence: "Trung bình" }
-          ],
-          gaps: [
-            { missing: "Ảnh macro phóng đại giác cắt và cạnh viên đá tại thời điểm giao hàng năm ngoái.", action: "Yêu cầu cửa hàng trích xuất hồ sơ kiểm định lưu trữ gốc." }
-          ],
-          recoveryPath: [
-            { step: 1, action: "Lập biên bản niêm phong đồng kiểm viên kim cương gửi trung tâm độc lập", owner: "Hai bên", sla: "Trong ngày" }
-          ]
-        }
-      };
+      const iframe = document.getElementById('explainable-iframe');
+      const fallback = document.getElementById('fallback-overlay');
+      const customUrlInput = document.getElementById('custom-app-url');
+      const connectBtn = document.getElementById('btn-connect-url');
+      const launchBtn = document.getElementById('btn-launch-external');
+      const statusText = document.getElementById('gateway-status-text');
 
-      let activeCaseKey = 'shopee';
-      let activeMode = 'analysis_only';
-      let currentLedgerData = sampleData.shopee;
+      let currentUrl = localStorage.getItem('explainable_app_url') || 'http://localhost:5173';
+      customUrlInput.value = currentUrl;
 
-      const byokInput = document.getElementById('user-byok-key');
-      const savedKey = localStorage.getItem('user_gemini_key') || '';
-      if (savedKey) byokInput.value = savedKey;
-      byokInput.addEventListener('change', () => {
-        localStorage.setItem('user_gemini_key', byokInput.value.trim());
-      });
+      function loadApp(url) {
+        currentUrl = url.trim() || 'http://localhost:5173';
+        localStorage.setItem('explainable_app_url', currentUrl);
+        iframe.src = currentUrl;
+        statusText.textContent = 'Đang kết nối tới: ' + currentUrl;
 
-      function renderCase(c) {
-        document.getElementById('intake-case-header').textContent = '💬 ' + c.num + ' · ' + c.title;
-        document.getElementById('inspector-goal').textContent = '🎯 Mục tiêu: ' + c.goal;
-        document.getElementById('inspector-summary').textContent = c.summary;
-
-        // Render Stream
-        const stream = document.getElementById('intake-stream');
-        stream.innerHTML = '<div class="msg-bubble user">' + escape(c.statement) + '</div><div class="msg-bubble system">🛡️ <strong>Case Ledger V3 Reconstructed:</strong> Đã ghi nhận và phân tích sự việc. Toàn bộ chuỗi sự kiện và ranh giới chứng cứ đã được tái lập.</div>';
-
-        // Render DAG Nodes
-        const dagList = document.getElementById('dag-nodes-list');
-        dagList.innerHTML = '';
-        (c.timeline || []).forEach(t => {
-          const div = document.createElement('div');
-          div.className = 'dag-node-item';
-          const st = (t.status || 'UNVERIFIED').toUpperCase();
-          const tagClass = st.includes('VERIFIED') ? 'verified' : (st.includes('CONTEST') ? 'contested' : 'unverified');
-          div.innerHTML = '<span class="time">⏱ ' + escape(t.time) + '</span><span class="event">' + escape(t.event) + '</span><span class="tag ' + tagClass + '">' + escape(st) + '</span>';
-          dagList.appendChild(div);
+        // Check if server is reachable
+        fetch(currentUrl, { mode: 'no-cors' }).then(() => {
+          fallback.style.display = 'none';
+        }).catch(() => {
+          // If offline, show the portal overlay helper with connect box
+          fallback.style.display = 'flex';
         });
-
-        // Render Findings
-        const findingsList = document.getElementById('findings-cards-list');
-        findingsList.innerHTML = '';
-        (c.findings || []).forEach(f => {
-          const card = document.createElement('div');
-          card.className = 'claim-box';
-          card.innerHTML = '<div class="claim-title">' + escape(f.claim) + '</div><div class="claim-basis">Cơ sở: ' + escape(f.basis) + '</div><div style="font-size:10.5px;color:var(--cyan);font-weight:700;">Độ tin cậy: ' + escape(f.confidence) + '</div>';
-          findingsList.appendChild(card);
-        });
-
-        // Render Gaps
-        const gapsList = document.getElementById('gaps-list');
-        gapsList.innerHTML = '';
-        (c.gaps || []).forEach(g => {
-          const card = document.createElement('div');
-          card.className = 'gap-alert';
-          card.innerHTML = '<div class="gap-alert-title">⚠️ Khoảng trống: ' + escape(g.missing) + '</div><div class="gap-alert-desc">↳ Đề xuất: ' + escape(g.action) + '</div>';
-          gapsList.appendChild(card);
-        });
-
-        // Render Recovery
-        const recoveryList = document.getElementById('recovery-steps-list');
-        recoveryList.innerHTML = '';
-        (c.recoveryPath || []).forEach(r => {
-          const row = document.createElement('div');
-          row.className = 'recovery-step-row';
-          row.innerHTML = '<div class="step-badge">' + (r.step || '•') + '</div><div><strong style="color:#fff;">' + escape(r.action) + '</strong></div><div style="font-size:11px;color:var(--text-muted);text-align:right;">' + escape(r.owner) + '<br><span style="color:#34d399;">' + escape(r.sla) + '</span></div>';
-          recoveryList.appendChild(row);
-        });
-
-        // PROV-O
-        document.getElementById('provo-json').textContent = JSON.stringify({
-          "@context": "http://www.w3.org/ns/prov#",
-          "entity": "CaseLedger_V3_" + c.num.replace("#", ""),
-          "generatedAt": new Date().toISOString(),
-          "wasAttributedTo": "Google_Gemini_Flash_Engine",
-          "wasDerivedFrom": c.num
-        }, null, 2);
-
-        // Raw JSON
-        document.getElementById('raw-ledger-json').textContent = JSON.stringify(c, null, 2);
       }
 
-      function escape(s) {
-        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      }
-
-      // Case switching
-      document.querySelectorAll('.case-card').forEach(card => {
-        card.addEventListener('click', () => {
-          document.querySelectorAll('.case-card').forEach(c => c.classList.remove('active'));
-          card.classList.add('active');
-          const key = card.dataset.case;
-          if (sampleData[key]) {
-            activeCaseKey = key;
-            currentLedgerData = sampleData[key];
-            renderCase(sampleData[key]);
-          }
-        });
+      connectBtn.addEventListener('click', () => {
+        loadApp(customUrlInput.value);
       });
 
-      // Tab switching
-      document.querySelectorAll('.inspector-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          document.querySelectorAll('.inspector-tab').forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          const target = tab.dataset.tab;
-          document.getElementById('panel-dag').style.display = target === 'dag' ? 'block' : 'none';
-          document.getElementById('panel-findings').style.display = target === 'findings' ? 'block' : 'none';
-          document.getElementById('panel-recovery').style.display = target === 'recovery' ? 'block' : 'none';
-          document.getElementById('panel-provo').style.display = target === 'provo' ? 'block' : 'none';
-          document.getElementById('panel-json').style.display = target === 'json' ? 'block' : 'none';
-        });
+      launchBtn.addEventListener('click', () => {
+        window.open(currentUrl, '_blank');
       });
 
-      // Mode switching
-      document.querySelectorAll('.mode-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-          document.querySelectorAll('.mode-pill').forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          activeMode = pill.dataset.mode;
-        });
+      // Try initial load
+      loadApp(currentUrl);
+
+      // Listen for iframe load
+      iframe.addEventListener('load', () => {
+        fallback.style.display = 'none';
       });
-
-      // Submit new statement
-      const inputEl = document.getElementById('intake-statement');
-      const submitBtn = document.getElementById('btn-submit-intake');
-      const charCounter = document.getElementById('char-counter');
-
-      inputEl.addEventListener('input', () => {
-        charCounter.textContent = inputEl.value.length.toLocaleString() + ' ký tự';
+      iframe.addEventListener('error', () => {
+        fallback.style.display = 'flex';
       });
-
-      submitBtn.addEventListener('click', async () => {
-        const text = inputEl.value.trim();
-        if (!text) {
-          alert('Vui lòng nhập nội dung cần phân tích.');
-          return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = '⏳ Đang phân tích...';
-
-        const stream = document.getElementById('intake-stream');
-        stream.innerHTML += '<div class="msg-bubble user">' + escape(text) + '</div><div class="msg-bubble system" id="temp-loading">⏳ Đang gọi Google Gemini Flash và Tavily Search để tái lập hồ sơ...</div>';
-        stream.scrollTop = stream.scrollHeight;
-
-        try {
-          const res = await fetch('/api/explainable/analyze', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              statement: text,
-              mode: activeMode,
-              userKey: byokInput.value.trim()
-            })
-          });
-
-          const data = await res.json();
-          submitBtn.disabled = false;
-          submitBtn.textContent = '⚡ Phân tích & Tái lập';
-
-          const temp = document.getElementById('temp-loading');
-          if (temp) temp.remove();
-
-          if (!res.ok || data.error) {
-            alert('Lỗi: ' + (data.error || 'Không thể phân tích'));
-            return;
-          }
-
-          const result = data.data;
-          const dynamicCase = {
-            num: "#CASE-" + Math.floor(100 + Math.random()*900),
-            title: result.goal || "New Intake Case",
-            statement: text,
-            goal: result.goal || "Xác định quyền lợi",
-            summary: result.summary || "Tình huống đã được bóc tách",
-            timeline: result.timeline || [],
-            findings: result.findings || [],
-            gaps: result.gaps || [],
-            recoveryPath: result.recoveryPath || []
-          };
-
-          currentLedgerData = dynamicCase;
-          renderCase(dynamicCase);
-          inputEl.value = '';
-          charCounter.textContent = '0 ký tự';
-        } catch (err) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = '⚡ Phân tích & Tái lập';
-          alert('Lỗi kết nối: ' + err.message);
-        }
-      });
-
-      // Copy JSON
-      document.getElementById('btn-copy-json').addEventListener('click', () => {
-        navigator.clipboard.writeText(JSON.stringify(currentLedgerData, null, 2)).then(() => {
-          const btn = document.getElementById('btn-copy-json');
-          btn.textContent = '✓ Copied!';
-          setTimeout(() => { btn.textContent = '📋 Copy Ledger'; }, 2000);
-        });
-      });
-
-      // New case button
-      document.getElementById('btn-new-case').addEventListener('click', () => {
-        inputEl.focus();
-        inputEl.placeholder = 'Nhập tình huống mới cần tạo Case Ledger...';
-      });
-
-      // Initial render
-      renderCase(sampleData.shopee);
     })();
   </script>
 </body>
 </html>`;
 }
-
 // ============================================================================
 // Main HTTP Request Handler & Router
 // ============================================================================
