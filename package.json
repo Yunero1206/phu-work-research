@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "bash scripts/build.sh",
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
     "validate": "node scripts/validate-artifact.mjs"
   }
 }
