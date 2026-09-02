@@ -497,6 +497,10 @@ const caseDocuments = {
   }
 };
 
+const totalWorks = finalWorkLibrary.length;
+const totalModes = finalModes.length;
+const totalArtifacts = Object.values(caseDocuments).reduce((acc, doc) => acc + (doc.assets?.length || 0), 0);
+
 function getReadingStats(text) {
   if (!text) return { words: 0, minutes: 1, time: "1 min read" };
   const clean = String(text).replace(/<[^>]*>/g, ' ').replace(/https?:\/\/\S+/g, ' ');
@@ -1188,9 +1192,9 @@ const siteCss = `:root {
     flex-direction: column;
   }
   .f-entry-title {
-    margin: 0 0 6px;
+    margin: 0 0 8px;
     font-family: var(--font-serif);
-    font-size: var(--text-xl);
+    font-size: 1.28rem;
     font-weight: var(--fw-bold);
     line-height: var(--lh-snug);
     letter-spacing: var(--tracking-tight);
@@ -1200,60 +1204,60 @@ const siteCss = `:root {
   .f-entry-question {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: var(--text-md);
-    line-height: var(--lh-normal);
-    color: var(--ink);
-    margin: 0 0 8px;
+    font-size: 1.02rem;
+    line-height: 1.55;
+    color: var(--ink-secondary);
+    margin: 0 0 10px;
   }
   .f-entry-desc {
     font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    line-height: var(--lh-normal);
+    font-size: 0.92rem;
+    line-height: 1.6;
     color: var(--ink-secondary);
-    margin: 0 0 10px;
+    margin: 0 0 12px;
   }
   .f-entry-foot {
     display: flex;
     align-items: center;
     gap: 16px;
     font-family: var(--font-sans);
-    font-size: var(--text-xs);
+    font-size: 0.8rem;
     color: var(--muted);
-    font-weight: var(--fw-semibold);
+    font-weight: var(--fw-medium);
   }
   .f-entry-foot span { display: inline-flex; align-items: center; gap: 4px; }
-  .f-entry-foot .f-entry-read { color: var(--copper); font-weight: var(--fw-bold); }
 
   .f-entry-schematic {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 6px;
-    margin: 8px 0 10px;
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
+    margin: 2px 0 12px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
   }
   .f-entry-step {
     background: #ffffff;
     border: 1px solid var(--line);
-    padding: 2px 7px;
+    padding: 3px 9px;
     border-radius: 4px;
-    color: var(--navy);
-    font-weight: var(--fw-semibold);
+    color: var(--ink);
+    font-weight: var(--fw-medium);
+    letter-spacing: -0.01em;
   }
   .f-entry-step.alert {
     background: #fef2f2;
-    border-color: #fca5a5;
-    color: #b91c1c;
+    border-color: #fecaca;
+    color: #991b1b;
   }
   .f-entry-step.success {
     background: #f0fdf4;
-    border-color: #86efac;
-    color: #15803d;
+    border-color: #bbf7d0;
+    color: #166534;
   }
   .f-entry-arrow {
-    color: var(--copper);
-    font-weight: bold;
+    color: var(--muted);
+    font-size: 0.8rem;
   }
 
   /* ========================================================================
@@ -1731,9 +1735,9 @@ const siteCss = `:root {
   }
   .f-maturity-badge {
     display: inline-block;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: var(--text-2xs);
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-semibold);
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
     padding: 3px 8px;
@@ -1750,7 +1754,7 @@ const siteCss = `:root {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: var(--text-2xs);
     font-weight: var(--fw-semibold);
     color: var(--navy);
@@ -1804,6 +1808,14 @@ const siteCss = `:root {
     align-items: center;
     margin-top: 2px;
   }
+  .f-keywords-label {
+    font-weight: var(--fw-bold);
+    color: var(--navy);
+    font-family: var(--font-sans);
+    font-size: var(--text-2xs);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+  }
   .f-tag-click {
     font-size: var(--text-xs);
     color: var(--muted);
@@ -1816,26 +1828,6 @@ const siteCss = `:root {
     text-decoration: underline;
   }
   .f-work-item[hidden] { display: none; }
-  .f-maturity-badge.prototype  { background: #fef3c7; color: #92400e; }
-  .f-maturity-badge.working    { background: #d1fae5; color: #065f46; }
-  .f-maturity-badge.developed  { background: #dbeafe; color: #1e40af; }
-  .f-maturity-badge.concept    { background: #ede9fe; color: #5b21b6; }
-  .f-maturity-badge.evidence   { background: #ffedd5; color: #9a3412; }
-  .f-maturity-badge.default    { background: #f1f5f9; color: #475569; }
-
-  .f-card-asset-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-semibold);
-    color: var(--navy);
-    background: var(--paper);
-    border: 1px solid var(--line);
-    padding: 2px 7px;
-    border-radius: 4px;
-  }
 
   /* Compact Ledger Table View */
   .f-ledger-table-wrap {
@@ -1892,10 +1884,12 @@ const siteCss = `:root {
     text-decoration: underline;
   }
   .f-ledger-mode {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    padding: 2px 6px;
+    font-family: var(--font-sans);
+    font-size: var(--text-2xs);
+    font-weight: var(--fw-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    padding: 2px 7px;
     border-radius: 4px;
     display: inline-block;
   }
@@ -1953,22 +1947,22 @@ const siteCss = `:root {
   .f-case-hero-stats {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-top: 16px;
+    gap: 12px;
+    margin-top: 18px;
     flex-wrap: wrap;
   }
   .f-hero-stat {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    font-family: var(--font-mono);
+    gap: 6px;
+    font-family: var(--font-sans);
     font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    color: var(--muted);
-    background: rgba(20, 28, 34, 0.06);
-    padding: 4px 10px;
+    font-weight: var(--fw-medium);
+    color: #f1f5f9;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
     border-radius: 20px;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   .f-case-meta {
@@ -2712,8 +2706,26 @@ const siteCss = `:root {
   @keyframes f-spin { to { transform: rotate(360deg); } }
 
   /* ========================================================================
-     17. ABOUT PAGE & REFINED EDITORIAL PRESENTATION (EYE-FRIENDLY & ARTISTIC)
+     17. HOME HERO & EDITORIAL PRESENTATION
      ======================================================================== */
+  .f-home-hero {
+    padding: 44px 0 34px;
+    background: radial-gradient(circle at 80% 20%, rgba(194, 94, 62, 0.04) 0%, transparent 50%),
+                var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .f-home-hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.3rem, 4.2vw, 3.6rem);
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--navy);
+    margin: 0 0 24px;
+    width: 100%;
+    max-width: 100%;
+  }
+
   .f-about-hero-artistic {
     padding: 72px 0 52px;
     background: radial-gradient(circle at 80% 20%, rgba(194, 94, 62, 0.04) 0%, transparent 50%),
@@ -3303,13 +3315,22 @@ const siteCss = `:root {
     .f-method-grid { grid-template-columns: 1fr; gap: 20px; }
   }
   @media (max-width: 640px) {
+    .f-wrap { width: min(calc(100% - 32px), 1080px); }
+    .f-nav { min-height: 58px; gap: 14px; }
+    .f-links { gap: 16px; font-size: 0.8125rem; }
     .f-map-grid { grid-template-columns: 1fr; }
     .f-map-item:nth-child(even) { padding-left: 0; border-left: 0; }
     .f-case-meta-grid { grid-template-columns: 1fr; }
-    .f-meta-cell { border-right: 0; border-bottom: 1px solid var(--line); }
+    .f-meta-cell { border-right: 0; border-bottom: 1px solid var(--line); padding: 14px 16px; }
     .f-search-row { flex-direction: column; align-items: stretch; }
     .f-search-box { max-width: 100%; }
-    .f-work-meta-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .f-work-meta-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .f-work-item { padding: 18px 16px; }
+    .f-home-hero { padding: 36px 0 28px; }
+    .f-about-hero-artistic { padding: 36px 0 28px; }
+    .f-work-hero-clean { padding: 36px 0 28px; }
+    .f-case-hero { padding: 36px 0 32px; }
+    .f-case-reading { padding: 32px 0 60px; }
   }
 `;
 
@@ -3541,7 +3562,6 @@ function homePage(nonce) {
           <p class="f-entry-desc">${escapeHtml(item.desc)}</p>
           <div class="f-entry-foot">
             <span>${escapeHtml(item.meta)}</span>
-            <span class="f-entry-read">Read monograph →</span>
           </div>
         </div>
       </a>
@@ -3578,24 +3598,11 @@ ${layoutHead("Phạm Thanh Phú — Work & Research Archive", "Evidence-first po
   ${layoutHeader("home")}
   <main id="main">
     <!-- 1. Refined Soothing Hero Header -->
-    <header class="f-about-hero-artistic">
+    <header class="f-home-hero">
       <div class="f-wrap">
-        <div class="f-about-status-pill">
-          <span class="f-status-dot"></span>
-          <span>Open Research &amp; Operations Archive · 2026 Edition</span>
-        </div>
         <h1>Observations on where product promises break, how operations recover, and what evidence remains traceable.</h1>
-        <div class="f-about-coords-bar" style="margin-bottom:28px;">
-          <span class="f-coord-tag"><strong>AUTHOR:</strong> Phạm Thanh Phú</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>SCOPE:</strong> 22 Operating Monographs</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>MODES:</strong> 4 Research Lenses</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>METHOD:</strong> Forensic Reconstruction</span>
-        </div>
         <div class="f-cta-dock-btns">
-          <a href="/work" class="f-about-btn primary">Browse 22 Works in Library →</a>
+          <a href="/work" class="f-about-btn primary">Browse ${totalWorks} Works in Library →</a>
           <a href="/about" class="f-about-btn secondary">How I Think &amp; Operate →</a>
           <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust App ↗</a>
         </div>
@@ -3614,7 +3621,7 @@ ${layoutHead("Phạm Thanh Phú — Work & Research Archive", "Evidence-first po
         </div>
         <div style="margin-top:24px;text-align:right;">
           <a href="/work" class="f-about-btn secondary" style="font-size:0.8rem;">
-            View full catalog of 22 monographs →
+            View full catalog of ${totalWorks} monographs →
           </a>
         </div>
       </div>
@@ -3703,7 +3710,7 @@ function workPage(nonce) {
           <h3><a href="${item.path}">${escapeHtml(item.title)}</a></h3>
           <p class="f-item-question">“${escapeHtml(item.question)}”</p>
           <div class="f-paper-tags">
-            <span style="font-weight:600;color:var(--navy);font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.04em;">KEYWORDS:</span>
+            <span class="f-keywords-label">KEYWORDS:</span>
             ${tagsHtml}
           </div>
         </div>
@@ -3731,7 +3738,7 @@ function workPage(nonce) {
 
     return `
       <tr class="f-ledger-row" data-mode="${item.mode}" data-title="${escapeHtml(item.title.toLowerCase())}" data-question="${escapeHtml(item.question.toLowerCase())}" data-tags="${escapeHtml((item.tags || '').toLowerCase())}">
-        <td style="font-family:var(--mono);color:var(--muted);width:36px;">${String(idx + 1).padStart(2, '0')}</td>
+        <td style="font-family:var(--font-mono);color:var(--muted);width:36px;font-size:0.75rem;">${String(idx + 1).padStart(2, '0')}</td>
         <td>
           <a class="f-ledger-title" href="${item.path}">${escapeHtml(item.title)}</a>
           <div style="color:var(--ink-secondary);font-size:0.78rem;font-style:italic;margin-top:2px;">“${escapeHtml(item.question)}”</div>
@@ -3739,7 +3746,7 @@ function workPage(nonce) {
         <td style="width:140px;">
           <span class="f-ledger-mode ${modeCls}">${escapeHtml(modeLabel)}</span>
         </td>
-        <td style="width:160px;font-family:var(--mono);font-size:0.74rem;color:var(--muted);">
+        <td style="width:160px;font-family:var(--font-sans);font-size:0.74rem;color:var(--muted);">
           ${escapeHtml(item.maturity)}
         </td>
       </tr>
@@ -3765,29 +3772,16 @@ function workPage(nonce) {
 
   return `<!doctype html>
 <html lang="en">
-${layoutHead("Work Library — Phạm Thanh Phú", "Complete catalog of 22 research monographs, operating case studies, essays, and software tools across business operations and AI trust.", nonce)}
+${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalWorks} research monographs, operating case studies, essays, and software tools across business operations and AI trust.`, nonce)}
 <body>
   <a class="f-skip" href="#main">Skip to catalog</a>
   ${layoutHeader("work")}
   <main id="main">
     <!-- Work Hero with Authentic Notion Narrative -->
-    <header class="f-about-hero-artistic">
+    <header class="f-about-hero-artistic" style="padding: 44px 0 34px;">
       <div class="f-wrap">
-        <div class="f-about-status-pill">
-          <span class="f-status-dot"></span>
-          <span>Phạm Thanh Phú · Master Research Register</span>
-        </div>
-        <h1>Work Library &amp; Operating Monographs</h1>
-        <div class="f-about-coords-bar" style="margin-bottom:20px;">
-          <span class="f-coord-tag"><strong>CATALOG:</strong> 22 Works</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>MODES:</strong> 4 Research Tracks</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>ARTIFACTS:</strong> 10+ Downloadable Packs</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>STATUS:</strong> Live &amp; Verifiable</span>
-        </div>
-        <p class="f-about-hero-dek">
+        <h1 style="max-width: 100%; margin-bottom: 16px;">Work Library &amp; Operating Monographs</h1>
+        <p class="f-about-hero-dek" style="margin-bottom: 0;">
           The cases look different on the surface, but I keep coming back to a small set of operating questions: what deserves to be built, what breaks after apparent success, what people can safely rely on, and what evidence should earn the next step.
         </p>
       </div>
@@ -3800,8 +3794,8 @@ ${layoutHead("Work Library — Phạm Thanh Phú", "Complete catalog of 22 resea
           “Every piece in this library separates confirmed public facts from working inferences, keeping the boundary of evidence visible.”
         </blockquote>
         <div class="f-work-meta-row">
-          <span>22 Works · 4 Research Modes · 10+ Downloadable Artifacts</span>
-          <span>Updated August 2026</span>
+          <span>${totalWorks} Works · ${totalModes} Research Modes · ${totalArtifacts}+ Downloadable Artifacts</span>
+          <span>Living Archive · 2026</span>
         </div>
       </div>
     </section>
@@ -3835,7 +3829,7 @@ ${layoutHead("Work Library — Phạm Thanh Phú", "Complete catalog of 22 resea
     <div class="f-wrap f-work-toolbar">
       <!-- Row 1: Search -->
       <div class="f-search-wrap">
-        <input class="f-search-input" id="work-search" type="search" placeholder="Search 22 works by title, question, or tag..." aria-label="Search works">
+        <input class="f-search-input" id="work-search" type="search" placeholder="Search ${totalWorks} works by title, question, or tag..." aria-label="Search works">
         <span class="f-kbd-hint">/</span>
         <button class="f-search-clear" id="work-search-clear" type="button" aria-label="Clear search" hidden>×</button>
       </div>
@@ -3856,7 +3850,7 @@ ${layoutHead("Work Library — Phạm Thanh Phú", "Complete catalog of 22 resea
             <button type="button" class="f-view-toggle-btn active" id="btn-view-cards">Cards</button>
             <button type="button" class="f-view-toggle-btn" id="btn-view-ledger">Index Table</button>
           </div>
-          <span class="f-toolbar-count" id="work-count">22 works found</span>
+          <span class="f-toolbar-count" id="work-count">${totalWorks} works found</span>
         </div>
       </div>
     </div>
@@ -3885,7 +3879,7 @@ ${layoutHead("Work Library — Phạm Thanh Phú", "Complete catalog of 22 resea
       </div>
     </div>
   </main>
-  ${layoutFooter("Master Library · 22 Works", nonce)}
+  ${layoutFooter(`Master Library · ${totalWorks} Works`, nonce)}
 
   <script nonce="${nonce}">
     (()=>{
@@ -4353,12 +4347,8 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
   ${layoutHeader("about")}
   <main id="about-content">
     <!-- 1. Artistic Hero with Status & Coordinates -->
-    <section class="f-about-hero-artistic">
+    <section class="f-about-hero-artistic" style="padding: 48px 0 38px;">
       <div class="f-wrap">
-        <div class="f-about-status-pill">
-          <span class="f-status-dot"></span>
-          <span>Based in Ho Chi Minh City · Operating Roots in Dong Thap · 2026 Archive</span>
-        </div>
         <h1>Commercial ground truth first.<br><em>Systems, product governance &amp; AI trust next.</em></h1>
         <p class="f-about-hero-dek">
           Business and operations professional with <strong>6+ years of founder-side ownership</strong> across B2B commercial operations, institutional account retention, supplier coordination, and business systemization. Connecting physical supply chain discipline with digital product strategy and AI decision systems.
@@ -4567,7 +4557,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
         <div class="f-cta-dock-btns">
           <a href="mailto:phamthanhphu97@gmail.com" class="f-about-btn primary">Email Phú ↗</a>
           <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
-          <a href="/work" class="f-about-btn secondary">Browse 22 Works →</a>
+          <a href="/work" class="f-about-btn secondary">Browse ${totalWorks} Works →</a>
           <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust App ↗</a>
         </div>
       </section>
