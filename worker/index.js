@@ -6308,7 +6308,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
       <div class="f-wrap">
         <h1>Commercial ground truth first.<br><em>Systems, product governance &amp; AI trust next.</em></h1>
         <p class="f-about-hero-dek">
-          Business and operations professional with <strong>6+ years of founder-side ownership</strong> across B2B commercial operations, institutional account retention, supplier coordination, and business systemization. Connecting physical supply chain discipline with digital product strategy and AI decision systems.
+          Business and operations professional with <strong>6+ years of founder-side ownership</strong> across B2B commercial operations, recurring-account retention, supplier and partner coordination, workflow design, and business systemization. I extend that operating foundation through independent product, platform, governance, and AI-trust work grounded in public evidence and explicit claim boundaries.
         </p>
         
         <div class="f-about-coords-bar">
@@ -6326,7 +6326,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
         <div class="f-about-hero-actions" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
           <a href="mailto:phamthanhphu97@gmail.com?subject=Contact%20-%20Pham%20Thanh%20Phu" class="f-about-btn primary">Direct Email: phamthanhphu97@gmail.com ✉</a>
           <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
-          <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust (Render App) ↗</a>
+          <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust Prototype ↗</a>
           <a href="mailto:phamthanhphu97@gmail.com?subject=Request%20Full%20CV%20-%20Pham%20Thanh%20Phu" class="f-about-btn secondary">Request Full CV / Dossier 📄</a>
         </div>
 
@@ -6338,19 +6338,19 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
       <div class="f-impact-dashboard">
         <div class="f-impact-stat">
           <b>22</b>
-          <span>Research Monographs</span>
+          <span>Research &amp; Applied Works</span>
         </div>
         <div class="f-impact-stat">
           <b>1</b>
-          <span>Live App on Render</span>
+          <span>Live System Prototype</span>
         </div>
         <div class="f-impact-stat">
           <b>4</b>
-          <span>Analytical Lenses</span>
+          <span>Research Modes</span>
         </div>
         <div class="f-impact-stat">
-          <b>100%</b>
-          <span>Traceable Evidence</span>
+          <b>Explicit</b>
+          <span>Evidence Boundaries</span>
         </div>
       </div>
 
@@ -6372,8 +6372,8 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
             <span class="f-bento-unit">VND / Qtr</span>
           </div>
           <h3>B2B Revenue &amp; Margin</h3>
-          <p>Average quarterly revenue across 10+ brand &amp; supplier partners, sustaining 30–35% operating margin after expenses.</p>
-          <div class="f-bento-tag">Commercial Performance · Unit Margin</div>
+          <p>Average quarterly B2B and institutional supply revenue, excluding retail, while sustaining a 30–35% operating margin after expenses.</p>
+          <div class="f-bento-tag">B2B Supply Revenue · Operating Margin</div>
         </div>
 
         <div class="f-bento-card">
@@ -6382,7 +6382,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
             <span class="f-bento-unit">Retention</span>
           </div>
           <h3>50+ Recurring Accounts</h3>
-          <p>Sustained institutional trust across schools, public-sector units, hospitals, courts, factories, and corporate branches.</p>
+          <p>Sustained ~95% recurring-account retention by account count across 50+ institutional and corporate clients.</p>
           <div class="f-bento-tag">Institutional Accounts · Long-Term Trust</div>
         </div>
 
@@ -6391,8 +6391,8 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
             <span class="f-bento-val">&gt;90%</span>
             <span class="f-bento-unit">Delegated</span>
           </div>
-          <h3>Systemized &amp; Scalable</h3>
-          <p>Migrated core workflows and inventory into KiotViet; recruited manager &amp; staff, transferring &gt;90% daily ops since 2025.</p>
+          <h3>Systemized &amp; Delegated</h3>
+          <p>Transferred &gt;90% of operating work since summer 2025 by moving core data into KiotViet and adding an experienced manager, part-time support, and delivery capacity.</p>
           <div class="f-bento-tag">KiotViet · SOPs · Workflow Design</div>
         </div>
       </section>
@@ -6411,16 +6411,16 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
               My operating foundation began with the unglamorous but consequential work of keeping <strong>50+ institutional accounts, 10+ supplier partners, pricing, warehouse dispatch, cash collections, and dispute resolution connected</strong> in a live commercial market in Dong Thap.
             </p>
             <p>
-              I translated fragmented demand from public-sector units, schools, factories, hospitals, and corporate branches (including Olam and Emivest) into reliable purchasing, pricing, inventory, and delivery decisions—balancing customer satisfaction with working capital and margin health.
+              I translated fragmented demand from public-sector units, schools, factories, hospitals, courts, SMEs, and corporate branches of companies including Olam and Emivest into reliable purchasing, pricing, inventory, and delivery decisions—balancing customer value, capacity, margin, working capital, and fulfilment risk.
             </p>
             <div class="f-horizon-highlights">
               <div class="f-horizon-chip">
                 <strong>Supplier Crisis Resilience</strong>
-                When a key supplier abruptly reduced our discount from 22% to 15%, confirmed policy, avoided ungrounded escalation, mobilized 5 alternative brands, validated samples with clients, and replaced over 80% of affected volume within one week.
+                When a supplier reduced discounts on an affected product line from 22% to 15%, I confirmed the policy, mobilized five alternative suppliers and brands, validated samples with customers, and replaced more than 80% of the affected line within one week.
               </div>
               <div class="f-horizon-chip">
                 <strong>Process Standardization</strong>
-                Standardized customer records, quotations, goods receiving, and inventory tracking; migrated all account data into KiotViet to ensure seamless handoffs and reduce single-point failure.
+                Moved product, pricing, VAT, invoice, inventory, and account data into KiotViet to improve visibility and handoffs; recruited an experienced manager and support capacity to reduce founder dependency.
               </div>
             </div>
           </div>
@@ -6430,7 +6430,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
         <article class="f-horizon-card">
           <aside class="f-horizon-aside">
             <span class="f-horizon-num">Horizon 02</span>
-            <h3>Legal Discipline &amp; Advisory</h3>
+            <h3>Legal Discipline &amp; Operations Support</h3>
             <span class="f-horizon-sub">Ho Chi Minh City &amp; Dong Thap</span>
           </aside>
           <div class="f-horizon-content">
@@ -6438,7 +6438,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
               Combining a <strong>Bachelor of Commercial Law (Ho Chi Minh City University of Law)</strong> and <strong>Lawyer Training Certificate (Judicial Academy)</strong> with live operations to maintain rigorous documentation, risk-transfer boundaries, and confidential stakeholder alignment.
             </p>
             <p>
-              Alongside business operations, I provide independent commercial and legal advisory support for business households and private clients—converting complex legal and regulatory requirements into structured records, timelines, options, and practical next steps.
+              Alongside business operations, I provide independent commercial and legal operations support for 4+ continuing confidential clients—converting complex requirements into structured records, timelines, risk-aware options, and practical next steps.
             </p>
             <div class="f-horizon-highlights">
               <div class="f-horizon-chip">
@@ -6447,7 +6447,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
               </div>
               <div class="f-horizon-chip">
                 <strong>Tax &amp; Contract Workflows</strong>
-                Supported quarterly tax-document workflows for 5+ business households with annual revenue above VND 1B; maintained confidential client handling across lease, vendor, and commercial disputes.
+                Supported quarterly tax-document workflows for 5+ business households with annual revenue above VND 1B while maintaining confidential handling across contract, lease, payment, vendor, and commercial matters.
               </div>
             </div>
           </div>
@@ -6458,23 +6458,23 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
           <aside class="f-horizon-aside">
             <span class="f-horizon-num">Horizon 03</span>
             <h3>Product Systems &amp; AI Trust</h3>
-            <span class="f-horizon-sub">22 Public Research Monographs</span>
+            <span class="f-horizon-sub">22 Public Research &amp; Applied Works</span>
           </aside>
           <div class="f-horizon-content">
             <p>
-              Over time, my focus expanded from running day-to-day operations to architecting product workflows, metric taxonomies, resolution pathways, and decision provenance across digital platforms and AI models.
+              Earlier creator and community work—including venue activations, independent short-form content, and support around platform rules, monetization, Content ID, copyright, and account-support paths—gave me direct exposure to audience behavior and creator–fan operating realities.
             </p>
             <p>
-              Completed the <strong>Value Chain Management Specialization (University of Illinois Urbana-Champaign, 2026)</strong> and authored 22 public research monographs analyzing operational tensions across HealthTech, fandom commerce, and platform governance.
+              I later completed the <strong>Value Chain Management Specialization (University of Illinois Urbana-Champaign, 2026)</strong> and published 22 public research and applied works, extending my operating foundation through independent outside-in work across HealthTech, fandom commerce, platform governance, and AI decision systems.
             </p>
             <div class="f-horizon-highlights">
               <div class="f-horizon-chip">
                 <strong>Product Strategy &amp; Activation (Elfie &amp; FanMe)</strong>
-                Mapped user routines, activation quality, event taxonomies, and 0–12w validation roadmaps for HealthTech (Elfie) and controlled artist launch systems for fandom commerce (FanMe).
+                For Elfie, mapped activation quality, event taxonomy, user routines, guardrails, and a 0–12-week validation roadmap. For FanMe, designed a controlled-growth operating plan spanning artist onboarding, commerce, fulfilment, recovery, metrics, and go/no-go gates.
               </div>
               <div class="f-horizon-chip">
                 <strong>Governance &amp; Explainable Trust (Shopee &amp; App)</strong>
-                Constructed explainable resolution pathways for account restrictions (Shopee, Adobe) and developed the live interactive Explainable Trust application.
+                Through independent public-evidence work, mapped explainable customer-resolution pathways for account restrictions (Shopee and Adobe) and developed the live Explainable Trust system prototype.
               </div>
             </div>
           </div>
@@ -6487,14 +6487,14 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
         <blockquote>
           “Every durable business is built on two visible boundaries: what was promised, and what evidence confirms it was delivered. I turn messy, multi-stakeholder tensions into clear workflows, measurable accountability, and calm, reliable execution.”
         </blockquote>
-        <span class="f-manifesto-author">— Phạm Thanh Phú · Business Operations &amp; Systems Architecture</span>
+        <span class="f-manifesto-author">— Phạm Thanh Phú · Business Operations &amp; Systems Thinking</span>
       </section>
 
       <!-- 5. Capabilities & Tooling Ledger -->
       <section aria-label="Capabilities and Tooling">
         <div class="f-human-head">
           <h2>Capabilities &amp; Core Tooling</h2>
-          <span>Practical skills honed through 6+ years of execution</span>
+          <span>Capabilities developed through operating experience, formal learning, and independent applied work</span>
         </div>
         <div class="f-about-toolkit-grid">
           <div class="f-toolkit-col">
@@ -6504,7 +6504,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
               <li>Sourcing &amp; Vendor Management</li>
               <li>Inventory &amp; KiotViet ERP Setup</li>
               <li>Working Capital &amp; Margin Control</li>
-              <li>Partner SLAs &amp; Quality Control</li>
+              <li>Partner Coordination &amp; Quality Control</li>
               <li>Incident Containment &amp; Recovery</li>
             </ul>
           </div>
@@ -6514,18 +6514,18 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
               <li>Problem Discovery &amp; User Journeys</li>
               <li>Event Taxonomy &amp; Funnel Metrics</li>
               <li>Experiment Hypotheses &amp; Guardrails</li>
-              <li>Value Chain Architecture (UIUC)</li>
+              <li>Value Chain Management (UIUC)</li>
               <li>Stage Gates &amp; Transfer Testing</li>
-              <li>Contestable Dispute Pathways</li>
+              <li>Customer Resolution &amp; Contestability</li>
             </ul>
           </div>
           <div class="f-toolkit-col">
-            <h4>Data, Legal &amp; AI Tools</h4>
+            <h4>Data, Legal &amp; AI</h4>
             <ul class="f-toolkit-list">
               <li>Excel, Google Sheets, SQL, Python, Tableau</li>
               <li>Commercial Law (HCMUL) &amp; Judicial Academy</li>
               <li>ChatGPT, Claude &amp; Generative AI Tools</li>
-              <li>AI Decision Provenance &amp; Scoring Models</li>
+              <li>AI Decision Provenance &amp; Evaluation Frameworks</li>
               <li>Notion, Asana, Trello Project Tracking</li>
               <li>TOEIC 825 Professional English</li>
             </ul>
@@ -6537,13 +6537,13 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
       <section class="f-about-cta-dock">
         <div class="f-cta-dock-text">
           <h3>Let's explore meaningful collaboration.</h3>
-          <p>Open to Business Operations, Program &amp; Product Operations, and Advisory roles in Ho Chi Minh City.</p>
+          <p>Open to Business Operations, Product Operations, and Product Strategy roles in Ho Chi Minh City.</p>
         </div>
         <div class="f-cta-dock-btns">
           <a href="mailto:phamthanhphu97@gmail.com" class="f-about-btn primary">Email Phu ↗</a>
           <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
           <a href="/work" class="f-about-btn secondary">Browse ${totalWorks} Works →</a>
-          <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust App ↗</a>
+          <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust Prototype ↗</a>
         </div>
       </section>
     </div>
