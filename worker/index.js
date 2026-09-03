@@ -3,6 +3,13 @@
 // Synchronized 1-to-1 with Notion Master Work Library & Google Drive Assets
 // ============================================================================
 
+
+// ============================================================================
+// Favicon SVG Asset & Constants
+// ============================================================================
+const SITE_FAVICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#14222c"/><text x="16" y="22" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="800" font-size="18" fill="#faf8f5" text-anchor="middle">P</text><circle cx="24" cy="8" r="3.5" fill="#c25e2e"/></svg>`;
+const SITE_FAVICON_DATA_URL = `data:image/svg+xml,${encodeURIComponent(SITE_FAVICON_SVG)}`;
+
 const HOME_CAT_WEBP = Uint8Array.from(atob("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"), character => character.charCodeAt(0));
 const PHU_PORTRAIT_WEBP = Uint8Array.from(atob("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"), character => character.charCodeAt(0));
 
@@ -41,8 +48,8 @@ const finalWorkLibrary = [
   {
     "index": 1,
     "path": "/work/vinamilk-trusted-nutrition",
-    "title": "Vinamilk — Trusted Nutrition Product-Service Discovery",
-    "question": "What trusted nutrition proposition deserves to exist—and can its valued attributes survive delivery, scale, and later governance?",
+    "title": "Vinamilk: Trusted Nutrition Product-Service Discovery",
+    "question": "What trusted nutrition proposition deserves to exist, and can its valued attributes survive delivery, scale, and later governance?",
     "maturity": "Developed outside-in research",
     "type": "Product-Service Discovery Research",
     "tags": "Strategy under uncertainty · Stage-gated investment · Operating blueprint · Capability stewardship",
@@ -52,7 +59,7 @@ const finalWorkLibrary = [
   {
     "index": 2,
     "path": "/work/creator-platform-operating-model",
-    "title": "Creator Platform Operating Model — MFan / fandom-commerce",
+    "title": "Creator Platform Operating Model: MFan / fandom-commerce",
     "question": "How can identity, membership, payment, ticketing, fulfilment, support, settlement, and reporting remain connected across multiple creator surfaces?",
     "maturity": "Working Model",
     "type": "Outside-in Operating Model",
@@ -63,7 +70,7 @@ const finalWorkLibrary = [
   {
     "index": 3,
     "path": "/work/elfie-trust-safe-activation",
-    "title": "Elfie Product Case — Trust-Safe Activation",
+    "title": "Elfie Product Case: Trust-Safe Activation",
     "question": "How can a health product reach first value and retained routine while making role, consent, data quality, and sharing boundaries visible?",
     "maturity": "Developed Work Sample",
     "type": "Product Strategy Work Sample",
@@ -85,7 +92,7 @@ const finalWorkLibrary = [
   {
     "index": 5,
     "path": "/work/shopee-account-restrictions",
-    "title": "Shopee Account Restrictions — Customer Resolution Under Platform Uncertainty",
+    "title": "Shopee Account Restrictions: Customer Resolution Under Platform Uncertainty",
     "question": "After a marketplace restricts a customer account, what must remain visible and actionable so the customer can understand, preserve, contest, resolve, or escalate?",
     "maturity": "Developed Work Sample",
     "type": "Evidence-Based Product Operations Case",
@@ -96,7 +103,7 @@ const finalWorkLibrary = [
   {
     "index": 6,
     "path": "/work/fanme-controlled-growth",
-    "title": "FanMe Controlled Growth Pilot — Building a Repeatable Artist-Launch Operating System",
+    "title": "FanMe Controlled Growth Pilot: Building a Repeatable Artist-Launch Operating System",
     "question": "Can FanMe use one controlled artist launch to make the fan journey reliable, contain operational risk, and build capability that transfers to the next artist?",
     "maturity": "Developed Work Sample",
     "type": "Controlled Growth & Launch Operations Case",
@@ -107,8 +114,8 @@ const finalWorkLibrary = [
   {
     "index": 7,
     "path": "/work/datvietvac-ownership-belonging",
-    "title": "DatVietVAC — Ownership & Belonging: Merchandise Growth Case",
-    "question": "Can verified fan contribution persist beyond a purchase or event as ownership, history, or recognition—without turning novelty into uncontrolled cost or operational complexity?",
+    "title": "DatVietVAC: Ownership & Belonging Merchandise Growth Case",
+    "question": "Can verified fan contribution persist beyond a purchase or event as ownership, history, or recognition, without turning novelty into uncontrolled cost or operational complexity?",
     "maturity": "Developed Work Sample",
     "type": "Merchandise Growth & IP Commercialization Case",
     "tags": "IP commercialization · Customer-history mechanics · Merchandise/event continuity · Reward economics · Ownership & governance · Pilot and scale gates",
@@ -118,8 +125,8 @@ const finalWorkLibrary = [
   {
     "index": 8,
     "path": "/work/datvietvac-fandom-cards",
-    "title": "DatVietVAC Fandom Cards — From Official Fandom Pack to a Gated Collectibles Product Line",
-    "question": "Can an official 12-card fandom pack turn visible existing demand into something fans carry, share, display and trade in everyday life—then earn repeated drops, a product line, and only later a conditional annual box or collectibles pod?",
+    "title": "DatVietVAC Fandom Cards: From Official Fandom Pack to a Gated Collectibles Product Line",
+    "question": "Can an official 12-card fandom pack turn visible existing demand into something fans carry, share, display, and trade in everyday life, then earn repeated drops, a product line, and only later a conditional annual box or collectibles pod?",
     "maturity": "Developed Work Sample",
     "type": "Merchandise Initiative / Gated Product-Line Case",
     "tags": "Observed outside-channel demand · 12-card social inventory · Everyday circulation · Physical manufacturing signature · Pilot economics · Single-SOW production and rights · Earned scale gates",
@@ -129,7 +136,7 @@ const finalWorkLibrary = [
   {
     "index": 9,
     "path": "/work/vieshop-fan-centred-merchandise-system",
-    "title": "VieSHOP — From Campaign Storefront to a Fan-Centred Merchandise System",
+    "title": "VieSHOP: From Campaign Storefront to a Fan-Centred Merchandise System",
     "question": "How can an official store become reliable enough to transact, open enough to explore, and structured enough to learn across artists and IPs?",
     "maturity": "Working V2 · 23 Aug 2026",
     "type": "Independent Product / Commerce Case",
@@ -151,7 +158,7 @@ const finalWorkLibrary = [
   {
     "index": 11,
     "path": "/work/explainable-trust",
-    "title": "Explainable Trust — Traceable Case Reconstruction",
+    "title": "Explainable Trust: Traceable Case Reconstruction",
     "question": "Can an AI-assisted case workspace update a living case without erasing the path by which the case was constructed?",
     "maturity": "Working Prototype",
     "type": "Built Product Prototype",
@@ -163,7 +170,7 @@ const finalWorkLibrary = [
     "index": 12,
     "path": "/work/vietnam-diamond-market-crisis",
     "title": "Vietnam’s 2026 Diamond-Market Crisis",
-    "question": "What can be reconstructed through observable events, stakeholder decisions, enterprise responses, and public records—and where does the evidence stop?",
+    "question": "What can be reconstructed through observable events, stakeholder decisions, enterprise responses, and public records, and where does the evidence stop?",
     "maturity": "Research cut-off: 21 July 2026",
     "type": "Evidence-First Case Study",
     "tags": "Claim architecture · Source preservation · Alternative readings · Evidence boundaries",
@@ -173,8 +180,8 @@ const finalWorkLibrary = [
   {
     "index": 13,
     "path": "/work/diamond-trust-chain-collapse",
-    "title": "Diamond Trust Chain Collapse — When Final Proof Needs Proof",
-    "question": "What happens when a certificate compresses a complex trust chain into one market signal—and that signal itself becomes uncertain?",
+    "title": "Diamond Trust Chain Collapse: When Final Proof Needs Proof",
+    "question": "What happens when a certificate compresses a complex trust chain into one market signal, and that signal itself becomes uncertain?",
     "maturity": "Evidence Building",
     "type": "Research Essay",
     "tags": "Trust-chain reconstruction · Guarantee drift · Reverse proof · Recovery architecture",
@@ -184,7 +191,7 @@ const finalWorkLibrary = [
   {
     "index": 14,
     "path": "/work/adobe-account-restriction",
-    "title": "Adobe Account Restriction — When Enforcement Interrupts the Work",
+    "title": "Adobe Account Restriction: When Enforcement Interrupts the Work",
     "question": "When enforcement interrupts an already-paid work tool, what must remain visible and recoverable beyond the account decision itself?",
     "maturity": "Evidence-First Research",
     "type": "Independent Comparative Case",
@@ -195,7 +202,7 @@ const finalWorkLibrary = [
   {
     "index": 15,
     "path": "/work/pathway-lens-operational-cycles",
-    "title": "Pathway Lens — AI Risk, Drift, Evidence, and Recovery Cycles",
+    "title": "Pathway Lens: AI Risk, Drift, Evidence, and Recovery Cycles",
     "question": "A working AI research lens for tracing how an output, signal, recommendation, or action becomes reliance, record, execution, transaction, memory, or real-world consequence.",
     "maturity": "Working Model & Framework",
     "type": "AI & Systems Governance",
@@ -217,7 +224,7 @@ const finalWorkLibrary = [
   {
     "index": 17,
     "path": "/work/ai-apprenticeship",
-    "title": "AI Apprenticeship — Before AI Becomes an Actor",
+    "title": "AI Apprenticeship: Before AI Becomes an Actor",
     "question": "Before AI receives operational authority, should it first learn how an organization understands mission, boundaries, evidence, exceptions, and recovery?",
     "maturity": "Working Hypothesis",
     "type": "Research Essay",
@@ -228,7 +235,7 @@ const finalWorkLibrary = [
   {
     "index": 18,
     "path": "/work/zalopay-smes-when-paid-not-done",
-    "title": "ZaloPay & SMEs — When Paid Is Not Yet Done",
+    "title": "ZaloPay & SMEs: When Paid Is Not Yet Done",
     "question": "What operational work still begins after a small merchant receives payment?",
     "maturity": "Working Hypothesis",
     "type": "Research Essay",
@@ -239,7 +246,7 @@ const finalWorkLibrary = [
   {
     "index": 19,
     "path": "/work/metub-creator-economy",
-    "title": "METUB & Creator Economy — When Creating Becomes Operating",
+    "title": "METUB & Creator Economy: When Creating Becomes Operating",
     "question": "What infrastructure do creators need when creating becomes a business, and what responsibility does a platform inherit?",
     "maturity": "Working Hypothesis",
     "type": "Research Essay",
@@ -250,7 +257,7 @@ const finalWorkLibrary = [
   {
     "index": 20,
     "path": "/work/momo-ai-paylater",
-    "title": "MoMo AI PayLater — Risk Begins After Yes",
+    "title": "MoMo AI PayLater: Risk Begins After Yes",
     "question": "Can an AI-enabled credit product define success beyond approval and conversion by considering the consequence the user must live with afterward?",
     "maturity": "Working Hypothesis",
     "type": "Research Essay",
@@ -273,7 +280,7 @@ const finalWorkLibrary = [
     "index": 22,
     "path": "/work/zalo-scam-emergency-mode",
     "title": "Zalo Scam Emergency Mode: Payment Safety Signal & Post-Transfer Safety Coach",
-    "question": "Where can a payment product add contextual safety interventions before an irreversible transfer—and what should happen immediately afterward?",
+    "question": "Where can a payment product add contextual safety interventions before an irreversible transfer, and what should happen immediately afterward?",
     "maturity": "Working Hypothesis",
     "type": "Product Concept",
     "tags": "Protective friction · Evidence preservation · Action-first guidance · False-positive guardrails",
@@ -289,22 +296,22 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "1nPQ5ijQQ_i4KoqyFtg1JIWzBiNthoAbj",
         "fileName": "vinamilk_paper_1_trusted_nutrition_product_service_discovery.docx",
-        "label": "📄 Xem trước: vinamilk_paper_1_trusted_nutrition_product_service_discovery.docx ↗",
-        "title": "vinamilk paper 1 trusted nutrition product service discovery"
+        "label": "📄 Preview: vinamilk_paper_1_trusted_nutrition_product_service_discovery.docx ↗",
+        "title": "Vinamilk Paper 1: Trusted Nutrition Product-Service Discovery"
       },
       {
         "type": "paper",
         "driveId": "1Xl_knBwuJQPn5mtFb8MyZXeC6hENKPW5",
         "fileName": "vinamilk_paper_2_everyday_milk_delivery_operations_scale.docx",
-        "label": "📄 Xem trước: vinamilk_paper_2_everyday_milk_delivery_operations_scale.docx ↗",
-        "title": "vinamilk paper 2 everyday milk delivery operations scale"
+        "label": "📄 Preview: vinamilk_paper_2_everyday_milk_delivery_operations_scale.docx ↗",
+        "title": "Vinamilk Paper 2: Everyday Milk Delivery Operations & Scale"
       },
       {
         "type": "paper",
         "driveId": "13Ylje0Y3X_xXVnx1-W-0CpQaBq-alTHh",
         "fileName": "vinamilk_paper_3_beyond_the_market_capability_allocation_governance.docx",
-        "label": "📄 Xem trước: vinamilk_paper_3_beyond_the_market_capability_allocation_governance.docx ↗",
-        "title": "vinamilk paper 3 beyond the market capability allocation governance"
+        "label": "📄 Preview: vinamilk_paper_3_beyond_the_market_capability_allocation_governance.docx ↗",
+        "title": "Vinamilk Paper 3: Beyond-the-Market Capability Allocation Governance"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1nPQ5ijQQ_i4KoqyFtg1JIWzBiNthoAbj\" data-title=\"vinamilk paper 1 trusted nutrition product service discovery (PDF)\">📄 vinamilk paper 1 trusted nutrition product service discovery (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1nPQ5ijQQ_i4KoqyFtg1JIWzBiNthoAbj/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1Xl_knBwuJQPn5mtFb8MyZXeC6hENKPW5\" data-title=\"vinamilk paper 2 everyday milk delivery operations scale (PDF)\">📄 vinamilk paper 2 everyday milk delivery operations scale (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1Xl_knBwuJQPn5mtFb8MyZXeC6hENKPW5/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"13Ylje0Y3X_xXVnx1-W-0CpQaBq-alTHh\" data-title=\"vinamilk paper 3 beyond the market capability allocation governance (PDF)\">📄 vinamilk paper 3 beyond the market capability allocation governance (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/13Ylje0Y3X_xXVnx1-W-0CpQaBq-alTHh/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n> **This case started with a quiet-store observation. The first instinct was to redesign the store; the research became more interesting when I asked whether the product and occasion had been proven before the channel was redesigned.**\n> \n\n> **Type:** Product-Service Discovery & Operating Research\n**Stage:** Developed outside-in research\n**Evidence basis:** Direct observation, public company information, comparative product and operating patterns, and clearly labeled hypotheses\n**Last updated:** July 2026\n**Boundary:** Current demand, internal feasibility, and implementation readiness remain unvalidated. Each later stage depends on evidence produced by the earlier gate.\n> \n\n## Case at a glance\n\n- **Observation:** Some Vinamilk-branded stores appeared quiet, with limited reasons for customers to stay, return, or consume products immediately.\n- **Initial instinct:** Redesign the retail experience with seating, served drinks, takeaway, delivery, and a stronger digital layer.\n- **Reframe:** Before changing the channel, determine whether there is a product and consumption occasion that customers would willingly pay for again.\n- **Core decision:** Discover a repeatable trusted-nutrition proposition first; choose the operating format only after the proposition earns evidence.\n- **Boundary:** Current demand, internal feasibility, and implementation readiness remain unvalidated.\n\n## Decision path\n\n```\nQuiet-store observation\n        ↓\nProduct architecture\nWhat form is worth testing?\n        ↓\nOccasion & paid repeat\nWho buys, when, why, at what price, and do they return?\n        ↓\nIndustrialization\nCan valued attributes survive simplification?\n        ↓\nChannel choice\nStore / Kiosk / Partner / Other format\n        ↓\nScale decision\nProceed / Narrow / Redirect / Stop\n```\n\n> **Test the product architecture first, the occasion second, the operating model third, and the channel format fourth.**\n> \n\n---\n\n## Why trust changes the problem\n\n> **A nutrition product is not merely a formulation or a drink. It is a trust package whose value depends on the integrity, transparency, and consistency of every step from nutritional science to consumption.**\n> \n\nA beverage chain may primarily compete through taste, convenience, price, and environment. Vinamilk carries a different customer expectation.\n\nCustomers may also ask:\n\n- What is the drink made from?\n- Is it fresh milk, powder, concentrate, or a hybrid?\n- How much sugar and protein does one serving contain?\n- Is the water and ice controlled?\n- Was it prepared to a standard?\n- How long is it safe and enjoyable to consume?\n- Does the process preserve the nutritional promise?\n\nFor Vinamilk, trust is not a communication layer added after product development. It is an operating outcome that must be designed into the entire product-service system.\n\n---\n\n## Stage 1 — Discover what deserves to exist\n\nThe first decision is:\n\n> **What trusted nutrition proposition deserves to exist?**\n> \n\nIt does not assume that “Everyday Milk,” a particular store format, or even liquid milk is the correct answer.\n\nIt establishes a discovery program for testing:\n\n- Liquid, powder, concentrate, and hybrid product architectures.\n- Taste, texture, ice compatibility, and consumption-window stability.\n- Nutritional, safety, and trust integrity.\n- Customer occasion, willingness to pay, and paid repeat behavior.\n- Premium and everyday propositions.\n- Simplification and industrialization potential.\n- Sustainability implications across ingredients, packaging, waste, water, energy, and cold chain.\n\nIts purpose is twofold:\n\n1. Produce a decision about the current proposition.\n2. Establish the foundations of a reusable organizational capability for evaluating future trusted-nutrition opportunities through evidence rather than assumption.\n\nThe discovery program may legitimately conclude that the proposition should stop, remain premium-only, move to a different channel, or advance to operating design.\n\n> **Gate:** Is there a validated Product-Occasion Brief strong enough to justify operating design?\n> \n\n---\n\n## Stage 2 — Preserve what customers valued\n\nThis stage activates only after Stage 1 produces an authoritative, validated Product-Occasion Brief.\n\nThe next decision is:\n\n> **How can Vinamilk deliver, learn from, and scale the validated proposition without losing its nutritional, trust, or operational integrity?**\n> \n\nIt covers:\n\n- Innovation and everyday operating formats.\n- Product industrialization and serving standards.\n- Store, kiosk, partner-channel, and other format choices.\n- Product, recipe, nutrition, and trust master data.\n- SOP, training, QA, audit, and traceability.\n- Make / Buy / Customize / Partner / Reuse decisions.\n- Fulfilment, pickup, delivery, and digital capabilities.\n- KPI, guardrails, stage gates, and replication.\n- Sustainability controls and future circular options.\n\nThe store remains important, but it is no longer treated as the default solution. It may be a laboratory, a channel, a learning environment, or one format among several.\n\n> **Gate:** Can the proposition survive simplification, repeated delivery, and real operating constraints without losing the attributes that created trust and repeat behavior?\n> \n\n---\n\n## Operating choice — Innovation Store vs. Everyday Format\n\nThe distinction is functional, not decorative.\n\n### Milk Innovation / Occasion Development Store\n\nIts job is to learn:\n\n- What taste and sensory attributes customers value.\n- Which nutrition and trust signals create confidence.\n- Which occasions generate paid repeat behavior.\n- Which formulations and preparation methods are worth industrializing.\n- Which propositions belong in other channels.\n\nIt optimizes for **preference and learning**.\n\n### Everyday / General Format\n\nIts job is to deliver a validated proposition:\n\n- At an accessible price.\n- With acceptable and consistent taste.\n- Through a fast, low-variance workflow.\n- With clear nutritional information.\n- With controlled waste and contribution economics.\n\nIt optimizes for **repeatability and habit**.\n\nThe key handoff is the Industrialization Gate:\n\n> Can the system simplify the recipe without losing the attributes that caused customers to trust, value, and repeat it?\n> \n\n---\n\n## What this could become strategically\n\nThe largest opportunity may not be opening a new store chain.\n\nVinamilk is already strong in dairy science, manufacturing, quality control, supply chain, and national distribution. The proposed capability extends that chain beyond the retail transaction:\n\n```\nNutrition Science\n        ↓\nProduct Architecture\n        ↓\nIndustrialized Preparation\n        ↓\nConsumption Occasion\n        ↓\nCustomer Behavior and Confidence\n        ↓\nContinuous Product Learning\n        ↺\n```\n\nThis creates a form of **occasion intelligence** that traditional sell-in data cannot provide:\n\n- What customers choose at different times and contexts.\n- Which sensory attributes create repeat.\n- Which nutrition information affects choice.\n- Which products work in premium versus everyday formats.\n- Which occasions belong in stores, gyms, campuses, hospitals, offices, or partner channels.\n\nThe strategic capability is not an app or a store network. It is the ability to repeatedly create, test, preserve, and distribute trusted nutrition propositions across multiple occasions and channels.\n\n> **Discovery outputs become organizational capability only when they are documented, governed, and designated as the authoritative inputs for subsequent investment decisions.**\n> \n\n---\n\n## Decision, not destination\n\nSuccess is not defined only as proving that an Everyday Milk retail concept should scale.\n\nA disciplined stop decision can also be successful if the evidence shows that:\n\n- Customers prefer consuming milk at home.\n- The proposition is attractive only within a premium niche.\n- A gym, campus, hospital, office, or convenience channel is superior to a standalone store.\n- Taste cannot survive industrialization at an acceptable price.\n- Trust, safety, waste, or economics cannot be preserved reliably.\n\nThe value of the program is its ability to reduce uncertainty before irreversible investment.\n\n---\n\n- Research artifacts — full discovery and operating papers\n    \n    The attached papers preserve the detailed discovery design, operating blueprints, assumptions, and stage-gate logic behind the public case.\n    \n    <button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1nPQ5ijQQ_i4KoqyFtg1JIWzBiNthoAbj\" data-title=\"vinamilk paper 1 trusted nutrition product service discovery.docx (PDF)\">📄 vinamilk paper 1 trusted nutrition product service discovery.docx (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1nPQ5ijQQ_i4KoqyFtg1JIWzBiNthoAbj/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n    \n    <button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1Xl_knBwuJQPn5mtFb8MyZXeC6hENKPW5\" data-title=\"vinamilk paper 2 everyday milk delivery operations scale.docx (PDF)\">📄 vinamilk paper 2 everyday milk delivery operations scale.docx (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1Xl_knBwuJQPn5mtFb8MyZXeC6hENKPW5/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n    \n\n## Conditional extension — Beyond the Market\n\n> **This is not part of the current product-scale recommendation.** It becomes relevant only if a trusted-nutrition capability eventually demonstrates sustained product integrity, operating reliability, traceability, and stability across real channels.\n> \n\n### Capability Allocation Governance for Trusted Nutrition Access\n\nThis extension asks what could happen after reliability has been earned, not how the current proposition should be launched or scaled.\n\nThe progression is:\n\n```\nPaper I\nDiscover what trusted nutrition proposition deserves to exist\n        ↓\nPaper II\nPreserve, deliver, and scale it reliably\n        ↓\nDemonstrated operating evidence\n        ↓\nPaper III\nGovern how legitimate access may be expanded beyond ordinary market participation\n```\n\nPaper III therefore does not ask how to sell the proposition more widely. It asks:\n\n> **Once a trusted nutrition capability has earned reliability and trust, under what governance may legitimate access to its outputs be expanded beyond the market?**\n> \n\n---\n\n### The Three-Layer Architecture\n\n```\nCapability\nWhat has been proven, and who must steward it?\n        ↓\nAllocation\nUnder what authority, funding, and rules may access be granted?\n        ↓\nAccess\nHow can eligible people receive value without being forced to become customers?\n```\n\nThe defining principle is:\n\n> **Capabilities remain stewarded. Only legitimate access is allocated.**\n> \n\nVinamilk would continue to steward the integrated capability bundle: nutrition science, approved product architecture, manufacturing, quality assurance, logistics, traceability, serving standards, and operating integrity.\n\nInstitutions would not receive ownership of those individual capabilities. They would participate through governed pathways that define purpose, eligibility, funding, authorized use, and accountability.\n\n---\n\n### Comparative Capability Research\n\nElfie is used only as an analytical reference because it illustrates how users, sponsors, and health-service partners may be coordinated through governed institutional pathways.\n\nThe objective is not to replicate Elfie’s product, app, or operating model. Elfie primarily coordinates capabilities distributed across an ecosystem, while Vinamilk directly owns and operates significant parts of the nutrition, manufacturing, quality, and distribution capability being considered.\n\nThe transferable research object is therefore **governance logic**, not features or technology.\n\n> **Compare capabilities, not appearances.**\n> \n\n---\n\n### Nutrition Credit — Suất Dinh Dưỡng\n\nMultiple funding sources and institutional programs create a normalization problem. Company funding, employer sponsorship, institutional support, public co-funding, philanthropy, customer contribution, and cross-subsidy may all operate differently in the backend.\n\nA common access unit may therefore be required at the system and user layers.\n\n> **Nutrition Credit is introduced to operationalize allocation governance. It is not the research object itself.**\n> \n\nThe proposed user-facing Vietnamese name is:\n\n> **Suất Dinh Dưỡng**\n> \n\nA Nutrition Credit is defined as:\n\n> **A standardized and equal unit of trusted-nutrition access.**\n> \n\nPrograms may grant different quantities of credits and apply different authorized pathways, but the value of one credit must not change according to the person receiving it or the source funding it.\n\n```\nNutrition Credit\n        ↓\nEqual Unit Value\n        ↓\nProgram Rules\n        ↓\nAuthorized Redemption\n```\n\nThe system may eventually support three broad access pathways:\n\n- Personal redemption through ordinary commercial participation.\n- Sponsored institutional access for eligible groups.\n- Voluntary contribution to verified access programs.\n\nHowever, receiving an institutional entitlement must not require a person to become a commercial customer, install an app, provide marketing consent, or disclose more personal information than is necessary.\n\n> **No app should not mean no access.**\n> \n\n---\n\n### Purchase Accrual Principle\n\nWhen Nutrition Credits are earned through purchases, issuance should be proportional to actual eligible economic value rather than the number of drinks or an arbitrary transaction threshold.\n\n```\nCredits earned\n=\nEligible Net Spend\n× Base Reward Rate\n÷ Reference Settlement Value\n× Approved Multiplier\n```\n\nThe design choice is:\n\n> **Proportional by net paid value, accumulated fractionally, with limited and funded bonuses.**\n> \n\nThis prevents cliff effects, basket splitting, uncontrolled liability, and inconsistent unit value.\n\nPromotions may change the number of credits issued, but they must never change the value of the unit itself.\n\n---\n\n### Architectural Boundary Conditions\n\nPaper III is protected by six boundary conditions:\n\n1. **Capabilities remain stewarded. Only legitimate access is allocated.**\n2. **Nutrition Credit operationalizes governance; it does not replace the research object.**\n3. **Equal unit value does not mean identical permissions.**\n4. **Institutional participation does not imply clinical endorsement.**\n5. **Capability stewardship must not override institutional mandate.**\n6. **Allocation is not fulfilment. Fulfilment is not automatically impact.**\n\nPublic-value evidence must follow the full pathway:\n\n```\nCommitted\n    ↓\nAllocated\n    ↓\nRedeemed\n    ↓\nFulfilled\n    ↓\nVerified\n    ↓\nImpact\n```\n\nThe stages must not be collapsed for reporting or communication.\n\n---\n\n### Constitutional Architecture, Not Software Architecture\n\nPaper III does not prescribe ledger design, identity technology, API patterns, system topology, or fraud models.\n\nIt defines constitutional requirements that any future technical architecture must preserve:\n\n- Equal unit value with traceable provenance.\n- Visible usage boundaries.\n- Legitimate non-app access.\n- Auditable state transitions.\n- Data minimization.\n- Scoped institutional authority.\n- Prevention of duplicate issuance, duplicate redemption, and silent value changes.\n\n> **Implementation must absorb governance complexity without transferring it to user cognition or weakening legitimate access.**\n> \n\nDetailed technical architecture should be developed only after the activation gate has been passed.\n\n---\n\n### What Paper III Is — and Is Not\n\nPaper III is a governance concept for allocating legitimate access to the outputs of a proven trusted-nutrition capability.\n\nIt is not:\n\n- A CSR campaign.\n- An ESG report.\n- A charity program.\n- A loyalty-system specification.\n- A government policy proposal.\n- A clinical nutrition protocol.\n- A software architecture document.\n\nIts purpose is to define when, why, and under whose authority access may be expanded without weakening product integrity, institutional legitimacy, individual dignity, or the trust established through Papers I and II.\n\n> **Paper I asks what people should be able to trust. Paper II asks how that trust can survive scale. Paper III asks how legitimate access to a capability that has earned trust may be expanded beyond the market.**\n> \n\n---\n\n### Full Paper\n\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"13Ylje0Y3X_xXVnx1-W-0CpQaBq-alTHh\" data-title=\"vinamilk paper 3 beyond the market capability allocation governance.docx (PDF)\">📄 vinamilk paper 3 beyond the market capability allocation governance.docx (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/13Ylje0Y3X_xXVnx1-W-0CpQaBq-alTHh/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n\n---\n\n## Current Limitations\n\nThis case is built without access to Vinamilk’s internal traffic, revenue, customer research, formulation pipeline, cost structure, quality systems, channel economics, ownership model, or implementation capacity.\n\nIt therefore does not establish:\n\n- that the observed store pattern is representative of the retail network;\n- that an immediate-consumption milk proposition has sufficient paid demand;\n- that valued sensory and nutritional attributes can survive industrialization;\n- that a standalone store is superior to other channels;\n- that the proposed operating architecture is feasible within current systems;\n- or that the governance concept in Paper III should be activated.\n\nPaper III is especially conditional. It should remain dormant unless Papers I and II produce sustained evidence of product integrity, operating reliability, traceability, and institutional readiness.\n\n## Next Validation Step\n\nThe next step is not format selection. It is a bounded Product-Occasion Discovery cycle:\n\n1. test multiple product architectures rather than assuming liquid milk;\n2. identify concrete consumption occasions and competing alternatives;\n3. measure paid choice and repeat behavior, not stated interest alone;\n4. test whether taste, nutrition, safety, and trust survive simplification;\n5. compare store, kiosk, delivery, institutional, and partner-channel economics;\n6. make an explicit stop, narrow, reposition, or advance decision before operating-scale investment.\n\n## Continue Reading\n\n[Elfie — Trust-Safe Activation](https://app.notion.com/p/Elfie-Product-Case-Trust-Safe-Activation-3926210cf1c780138d3dfb16dba10e43?pvs=21) — a product strategy case on activation, role boundaries, consent, data quality, and execution.\n\n[Creator Platform Operating Model — MFan](https://app.notion.com/p/Creator-Platform-Operating-Model-MFan-fandom-commerce-3926210cf1c7808ea5b8ca1f0d975302?pvs=21) — a multi-party operating model built around shared state, ownership, and recovery.\n\n[Work Library](https://app.notion.com/p/Work-Library-37d6210cf1c7804b933af056f81215ea?pvs=21) · [Portfolio Home](https://app.notion.com/p/Ph-m-Thanh-Ph-s-Works-37d6210cf1c78052afafd34e27af898b?pvs=21)"
@@ -315,8 +322,8 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "11odCvGgn4HQENscQ3Y194ZPmKBuo2bBh",
         "fileName": "MFan_Platform_Fragmentation__Trust_Chain_Integration.pdf",
-        "label": "📄 Xem trước: MFan_Platform_Fragmentation__Trust_Chain_Integration.pdf ↗",
-        "title": "MFan Platform Fragmentation  Trust Chain Integration"
+        "label": "📄 Preview: MFan_Platform_Fragmentation__Trust_Chain_Integration.pdf ↗",
+        "title": "MFan Platform Fragmentation & Trust Chain Integration"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"11odCvGgn4HQENscQ3Y194ZPmKBuo2bBh\" data-title=\"MFan Platform Fragmentation  Trust Chain Integration (PDF)\">📄 MFan Platform Fragmentation  Trust Chain Integration (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/11odCvGgn4HQENscQ3Y194ZPmKBuo2bBh/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n> **A fan can move through an artist page, payment flow, ticketing partner, merch order, and support channel without any one of those surfaces being broken. The trouble starts when identity, entitlement, payment, fulfilment, and support stop carrying the same operating truth.**\n> \n\n> **Type:** Outside-in Operating Model\n**Stage:** Working Model\n**Evidence basis:** Public product signals, observed journeys, market patterns, and operational inference\n**Last updated:** August 2026\n**Boundary:** A proposed outside-in model requiring validation against actual workflows, systems, constraints, and incident data.\n> \n\n> **Supporting artifact:**\n> \n> \n> <button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"11odCvGgn4HQENscQ3Y194ZPmKBuo2bBh\" data-title=\"MFan Platform Fragmentation & Trust Chain Integration.pdf (PDF)\">📄 MFan Platform Fragmentation & Trust Chain Integration.pdf (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/11odCvGgn4HQENscQ3Y194ZPmKBuo2bBh/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n> \n\n---\n\n## The operating problem\n\nA fan may encounter one creator ecosystem through an artist page, membership layer, campaign surface, merch store, ticketing partner, payment provider, logistics provider, and support channel. None of those surfaces has to be broken for the overall journey to become difficult.\n\nThe problem appears when state stops travelling with the fan. Identity may be known in one place, payment in another, entitlement somewhere else, while fulfilment and support each hold their own version of what happened. The same fan can then be asked to prove a purchase or benefit repeatedly because the systems around the journey do not preserve one reliable operating record.\n\nThat matters more in fandom commerce because the transaction may also create access, recognition, membership status, event participation, or another promised benefit. A missing ticket, failed VIP benefit, duplicated account, delayed order, payment mismatch, or unclear refund can therefore affect the fan–artist relationship as well as the transaction itself.\n\nThis case asks a narrower operating question: **what is the minimum shared layer needed so separate surfaces can preserve the same identity, entitlement, transaction state, owner, evidence, and recovery record where those states need to agree?**\n\n## Operating diagnosis\n\nThe fragmentation is easier to inspect by following the state that should remain consistent across each pathway.\n\n| Pathway | Where continuity breaks | Visible consequence |\n| --- | --- | --- |\n| **Identity** | The same fan exists as different records across membership, commerce, ticketing, events, or support. | Repeated verification, duplicate profiles, broken history, weak cross-surface support. |\n| **Entitlement** | A purchase or membership creates a benefit that is not visible where it must be honored. | Manual proof, missed benefits, access disputes, event-entry problems. |\n| **Payment / Order** | Payment, order, vendor, and support systems disagree on transaction state. | Paid-but-not-recognized cases, manual reconciliation, refund or fulfilment delay. |\n| **Ticket / Access** | Ticket ownership, identity, membership eligibility, and venue access are handled separately. | Invalid or duplicated access, unclear VIP eligibility, slow onsite recovery. |\n| **Fulfilment / Support** | Support lacks the order, entitlement, vendor, or logistics context needed to resolve the case. | Repeated explanation, slow routing, inconsistent status, weak root-cause visibility. |\n| **Reporting** | Campaign, commerce, ticketing, support, and settlement data remain separate. | Slow decisions, disputed results, difficult campaign comparison, weak partner visibility. |\n\n## Shared operating layer\n\nA shared operating layer is useful only where separate surfaces need to preserve the same identity, entitlement, transaction state, owner, or recovery record. It does not require replacing every artist page, vendor, payment provider, ticketing partner, or workflow.\n\nThe minimum working model has six capabilities:\n\n### 1. Central Fan ID\n\nA shared identity reference across membership, commerce, ticketing, events, and support. It links only the identifiers and states needed for continuity, entitlement, service, reporting, and recovery; it is not a reason to centralize every available fan data point.\n\n### 2. Entitlement Ledger\n\nA shared record of what access, benefit, item, or status was created by a membership, payment, campaign, or partner action, and its current state. The purpose is simple: when a benefit is questioned, different teams should be able to see whether the promise exists, whether it has been used, and whether it is disputed or recovered.\n\n### 3. Payment and Order Reconciliation\n\nA layer that aligns payment, order, entitlement, fulfilment, and refund states. It is most useful for exceptions such as payment succeeded but no order was created, an order exists without its entitlement, a refund is in progress but invisible to support, or a vendor has no fulfilment instruction.\n\n### 4. Ticketing and Event Access Sync\n\nA shared view of ticket identity, fan identity, membership eligibility, transfer state, usage, and onsite recovery authority. The operating question is whether an authorized operator can determine what access should exist and recover it quickly when the venue experience fails.\n\n### 5. Fulfilment and Customer Support Integration\n\nA support record that carries enough fan, order, payment, entitlement, vendor, shipment or event, communication, owner, and next-action context to resolve the issue without asking the fan to reconstruct the pathway.\n\n### 6. Artist and Campaign Reporting\n\nA partner view that brings campaign demand, benefit delivery, transaction and settlement state, ticket or attendance signals, fulfilment, support incidents, unresolved risk, and recovery outcomes into one operating picture. Confirmed data should remain distinguishable from estimates or incomplete partner feeds.\n\n## Core workflow map\n\nA simplified pathway is:\n\n> Fan enters an artist or campaign surface\n> \n> \n> → Identity is recognized or created\n> \n> → Fan takes a membership, purchase, or event action\n> \n> → Payment and order are reconciled\n> \n> → Entitlement is created\n> \n> → Vendor, ticketing, or fulfillment action is triggered\n> \n> → Status remains visible to support and operator teams\n> \n> → Artist or campaign reporting is updated\n> \n> → Failure enters a recovery pathway\n> \n> → Outcome updates the operating record\n> \n\nThe critical design question is not whether every step uses one tool.\n\nIt is whether the steps preserve shared state, ownership, and evidence.\n\n## Who owns the next action?\n\nThe exact organization structure is unknown, so this is a proposed responsibility split rather than a claim about MFan’s current teams.\n\n| Operating responsibility | Primary owner |\n| --- | --- |\n| Cross-surface continuity, shared status definitions, cross-team incidents, recurring operating review | **Platform Operations** |\n| Fan identity, entitlement, integrations, permissions, instrumentation, operator tooling | **Product & Engineering** |\n| Payment reconciliation, settlement, refunds, financial evidence, payment exceptions | **Finance & Payments** |\n| Ticketing, commerce, vendor fulfilment, partner execution, domain-specific exceptions | **Domain Operations** |\n| Fan communication, case routing, visible next action, recovery confirmation, recurring pain-point feedback | **Customer Support** |\n| Artist commitments, benefit definition, partner expectations, reporting interpretation, trust escalation | **Artist & Partnerships** |\n\n<aside>\n↪️\n\n**Handoff rule:** Several teams may contribute to one case, but one team should hold the next action until another owner explicitly accepts the handoff.\n\n</aside>\n\n## Growth logic — hero campaigns and indie density\n\nLarge artist campaigns can create strong demand and visible platform moments.\n\nThey may also create operational peaks, partner-specific customization, and high public consequence.\n\nA scalable creator platform also needs a minimum operating package for smaller or independent creators.\n\n### Minimum Indie Operating Kit\n\nA possible minimum package includes:\n\n- verified creator profile;\n- basic fan identity;\n- membership or supporter tier;\n- simple entitlement rules;\n- payment and settlement status;\n- campaign or store template;\n- basic support route;\n- standard reporting;\n- clear escalation boundary.\n\nThe strategic question is not whether every creator receives the same service.\n\nIt is which operating components must remain standard so the platform can scale without multiplying hidden manual work.\n\n## Implementation pathway\n\n### Phase 0 — Audit and baseline\n\nMap:\n\n- current surfaces;\n- user journeys;\n- identity systems;\n- vendors;\n- payment states;\n- entitlement rules;\n- support channels;\n- reporting flows;\n- recurring failure cases.\n\nOutput:\n\n- current-state pathway map;\n- shared status definitions;\n- top trust-critical breakdowns;\n- integration and ownership gaps.\n\n### Phase 1 — Trust stabilization\n\nPrioritize visible operational failures before building a large architecture.\n\nExamples:\n\n- payment/order mismatch;\n- missing entitlement;\n- ticket-access failure;\n- unclear support owner;\n- missing refund status;\n- incomplete vendor escalation.\n\nOutput:\n\n- exception queue;\n- visible ownership;\n- standard recovery messages;\n- evidence-preservation rules;\n- recurring incident review.\n\n### Phase 2 — Fan ID and entitlement foundation\n\nBuild or connect:\n\n- cross-surface identity reference;\n- entitlement ledger;\n- permission model;\n- support lookup;\n- event and audit history.\n\n### Phase 3 — Commerce, ticketing, and fulfillment integration\n\nConnect:\n\n- payment and order status;\n- ticket identity and access;\n- vendor and shipment status;\n- refunds;\n- partner-facing exceptions.\n\n### Phase 4 — Control tower and reporting\n\nCreate:\n\n- cross-workstream operating view;\n- campaign health;\n- unresolved incidents;\n- settlement visibility;\n- partner reporting;\n- recurring improvement loop.\n\n## Metrics\n\nThe metrics should measure continuity and recovery, not only campaign volume.\n\n### Transaction clarity\n\n- percentage of payments matched to orders;\n- percentage of orders with visible status;\n- pending-state age;\n- refund-status visibility.\n\n### Entitlement accuracy\n\n- entitlement creation success;\n- missing or duplicate entitlement rate;\n- access failure rate;\n- time to entitlement correction.\n\n### Recovery efficiency\n\n- time to identify owner;\n- time to first useful response;\n- time to resolution;\n- repeated-contact rate;\n- percentage of cases with preserved evidence;\n- customer-confirmed recovery.\n\n### Fulfillment reliability\n\n- on-time fulfillment;\n- exception rate;\n- vendor response time;\n- unresolved shipment age.\n\n### Platform scalability\n\n- manual cases per campaign;\n- manual cases per creator;\n- standard-workflow adoption;\n- integration coverage;\n- reporting preparation time.\n\nThese are proposed operating metrics, not known MFan baselines.\n\n## Risks and trade-offs\n\n### Vendor lock-in\n\nConnecting more partners can create dependency on their APIs, data quality, and operating discipline.\n\n### Identity error\n\nA false merge can expose private information or assign benefits to the wrong person.\n\n### Over-centralization\n\nA shared layer can improve continuity while creating a single point of operational failure.\n\n### Support overload\n\nBetter visibility may initially reveal more unresolved issues than the current team can handle.\n\n### Overbuild risk\n\nA full platform architecture may be unnecessary if the highest-impact failures can be solved through lighter reconciliation and operating standards.\n\n### Creator autonomy\n\nStandardization can reduce fragmentation but should not erase creator-specific identity, community norms, or commercial models.\n\n## What I would validate first\n\n1. Which journeys create the highest fan trust cost?\n2. How many identity systems currently exist?\n3. Where do payment, order, entitlement, and refund status diverge?\n4. Which issues require the fan to provide proof that the platform should already have?\n5. Which vendors can provide reliable status feeds?\n6. Who owns cross-surface incidents today?\n7. Which operating components can be standardized across creators?\n8. What internal constraints make a shared layer difficult?\n9. Which data should remain outside the shared layer?\n10. What recovery outcome matters most to artists and fans?\n\n## Related concept\n\n> \n> \n> \n> [Artist Fandom Page & Fan Dashboard](https://app.notion.com/p/Artist-Fandom-Page-Fan-Dashboard-3926210cf1c7809e9468dfc598dfc2e9?pvs=21)\n> \n\nThis related page explores how parts of the operating model could appear as a fan-facing product experience.\n\nIt is a Product Concept, not validation of the operating model.\n\n## What this case demonstrates\n\nThis work sample demonstrates an ability to:\n\n- distinguish interface fragmentation from operating fragmentation;\n- reconstruct a multi-party service pathway;\n- define shared status and ownership needs;\n- connect product infrastructure with operations;\n- prioritize trust stabilization before full rebuild;\n- propose a phased operating model;\n- define validation questions before implementation.\n\n## Current limitations\n\nThis case is based on public product signals, observed journeys, market patterns, and operating inference.\n\nIt does not establish:\n\n- MFan’s current internal architecture, roadmap, or operating priorities;\n- the actual number or severity of identity, entitlement, payment, ticketing, fulfilment, support, or reporting failures;\n- whether existing systems already solve parts of the proposed model;\n- the feasibility, cost, organizational ownership, or sequencing of implementation;\n- that a centralized architecture is preferable to lighter operating standards, reconciliation, or partner integration.\n\nThe proposed Fan ID, entitlement ledger, reconciliation layer, and control-tower direction are hypotheses to validate—not instructions to rebuild the company.\n\n## Next validation step\n\nThe next step is internal discovery, not immediate full-scale implementation.\n\nA practical validation sequence would be:\n\n1. map the current fan and partner pathways across surfaces, systems, and vendors;\n2. identify the highest-cost recurring breakdowns and who currently absorbs the recovery burden;\n3. compare lightweight operating fixes with deeper shared-infrastructure needs;\n4. validate data, authority, privacy, and ownership boundaries;\n5. prioritize one bounded pathway where improved continuity can be measured before expanding the model.\n\n## Final takeaway\n\n> **The platform becomes more than a collection of campaigns when identity, entitlement, payment, fulfillment, support, and reporting can remain connected through both success and failure.**\n> \n\nThe value of the model is not integration for its own sake. It is preserving one understandable and recoverable operating pathway across fans, artists, partners, and internal teams.\n\n---\n\n## Continue Reading\n\n[Artist Fandom Page & Fan Dashboard](https://app.notion.com/p/Artist-Fandom-Page-Fan-Dashboard-3926210cf1c7809e9468dfc598dfc2e9?pvs=21) — the fan-facing companion concept.\n\n[Post-Signing Artist / Label Operations](https://app.notion.com/p/Post-Signing-Artist-Label-Operations-3926210cf1c780448dfae5e58d79a084?pvs=21) — the partnership and execution layer after an agreement is signed.\n\n[Work Library](https://app.notion.com/p/Work-Library-37d6210cf1c7804b933af056f81215ea?pvs=21) · [Portfolio Home](https://app.notion.com/p/Ph-m-Thanh-Ph-s-Works-37d6210cf1c78052afafd34e27af898b?pvs=21)"
@@ -327,8 +334,8 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "1X0oyZbOEHUg_v8scrZBGzOpK8dZvfrGp",
         "fileName": "Pham_Thanh_Phu_Elfie_Product_Case_Trust_Safe_Activation_v4.docx",
-        "label": "📄 Xem trước: Pham_Thanh_Phu_Elfie_Product_Case_Trust_Safe_Activation_v4.docx ↗",
-        "title": "Pham Thanh Phu Elfie Product Case Trust Safe Activation v4"
+        "label": "📄 Preview: Pham_Thanh_Phu_Elfie_Product_Case_Trust_Safe_Activation_v4.docx ↗",
+        "title": "Elfie Product Case: Trust-Safe Activation (V4)"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1X0oyZbOEHUg_v8scrZBGzOpK8dZvfrGp\" data-title=\"Pham Thanh Phu Elfie Product Case Trust Safe Activation v4 (PDF)\">📄 Pham Thanh Phu Elfie Product Case Trust Safe Activation v4 (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1X0oyZbOEHUg_v8scrZBGzOpK8dZvfrGp/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n> **Elfie’s public product surface spans more than one user role: self-monitoring, sponsored programs, research participation, and professional workflows. That makes activation interesting because reaching first value is only useful if the user still understands which role they are in, what data is moving, and what remains under their control.**\n> \n\n> **Type:** Product Strategy Work Sample\n**Stage:** Developed Work Sample\n**Evidence basis:** Public company materials, reference-product patterns, and product inference\n**Last updated:** July 2026\n**Boundary:** Internal baselines, roadmap, contracts, clinical maturity, regulatory interpretation, and data architecture are unknown; numeric targets and sequencing remain hypotheses.\n> \n\n## Reading Route\n\n**Quick orientation:** Executive summary → Product diagnosis → North-star direction → MVP roadmap\n\n**Product logic:** Trust-Safe Activation pathway → Product components → Metrics and impact hypotheses\n\n**Execution review:** Experiment set → Instrumentation → Roadmap → Risks and validation requirements\n\n**Decision lens:** Improve first value and retained routine without increasing role confusion, coerced consent, dishonest reporting, unsafe sharing, or downstream overclaiming.\n\n---\n\n## Executive summary\n\nPublic materials reviewed for this case present Elfie as more than a free health-rewards application.\n\nThe broader product surface appears to include consumer self-monitoring, sponsor-funded health programs, research or real-world-evidence use cases, and professional or care-related workflows.\n\nThe product challenge is therefore not only user acquisition.\n\nIt is whether the product can turn free access, rewards, self-reported behavior, program participation, research consent, reporting, and professional workflows into a low-friction system that remains understandable and trustworthy to users.\n\nThis case proposes **Trust-Safe Activation** as a product direction:\n\n> Help users reach first health value quickly, make role and data boundaries visible at the moment they matter, improve routine and data quality, and translate retained behavior into useful partner or care outcomes without weakening user control.\n> \n\nThe proposal includes:\n\n- a bounded activation funnel;\n- progressive trust mechanics;\n- event instrumentation;\n- data-quality and reward guardrails;\n- reactivation flows;\n- a patient-controlled health summary;\n- partner-level reporting hypotheses;\n- a 0–12 week MVP roadmap.\n\nAll numeric targets are directional hypotheses to be replaced by internal baseline data.\n\n## Product context\n\nThe product may need to serve several roles.\n\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1X0oyZbOEHUg_v8scrZBGzOpK8dZvfrGp\" data-title=\"Pham Thanh Phu Elfie Product Case Trust Safe Activation v4.docx (PDF)\">📄 Pham Thanh Phu Elfie Product Case Trust Safe Activation v4.docx (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1X0oyZbOEHUg_v8scrZBGzOpK8dZvfrGp/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n\n### Consumer self-monitoring\n\nPossible needs:\n\n- medication reminders;\n- measurement tracking;\n- symptom or behavior logs;\n- refill reminders;\n- health reports;\n- rewards;\n- family support.\n\nPrimary product question:\n\n> Can the user reach one useful health action quickly and build a repeatable routine?\n> \n\n### Sponsor-funded programs\n\nPossible participants:\n\n- pharmaceutical partners;\n- insurers;\n- employers;\n- public-health organizations;\n- hospitals or care partners.\n\nPrimary product question:\n\n> Can the product create program value without making the user feel that a sponsor is invisibly observing or controlling personal behavior?\n> \n\n### Research participation\n\nPossible needs:\n\n- separate consent;\n- participation state;\n- withdrawal;\n- data-quality visibility;\n- audit trail;\n- cohort reporting.\n\nPrimary product question:\n\n> Can research participation remain distinguishable from ordinary app use?\n> \n\n### Professional or care workflows\n\nPossible public directions include pre-visit support, summaries, documentation, evidence support, or workflow assistance.\n\nPrimary product question:\n\n> Can patient-generated information become useful to a professional without being mistaken for diagnosis, verified clinical truth, or an instruction that bypasses professional review?\n> \n\nThe same person may move between roles.\n\nThey may be:\n\n- a general app user;\n- a participant in a sponsored program;\n- a research participant;\n- a family-sharing user;\n- a patient sharing a report;\n- a person whose self-reported data enters a professional workflow.\n\nRole clarity is therefore a product requirement, not only a policy requirement.\n\n## Product diagnosis\n\nElfie’s public model can be interpreted as commercially coherent:\n\n- users receive a free health companion;\n- rewards may reinforce engagement;\n- partners support programs;\n- structured behavior may create research, reporting, or care value.\n\nThe model is also trust-sensitive.\n\nThe main product risk is not necessarily that a privacy policy is absent.\n\nIt is that users may not understand their role, sponsor, data use, or sharing boundary at the exact moment those conditions change.\n\n### Problem statement\n\n> How might Elfie improve activation quality and downstream program value while helping users understand their role, why the product is free, what data is used, what is not shared, and which actions remain under their control?\n> \n\n## Goals and non-goals\n\n### Goals\n\n- reduce time to first useful health action;\n- improve D7 and D30 routine formation;\n- preserve honest self-reporting;\n- make role and consent transitions visible;\n- create useful patient-controlled summaries;\n- improve partner-level measurement without exposing unnecessary personal detail;\n- create clear recovery when a user enters the wrong role or shares the wrong information.\n\n### Non-goals\n\n- diagnosing or treating a condition;\n- replacing clinician judgment;\n- maximizing consent or data sharing;\n- turning every user into a research participant;\n- treating rewards claimed as the primary success metric;\n- assuming that all public product surfaces are equally mature or integrated.\n\n## Stakeholder and role-boundary map\n\n### Patient or general user\n\nWants:\n\n- simple setup;\n- useful reminders;\n- understandable rewards;\n- confidence and control.\n\nRisks:\n\n- tracking fatigue;\n- role confusion;\n- surveillance feeling;\n- unclear data sharing.\n\nProduct requirements:\n\n- quick start;\n- progressive explanation;\n- user-controlled sharing;\n- correction and recovery.\n\n### Caregiver or family member\n\nWants:\n\n- appropriate support and visibility.\n\nRisks:\n\n- overreach;\n- outdated permission;\n- loss of patient control.\n\nProduct requirements:\n\n- explicit permission;\n- revocation;\n- visible scope;\n- audit of sharing changes.\n\n### Health professional\n\nWants:\n\n- concise, reviewable information.\n\nRisks:\n\n- raw data overload;\n- uncertain reliability;\n- unclear liability;\n- automation mistaken for clinical judgment.\n\nProduct requirements:\n\n- short summary;\n- source and confidence visibility;\n- clear patient-generated-data label;\n- professional review and editability.\n\n### Sponsor or program partner\n\nWants:\n\n- activation;\n- retained participation;\n- program outcomes;\n- reporting;\n- renewal evidence.\n\nRisks:\n\n- weak data;\n- trust backlash;\n- unclear consent;\n- measurement that rewards volume over quality.\n\nProduct requirements:\n\n- aggregate reporting;\n- role and consent status;\n- data-completeness signals;\n- cohort-level outcomes.\n\n### Research team\n\nWants:\n\n- valid participation;\n- structured data;\n- withdrawal handling;\n- auditability.\n\nRisks:\n\n- consent confusion;\n- biased cohorts;\n- low-quality self-reporting;\n- mixed research and ordinary-use states.\n\nProduct requirements:\n\n- separate consent;\n- participation status;\n- source and quality metadata;\n- withdrawal pathway.\n\n### Product, data, growth, legal, and operations teams\n\nWant:\n\n- scalable activation;\n- consistent measurement;\n- safe market adaptation;\n- manageable support.\n\nRisks:\n\n- feature sprawl;\n- inconsistent event taxonomy;\n- local compliance gaps;\n- trust treated as copy rather than behavior.\n\nProduct requirements:\n\n- shared event definitions;\n- market feature flags;\n- role-state architecture;\n- operating review;\n- escalation standards.\n\n## Trust-Safe Activation pathway\n\nA shallow funnel is:\n\n> Install\n> \n> \n> → Sign up\n> \n> → Track\n> \n> → Reward\n> \n\nA more useful product pathway is:\n\n> Trusted entry\n> \n> \n> → Quick health setup\n> \n> → First useful action\n> \n> → First reward or feedback\n> \n> → Progressive role and data clarity\n> \n> → D7 routine\n> \n> → D30 retained routine\n> \n> → Patient, care, research, or partner value\n> \n\n### Stage 1 — Trusted entry\n\nQuestion:\n\n> Where did the user come from, and what context should be visible?\n> \n\nPossible entry sources:\n\n- organic;\n- sponsor program;\n- hospital or health professional;\n- insurer or employer;\n- research invitation;\n- family support.\n\nSignals:\n\n- `entry_source`\n- program context shown\n- user recognizes why they arrived\n\n### Stage 2 — Quick health setup\n\nQuestion:\n\n> Can the user reach one useful action without completing a full medical profile?\n> \n\nSignals:\n\n- setup started and completed;\n- time to first value;\n- abandonment point;\n- accessibility issues.\n\n### Stage 3 — First value\n\nQuestion:\n\n> Did the user complete a meaningful action?\n> \n\nExamples:\n\n- reminder enabled;\n- first honest log;\n- first measurement;\n- first refill setup;\n- first report preview.\n\n### Stage 4 — Progressive trust gate\n\nQuestion:\n\n> Does the user understand a change in role, sponsor, consent, or sharing at the point it occurs?\n> \n\nExamples:\n\n- joining a sponsored program;\n- accepting research participation;\n- sharing a report;\n- enabling family access;\n- entering a professional workflow.\n\n### Stage 5 — D7 routine\n\nQuestion:\n\n> Is behavior repeating beyond novelty and the first reward?\n> \n\n### Stage 6 — D30 activated cohort\n\nQuestion:\n\n> Is the routine stable enough to support user, care, research, or partner value?\n> \n\n### Stage 7 — Downstream value\n\nQuestion:\n\n> Can the behavior become useful without overstating its quality or changing the user’s role invisibly?\n> \n\n## Product components\n\n### 1. Low-friction health setup\n\nMechanic:\n\n> One health focus\n> \n> \n> → One reminder or first log\n> \n> → First useful feedback or reward\n> \n> → Complete the profile later\n> \n\nPurpose:\n\n- reduce first-session burden;\n- support older or referred users;\n- reach value before asking for extensive information.\n\n### 2. Contextual role and consent explanation\n\nAt a role-changing action, show:\n\n- who supports the program;\n- what the user is joining;\n- what information is used;\n- what is not shared;\n- what remains optional;\n- how to leave or revoke.\n\nThe explanation should be short first, with deeper detail available.\n\n### 3. Role and Sharing Center\n\nOne place to view:\n\n- general-user state;\n- sponsored-program participation;\n- research participation;\n- family sharing;\n- report sharing;\n- professional-workflow connections;\n- permissions and revocation.\n\n### 4. Honest-reward mechanics\n\nRewards should not create pressure to report only positive behavior.\n\nPotential principles:\n\n- reward the act of accurate tracking, not only “good” outcomes;\n- allow missed medication or difficult measurements to be reported honestly;\n- delay high-value rewards until routine signals exist;\n- do not punish users whose conditions or resources make frequent tracking difficult.\n\n### 5. Data-confidence support\n\nUse gentle quality mechanics:\n\n- impossible-value check;\n- duplicate-entry check;\n- unusual-change confirmation;\n- correction prompt;\n- source label;\n- self-reported / device / imported distinction.\n\nAvoid harsh “fraud” labels for ordinary anomalies.\n\n### 6. Reactivation\n\nDrop-off is expected in chronic or long-term health routines.\n\nRecovery should be a product path, not an exception.\n\nExamples:\n\n- unfinished setup → 30-second restart;\n- missed routine → restart without penalty;\n- tracking fatigue → reduce frequency or simplify;\n- wrong program → leave and return to general use;\n- sharing mistake → revoke and confirm the new state.\n\n### 7. Patient-controlled health summary\n\nA short summary may include:\n\n- recent routine;\n- selected measurements;\n- changes or unusual values;\n- missed actions;\n- user’s question;\n- source and confidence labels.\n\nThe summary should remain:\n\n- patient-controlled;\n- reviewable;\n- editable where appropriate;\n- clearly separate from diagnosis or treatment advice.\n\n### 8. Cohort and partner reporting\n\nPartner reporting should focus on aggregate program quality.\n\nPossible signals:\n\n- entry source;\n- setup completion;\n- D7 and D30 routine;\n- consent state;\n- data completeness;\n- reactivation;\n- withdrawal;\n- report generation;\n- support burden.\n\nIndividual data should not become visible merely because a partner funds the program.\n\n## Instrumentation\n\nA possible event sequence is:\n\n> `app_open`\n> \n> \n> → `signup_started`\n> \n> → `signup_completed`\n> \n> → `entry_context_viewed`\n> \n> → `health_focus_selected`\n> \n> → `first_action_configured`\n> \n> → `first_tracking_completed`\n> \n> → `first_reward_claimed`\n> \n> → `role_change_explanation_viewed`\n> \n> → `consent_started` / `consent_completed`\n> \n> → `D3_return`\n> \n> → `D7_tracking_active`\n> \n> → `D30_retained_routine`\n> \n> → `health_summary_generated`\n> \n> → `report_shared` / `program_joined` / `research_opt_in`\n> \n\nUseful segmentation:\n\n- entry source;\n- condition or health focus;\n- age and accessibility needs where lawful and appropriate;\n- reward motivation;\n- sponsored versus general use;\n- research invitation;\n- professional referral;\n- market;\n- device or manual entry.\n\n## Metrics and impact hypotheses\n\nThese are not known Elfie baselines.\n\nThey are directional hypotheses to test after baseline discovery.\n\n### Activation\n\n- first-setup completion;\n- time to first useful action;\n- first tracking completed;\n- first reward claimed;\n- D3 return;\n- D7 active routine.\n\n### Trust and role clarity\n\n- role-change explanation viewed;\n- consent start and completion;\n- consent-related drop-off;\n- role confusion reported;\n- permission revocation success;\n- trust-related support contacts.\n\n### Retention and recovery\n\n- D30 retained routine;\n- routine restart;\n- reactivation after missed behavior;\n- reduced repeated setup;\n- reason for drop-off.\n\n### Data quality\n\n- corrected entry;\n- impossible-value confirmation;\n- duplicate entry;\n- source completeness;\n- self-reported versus imported distinction;\n- confidence label coverage.\n\n### Downstream value\n\n- summary generated;\n- summary shared;\n- professional review or use, where measurable;\n- research participation and withdrawal;\n- cohort-report use;\n- partner renewal signal.\n\nA better north-star direction is not downloads, MAU, or coins claimed alone.\n\nIt is:\n\n> **Retained health routine quality that can translate into user value and downstream usefulness without weakening trust or control.**\n> \n\n## Experiment set\n\n### Experiment 1 — Quick-start setup\n\nVariants:\n\n- full profile first;\n- one health focus first;\n- referral-specific quick start.\n\nMeasure:\n\n- setup completion;\n- time to first value;\n- D7 routine;\n- downstream profile completion.\n\nGuardrail:\n\n- do not hide information required for safe use.\n\n### Experiment 2 — Progressive role explanation\n\nVariants:\n\n- large upfront explanation;\n- contextual explanation at role-changing action;\n- short explanation with expandable detail.\n\nMeasure:\n\n- completion;\n- informed opt-in;\n- role confusion;\n- trust feedback;\n- later withdrawal.\n\nGuardrail:\n\n- no dark patterns or preselected consent.\n\n### Experiment 3 — Reward timing\n\nVariants:\n\n- immediate reward;\n- small immediate reward plus D7 unlock;\n- routine milestone reward.\n\nMeasure:\n\n- honest tracking;\n- D7 routine;\n- unusual entries;\n- reward-only behavior.\n\nGuardrail:\n\n- do not penalize difficult health outcomes.\n\n### Experiment 4 — Reactivation\n\nVariants based on drop-off reason:\n\n- unfinished setup;\n- missed routine;\n- tracking fatigue;\n- program confusion;\n- technical problem.\n\nMeasure:\n\n- restart;\n- retained behavior after restart;\n- support demand;\n- opt-out.\n\n### Experiment 5 — Health summary\n\nVariants:\n\n- raw history;\n- concise patient-controlled summary;\n- summary with source/confidence labels.\n\nMeasure:\n\n- preview;\n- share;\n- user comprehension;\n- professional usefulness where available;\n- correction before sharing.\n\nGuardrail:\n\n- no diagnosis claim.\n\n## MVP roadmap\n\n### Weeks 0–2 — Baseline and discovery\n\n- map entry sources and role states;\n- define activation events;\n- measure current setup and D7 funnel;\n- review support reasons;\n- identify current consent and sharing transitions;\n- confirm product and clinical boundaries.\n\n### Weeks 3–5 — Quick-start and instrumentation\n\n- launch one-health-focus quick start;\n- instrument first-value events;\n- add drop-off reason capture;\n- establish event-quality review.\n\n### Weeks 6–8 — Progressive trust\n\n- add contextual role explanations;\n- create Role and Sharing Center MVP;\n- test revocation and recovery;\n- review support and trust signals.\n\n### Weeks 9–12 — Routine and reactivation\n\n- test reward timing;\n- add reason-based reactivation;\n- introduce gentle data-quality prompts;\n- measure D7 and D30 impact.\n\n### Quarter 2 — Downstream value\n\n- pilot patient-controlled summary;\n- test aggregate program reporting;\n- separate research participation state;\n- validate professional-workflow usefulness;\n- build renewal and program-quality review.\n\n## Risks and guardrails\n\n### Clinical overreach\n\nRisk:\n\nSelf-reported or AI-organized information may be mistaken for diagnosis or medical advice.\n\nGuardrail:\n\n- clear role labels;\n- source visibility;\n- professional review;\n- no treatment instruction unless governed by an appropriate clinical pathway.\n\n### Consent fatigue\n\nRisk:\n\nToo many explanations reduce activation without improving understanding.\n\nGuardrail:\n\n- progressive disclosure;\n- explain at role change;\n- test comprehension, not only completion.\n\n### Reward distortion\n\nRisk:\n\nUsers optimize for rewards rather than honest behavior.\n\nGuardrail:\n\n- reward tracking honesty and routine;\n- anomaly confirmation;\n- avoid punishment for negative health outcomes.\n\n### Sponsor mistrust\n\nRisk:\n\nUsers believe sponsors or payers can see individual data by default.\n\nGuardrail:\n\n- aggregate reporting by default;\n- visible sharing state;\n- clear role and data boundary.\n\n### Data-quality overconfidence\n\nRisk:\n\nStructured self-reported data appears more reliable than it is.\n\nGuardrail:\n\n- source and confidence labels;\n- correction history;\n- distinction between self-reported, device, and imported data.\n\n### Feature sprawl\n\nRisk:\n\nEach partner or market creates a different activation system.\n\nGuardrail:\n\n- shared role-state model;\n- shared event taxonomy;\n- market feature flags;\n- explicit exception review.\n\n## Open questions\n\n- Which public product surfaces are integrated today?\n- What is the current activation baseline by entry source?\n- Which users are general users, program participants, research participants, or professional-workflow users?\n- What data is shared at individual and aggregate level?\n- What role does ElfieCare currently play in deployed workflows?\n- Which outcomes are company claims, partner-reported, research-derived, or independently verified?\n- Which markets create different consent or safety requirements?\n- What is the largest source of activation failure?\n- What is the largest source of trust-related support demand?\n- What evidence would cause the proposed direction to change?\n\n## Source register — in progress\n\n| Source | What it supports | Source type | Limitation |\n| --- | --- | --- | --- |\n| **[ADD ELFIE CONSUMER PRODUCT PAGE]** | Public consumer positioning | Company source | Describes product; does not independently validate outcomes |\n| **[ADD ELFIE PARTNER / PHARMA PAGE]** | Public partner positioning | Company source | Commercial description |\n| **[ADD ELFIE RESEARCH PAGE]** | Public research direction | Company source | Deployment maturity may be unclear |\n| **[ADD ELFIECARE PAGE]** | Public professional-workflow positioning | Company source | Integration depth and adoption unknown |\n| **[ADD MYTHERAPY SOURCE]** | Reference-product pattern | Company source | Pattern reference, not evidence for Elfie |\n| **[ADD MEDISAFE SOURCE]** | Reference-product pattern | Company source | Pattern reference |\n| **[ADD OMADA / DARIO / LARK SOURCES]** | Reference-product patterns | Company sources | Outcomes require independent verification |\n\n## Final recommendation\n\nThe strongest product direction is not “more engagement” in isolation.\n\nIt is:\n\n> **Build a measurable activation pathway in which users reach value quickly, understand role changes when they occur, preserve control over sharing, form a repeatable routine, and create downstream value that remains proportionate to the evidence and permissions available.**\n> \n\nThis is a product work sample.\n\nIts next step in a real environment would be discovery against internal baselines, constraints, safety review, and partner reality.\n\n---\n\n## Current Limitations\n\nThis case is an outside-in product proposal without internal product, user, clinical, regulatory, operational, or commercial evidence.\n\nIt does not establish:\n\n- Elfie’s current activation funnel or D7/D30 baselines;\n- which public product surfaces are live, integrated, piloted, or strategic priorities;\n- how users currently understand sponsors, research participation, professional workflows, or data sharing;\n- whether reward mechanics improve routine quality or mainly attract reward-seeking behavior;\n- the reliability and usefulness of self-reported information in downstream workflows;\n- partner reporting requirements, contractual boundaries, or renewal drivers;\n- or the technical, clinical, legal, and market-specific feasibility of the proposed components.\n\nThe metrics, experiments, and 0–12 week sequence are therefore decision hypotheses, not known Elfie commitments or performance targets.\n\n## Next Validation Step\n\nA practical validation sequence would be:\n\n1. establish the current activation, retention, consent, support, and data-quality baselines by entry source and role;\n2. conduct user research around first value, sponsor understanding, role transitions, rewards, sharing, and withdrawal;\n3. instrument one bounded quick-start pathway with explicit event-quality review;\n4. test contextual role explanation against comprehension, informed choice, confusion, withdrawal, and support demand—not completion alone;\n5. pilot reactivation and patient-controlled summaries with correction, source, confidence, and professional-review safeguards;\n6. decide whether the pathway improves retained routine quality and downstream usefulness without weakening trust or user control.\n\n## Continue Reading\n\n[Vinamilk — Trusted Nutrition Product-Service Discovery](https://app.notion.com/p/Vinamilk-Trusted-Nutrition-Product-Service-Discovery-3a16210cf1c780c88ff5cb1a31d22a6e?pvs=21) — a product-service research progression on trust preservation from proposition discovery through operating scale and access governance.\n\n[Zalo Scam Emergency Mode](https://app.notion.com/p/Zalo-Scam-Emergency-Mode-Payment-Safety-Signal-Post-Transfer-Safety-Coach-38b6210cf1c781fa95bee2c50a943c77?pvs=21) — an early product concept focused on contextual safety intervention, action-first guidance, evidence preservation, and recovery.\n\n[Work Library](https://app.notion.com/p/Work-Library-37d6210cf1c7804b933af056f81215ea?pvs=21) · [Portfolio Home](https://app.notion.com/p/Ph-m-Thanh-Ph-s-Works-37d6210cf1c78052afafd34e27af898b?pvs=21)"
@@ -339,8 +346,8 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "1sjbx90b79-vMT7xz_3Ieo-Orj0EB4hzQ",
         "fileName": "Post-Signing_Artist_Label_Operations_Case_Study.pdf",
-        "label": "📄 Xem trước: Post-Signing_Artist_Label_Operations_Case_Study.pdf ↗",
-        "title": "Post-Signing Artist Label Operations Case Study"
+        "label": "📄 Preview: Post-Signing_Artist_Label_Operations_Case_Study.pdf ↗",
+        "title": "Post-Signing Artist / Label Operations Case Study"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1sjbx90b79-vMT7xz_3Ieo-Orj0EB4hzQ\" data-title=\"Post-Signing Artist Label Operations Case Study (PDF)\">📄 Post-Signing Artist Label Operations Case Study (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1sjbx90b79-vMT7xz_3Ieo-Orj0EB4hzQ/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n> **A signed deal looks like an ending from the outside. Operationally, it creates a queue of rights, approvals, campaigns, payments, reporting, fan promises, and exceptions that now have to stay connected.**\n> \n\n> **Type:** Operating Model / Role-Understanding Work Sample\n**Stage:** Working Model\n**Evidence basis:** Public industry patterns, role analysis, and operating inference\n**Last updated:** August 2026\n**Boundary:** An independent synthesis—not an internal label process, official industry standard, or validated universal model.\n> \n\n> **Supporting artifact:**\n> \n> \n> <button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1sjbx90b79-vMT7xz_3Ieo-Orj0EB4hzQ\" data-title=\"Post-Signing Artist Label Operations Case Study.pdf (PDF)\">📄 Post-Signing Artist Label Operations Case Study.pdf (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1sjbx90b79-vMT7xz_3Ieo-Orj0EB4hzQ/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n> \n\n---\n\n## The operating problem\n\nA signed agreement can settle commercial intent while leaving the operating work unresolved. Rights still need to become approval rules; promises need owners and dates; campaigns need dependencies cleared; payments and reporting need visible states; fan-facing failures still need a route back to the partnership team.\n\nThe useful question is therefore narrower than “how do we manage artists?”:\n\n> **How do we keep commitments visible after signing, especially when several teams, vendors, and fan-facing systems participate in the same promise?**\n> \n\nThis working model treats the agreement as the start of an operating pathway: translate the deal into repeatable work, preserve one source of truth, and make changes and recovery traceable.\n\n## Before signing — standard spine, explicit exceptions\n\nCustomization is normal. The risk begins when basic operating structure is customized too, because every new partnership can then create its own hidden workflow.\n\n| Standard operating spine | Deal-specific choices |\n| --- | --- |\n| Onboarding, owner map, approval categories, campaign brief, reporting fields, finance states, support route, change log, review cadence | Creative identity, exclusivity, release strategy, territory, commercial terms, fan benefits, special events, brand restrictions, approval authority, reporting depth, crisis sensitivity |\n\n<aside>\n🧭\n\n**Rule:** Standardize how the work is coordinated; customize the commercial and creative choices that actually need to differ.\n\n</aside>\n\n## Post-signing lifecycle\n\nThe lifecycle can stay simple as long as each handoff preserves the operating state.\n\n<aside>\n→\n\n**Signed → Setup → Translate commitments → Plan & approve → Execute → Report & settle → Recover → Renew / exit**\n\n</aside>\n\nAt every transition, three things should remain visible: **current state, next owner, and evidence of what was agreed.**\n\n## Seven operating workstreams\n\nThe workstreams are not seven departments. They are seven kinds of state that can break when ownership, records, or handoffs become unclear.\n\n| Workstream | What must stay visible | Failure to catch |\n| --- | --- | --- |\n| **1 · Partner relationship** | Contacts, decision authority, open commitments, review cadence, escalation | An unresolved operating issue quietly becomes a relationship problem |\n| **2 · Rights & approvals** | Asset, right involved, approver, conditions, expiry, approved version, evidence | Approval drift across context, territory, duration, or format |\n| **3 · Release & campaign** | Objective, dependencies, readiness, approvals, support preparation, owner | Creatively ready but operationally unready |\n| **4 · Fandom & membership** | Promise, eligible fan, entitlement evidence, fulfilment owner, recovery route | A fan benefit exists but cannot be recognized or recovered |\n| **5 · Merchandise & ticketing** | Inventory or capacity, vendor, payment, order/ticket state, fulfilment, refund | Oversell, invalid access, delayed fulfilment, inconsistent status |\n| **6 · Finance & reporting** | Commercial model, invoice, settlement, reporting period, variance, dispute, owner | A clean number hides estimated, pending, disputed, or adjusted states |\n| **7 · Support & crisis** | Promise, incident, owner, approved communication, recovery, recurrence | A fan-facing failure stays isolated from the partnership record |\n\n## Artist Operating File — minimum source of truth\n\nThe Artist Operating File should point people to the current operating truth without becoming a second uncontrolled archive.\n\n| Domain | Minimum record |\n| --- | --- |\n| **Relationship** | Artist/label/management contacts, decision authority, review cadence, escalation boundary |\n| **Rights & contract** | Rights matrix, territory, duration, exclusivity, approval rights, restrictions, renewal/exit conditions |\n| **Calendar & commitments** | Releases, campaigns, events, approvals, reporting, payments, dependencies, deadlines |\n| **Platform & commerce** | Active surfaces, membership, merch, ticketing, fan benefits, vendors, technical dependencies |\n| **Finance & reporting** | Commercial model, invoices, cost/revenue, settlement, reporting state, disputes, financial owner |\n| **Issues & escalation** | Severity, affected pathway, evidence, owner, next action, deadline, communication, recovery, learning |\n\n<aside>\n📌\n\nThe file should preserve **where the authoritative record lives, what state it is in, and who owns the next action**. It does not need to duplicate every raw document or conversation.\n\n</aside>\n\n## Control Tower maturity — four earned layers\n\nA Control Tower should grow only when coordination burden earns the next layer.\n\n| Layer | Trigger | Minimum added structure |\n| --- | --- | --- |\n| **4 · Learning** | Failures recur across artists or campaigns | Incident patterns · root cause · workflow change |\n| **3 · Control** | Blockers and handoffs repeatedly cross teams | Risk/dependency view · owner map · operating review |\n| **2 · Coordination** | Commitments, approvals, payments, and reports begin to overlap | Commitment register · portfolio calendar · pipeline |\n| **1 · Foundation** | Facts and authority no longer fit safely in personal memory | Master list · Artist Operating File · rights matrix |\n\n<aside>\n△\n\n**Foundation → Coordination → Control → Learning**. Each layer adds structure only after the previous layer is no longer enough.\n\n</aside>\n\nThis is a heuristic maturity path, not a validated numerical threshold.\n\n## Change workflow — one traceable line\n\nChange is normal. The failure happens when authority, downstream impact, or the final state gets separated from the request.\n\n<aside>\n→\n\n**Request → Impact & authority → Update source of truth → Notify & close**\n\n</aside>\n\n| Checkpoint | What must travel with the change |\n| --- | --- |\n| **1 · Request** | What changed · requester · reason · needed by |\n| **2 · Impact & authority** | Rights · timeline · cost · fan/brand impact · dependencies · correct approver · conditions |\n| **3 · Update** | Only the affected sources of truth: operating file, calendar, rights, commitments, budget, campaign or reporting state |\n| **4 · Notify & close** | Who accepted the new state · what actually changed · unresolved consequence · learning if the pattern recurs |\n\n## Trust and crisis recovery — three phases\n\n| Before release · Prevent | During incident · Contain | After incident · Recover |\n| --- | --- | --- |\n| Confirm rights and approval source\nPreserve references\nConfirm vendor commitment\nTest critical access/fulfilment\nPrepare support language\nDefine escalation and stop conditions | Identify affected pathway\nStop unsafe or misleading action\nPreserve evidence\nAssign one incident owner\nAlign partner/public communication\nProtect affected fans or customers | Correct the issue\nCommunicate status\nCompensate where appropriate\nConfirm affected users recovered\nUpdate artist/label\nFind root cause and change workflow\nRecord unresolved exposure |\n\n<aside>\n↩️\n\n**Recovery rule:** closing the internal task is not enough. Recovery ends when the affected relationship and operating pathway have been restored as far as reasonably possible.\n\n</aside>\n\n## What I would validate first\n\n1. Which of these workstreams actually exist, and who holds decision authority in each?\n2. Where do commitments, approvals, and exceptions currently live?\n3. Which handoffs still depend on personal memory or repeated explanation?\n4. Which changes create the largest downstream cost across rights, campaign, finance, support, or fan experience?\n5. How do fan incidents travel back to the partnership team and artist/label relationship?\n6. What is the smallest operating file and coordination layer that would materially reduce burden before a larger Control Tower is justified?\n\n## Current boundary\n\nThis case does not establish how any specific label, artist-management team, or platform currently operates. It also does not prove that every partnership needs all seven workstreams, a centralized file, or a Control Tower.\n\nThe model is useful only if internal discovery shows that commitments are being lost across handoffs, states are difficult to reconcile, or recovery depends too heavily on individual memory. Where lighter standards or existing systems already preserve that continuity, they should remain in place.\n\n## Final takeaway\n\nSigning gives the relationship a legal and commercial starting point. The operating work keeps later commitments legible: **what was promised, what changed, who owns the next action, what evidence exists, and how the pathway recovers when delivery goes wrong.**\n\nThe next useful test is against one real organization, portfolio, and operating cadence."
@@ -351,8 +358,8 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "1tbyd18ZECS49cZfQbWGhTvBPHYG0tSDZ",
         "fileName": "Shopee_Account_Restriction_Resolution_Portfolio_Final_2026-08-05.pdf",
-        "label": "📄 Xem trước: Shopee_Account_Restriction_Resolution_Portfolio_Final_2026-08-05.pdf ↗",
-        "title": "Shopee Account Restriction Resolution Portfolio Final 2026-08-05"
+        "label": "📄 Preview: Shopee_Account_Restriction_Resolution_Portfolio_Final_2026-08-05.pdf ↗",
+        "title": "Shopee Account Restriction Resolution Case (Aug 2026)"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1tbyd18ZECS49cZfQbWGhTvBPHYG0tSDZ\" data-title=\"Shopee Account Restriction Resolution Portfolio Final 2026-08-05 (PDF)\">📄 Shopee Account Restriction Resolution Portfolio Final 2026-08-05 (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1tbyd18ZECS49cZfQbWGhTvBPHYG0tSDZ/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n## Can Customers Still Understand, Preserve, Contest, and Recover?\n\n> **Evidence-Based Product Operations Case**\n> \n\n> A privacy-first analysis of 35 coded Threads narratives, Shopee policy, and Vietnam consumer-protection baselines\n> \n\n> Public evidence only · Research cut: 5 August 2026 · Not commissioned by Shopee\n> \n\n\n<diagram-card title=\"ChatGPT Image Aug 5, 2026, 04_39_00 PM.png\" driveid=\"1usqgZCJbA7udggiW8W9UBlv3NgGJb0WM\" caption=\"ChatGPT Image Aug 5, 2026, 04_39_00 PM.png\"></diagram-card>\n\n\n> **The restriction is one platform event. The customer may still be waiting on an order, refund, balance, benefit, or explanation after that event has been recorded internally. This case asks what minimum resolution pathway should remain visible without requiring the platform to expose its fraud model.**\n> \n\n---\n\n## Executive Summary\n\n- **Problem:** A restriction can affect more than account access. Orders, refunds, balances, benefits, and future transactions may also become uncertain.\n- **Evidence:** 35 public customer narratives were collected and screened; 22 form the core analytical sample. The corpus is purposive and supports pathway analysis, not prevalence or wrongdoing claims.\n- **Observed issue:** Customers in the sample reported different levels of reason clarity, appeal effort, affected interests, and recovery outcomes.\n- **Proposal:** An **Explainable Resolution Case** — one coherent customer-facing source of truth for the current issue, affected interests, required action, review state, timing, outcome, recovery state, and remaining remedy.\n- **Business hypothesis:** Better resolution quality may improve benefit recovery, customer experience, return, repeat purchase, and retention without weakening enforcement controls. This must be tested with Shopee internal data; the public case does not claim that the solution is proven.\n\n<aside>\n↳\n\n**This page is the portfolio summary.**\n\nThe full 22-page case includes the privacy-first evidence register, detailed gap matrix, policy/legal source cards, claim-to-source map, pilot design, metric definitions, guardrails, and evidence boundaries.\n\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1tbyd18ZECS49cZfQbWGhTvBPHYG0tSDZ\" data-title=\"Shopee Account Restriction Resolution Portfolio Final 2026-08-05.pdf (PDF)\">📄 Shopee Account Restriction Resolution Portfolio Final 2026-08-05.pdf (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1tbyd18ZECS49cZfQbWGhTvBPHYG0tSDZ/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n\n</aside>\n\n---\n\n## 1. Case Framing — Restriction interrupts a customer benefit, not just an account\n\nCustomers use a marketplace to achieve a downstream benefit: receive a product, complete a time-sensitive purchase, recover a refund, use stored value, or maintain account continuity.\n\nThe research object is therefore the **post-restriction customer-resolution pathway**, not the restriction decision in isolation.\n\n> **Key distinction:** Internal case closure does not necessarily mean the customer problem is resolved.\n> \n\n---\n\n## 2. Research Question and Scope\n\n> **After a marketplace restricts a customer account, does a usable resolution pathway remain visible and actionable to the customer?**\n> \n\nThe case separates three questions:\n\n1. What customers publicly reported experiencing.\n2. What Shopee publicly states in policy/help and complaint processes.\n3. What current legal or regulator baselines require or make available, subject to applicability.\n\n**Out of scope:** proving individual restrictions erroneous or unlawful; estimating platform-wide failure rates; reverse-engineering fraud controls; inferring undocumented Shopee operations; or claiming the proposed intervention works before testing.\n\n- Evidence and method\n    - Public narratives were collected manually and purposively.\n    - The coded register used in this case contains **35 publicly linked Threads posts and replies: 22 core / 4 adjacent / 4 appeal-recovery context / 5 excluded**.\n    - Broader Facebook screening was not included in the coded corpus.\n    - Records were screened for sufficient pathway detail, relevance to the research object, and near-duplicate content.\n    - Usernames, screenshots, profile URLs, direct social links, and verbatim posts are excluded from the portfolio export.\n    - Evidence supports reported pathway states and customer-interface signals. It does **not** establish prevalence, representativeness, a common root cause, wrongdoing, or legal violation.\n\n---\n\n## 3. Observed Customer Journey — The path fragments after restriction\n\nDifferent initiating events converged into a partially shared post-restriction resolution problem:\n\n> **Intended benefit → restriction/cancellation → search for explanation/support → appeal/review in some cases → mixed recovery or unresolved outcome**\n> \n\nFour recurring analytical signals matter:\n\n- **Reason opacity** — some customers could not identify a sufficiently specific reason.\n- **Appeal effort** — some reported repeated contact or evidence submission.\n- **Mixed recovery** — outcomes ranged from reopening to delayed recovery, relock, permanent lock, or unresolved/unstated outcomes.\n- **Affected interests beyond access** — orders, purchases, balances, benefits, or account continuity could also be involved.\n\nThis supports studying **resolution quality**, not concluding that all restrictions share one failure mode.\n\n\n<diagram-card title=\"Shopee_Case_Figure_1_Observed_Pathway.png\" driveid=\"1_O_IQFaVpGzJweoJSBcfM2tifcB0hbQ8\" caption=\"Shopee_Case_Figure_1_Observed_Pathway.png\"></diagram-card>\n\n\n*Caption: Synthesis of reported pathway states across a purposive public evidence sample; not an official Shopee process.*\n\n---\n\n## 4. Minimum Contestable Restriction — What should remain possible\n\nFor this case, operational contestability means preserving four customer functions:\n\n> **UNDERSTAND → PRESERVE → CONTEST → RESOLVE / ESCALATE**\n> \n\nThe customer should be able to determine:\n\n- what is restricted and what is affected;\n- the safe-to-disclose reason or rule at issue;\n- where and how to submit a complaint or evidence;\n- current review state and expected timing;\n- what happens to pending orders, refunds, balances, and benefits;\n- the reasoned outcome and practical recovery consequence;\n- what internal or external remedy remains.\n\nThis is an operational minimum for the case, not a claim that every element is independently mandated by one law.\n\n- Policy and legal baseline\n    \n    Three baselines are kept separate:\n    \n    1. **Shopee policy:** broad account-enforcement discretion plus published restoration and complaint routes.\n    2. **Vietnam consumer-protection law:** complaint receipt/resolution duties, intermediary-platform responsibilities, and recognized dispute-remedy routes.\n    3. **Electronic-transactions and e-commerce platform duties:** potentially relevant platform-specific information, complaint-handling, coordination, and record obligations, subject to the exact statutory classification and provision applied.\n    \n    **Important:** Shopee's published complaint timing, statutory complaint acknowledgement, and statutory negotiation timing are separate clocks. The case does not merge them into one SLA.\n    \n    Full provisions, source cards, URLs, and applicability notes are retained in the full case.\n    \n- Observed Gap Matrix\n    \n    Each Minimum Contestable Restriction element is compared against public narratives and published baselines using three evidence states:\n    \n    - **Observed gap** — a missing or insufficient element is directly reported.\n    - **Partially evidenced** — a relevant feature appears, but completeness or consistency cannot be determined.\n    - **Not evidenced — cannot determine** — the public corpus lacks enough visibility.\n    \n    This distinction prevents **“not reported”** from being converted into **“Shopee does not do this.”**\n    \n    The strongest directly observed issue is reason/explanation opacity in a subset of narratives. Other areas worth testing are affected-interest visibility, complaint acknowledgement, review-state visibility, timing certainty, recovery handling, and remedy continuity.\n    \n- Customer Remedy Ladder\n    \n    The pathway should remain intelligible even when the platform reaches an internally final decision:\n    \n    1. Read the restriction notice and published restoration requirements.\n    2. Use the internal complaint/restoration process and retain submitted evidence and dates.\n    3. Seek an actionable outcome: decision, practical consequences, and remaining action.\n    4. Use negotiation or supported negotiation where statutory conditions apply.\n    5. Other recognized routes may include mediation, arbitration, or court, subject to jurisdiction, agreement, procedure, and facts.\n    \n    > **Key distinction:** An internal case can be closed while the customer problem remains open.\n    > \n\n---\n\n## 5. Platform Governance Diagnosis — Four interface control problems worth testing\n\n- Open diagnosis\n    \n    ### 5.1 Enforcement decision ↔ customer explanation\n    \n    The platform may need to protect detection signals, but that does not eliminate the need for enough explanation to make a decision contestable.\n    \n    ### 5.2 Restriction ↔ affected interests\n    \n    The resolution object may include orders, refunds, stored value, benefits, and linked-service access — not only account reopening.\n    \n    ### 5.3 Complaint intake ↔ review visibility\n    \n    A contact channel is not the same as a visible case state. A customer may still lack a coherent source of truth for acknowledgement, evidence required, current stage, next step, or expected update.\n    \n    ### 5.4 Internal finality ↔ remedy continuity\n    \n    After internal review ends, the customer still needs to know what was decided, what happens to affected interests, what is actually final, and what route remains.\n    \n\n---\n\n## 6. Resolution Pathway Components — Make resolution explainable end to end\n\nThe proposal is one integrated pathway with four connected components:\n\n| Component | Role |\n| --- | --- |\n| **A. Restriction Notice** | Opens the pathway with state, affected scope, safe reason category, consequences, and appeal route. |\n| **B. Explainable Resolution Case** | Becomes the customer-facing source of truth for the case. |\n| **C. Affected-Interest Protection / Recovery** | Keeps orders, refunds, balances, benefits, and other practical consequences visible. |\n| **D. Reasoned Closure & Remedy** | Shows the decision, recovery state, remaining internal action, and external remedy where applicable. |\n\n### Explainable Resolution Case — Proposed source of truth\n\nThe conceptual case surface answers:\n\n- What is my current state?\n- Why am I here?\n- What is affected — and what remains protected?\n- What supports the issue at a safe-to-disclose level?\n- What do you need from me?\n- What is happening now?\n- When will I hear back?\n- What was decided?\n- What happens to my affected interests?\n- What can I do next?\n\n> **Design principle:** At any point, the customer should be able to determine where the issue sits, why it is there, what is affected, what information is required, what happens next, and when the next state is expected. Explainable does not mean disclosing everything.\n> \n\n\n<diagram-card title=\"Shopee_Case_Figure_2_Explainable_Resolution_Case.png\" driveid=\"19b-4zTKvXCe-GHlAxGrrY6CyYoIRzk-V\" caption=\"Shopee_Case_Figure_2_Explainable_Resolution_Case.png\"></diagram-card>\n\n\n*Caption: Conceptual customer-resolution interface; proposed, not an existing Shopee product.*\n\n---\n\n## 7. Recommended Pilot — Test resolution without changing detection rules\n\n**Hypothesis:** For a defined subset of eligible restricted buyer accounts, one coherent Explainable Resolution Case may reduce uncertainty and repeat support effort while improving resolution experience and post-resolution customer return, without materially weakening enforcement controls.\n\nFirst pilot principles:\n\n- define eligible account-restriction types and explicit high-risk exclusions;\n- do not change substantive detection thresholds or enforcement criteria;\n- test the resolution interface and cross-functional handoffs;\n- compare eligible cohorts using random assignment where feasible or a controlled phased rollout;\n- pre-register exclusions, metric definitions, comparison windows, guardrails, and stop conditions;\n- determine sample size from Shopee baseline volume and variance rather than inventing public-case targets.\n- Headline metrics and guardrails\n    \n    **Headline metrics**\n    \n    - Time to Customer Certainty\n    - Resolution Completeness\n    - Benefit Recovery Rate\n    - Repeat Contact Rate\n    - 30-day Customer Return Rate\n    \n    The pilot tests whether better resolution quality affects subsequent customer behavior. It does not assume that restoration automatically produces return or retention.\n    \n    **Guardrails**\n    \n    - incorrect restoration or enforcement-reversal risk;\n    - fraud or financial loss;\n    - sensitive-control disclosure;\n    - reviewer workload or backlog;\n    - privacy and security incidents.\n    \n    Detailed definitions, observation windows, survey items, retention logic, and stop conditions are provided in the full case.\n    \n\n---\n\n## 8. Bounded Findings and Unknowns — What this case can support\n\n### Evidence supports\n\n- Customer-reported difficulty or uncertainty can occur at multiple points in the post-restriction pathway.\n- Reason opacity appears directly in a subset of core narratives; appeal/contact and recovery outcomes are mixed.\n- Affected interests can extend beyond account access.\n- Public policy and legal sources preserve multiple resolution and remedy mechanisms alongside enforcement discretion.\n\n### Evidence does not support\n\n- a Shopee-wide prevalence or failure rate;\n- a common root cause across the core sample;\n- a conclusion that an individual restriction was wrongful or unlawful;\n- an inference that anything absent from a sampled narrative was absent from Shopee's actual process;\n- a claim that the proposed Explainable Resolution Case improves business outcomes before a pilot is run.\n\n---\n\n*Independent portfolio case study · Public evidence only · Research cut: 5 August 2026*"
@@ -363,15 +370,15 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "1xVd1MpeMoMWFKlHJWoB0GFiq0JGIf_qI",
         "fileName": "FanMe_Controlled_Growth__Native_Editable_Final.pdf",
-        "label": "📄 Xem trước: FanMe_Controlled_Growth__Native_Editable_Final.pdf ↗",
-        "title": "FanMe Controlled Growth  Native Editable Final"
+        "label": "📄 Preview: FanMe_Controlled_Growth__Native_Editable_Final.pdf ↗",
+        "title": "FanMe Controlled Growth: Native Operating Framework"
       },
       {
         "type": "paper",
         "driveId": "1usSmtp-Ox6hmPTsZ-mEYv-kTD83UWVvk",
         "fileName": "FanMe_Controlled_Growth_Pilot.pdf",
-        "label": "📄 Xem trước: FanMe_Controlled_Growth_Pilot.pdf ↗",
-        "title": "FanMe Controlled Growth Pilot"
+        "label": "📄 Preview: FanMe_Controlled_Growth_Pilot.pdf ↗",
+        "title": "FanMe Controlled Growth Pilot Monograph"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1xVd1MpeMoMWFKlHJWoB0GFiq0JGIf_qI\" data-title=\"FanMe Controlled Growth  Native Editable Final (PDF)\">📄 FanMe Controlled Growth  Native Editable Final (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1xVd1MpeMoMWFKlHJWoB0GFiq0JGIf_qI/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1usSmtp-Ox6hmPTsZ-mEYv-kTD83UWVvk\" data-title=\"FanMe Controlled Growth Pilot (PDF)\">📄 FanMe Controlled Growth Pilot (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1usSmtp-Ox6hmPTsZ-mEYv-kTD83UWVvk/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n## Can FanMe turn one artist launch into a repeatable operating capability?\n\n> **Controlled Growth & Launch Operations Case · Developed Work Sample**\n> \n\n> Six-week outside-in operating-readiness and artist-launch plan\n> \n\n> Public evidence and direct product observation only · Not commissioned by DAO or FanMe\n> \n\n\n<diagram-card title=\"ChatGPT Image Aug 10, 2026, 03_09_18 PM.png\" driveid=\"1CrBb6akpk5skhweDvBlmARZQaoRQSY-U\" caption=\"ChatGPT Image Aug 10, 2026, 03_09_18 PM.png\"></diagram-card>\n\n\n> **An artist can bring demand into FanMe quickly. The harder test is whether that burst can pass through login, a meaningful fan action, support, fulfilment, and commercial closure without turning the launch into a custom rescue project. The second artist is where I would test whether the operating system actually transfers.**\n> \n\n---\n\n## Executive Summary\n\n- **Current stage:** FanMe is treated as a live early-stage platform whose immediate challenge is formation and operating readiness—not the absence of a long-term vision.\n- **Role outcome:** Create a reliable operating system through which artist initiatives can launch and improve without every campaign becoming a custom rescue project.\n- **Growth lever:** Use controlled fan bursts from artist engagement and offline moments rather than waiting for a fully mature platform or opening traffic without containment.\n- **Pilot:** A six-week sequence from reality mapping and critical-path hardening to one anchor launch, productization, and a second-artist transfer test.\n- **Success test:** The second artist should require adaptation—not a complete rebuild, new tracker, or new emergency workflow.\n\n<aside>\n↳\n\n**This page is the portfolio summary.**\n\nThe full case contains the detailed role model, capability map, technical-delivery controls, operating records, risk matrix, roadmap, scale gates, strategic horizon, and public evidence links.\n\n**Full document here:** \n\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1usSmtp-Ox6hmPTsZ-mEYv-kTD83UWVvk\" data-title=\"FanMe Controlled Growth Pilot.pdf (PDF)\">📄 FanMe Controlled Growth Pilot.pdf (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1usSmtp-Ox6hmPTsZ-mEYv-kTD83UWVvk/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n\n**Attach presentation here:** \n\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1xVd1MpeMoMWFKlHJWoB0GFiq0JGIf_qI\" data-title=\"FanMe Controlled Growth — Native Editable Final.pdf (PDF)\">📄 FanMe Controlled Growth — Native Editable Final.pdf (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1xVd1MpeMoMWFKlHJWoB0GFiq0JGIf_qI/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n\n</aside>\n\n---\n\n## 1. Current-Stage Diagnosis\n\nFanMe should not be approached as a mature-platform integration problem. The immediate question is narrower:\n\n> **What must work first, in what sequence, with which owners and recovery paths, before FanMe expands artist scope or product ambition?**\n> \n\nThe first case should therefore build and test one repeatable launch system rather than design the entire future fandom ecosystem.\n\n### Evidence boundary\n\nThis is an outside-in case based on public product surfaces, public company information, and direct journey observation. It does not claim access to internal analytics, architecture, staffing, contracts, unit economics, roadmaps, or operating playbooks.\n\n- What requires internal validation\n    - Product and technical ownership;\n    - internal, hybrid, or outsourced delivery model;\n    - committed capacity and WIP limits;\n    - artist commitments, rights, approvals, and deadlines;\n    - commerce, fulfillment, CS, settlement, and escalation ownership;\n    - actual launch traffic, failure patterns, and unit economics.\n\n---\n\n## 2. Strategic Lever — Controlled Fan Burst\n\n> **Borrow artist demand, constrain the first fan journey, observe everything, recover quickly, and expand only after the launch system transfers to another artist.**\n> \n\n### Minimum fan journey\n\n> **Artist push / offline moment → FanMe landing → login → follow or meaningful action → benefit / order / event → status and support → return**\n> \n\nThree conditions must exist before broader traffic:\n\n| Condition | What it means |\n| --- | --- |\n| **Reliable** | Fans can complete the critical action without losing account, payment, order, or benefit context. |\n| **Observable** | The team can see where the journey fails and which cohort, device, version, or dependency is affected. |\n| **Recoverable** | A failure has a named owner, containment action, communication path, escalation threshold, and closure evidence. |\n\nThe technical workstream supports this operating goal. Operations defines the critical journey, expected traffic shape, unacceptable failure states, visibility, and recovery requirements; Product/Tech selects and implements the architecture.\n\n---\n\n## 3. Role Understanding — Operating Integrator, Not Human Middleware\n\nThe Project & Operations Manager connects artist commitments, Product/Tech delivery, fan-facing execution, commerce and fulfillment, customer support, partner performance, settlement, and management reporting.\n\n> **Protect the outcome → identify the owner → support execution → escalate when the issue exceeds authority or capacity.**\n> \n\nThe role should not personally absorb every task or become the only bridge between functions and vendors.\n\n### Responsibility lanes\n\n- **Platform & Product Operations:** requirements, release coordination, UAT, incidents, analytics, and backlog visibility.\n- **Artist & Campaign Readiness:** commitments, rights, approvals, assets, fan promise, launch brief, and go/no-go readiness.\n- **Commerce, Fulfillment & Fan Continuity:** order/benefit states, exceptions, partner SLAs, support, and recovery.\n- **Reporting, Commercial Closure & Learning:** reconciliation, settlement, operating effort, post-launch evidence, and next-decision memo.\n\n---\n\n## 4. Minimum Operating System\n\nThe system should remain simple enough to live inside existing tools. Its purpose is to keep commitments, rights, capacity, delivery, recovery, money, and learning connected.\n\n> **Promise & commitment → rights & approval → capacity & readiness → controlled launch → CS and fulfillment recovery → commercial closure → learning and change**\n> \n\n### Core records\n\n| Control layer | What it protects |\n| --- | --- |\n| Initiative charter | Bounds the pilot and prevents the platform vision from swallowing the first test. |\n| Commitment, rights & approval view | Links each deliverable to permission, controlling party, approved version, deadline, and fallback. |\n| Fan promise register | Makes eligibility, delivery owner, timing, status source, communication trigger, and recovery path explicit. |\n| Capacity & WIP map | Tests whether the whole launch is supportable—not whether each function can individually “try.” |\n| Fan journey, release & dependency view | Connects front-end actions to systems, owners, state changes, analytics, fallbacks, and support. |\n| CS, incident & fulfillment recovery pack | Makes containment, communication, exception handling, escalation, and closure consistent. |\n| Commercial closure sheet | Shows collected value, failures, refunds, fees, partner shares, settlement, and manual operating effort. |\n| Post-launch learning record | Turns each launch into a reusable playbook, next-bottleneck view, and scale/stop decision. |\n- AI-assisted operating watcher\n    \n    AI may summarize approved trackers, flag missed deadlines or repeated operating patterns, and draft internal updates after the records are structured.\n    \n    Authority remains human-owned: AI does not approve rights, decide refunds or payouts, accept risk, change architecture, or publish autonomous crisis communication.\n    \n\n---\n\n## 5. Six-Week Controlled Growth Pilot\n\n| Week | Objective | Exit gate |\n| --- | --- | --- |\n| **1 — Reality Sprint** | Map what is live, manual, outsourced, planned, and unknown; choose one real artist initiative. | Named owners, bounded scope, clear fan promise, confirmed approvals, realistic capacity, support, and first-wave assumption. |\n| **2 — Minimum Reliable Journey** | Harden the critical path and build readiness, fallback, communication, and recovery controls. | Authentication, meaningful action, order/benefit/event, and support recovery can be tested end to end. |\n| **3 — Test in Waves** | Run internal, load, failure, dependency, and closed-fan tests. | Traffic grows only while error, duplicate risk, support load, and recovery remain within threshold. |\n| **4 — Anchor Artist Launch** | Use one artist moment to create bounded traffic waves with live monitoring and pause/rollback authority. | Fans complete the meaningful action and Tier 0 failures remain controlled. |\n| **5 — Fix and Productize** | Separate product defects, UX gaps, artist dependencies, CS gaps, manual bottlenecks, and the next capacity constraint. | The launch no longer depends on undocumented heroics; rights, promises, money, and recovery are closable. |\n| **6 — Second Artist Transfer Test** | Launch a second artist with a different fanbase or campaign pattern. | The second launch requires adaptation—not a new operating system. |\n\nOffline activation belongs inside the same loop—not as a separate vanity project:\n\n> **Artist / event attention → QR or code → FanMe login → follow / claim / purchase / check-in → account-visible status or benefit → post-event return**\n> \n\n---\n\n## 6. Measurement and Scale Gates\n\n### Pilot success statement\n\n> **FanMe can launch and support one artist initiative reliably, then transfer the same operating system to a second artist without disproportionate manual rescue.**\n> \n\nHeadline signals:\n\n- login success, session continuity, and Tier 0 error/latency;\n- first meaningful action and post-launch return;\n- payment/order or benefit completion and exception rate;\n- support entry, repeat contact, resolution, and incident closure time;\n- manual hours by workstream and number of custom steps required for Artist Two;\n- partner exceptions, fulfillment ageing, settlement discrepancies, and commercial closure;\n- approval lead time, blocked dependencies, emergency changes, and time to produce a decision-ready post-launch report.\n\nScale only when:\n\n- the critical journey is stable;\n- artist readiness, permissions, and approval versions are real;\n- the fan promise has an owner, status source, communication trigger, and recovery path;\n- each critical lane has capacity, backup, and a WIP/no-go limit;\n- support can see enough context to resolve the fan problem;\n- fulfillment, settlement, and commercial closure are traceable;\n- manual effort is bounded and the second artist does not recreate the workflow;\n- technical delivery has a named owner, controlled system access, documentation, committed capacity, and incident support.\n- Decision rules after the first two artists\n    - High traffic, low login → fix entry value, authentication, or UX before adding features.\n    - Login succeeds, low meaningful action → the fan promise or campaign value is weak.\n    - Fan action succeeds, low return → improve artist cadence, notification, and post-event continuity.\n    - Commerce succeeds, support or fulfillment fails → stop scaling demand until recovery is stable.\n    - Artist One works, Artist Two needs a full rebuild → the playbook is not yet platform capability.\n    - Both artists transfer cleanly → expand selectively and productize the highest-cost manual steps.\n\n---\n\n## 7. Boundary and Strategic Horizon\n\n### Explicit non-scope for the first six weeks\n\n- full platform redesign or feature-complete My FanMe;\n- mass artist onboarding or an open indie marketplace;\n- native ticketing, concert production, or full artist management;\n- broad paid membership, livestream, music-streaming, loyalty, or collectibles infrastructure;\n- international commerce or a complete commerce replatform;\n- a large offline event disconnected from the core fan journey.\n\nA later independent FanMe business, global-market operations, or partnership model is a conditional strategic horizon—not part of the pilot and not assumed to be DAO’s current strategy.\n\n- What must be true before the longer-term vision becomes credible\n    - several artist launches transfer through the same operating system;\n    - dedicated Product/Tech ownership and controllable critical system access;\n    - reliable commerce, CS, fulfillment, refunds, and partner exception handling;\n    - traceable rights, approvals, settlement, and revenue-share closure;\n    - a dedicated operating cadence, budget, and increasingly visible contribution logic;\n    - a recognizable FanMe relationship beyond one artist page;\n    - sufficient compliance and working-capital capacity for larger market responsibility.\n\n---\n\n## What This Case Demonstrates\n\n**Launch operations · Product/Tech coordination · artist and rights readiness · capacity and WIP control · fan-journey reliability · incident and recovery design · commercial closure · stage gates · transfer testing**\n\n---\n\n*Independent outside-in work sample · Public evidence and direct product observation only*"
@@ -382,8 +389,8 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "1PGeCoPWn38uS0R2N1_agtyYFEvwLs1IW",
         "fileName": "DatVietVAC_Ownership_Belonging_Merchandise_Growth_Case_Study.pdf",
-        "label": "📄 Xem trước: DatVietVAC_Ownership_Belonging_Merchandise_Growth_Case_Study.pdf ↗",
-        "title": "DatVietVAC Ownership Belonging Merchandise Growth Case Study"
+        "label": "📄 Preview: DatVietVAC_Ownership_Belonging_Merchandise_Growth_Case_Study.pdf ↗",
+        "title": "DatVietVAC: Ownership & Belonging Merchandise Growth"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1PGeCoPWn38uS0R2N1_agtyYFEvwLs1IW\" data-title=\"DatVietVAC Ownership Belonging Merchandise Growth Case Study (PDF)\">📄 DatVietVAC Ownership Belonging Merchandise Growth Case Study (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1PGeCoPWn38uS0R2N1_agtyYFEvwLs1IW/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n## Making verified fan contribution persist beyond a transaction or event\n\n> **Merchandise Growth & IP Commercialization Case · Developed Work Sample**\n> \n\n> Public evidence + Merchandise Manager JD · Outside-in case · August 2026 · Not commissioned by DatVietVAC\n> \n\n\n<diagram-card title=\"Verified History_ Ownership & Belonging.png\" driveid=\"1U33wyQN4ZbGjCjU3NBM0ugSiQiI_xzm4\" caption=\"Verified History_ Ownership & Belonging.png\"></diagram-card>\n\n\n> **This case started from two ideas that look emotionally similar but operate very differently: recognizing past customer contribution with ownership at a corporate milestone, and preserving verified event/card history over time. I keep them separate because the first depends on securities feasibility; the second depends on identity, provenance, event operations, and merchandise economics.**\n> \n\n---\n\n## Executive Summary\n\n- **Question:** Can verified fan contribution persist beyond a purchase or event as ownership, history, or recognition—without turning novelty into uncontrolled cost or operational complexity?\n- **Idea 1 — Ownership:** test whether verified high-value historical customers could be recognized through an opt-in ownership mechanism after listing, subject to securities feasibility, approved transfer structure, budget, identity quality, and Legal/IR review.\n- **Idea 2 — Event Joining Card / History:** bind eligible event-linked physical cards to a verified fan account, preserve the exact digital collection history, separate verified attendance from card ownership, and test optional milestone returns and rewards.\n- **Shared primitive:** **User ID + verified historical action.** One idea uses cumulative paid history; the other uses event/card history.\n- **Decision logic:** treat the two ideas as separate experiments. Either one can fail feasibility without invalidating the other.\n\n<aside>\n↳\n\n**This page is the portfolio summary.**\n\nThe full case contains global benchmarks, behavioral research, ownership models, KPI trees, cost scenarios, risk controls, roadmaps, measurement design, and source links.\n\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1PGeCoPWn38uS0R2N1_agtyYFEvwLs1IW\" data-title=\"DatVietVAC Ownership Belonging Merchandise Growth Case Study.pdf (PDF)\">📄 DatVietVAC Ownership Belonging Merchandise Growth Case Study.pdf (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1PGeCoPWn38uS0R2N1_agtyYFEvwLs1IW/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n\n</aside>\n\n---\n\n## 1. Why Now\n\nThe public case context combines three signals: DatVietVAC’s transition toward a listed-company era, a stated 2026–2030 emphasis on multi-layer IP monetization and the fandom economy, and a Merchandise Manager scope that spans product portfolio, pricing, B2B/B2C growth, event commercialization, suppliers, inventory, P&L, and cross-functional coordination.\n\nThe portfolio question is therefore not simply how to create two promotions. It is how verified customer history could become a durable commercial asset while keeping feasibility, economics, identity, and ownership explicit.\n\n- Evidence boundary\n    \n    The case uses public company/product information, comparable public programs, behavioral research, and the Merchandise Manager JD. It does not claim access to DatVietVAC’s internal identity architecture, customer distributions, contracts, economics, loyalty/CRM systems, securities-transfer mechanism, supplier capacity, or current operating ownership.\n    \n\n---\n\n## 2. Two Experiments, Not One Program\n\n### Idea 1 — Listed-Era Ownership Concept\n\n**Working proposition:** use a fixed historical snapshot of verified net paid value to identify eligible high-value customers, then test an optional ownership-recognition mechanism after listing.\n\n**Why the historical cutoff matters:** the mechanism recognizes value already created rather than encouraging customers to spend more now to qualify.\n\n**Primary dependency:** securities feasibility. Cohort logic, tier economics, identity quality, budget, claim flow, and communications matter only if an approved transfer structure is executable at the intended scale.\n\n**Merchandise role boundary:** own the customer concept, cohort economics, KPI, budget scenarios, and go/no-go recommendation—not securities execution.\n\n### Idea 2 — Event Joining Card: Fan History + Optional Physical Return\n\n**Working proposition:** give each eligible physical event card a unique identity, bind it to a verified fan account, preserve the exact digital collection history, and let fans optionally return selected physical cards at milestones without deleting the memory.\n\n**Important distinction:** **attendance history ≠ card collection history.** Verified attendance should come only from a reliable ticket/check-in/order source; owning a transferable card does not automatically prove attendance.\n\n**Primary dependency:** reliable identity and card provenance. The pilot can begin inside one IP/event/account system rather than waiting for a perfect enterprise-wide fan ID.\n\n**Merchandise role fit:** direct ownership of mechanics, economics, pilot scope, event handoff, reverse flow, KPI, P&L, and scale decision.\n\n\n<diagram-card title=\"Verified History_ Ownership & Belonging(1).png\" driveid=\"1V9ejbjhrIXWBk2uoOClzlap9ToxjNbl0\" caption=\"Verified History_ Ownership & Belonging(1).png\"></diagram-card>\n\n\n\n<diagram-card title=\"Verified History_ Ownership & Belonging(2).png\" driveid=\"1cjv8PvOo2yUA0e7rpqNHtRGrLO3_Kw0e\" caption=\"Verified History_ Ownership & Belonging(2).png\"></diagram-card>\n\n\n---\n\n## 3. One Shared Primitive\n\n> **User ID + verified historical action**\n> \n\nIdea 1 uses cumulative net paid history to test a one-time ownership-recognition mechanism. Idea 2 uses event/card history to create a persistent collection, progress, and achievement layer.\n\nThe strategic thread is the same: **the platform remembers verified contribution and turns it into ownership, history, or recognition.**\n\n<aside>\n🃏\n\n**Related but intentionally separate: Fandom Cards**\n\nA new adjacent case tests the opposite operating condition: an accessible official collectible designed for **free circulation without owner identity tracking**. The Event Joining Card means *“I was there”* and needs controlled provenance; the Fandom Card means *“this is who / what I support”* and needs frictionless circulation across carry, gift, share and trade.\n\n**Design rule:** do not bind the everyday Fandom Card to this event-history system.\n\n[DatVietVAC Fandom Cards — From Official Fandom Pack to a Gated Collectibles Product Line →](https://app.notion.com/p/DatVietVAC-Fandom-Cards-From-Official-Fandom-Pack-to-a-Gated-Collectibles-Product-Line-3bb6210cf1c78187817af591d7aced63?pvs=21)\n\n</aside>\n\n\n<diagram-card title=\"Verified History_ Ownership & Belonging(3).png\" driveid=\"1OUwoTZP3Qj2oP8SMAW-38iKABvWEKCXX\" caption=\"Verified History_ Ownership & Belonging(3).png\"></diagram-card>\n\n\n---\n\n## 4. Pilot Before Scale\n\n### Idea 1 — Feasibility first\n\n1. Confirm the approved transfer path and transaction-data boundary.\n2. Audit identity and net-paid logic before designing tiers.\n3. Cap the share pool and model claim economics.\n4. Dry-run eligibility, claim, exception, and reconciliation flows before any public announcement.\n5. Measure the claim funnel, friction, data integrity, cost, and post-campaign customer behavior where comparison is feasible.\n\n> **Go / no-go:** do not announce until eligibility data is stable, transfer is executable at intended volume, budget is capped and reconcilable, and campaign language clearly separates recognition from investment advice or expected return.\n> \n\n### Idea 2 — One IP, two events\n\n1. Start with one IP/event/account boundary.\n2. Serialize cards and test bind/claim, duplicate handling, history, progress, and recovery.\n3. Use Event 1 to measure activation and operating friction.\n4. Fix the flow, then repeat at Event 2.\n5. Make the scale decision from fan acceptance, archive use, operational load, error rate, repeat behavior, and contribution-margin evidence.\n\nThe measurement can be staged to separate effects:\n\n- **Phase A:** history only.\n- **Phase B:** history + visible progress.\n- **Phase C:** history + progress + reward.\n\nThis helps distinguish the value of memory from gamified progress and from discounting.\n\n---\n\n## 5. What Success Should Mean\n\nThe case does not use reach alone as proof of value.\n\n**Idea 1** should be judged through eligibility accuracy, claim completion, friction, budget/reconciliation quality, and downstream customer behavior—not post-listing share price.\n\n**Idea 2** should be judged through card binding, archive revisits, collection depth, milestone behavior, repeat event/purchase behavior, operating errors, CS burden, and contribution-margin evidence.\n\n> **Scale only when behavior, economics, and operating reliability move together.** If only vanity engagement improves, redesign rather than scale.\n> \n\n---\n\n## 6. Ownership Without Role Confusion\n\nThe Merchandise Manager owns the commercial outcome and keeps the right functions connected.\n\nFor **Idea 1**, Group-level IR, Finance/Treasury, Legal/Compliance, Data/CRM, Product/Tech, CS, and an approved securities partner would need explicit responsibilities before launch.\n\nFor **Idea 2**, Product/Tech, Data/CRM, Event Production, Creative/IP/Talent, suppliers, VieSHOP/E-commerce, Logistics, Finance, CS, and Legal/Privacy form the operating chain.\n\n> **Role principle:** protect the outcome → identify the functional owner → support execution → escalate when the issue exceeds authority or capacity.\n> \n\n---\n\n## 7. Bounded Findings and Unknowns\n\n**Supported by the current case**\n\n- comparable public programs show that customer ownership recognition, persistent event memorabilia, and optional physical-return mechanics have real-world precedents;\n- behavioral research provides hypotheses for psychological ownership, goal-gradient effects, and visible progress;\n- the two proposed ideas can be structured as separate experiments around verified historical action;\n- Idea 2 can be piloted inside a narrow identity boundary without first solving enterprise-wide identity.\n\n**Still requires internal validation**\n\n- identity quality and cross-channel joins;\n- historical spend and card-count distributions;\n- securities-transfer feasibility and approved communication structure;\n- margin, reward economics, supplier/serialization capacity, and reverse-flow cost;\n- fan acceptance and actual post-event card-retention behavior;\n- current team ownership, platform capability, and implementation capacity.\n\n---\n\n## What This Case Demonstrates\n\n**Merchandise growth · IP commercialization · customer-history mechanics · reward economics · product and event operations · ownership/governance · measurement design · pilot and scale gates**\n\n---\n\n*Independent outside-in work sample · Public evidence only · August 2026*"
@@ -394,8 +401,8 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "1L_TKkbM1XbPqdML_AwBHZYXppZKl3Tf-",
         "fileName": "DatVietVAC_Fandom_Cards_Case_Study.pdf",
-        "label": "📄 Xem trước: DatVietVAC_Fandom_Cards_Case_Study.pdf ↗",
-        "title": "DatVietVAC Fandom Cards Case Study"
+        "label": "📄 Preview: DatVietVAC_Fandom_Cards_Case_Study.pdf ↗",
+        "title": "DatVietVAC Fandom Cards: Collectibles Product Line Case"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1L_TKkbM1XbPqdML_AwBHZYXppZKl3Tf-\" data-title=\"DatVietVAC Fandom Cards Case Study (PDF)\">📄 DatVietVAC Fandom Cards Case Study (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1L_TKkbM1XbPqdML_AwBHZYXppZKl3Tf-/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n## One listing changed the starting question\n\nIn the exploratory Shopee pull for *Anh Trai Say Hi*, one card listing from one seller showed more than 30,000 units sold. The pull was not exhaustive, so I use that number only as a demand signal; it was enough to shift the product question toward what an official 12-card pack would need to do better.\n\n> **Merchandise Initiative / Outside-In Working Case · Developed Work Sample**\n> \n\n> Updated 16 August 2026 · Public evidence only · Not commissioned by DatVietVAC\n> \n\n\n<diagram-card title=\"00_cover_ready.png\" driveid=\"1uDuipV8TBC8l_vyka_oNSNqUh0tzRfgV\" caption=\"00_cover_ready.png\"></diagram-card>\n\n\n> **Core question:** Can DatVietVAC turn already-observed demand for artist cards into an official 12-card product that fans carry, share, display and trade in everyday life — then use repeated drop evidence to earn a gated collectibles product line?\n> \n\n---\n\n## Executive Summary\n\n- **Product promise:** Official enough to trust. Personal enough to carry. Simple enough to share.\n- **Pilot unit:** one IP/program · one launch/drop occasion · one sealed **12-card pack** · one public MSRP.\n- **Working price:** **VND89K preferred working MSRP** when it preserves a visibly better official quality bar; **VND79K** remains a value-engineering sensitivity only if that quality bar survives.\n- **Authentication:** no owner registry, crypto or NFC requirement. Build a reproducible **physical manufacturing signature** across substrate, print, surface, cut and packaging.\n- **Behavior thesis:** 12 cards create enough social inventory to keep, gift, share, carry, display and trade. Event/concert moments can concentrate launch demand; everyday life is where circulation is tested.\n- **Social-object kill rule:** if packs sell but both designed interaction and post-drop daily circulation remain weak after one reasonable iteration, kill the broader social-object thesis. The card may remain merchandise if its direct economics justify it.\n- **Scale logic:** **prototype → drop pilot → repeated product line → conditional annual box → collectibles pod → selective internalization.** Each stage is an earned option, not a default roadmap.\n\n<aside>\n↳\n\n**Strategic bet**\n\nDatVietVAC does not need to manufacture community. It needs to issue an official object good enough to circulate, give fans enough cards to keep and share, and then observe what actually happens after checkout. Direct card P&L must still stand on its own.\n\n</aside>\n\n---\n\n## 1. The Human and Business Opportunity\n\nDatVietVAC already has a dense entertainment ecosystem: programs, artists, content moments, concerts, distribution and D2C surfaces. The outside-in problem is therefore not lack of content. It is whether the IP owner can turn visible existing demand for artist cards into an official product that is materially better and worth carrying.\n\nIn the exploratory Shopee pull used for this case, one **Anh Trai Say Hi** card listing from one seller showed more than **30,000 units sold**. Hundreds of other products and sellers were visible, but the pull was not exhaustive across listings, product lines or platforms. This is directional demand evidence, not market size, and it does not by itself establish the authorization status of each seller or listing.\n\nThe observed category is therefore not starting from zero. The product opportunity is to compete with existing outside-channel supply through official content access, stronger material/print/finish, consistent packaging and a recognizable manufacturing signature; seller authorization still needs to be checked rather than assumed.\n\nThe human mechanism is broader than event trading. A 12-card pack gives one buyer enough inventory to keep favorite cards, gift one or two to friends, trade duplicates, carry a card in a phone case or card holder, attach it to a bag, photograph it or post it. Events can concentrate launch attention, but **daily life is the real usage environment**.\n\n> **Working thesis:** the card is an object, a signal and social inventory. The company can make the object trustworthy and easy to circulate; fans decide whether repeated sharing, carrying, display and exchange become belonging.\n> \n\nThe mechanism is plausible, not guaranteed. If the card sells but remains socially inert after checkout, it may still be a valid merchandise SKU. It does not automatically earn a community thesis.\n\n\n<diagram-card title=\"01_initiative_summary.png\" driveid=\"1VYrA7MkJU5iZWJUV7vOwj99apaYbDXV9\" caption=\"01_initiative_summary.png\"></diagram-card>\n\n\n---\n\n## 2. Product Architecture: Program → Drop Occasion → Pack → Conditional Annual Box\n\nThe architecture fixes four levels:\n\n1. **Program / IP** — provides the year-long content universe, rights framework and common issuer/manufacturing grammar.\n2. **Drop occasion** — creates freshness and a reason to buy now. A concert/event is a strong pilot catalyst, but later drops can also follow program milestones, artist moments or other culturally meaningful releases.\n3. **Pack** — the commercial unit: always **one sealed 12-card pack** in the pilot and base product-line design; its value should continue after the launch occasion through everyday circulation.\n4. **Annual box** — a later program-level archive/collector product: **12 sealed packs × 12 cards + one collectible**, considered only after multi-drop gates pass.\n\nThis hierarchy prevents two common drifts: redesigning the pack every time the occasion changes, and assuming a box simply because a program is large.\n\n### Why 12 cards\n\nThe earlier two-card proposition was too thin. Twelve cards create a stronger opening ritual, more visible value-in-hand, room for a clear slot promise and better comparison of physical quality. More importantly, they create **shareable social inventory**: enough cards for one buyer to keep favorites, gift or share one or two, display others and still have duplicates or gaps that make exchange natural.\n\n### Working pack anatomy\n\n| Slot | Working count | Role |\n| --- | --- | --- |\n| Base identity | 10 | Artists, characters, quotes, lyrics, memes or era markers on one consistent official physical grammar. |\n| Moment / collective | 1 | Performance, episode, concert or ensemble memory. |\n| Special / chase | 1 guaranteed | Visibly differentiated pull such as foil, holo or texture where economics allow. |\n\nThe slot structure is a working collation hypothesis, not a final odds table. Exact rarity, artist distribution and variants remain production decisions after rights, content and demand review.\n\n\n<diagram-card title=\"02_benchmark_mechanism_map.png\" driveid=\"14OHAm-ePUzEH58suLljFwhpRqi-XYsOr\" caption=\"02_benchmark_mechanism_map.png\"></diagram-card>\n\n\n---\n\n## 3. Boundary Versus the Event Joining Card\n\n| Dimension | Event Joining Card | Fandom Card |\n| --- | --- | --- |\n| Meaning | “I was there.” | “This is who or what I support.” |\n| Supply | Controlled and event-linked. | Broad enough for circulation and repeated drops. |\n| Identity binding | May be required to prove participation/history. | No owner identity required. |\n| Transfer | Not the core behavior. | Free pass, gift and trade are core behaviors. |\n| Value source | Verified memory and milestone meaning. | Identity, collectibility, culture and exchange. |\n| Data | User/event/card history. | SKU, batch, sales, quality and aggregate behavior signals. |\n\n> **Design boundary:** do not bind the everyday Fandom Card to the Event Joining Card history system. One needs controlled provenance; the other needs frictionless circulation.\n> \n\n---\n\n## 4. Authenticity Through a Manufacturing Signature\n\nV2 drops the assumption that every card needs a premium anti-counterfeit device. The pilot instead establishes a **reproducible physical fingerprint** that fans can learn and that the company or a specialist can inspect more deeply when a dispute occurs.\n\nThe signature spans:\n\n- **Substrate:** stock family, thickness/caliper, weight range, opacity, stiffness and internal core.\n- **Print:** color targets, black density, sharpness, halftone/rosette, registration and back alignment.\n- **Surface:** gloss/matte level, texture and coating response.\n- **Cut:** dimensions, corner radius, centering and edge cleanliness.\n- **Packaging:** wrapper film, seal, print, batch/lot mark and official reference.\n\n### Fan-facing three-step check\n\n1. **Feel and stack** — compare rigidity, thickness, edge/core, size, cut and surface against a known official card.\n2. **Look under normal and angled light** — compare color, text sharpness, back alignment, print pattern, gloss/texture and wrapper seal.\n3. **Escalate disputed cards** — compare with official references/retained samples or an approved specialist; no account binding is required.\n\n> **Pilot rule:** no blockchain, crypto or ownership transfer. No NFC requirement. Holo or texture may identify a special content tier, but the official manufacturing signature must exist across the entire product family.\n> \n\n\n<diagram-card title=\"03_card_pack_architecture.png\" driveid=\"1iGgCjhCui7H2sVBk1kEWw9-_n1l54HYR\" caption=\"03_card_pack_architecture.png\"></diagram-card>\n\n\n---\n\n## 5. Drop Occasion and Everyday Circulation Test\n\nAn event or concert is a useful **launch catalyst** because it supplies fresh cultural content, concentrated demand and a shared context. It is not the only place where the product should create value.\n\nThe operating loop is:\n\n**Select → compose → produce → release → circulate → observe → decide.**\n\nThe pilot can still provide one light and fair exchange opportunity — for example a clearly signed table or short trade hour — without making rewards or attendance contingent on trading. But the broader test continues after the event.\n\nEveryday circulation is observed through behavior: did buyers keep and carry cards, gift or share them with friends, display them in phone cases/card holders/bags, photograph or post them, trade duplicates, trigger conversations, or return for another drop?\n\n<aside>\n✕\n\n**Social-object kill rule**\n\nIf packs sell but both the designed interaction opportunity **and** post-drop daily circulation remain weak after one reasonable iteration, kill the broader social-object thesis. Continue only as merchandise if the direct economics justify it.\n\n</aside>\n\nA weak trade table alone is not enough to kill the idea; Vietnamese fan behavior may express itself through friend-to-friend gifting, school/social-group exchange, carry/display or UGC instead. DatVietVAC should support emergence, not declare a community into existence. A marketplace, grading service, price index, resale guarantee, reseller program or always-on creator network should not be the first move.\n\n\n<diagram-card title=\"04_physical_auth_fingerprint.png\" driveid=\"1GN4ydkyJN5ecUbhtkAEQyEyikI-CHzOT\" caption=\"04_physical_auth_fingerprint.png\"></diagram-card>\n\n\n---\n\n## 6. Pilot, Measurement and Economics\n\n### Working 90-day pilot\n\n- **Program / IP:** one active program with visible demand and enough artist/moment variety.\n- **Occasion:** one event or concert-linked launch for the pilot, followed by explicit post-drop daily-circulation observation.\n- **Pack:** one sealed 12-card pack.\n- **Checklist:** approximately 30 outcomes as a starting hypothesis.\n- **Price:** one public MSRP; **VND89K preferred working anchor** when it protects the official quality bar. **VND79K** is a value-engineering sensitivity only if material, print, finish, packaging and rights economics remain credible.\n- **Run:** 3,000 packs + pre-agreed reprint option.\n- **Channel:** VieSHOP + one event touchpoint.\n- **Circulation:** checklist + light creator seeding + one optional exchange touchpoint + sampled post-event observation of carry/share/display/gift/trade behavior.\n- **Technology:** no owner system; physical manufacturing signature first.\n- **Annual box:** excluded from pilot.\n\n### Everyday circulation signals\n\nTrack a small set of post-checkout behaviors without building an owner ledger: carry/display, share/gift, trade, organic photo/story/UGC, interaction outside official events, “someone asked me about the card,” and repeat purchase for self or another person. Use sampled surveys, interviews and pilot observation rather than tracking each physical card owner.\n\n### Five pilot gates\n\n| Gate | What it must show | If weak |\n| --- | --- | --- |\n| Paid demand | Healthy sell-through plus repeat/reprint intent without excessive discount dependence. | Rework price/value/channel once, then stop. |\n| Product + trust | Worth-price response, repeatable official quality and acceptable defect/authentication outcomes. | Fix spec/vendor before another drop. |\n| Behavior + belonging | Credible trade/gift/display/content and recognition/interaction beyond seeded activity. | Kill community thesis after one designed iteration. |\n| Economics | Positive path after physical COGS, rights/royalty, payment, handling, shipping and inventory risk. | Requote, re-spec or stop. |\n| Operations + rights | Clean approval cycle, on-time delivery, correct collation, retained references and repeatable rights/production process. | Hold portfolio expansion. |\n\n### Two ledgers, not one blended story\n\n- **Direct Card P&L:** pack revenue; physical card/pack COGS; rights/royalty; payment; handling; delivery subsidy; returns/write-off; pilot/team allocation. It must become economically defensible on its own.\n- **Ecosystem Impact:** organic content, carry/display, gift/share, trade, creator repetition, interaction inside and outside official events, artist/program resurfacing and directional cross-purchase. Measure separately; do not invent VND value to hide weak merchandise economics.\n\n### V2 pack-economics sensitivity\n\nThe case uses a planning sensitivity, not a public price ladder. With an illustrative **VND27K physical build**, the planning sensitivity estimates product GM around **59.7% at VND89K** and **55.6% at VND79K**, before payment/handling/delivery subsidy and fixed pilot cost. The higher anchor is preferred only if fans can visibly feel the official quality difference; actual tax treatment, artist contracts, logistics, GM hurdle and supplier quotes remain internal validation dependencies.\n\n\n<diagram-card title=\"05_exchange_cycle_and_metrics.png\" driveid=\"1P_2KleB-PyM56kwiBeXy5RAaymVldtbK\" caption=\"05_exchange_cycle_and_metrics.png\"></diagram-card>\n\n\n---\n\n## 7. Operating and Rights Architecture\n\n### One accountable third party\n\n> **Own the specification and acceptance. Outsource the industrial chain through one accountable lead partner.**\n> \n\nFor the pilot, DatVietVAC should avoid splitting prepress, printing, finishing, collation and pack assembly across loosely coordinated vendors. One lead specialist manufacturer/packer should contract for the full physical delivery under a single SOW, even when it uses disclosed subcontractors.\n\nDatVietVAC retains control of final art, rights approval, physical fingerprint, proof sign-off, substitution approval, collation rules, audit samples, lot traceability requirements, retained references and reject/rework decisions.\n\n### Rights cannot be outsourced away\n\nLegal/IP must confirm which artist likenesses, lyrics, quotes, memes, episode stills, music-related imagery and sponsor marks may be commercially reproduced. The rights design should distinguish:\n\n- drop-specific use versus later annual compilation/reprint/reuse;\n- whether artist compensation is already included or must be itemized as fee/royalty;\n- file custody and subcontractor limits;\n- pack-level sales/returns and royalty reporting;\n- fresh approval requirements for a later annual box.\n\n\n<diagram-card title=\"06_pack_economics.png\" driveid=\"1_5bRzfWLSmBr1n22I4LrWlYJQ6laR1Gd\" caption=\"06_pack_economics.png\"></diagram-card>\n\n\n---\n\n## 8. Earn the Right to Scale\n\nA successful pilot unlocks **another controlled drop** — not an annual box and not a standalone venture.\n\nThe scale ladder is:\n\n**0 — Prototype** → physical fingerprint, 12-card pack, checklist, vendor proofs and fan/WTP research.  \n\n**1 — Drop pilot** → one IP/occasion, one MSRP, 3,000 packs, light interaction opportunity, post-drop circulation observation and full gate review.  \n\n**2 — Repeated product line** → recurring drops, standardized issuer back/spec/SOW, artist/occasion demand tracking, everyday-circulation signals and mini-P&L.  \n\n**3 — Conditional annual box** → 12 sealed packs × 12 cards + one collectible for a proven year-long program, only after box-design evidence passes.  \n\n**4 — Collectibles pod** → portfolio strategy, distribution, creator/community support and dedicated P&L after multiple programs sustain releases.  \n\n**5 — Selective internalization** → bring high-value control points in-house only when control is economically superior to specialist outsourcing.\n\n### Annual box remains a principle, not a pilot product\n\nThe annual box follows the **program**, not one isolated concert. Design work is unlocked only when multi-drop evidence supports:\n\n- repeated pack demand and repeat buyers;\n- artist/event demand breadth rather than one hot individual;\n- enough distinct, rights-cleared annual content for 144 cards to remain meaningful;\n- buyer fairness for existing collectors;\n- intentional inventory/reprint policy;\n- viable economics;\n- clean compilation rights and third-party production capability.\n\nExact checklist, pack mix, rarity, exclusives, print run, price and cannibalization policy remain deferred.\n\n\n<diagram-card title=\"07_event_pack_to_annual_box_scale.png\" driveid=\"1WXdlWOcMtJqx1Un0Kc8ArNzv1isKkVVH\" caption=\"07_event_pack_to_annual_box_scale.png\"></diagram-card>\n\n\n---\n\n## 9. Decision Memo\n\n**Recommendation:** test the initiative as a contained **12-card official fandom-pack pilot**, using an event/concert as the launch catalyst but measuring what happens after the product enters everyday life.\n\n**Before print:** clean asset-level rights; approved physical fingerprint; acceptable third-party proof; capped pilot economics; clear collation/pack promise.\n\n**Working price:** prefer **VND89K** when it protects a visibly better official quality bar; use **VND79K** only as a value-engineering sensitivity if the quality difference remains credible.\n\n**Kill the broader social-object thesis if:** both designed interaction and post-drop carry/share/display/gift/trade signals remain weak after one reasonable iteration.\n\n**Another drop is earned only when:** paid demand, repeat/reprint interest, recognized official quality, positive economic path, clean rights, repeatable operations and at least credible circulation evidence appear together.\n\n**Annual-box design is earned only when:** multi-drop pack sales, repeat buyers, artist/occasion demand evidence, annual content depth, buyer fairness, clean compilation rights, inventory plan and viable economics support it.\n\n> **Manager-seat principle:** manage the initiative as a sequence of earned options. Keep the fan job, product specification, rights, supplier accountability, unit economics, release calendar, circulation evidence and scale decision connected.\n> \n\n\n<diagram-card title=\"08_final_case_summary.png\" driveid=\"1Xw6ankrngAZ0oUV34AQXKgv3LkWDY_6w\" caption=\"08_final_case_summary.png\"></diagram-card>\n\n\n---\n\n## Evidence Boundary\n\nPublic evidence supports company context, current product observations, global authentication practices and market/manufacturing precedents. It does **not** prove DatVietVAC demand, achievable cost, rights coverage, card odds, box viability or community effects.\n\n**Known from public sources:** company-reported IP/event/distribution ecosystem; current public merchandise examples; external authentication and manufacturing mechanisms.\n\n**Observed in the case research pull:** one Anh Trai Say Hi Shopee listing from one seller showed more than 30,000 units sold, with many other products/sellers visible but not exhaustively captured. Treat this as directional demand evidence only, not market size or proof of authorization status.\n\n**Outside-in hypotheses:** 12-card social-inventory consumer job; VND89K preferred price viability with VND79K sensitivity; physical COGS; everyday-circulation mechanism; single-third-party operating design.\n\n**Must validate internally:** IP/artist rights, actual COGS and fixed budget, GM hurdle, pack demand, circulation behavior, collation, defect tolerance, box eligibility and operating ownership.\n\n---\n\n## Full Case\n\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1L_TKkbM1XbPqdML_AwBHZYXppZKl3Tf-\" data-title=\"DatVietVAC Fandom Cards Case Study.pdf (PDF)\">📄 DatVietVAC Fandom Cards Case Study.pdf (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1L_TKkbM1XbPqdML_AwBHZYXppZKl3Tf-/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n\n*Independent outside-in work sample · Public evidence only · Updated 16 August 2026*"
@@ -406,8 +413,8 @@ const caseDocuments = {
             "type": "pdf",
             "driveId": "1BXsJFeZnRvccB02eJAYiO5xwucqwBQfk",
             "fileName": "VieSHOP_Fan_Centred_Merchandise_System.pdf",
-            "label": "📄 Xem trước: VieSHOP — Fan-Centred Merchandise System (PDF) ↗",
-            "title": "VieSHOP — Fan-Centred Merchandise System"
+            "label": "📄 Preview: VieSHOP — Fan-Centred Merchandise System (PDF) ↗",
+            "title": "VieSHOP: Fan-Centred Merchandise System Case"
         }
     ],
     "body": "<div class=\"f-asset-bar\"><button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1BXsJFeZnRvccB02eJAYiO5xwucqwBQfk\" data-title=\"VieSHOP — Fan-Centred Merchandise System\">Read full case</button><a href=\"https://drive.google.com/file/d/1BXsJFeZnRvccB02eJAYiO5xwucqwBQfk/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Open in new tab\">↗</a>\n<a href=\"https://drive.google.com/drive/u/0/folders/1PjSsAqx19py6Nt7gogwgkzaqUe8jdCuo\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-btn\">View figure set ↗</a></div>\n\n<figure class=\"f-diagram-card\">\n      <div class=\"f-diagram-header\">\n        <span class=\"f-diagram-title\">📊 VieSHOP case cover</span>\n        <div class=\"f-diagram-header-actions\">\n          <button type=\"button\" class=\"f-diagram-open-btn f-asset-trigger\" data-type=\"image\" data-driveid=\"1ujqzcWWCWzZtNHj_L2pAdZrf7L8-m2f0\" data-title=\"VieSHOP case cover\">Preview</button>\n          <a href=\"https://drive.google.com/file/d/1ujqzcWWCWzZtNHj_L2pAdZrf7L8-m2f0/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-diagram-ext-btn\" title=\"Open in new tab\" aria-label=\"Open in new tab\">↗</a>\n        </div>\n      </div>\n      <div class=\"f-diagram-body f-asset-trigger\" data-type=\"image\" data-driveid=\"1ujqzcWWCWzZtNHj_L2pAdZrf7L8-m2f0\" data-title=\"VieSHOP case cover\" title=\"Click to enlarge\">\n        <img src=\"https://lh3.googleusercontent.com/d/1ujqzcWWCWzZtNHj_L2pAdZrf7L8-m2f0=w1600\" alt=\"VieSHOP case cover\" loading=\"lazy\">\n        <div class=\"f-diagram-zoom-hint\">Click to enlarge</div>\n      </div>\n      <figcaption class=\"f-diagram-caption\">Independent outside-in case · Working V2 · 23 August 2026</figcaption>\n    </figure>\n\n> <strong>Independent Product / Commerce Case · DatVietVAC Merchandise Manager lens · Working V2</strong>\n> \n> Public evidence, one direct black-box shopping session, a user-supplied qualitative signal, and working hypotheses. This case does not claim access to DatVietVAC internal analytics, contracts, margins, source code, customer data, rights, or technology architecture.\n\n## Case at a glance\n\nI began with one ordinary shopping session on VieSHOP. The store was usable enough to complete, but the journey exposed friction before any larger fandom feature became relevant: slow page and cart interactions, a campaign CTA that returned a 404, campaign-led navigation, product pages that made choice harder, awkward unavailable variants, and little visible post-purchase utility. These are scoped observations from one session, not a full performance audit.\n\nThe case asks what VieSHOP would need to become if merchandise has to serve more artists, IPs, product roles, and a longer fan relationship. The working answer is a fan-centred merchandise system with two connected tracks: repair the commerce foundation first, then build a merchandise learning loop across artist discovery, product roles, assortment, rights, vendors, quantity, launch, and transfer to a second artist.\n\n## What changes first\n\nThe recommendation is deliberately practical:\n\n<ol class=\"f-numbered-list\">\n<li><strong>Measure and stabilise the critical store path.</strong> Fix broken CTAs and verify homepage, catalog, product, cart, checkout, account, order, and support tasks before adding feature weight.</li>\n<li><strong>Rebuild discovery as a stable system.</strong> Let fans browse by Artist, Show / Event / IP, Product Family, Availability, and Price rather than relying on a small set of campaign-led routes.</li>\n<li><strong>Make product, account, and recovery states useful.</strong> A product page must explain identity, available variants, quality, sale state, delivery or pickup, and what happens when the promise fails. My VieSHOP begins with order, claim, support, and wishlist continuity—not avatars or social features.</li>\n<li><strong>Test merchandise as a learning loop.</strong> Start with a bounded portfolio across Daily / Core and selected Premium / Limited / Event roles. Learn from paid demand, quality, support burden, contribution, and whether the operating model transfers to Artist 2.</li>\n</ol>\n\n> <strong>Repair the store → rebuild discovery → clarify product, account, and support → run a small merchandise pilot → learn from paid behaviour → test Artist 2 transfer → prepare future interfaces.</strong>\n\n## Two connected workstreams\n\n<div class=\"f-table-wrap\"><table class=\"f-table\"><thead><tr><th>Workstream</th><th>What it addresses</th><th>Merchandise role</th></tr></thead><tbody><tr><td><strong>Commerce Foundation</strong></td><td>Performance, navigation, product clarity, cart and account continuity, order and support recovery.</td><td>Define fan and product requirements, acceptance criteria, launch risk, and commercial consequence.</td></tr><tr><td><strong>Merchandise Growth</strong></td><td>Artist discovery, product roles, assortment, rights, vendor, price, quantity, inventory, and launch learning.</td><td>Own the commercial decision path and the repeat / redesign / stop recommendation.</td></tr></tbody></table></div>\n\nProduct and Tech own architecture and implementation. Merchandise needs the control view: which gate is blocked, who owns the next decision, what evidence is missing, and what recovery option remains when the promise to the fan is at risk.\n\n## What remains conditional\n\n<details class=\"f-details\"><summary>Vie World and other future layers</summary><div class=\"f-details-content\">\n\nVie World is a proposed future relationship layer, not a dependency of the recommendation and not a confirmed DatVietVAC roadmap. VieSHOP may eventually sit inside it as a commerce module or beside it as a connected service. The store and merchandise model must still work if the concept changes or never launches.\n\nMembership benefits, digital merchandise, SKU-level pricing, and control-transfer choices also remain conditional. They require internal evidence on rights, COGS, contribution, inventory, target buyer behaviour, technical constraints, operating ownership, and support burden.\n\n</div></details>\n\n## Evidence boundary\n\nOne black-box session can establish that these specific observations occurred; it cannot establish a universal performance problem, identify Haravan as the root cause, prove internal operations are weak, or validate demand, conversion, rights, margins, and technical feasibility. The full case preserves the evidence register, control roadmap, portfolio hypothesis, reversal conditions, and internal validation requirements.\n\n## Related work\n\n<a href=\"/work/datvietvac-fandom-cards\" class=\"f-inline-link\">DatVietVAC Fandom Cards</a> remains a separate product-line case on official physical collectibles and earned scale gates. <a href=\"/work/datvietvac-ownership-belonging\" class=\"f-inline-link\">Ownership & Belonging</a> examines persistent fan contribution and history. <a href=\"/work/artist-fandom-page\" class=\"f-inline-link\">Artist Fandom Page & Fan Dashboard</a> is the adjacent relationship-layer concept."
@@ -418,22 +425,22 @@ const caseDocuments = {
             "type": "document",
             "driveId": "1W3Kk30NedZpITUTQddW-v5eQgoUBtTAL",
             "fileName": "DatVietVAC_Who_Owns_the_Fan_Promise_Full_Case.docx",
-            "label": "📄 Xem trước: DatVietVAC: Who Owns the Fan Promise? (Full Case) ↗",
-            "title": "DatVietVAC: Who Owns the Fan Promise? — Full Case"
+            "label": "📄 Preview: DatVietVAC: Who Owns the Fan Promise? (Full Case) ↗",
+            "title": "DatVietVAC: Who Owns the Fan Promise? (Full Case)"
         },
         {
             "type": "document",
             "driveId": "1AaqJP1Jls3zPXWwZW_4nOOD8dBtRfDyW",
             "fileName": "DatVietVAC_Evidence_Pack_V1.1.docx",
-            "label": "📄 Xem trước: DatVietVAC Evidence Pack V1.1 (DOCX) ↗",
-            "title": "DatVietVAC Evidence Pack V1.1"
+            "label": "📄 Preview: DatVietVAC Evidence Pack V1.1 (DOCX) ↗",
+            "title": "DatVietVAC Evidence Pack (V1.1 Forensic Audit)"
         }
     ],
     "body": "<div class=\"f-asset-bar\"><button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"document\" data-driveid=\"1W3Kk30NedZpITUTQddW-v5eQgoUBtTAL\" data-title=\"DatVietVAC: Who Owns the Fan Promise? — Full Case\">Read full case</button><a href=\"https://drive.google.com/file/d/1W3Kk30NedZpITUTQddW-v5eQgoUBtTAL/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Open in new tab\">↗</a>\n<a href=\"#part-2-evidence-pack\" class=\"f-asset-btn\">Explore evidence pack ↓</a></div>\n\n## Part 1 — Who Owns the Fan Promise?\n\n### One transaction, several operating truths\n\nOne accepted VieSHOP order can pass through product approval, production, inventory, warehouse, carrier, customer service, payment, and recovery. To the fan, the promise is much simpler: the item, the price, and a stated delivery window. This case started from the gap between those two realities.\n\nPublic reports include orders still pending weeks after purchase, repeated follow-up, broad status messages, and cases where customers describe escalation as the only way to get a clearer response. These signals do not establish VieSHOP's late-order rate or one common root cause. They do make one operating question worth testing: once a fan transaction is accepted, can the selling entity prove what it committed to, trace the obligation through execution, and close it without the customer having to force a response?\n\n> <strong>Independent outside-in case · Working V1.1 · 27 August 2026</strong>\n> \n> Evidence includes anonymized public user signals, four supplied VieSHOP screenshots, direct observations, public terms and role descriptions, and comparative cases. No internal order, warehouse, vendor, payment-gateway, or customer data was available.\n\n## What the public evidence can and cannot show\n\nVieSHOP publicly states a 20–25 working-day delivery window, but the starting event is not worded identically across every public page. Some language points to successful order placement during the initial selling period; current product pages refer to successful payment and exclude weekends and holidays. That difference matters when an old order is classified.\n\nA raw count of calendar days is therefore only a signal. The applicable term, its version, the start event, excluded days, sale mode, and any buyer-agreed revision have to be reconstructed at order level before calling a transaction late or breached.\n\nThe social evidence is also bounded. It supports recurrence across dates, SKUs, and threads, not prevalence. A large self-reported order set or monetary exposure remains unverified until matched to authoritative transaction and payment records.\n\n## The promise becomes an obligation after acceptance\n\nBefore checkout, delivery language helps sell. After acceptance, it becomes an obligation that has to reach performance or a valid resolution. The work can move between teams; the obligation cannot disappear at the handoff.\n\nThat changes the unit of analysis. The useful record is not a generic order status. It is the full path from accepted term to production, inventory allocation, warehouse receipt, packing, carrier acceptance, delivery, claim handling, refund or replacement, and final closure.\n\nEvery customer-visible state should map to one defined event and one authoritative source. “Warehouse preparation,” “still in production,” “completed,” and “refund initiated” are not interchangeable, and none of them necessarily proves that every physical, claim, and financial obligation is closed.\n\n## The backlog is the first pilot\n\nThe immediate recommendation is deliberately unglamorous: do not begin with another merchandise drop. Reconcile the unresolved backlog first, together with a sample of recently closed-but-late orders.\n\nEach order should reconstruct four layers:\n\n<ol class=\"f-numbered-list\">\n<li><strong>Transaction:</strong> accepted date, payment, SKU, sale mode, applicable promise, and any buyer-agreed revision.</li>\n<li><strong>Physical execution:</strong> production, batch, inventory, allocation, warehouse, packing, and carrier evidence.</li>\n<li><strong>Customer and CS:</strong> contacts, verified replies, complaint state, next update date, and requested recovery.</li>\n<li><strong>Closure:</strong> exception owner, next action, replacement or refund path, settlement, terminal evidence, and reason code.</li>\n</ol>\n\nPriority should follow obligation age, prepaid exposure, unknown state, severity, and remaining recovery options. Public visibility can be monitored as reputation exposure, but it should not become the service-priority algorithm. The oldest or most harmful silent case may deserve attention before the loudest complaint.\n\n## Customer service is a control surface\n\nGeneric replies do not prove that CS caused the delay. Two different mechanisms may be hiding behind the same customer experience.\n\nCS may know the verified state but lack the script, authority, or escalation rule to act. Or CS may not have access to authoritative production, inventory, fulfillment, and payment truth in the first place. The first problem points to service design and decision authority; the second points upstream to data access, state ownership, and response SLAs.\n\nThe practical metrics follow the mechanism: CS truth coverage, repeat-contact rate, escalation turnaround, customer-chasing dependency, unknown-state rate, ownerless exceptions, proactive recovery coverage, and refund settlement time.\n\n## Let the backlog choose the intervention\n\nThis case does not recommend replatforming the store or rewriting the entire merchandise process before diagnosis. The backlog is the dataset that should decide where the first change belongs.\n\nIf failures concentrate in one supplier, batch, SKU, or sale mode, the solution should narrow to that bottleneck. If customer-facing labels do not map to physical events, fix state semantics. If CS cannot retrieve verified truth, fix the order-linked exception record and upstream response path. If the main gap sits before acceptance, strengthen commitment readiness, capacity evidence, and sale-mode wording.\n\nThe main working hypothesis is that fan-facing commitments may be created faster than the operating system can make their readiness, state, and recovery visible across handoffs. The pilot should be allowed to kill that hypothesis. If most orders are within the applicable terms, state is accurate, and customer contact does not drive movement, the systemic-control explanation should be downgraded.\n\n## What is at risk\n\nThe visible customer exposure is money, waiting, uncertainty, and repeated effort. The business also carries manual recovery load, unresolved prepaid value, complaint-handling duties, and possible refund or replacement cost.\n\nArtist and IP exposure is more indirect but still worth measuring. Fans may associate a fulfillment failure with VieSHOP, the show, the artist, the carrier, or nobody clearly. The business owns the operational failure; the artist may absorb reputational spillover without being its cause or legal seller.\n\n## Current takeaway\n\nA storefront issue can be redesigned. An accepted transaction has to be performed as agreed or resolved through a valid alternative. Before VieSHOP asks for the next fan transaction, it should be able to account for the ones it has already accepted.\n\nThis case uses only the evidence needed to test accepted-order accountability. The wider research produced a broader evidence pack across the DatVietVAC ecosystem. For readers who want to inspect that research trail, Part 2 explains what is inside, what it can support, and what it cannot.\n\n---\n\n## Part 2 — Evidence Pack\n\n### The research trail behind the case\n\nThe VieSHOP case above is deliberately narrow. It uses the evidence needed to examine accepted-order accountability, customer recovery, and possible spillover to artist or IP trust.\n\nThe research that led to it was wider. The Evidence Pack preserves observations across merchandise and fulfillment, ticketing, voting, production capacity and artist wellbeing, content and IP recognition, and public operating roles. Some signals were strong enough to support the case. Others remain questions to keep open.\n\n### Why this pack exists\n\nA readable case has to simplify. Evidence should not.\n\nThe pack keeps direct observations, recurring public signals, single-source reports, and working hypotheses visibly separate. It also records what would change confidence in each interpretation.\n\nIts purpose is not to prove that DatVietVAC has one common operating problem. Different incidents may have different causes, owners, and levels of significance. The pack exists so those differences are not lost when the research is compressed into a narrative.\n\n### What is inside\n\nThe wider evidence trail covers:\n\n<ul class=\"f-list\">\n<li>VieSHOP storefront, merchandise fulfillment, order status, customer service, and recovery</li>\n<li>product integrity, packing, and quality-control signals</li>\n<li>ticket purchase, lineup certainty, and downstream fan commitments</li>\n<li>voting entitlement, revocation, and reconciliation</li>\n<li>production capacity, scheduling, and artist wellbeing</li>\n<li>content, AI, and IP recognition signals</li>\n<li>public job descriptions, functional scopes, and handoff questions</li>\n</ul>\n\nOnly a subset supports the accepted-order case above. The remaining clusters are adjacent research, not proof of the same root cause.\n\n### How to read the evidence\n\nEach item is weighted by what its source can actually support:\n\n<div class=\"f-table-wrap\"><table class=\"f-table\"><thead><tr><th>Code</th><th>Evidence type</th><th>Appropriate use</th></tr></thead><tbody><tr><td><strong>A</strong></td><td>Direct artifact or observation</td><td>Strongest for what was visible; not necessarily for root cause.</td></tr><tr><td><strong>B</strong></td><td>Recurring independent public signal</td><td>Supports recurrence and pattern detection; does not establish prevalence.</td></tr><tr><td><strong>C</strong></td><td>Single-source public or user report</td><td>Useful for triage and hypothesis generation; claims remain unverified unless corroborated.</td></tr><tr><td><strong>D</strong></td><td>Working hypothesis or interpretation</td><td>An analytical branch to test against operational data, not an established finding.</td></tr></tbody></table></div>\n\nA recurring social signal does not establish prevalence. Several claims from one user or one parent thread do not automatically become independent incidents. The four supplied screenshots form one evidence chain, not four separate customer cases. A screenshot can establish the language or state shown to a customer without revealing the internal event behind it.\n\n### What it can and cannot support\n\nThe pack can support pattern detection, operating questions, order-level reconstruction, bounded hypotheses, and a clearer list of internal evidence needed next.\n\nIt does not reveal VieSHOP's overall late-order rate, median fulfillment time, internal SOP, exact ownership model or org chart, supplier performance, warehouse logs, payment-gateway state, management intent, or one common root cause. It does not characterize delayed orders as fraud or criminal conduct.\n\n### How it relates to this case\n\n<strong>Who Owns the Fan Promise?</strong> takes one narrow slice of the pack and asks a testable operating question: once a fan transaction is accepted, can the obligation be traced through execution and closed without the customer having to become the monitoring system?\n\nThe Evidence Pack keeps the broader picture available without forcing every signal into that explanation. Some clusters may become separate cases later. Others may disappear when stronger evidence becomes available. Both outcomes are useful.\n\n<div class=\"f-asset-bar\"><button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"document\" data-driveid=\"1AaqJP1Jls3zPXWwZW_4nOOD8dBtRfDyW\" data-title=\"DatVietVAC Evidence Pack V1.1\">View evidence pack</button><a href=\"https://drive.google.com/file/d/1AaqJP1Jls3zPXWwZW_4nOOD8dBtRfDyW/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Open in new tab\">↗</a>\n<a href=\"https://drive.google.com/uc?export=download&id=1AaqJP1Jls3zPXWwZW_4nOOD8dBtRfDyW\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-btn\">Download DOCX</a></div>"
 },
   "/work/explainable-trust": {
     "assets": [],
-    "body": "<asset-bar>\n<a href=\"https://app.phamthanhphu.io.vn/\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-btn accent\" style=\"padding:10px 20px;font-size:14px;\">⚡ Khởi chạy Explainable Trust App (app.phamthanhphu.io.vn) ↗</a>\n</asset-bar>\n\n> **When a situation is still vague, people naturally start connecting the missing pieces. Explainable Trust moves that reconstruction out of memory and into an inspectable record: what was reported, what is supported, what is inferred, what changed, and what is still unknown.**\n> \n\n> **Type:** Built Product Sample\n**Stage:** Completed sample app · Runnable locally\n**Evidence basis:** Runnable application, implemented end-to-end case flows, repository behavior, automated tests, and product screenshots\n**Last updated:** August 2026\n**Boundary:** The sample demonstrates case reconstruction, correction, provenance, local persistence, bounded public retrieval, and export. It is not deployed as a production service and does not include shared accounts, cloud collaboration, or an operational verification layer.\n> \n\n---\n\n## Why I built this\n\nThe app started from a simple observation: when information is incomplete, the mind does not like leaving the story unfinished. We connect a message to a screenshot, a remembered detail to a public rule, one person's account to another source. That is useful, but over time it becomes difficult to remember where the evidence ended and the reconstruction began.\n\nThe burden gets heavier when a situation unfolds across messages, files, corrections, public sources, and multiple possible explanations. The person has to keep reconstructing the timeline, evidence, assumptions, unresolved questions, and next step in their head.\n\nI built Explainable Trust to externalize that work. The product does not try to make uncertainty disappear by producing a more confident answer. It keeps the current state inspectable: what is known, what is only reported, what is inferred, what remains open, and how the reasoning changed when new information arrived.\n\nCustomer support and disputes are one use case, but not the boundary. The same problem appears in purchases, public events, personal decisions, and smaller everyday situations where facts arrive gradually and from sources with different strengths.\n\n---\n\n## The product question\n\nAn uncertain situation rarely arrives as a clean set of facts. It arrives as fragments with different strengths: a first-person statement, a document, an image, a public rule, a later correction, or a claim that may still be unsupported. The product needs to help reconstruct the situation without collapsing those differences into one confident narrative.\n\nThe product question is:\n\n> **Can an AI-assisted workspace help a person reconstruct a situation under uncertainty without losing the distinction between evidence, report, inference, and what is still unknown?**\n> \n\nBecause that state can change, a second requirement follows: new information should update the case without erasing how the previous state was constructed.\n\nThe working flow is:\n\n> **Describe → reconstruct → inspect → trace reasoning → correct → reconcile → expose gaps → decide what to check next**\n> \n\n## How the app works\n\nThe core design choice is simple: **the model can propose changes, but the application owns the record.**\n\n1. **Start or import a case.** The application creates a local case ledger in the browser rather than treating the chat transcript as the record.\n2. **Submit a statement and optional files.** A user can add text, PDFs, images, or text-based files, then choose **Analysis only** or **Web-assisted** for that run.\n3. **Preserve the intake before interpreting it.** The original statement remains verbatim. Uploaded files receive case-linked metadata and a SHA-256 fixity hash.\n4. **Let the model propose a change, not rewrite the case.** Gemini returns typed operations for events, claims, evidence relationships, gaps, actions, and reasoning.\n5. **Validate before committing.** Application code allocates canonical IDs, reconciles corrections against existing entities, validates the complete candidate revision, and commits it atomically. If validation fails, the last accepted case remains unchanged and the rejected run is retained for audit.\n6. **Project one ledger into several views.** The same accepted state appears as a readable response, timeline, findings, evidence inventory, gaps and actions, interactive case and reasoning DAGs, and a Toulmin argumentation view. Clickable IDs connect each view back to its sources. Selecting a node highlights the connections leading to it, so a user can trace a claim or finding through the reasoning that supports, qualifies, or leaves it unresolved instead of visually scanning the whole graph.\n7. **Carry the case forward.** A later message creates a child revision. Clear corrections retain stable entity IDs; ambiguous corrections fail closed instead of silently creating a duplicate.\n8. **Export or import through separate paths.** The user can download a case-view JSON, copy a Markdown case report or provenance dossier, and print the case view. The importer separately accepts a valid Ledger V3 JSON; the current export and import formats are not a one-click backup-and-restore pair.\n\n## Working demo — one case, two messages\n\nThis small test starts with a traffic-accident report. The user describes the collision, suspected drunk driving and leaving the scene, vehicle damage, an X-ray visit, and uncertainty about compensation and legal handling. No official police or medical evidence has been added yet.\n\n### 1 · The first message becomes a case, not only an answer\n\nThe first intake is projected into a case view with a user goal, timeline events, findings, unresolved gaps, and proposed next actions. The response can still explain the current situation in plain language, but the structured record remains separately inspectable.\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 14-52-05 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1easUBv-D5P4vsfxihyQbPHmUSTryLCbf\" caption=\"Screenshot 2026-08-19 at 14-52-05 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\nInitial reconstruction from the first user report. The workspace keeps narrative, structured case state, gaps, and next actions visible at the same time.\n\n### 2 · A later correction changes the affected state\n\nIn the second message, the user corrects the accident time from **18:30 to 19:15** after checking dashcam data and adds information about the other driver. The correction is kept as a new source statement rather than silently replacing the earlier one.\n\nThe useful behavior is not that the model can notice a correction. It is that the application can reconcile the affected event and claim while preserving the earlier source, the new source, and the revision path between them.\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 14-58-41 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1NEv9CWDj4uU7Pk4HSv0WrDs3RP2iMrxM\" caption=\"Screenshot 2026-08-19 at 14-58-41 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\nSecond intake after the correction. The current case reflects the updated time while still exposing source IDs and revision change.\n\n### 3 · Unknowns stay visible instead of being completed by the model\n\nThe case still has no admitted evidence for the official accident record or the medical result. Those remain open gaps, with actions asking for scene images/video and medical documents. A source-linked finding can also preserve its scope and limitation rather than presenting a reported statement as independently verified fact.\n\nThat distinction matters here because the product is not trying to turn a user narrative into a verified legal conclusion. It is trying to make **reported state, supporting evidence, missing evidence, and next action** easier to separate.\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 14-59-09 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1ulV9X6viT2FBtVnvate7RjLbNRDKAPMW\" caption=\"Screenshot 2026-08-19 at 14-59-09 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\n### 4 · Provenance can be inspected as a network\n\nThe case graph makes the dependency structure visible: user statements connect to events and claims; those records expose unresolved gaps; gaps connect to proposed actions. A correction can therefore be inspected for what it changed downstream instead of disappearing inside a rewritten summary.\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 15-00-18 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1LcHsTBzFbS_HzFEcsJm2pu5WJACEfaZT\" caption=\"Screenshot 2026-08-19 at 15-00-18 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 15-00-29 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1H50sY3C-uR0QZ6tliPTNr3NB0AEyAkKi\" caption=\"Screenshot 2026-08-19 at 15-00-29 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\nCase-wide provenance view: user statements → events / claims → gaps → actions.\n\n## Product decisions\n\n| Decision | What it protects |\n| --- | --- |\n| **Local-first authoritative case state** | Case data and preserved attachments remain in browser storage rather than making the model conversation the source of truth. |\n| **Immutable raw intake** | A later interpretation or correction does not rewrite what the user originally submitted. |\n| **Model proposes; application accepts** | The model can suggest typed operations, but canonical IDs, validation, reconciliation, and committed case state remain application-owned. |\n| **Stable-ID correction** | A correction updates the affected entity when the target is clear instead of silently creating a duplicate record. |\n| **Explicit gaps and actions** | Missing evidence stays visible and can produce a concrete next step without pretending that the missing fact is already known. |\n| **Bounded public retrieval** | Web-assisted runs can request public information without sending the raw private case to the retrieval provider. |\n\n## What the completed sample includes\n\n| Capability | Implemented behavior |\n| --- | --- |\n| **Case workspace** | Create, rename, archive, restore, delete, import, and switch between locally stored cases. |\n| **Text and file intake** | Submit a statement with optional PDF, image, or text-based files; drag-and-drop is supported and the client applies a 12 MB total attachment limit per intake. |\n| **Structured reconstruction** | Project accepted intake into a user goal, timeline events, findings and claims, evidence relationships, open gaps, proposed actions, and an explainable response. |\n| **Corrections and revisions** | Preserve the original statement, update a clearly identified entity under its stable ID, record the revision delta, and retain earlier revisions. |\n| **Traceable inspection** | Use clickable source IDs, search and filtered record views, an evidence detail panel, a case-wide provenance graph, and a structured reasoning graph. |\n| **Two run modes** | Use the submitted record alone, or request bounded public retrieval from first-party and responsible public-authority sources when a public information need remains. |\n| **Local persistence and recovery** | Keep the authoritative ledger, run audits, attachments, and display metadata in browser IndexedDB; preserve the last accepted record after provider or validation failure. |\n| **Language and export** | Switch the interface across English, Vietnamese, Spanish, French, Chinese, and Japanese while preserving source text; export JSON, Markdown reports, a provenance dossier, or a printable case view. |\n\nThe architectural constraint is deliberate: **a provider response is not the case**. A candidate revision becomes authoritative only after application-side reconciliation, full-ledger validation, and successful browser commit.\n\n## What the sample deliberately does not include\n\n- **No truth or legal determination.** It does not independently prove that a user statement is true, decide liability, authenticate an object, determine eligibility, or guarantee that legal or policy analysis is correct.\n- **No automatic access to private systems.** It has no connector to a police, hospital, insurer, marketplace, employer, or customer account. Case-specific confirmation must come from a user-supplied record or a direct response from the responsible organization.\n- **No shared cloud workspace.** There are no user accounts, server-side case database, team permissions, real-time collaboration, or automatic cross-device sync. The authoritative case remains in the current browser.\n- **No round-trip backup package.** The current JSON export is a projected case view for review or downstream use, while import accepts the authoritative Ledger V3 format. They are not yet a single portable backup-and-restore flow.\n- **No fully offline model analysis.** In a live run, the submitted statement and supported files are sent through the application server to the configured Gemini provider. The narrower privacy boundary applies to public-web retrieval: Tavily receives only a validated public query and official-domain filters, not the raw private case.\n- **No unrestricted web research.** Public results are admitted only when a direct first-party or responsible public-authority source can support the specific public claim. Media, forums, social posts, aggregators, and model memory cannot close an evidence gap.\n- **No forced correction matching.** If the target of a correction is ambiguous, the application rejects the candidate change rather than guessing or creating a silent duplicate.\n- **No certified chain of custody.** File hashes help detect content changes, but they are not digital signatures, identity verification, notarization, or independent evidence certification.\n- **No production assurance.** The sample does not claim production-grade authentication, security/privacy audit, monitoring, service availability, regulatory compliance, or readiness for unrestricted high-stakes deployment.\n\n<aside>\n🧪\n\n**Scope statement**\n\nThis is a completed functional sample for testing traceable case reconstruction. Its output remains a structured working record for human inspection, not a legal opinion, verified investigation result, or automated decision.\n\n</aside>\n\n## If I extended the sample\n\nThe scoped sample is complete, but the original product direction was broader than a standalone case workspace. The longer-term idea is a privacy-preserving resolution channel in which the user keeps control of the case, linked organizations can update the process without taking ownership of the user's record, and the product learns from patterns only when users explicitly allow it.\n\nA real-world pilot would first test the current product behavior:\n\n1. **Correction reliability:** when do users phrase a correction clearly enough for stable-ID reconciliation, and when should the system stop and ask?\n2. **Evidence behavior:** do users understand the difference between reported claims, admitted evidence, inference, and unresolved gaps?\n3. **Recovery burden:** after several revisions, can a user still understand what changed and what they need to do next without reading the full history?\n4. **Transfer:** does the same case structure remain useful outside disputes, for example customer-support escalation, insurance, workplace incidents, or other evidence-heavy pathways?\n\n### From case workspace to resolution channel\n\nThe next product step would not be to make the app know more about the user. It would be to let the case move between parties while revealing less identity than a normal support workflow.\n\nThe design goal would be **anonymous at the application layer**: the app would not need a conventional user profile, and the server would operate on opaque case identifiers rather than treating real-world identity as part of the product. A user could choose to link a case to a company, platform, insurer, public body, or other responsible party through a bounded case channel. The linked party could then send requests for evidence, status changes, review outcomes, deadlines, or next actions back into the same case record.\n\nFor the user, this would turn repeated support contact into a visible process: **what the organization has received, what is still missing, who or what is currently waiting, what changed, and what happens next.** For the organization, especially customer service, the same structure could reduce repeated explanation, duplicate evidence requests, inconsistent handoffs, and uncertainty about the current case state.\n\n### A consented analytics model, not silent data extraction\n\nBy default, the individual case would remain private. A separate opt-in would ask whether the user wants to contribute de-identified case signals to aggregate analytics.\n\nThe commercial hypothesis is that linked organizations would pay for those aggregate operational signals, not for access to an identifiable person's case. Useful outputs could include where resolution pathways repeatedly stall, which evidence is most often missing, where customers need repeated contact, how long different states persist, and which handoffs create avoidable recovery burden.\n\nThat creates a different incentive structure from advertising or hidden profiling: the user gets a clearer resolution pathway and can choose whether their de-identified experience contributes to system learning; the organization gets a better view of recurring operational friction; and the product earns from the analytics or integration layer rather than from making identity itself more valuable.\n\n<aside>\n↳\n\n**Future-product boundary**\n\nNone of this channel, identity-minimization, organization-linking, notification, or analytics model is implemented in the completed sample. Production claims about anonymity, encryption, de-identification, consent, or data governance would require a separate architecture and security/privacy validation.\n\n</aside>\n\n## Build and repository\n\nThe public repository contains the runnable application, server boundary, Ledger V3 contract, deterministic proposal application, local persistence, retrieval controls, automated tests, evaluation configuration, and runtime notes.\n\n[Open Explainable-App on GitHub →](https://github.com/Yunero1206/Explainable-App)\n\n[Read the runtime architecture →](https://github.com/Yunero1206/Explainable-App/blob/main/docs/ARCHITECTURE.md) · [Read the public-retrieval boundary →](https://github.com/Yunero1206/Explainable-App/blob/main/docs/AUTHORITATIVE_RETRIEVAL.md)\n\n## Current takeaway\n\nThe prototype is most useful to me as a test of one product assumption: **explainability is not only a better answer. It is the ability to inspect how a changing case reached its current state, what still supports that state, and what remains unresolved.**"
+    "body": "<asset-bar>\n<a href=\"https://app.phamthanhphu.io.vn/\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-btn accent\" style=\"padding:10px 20px;font-size:14px;\">⚡ Launch Live App — Explainable Trust (app.phamthanhphu.io.vn) ↗</a>\n</asset-bar>\n\n> **When a situation is still vague, people naturally start connecting the missing pieces. Explainable Trust moves that reconstruction out of memory and into an inspectable record: what was reported, what is supported, what is inferred, what changed, and what is still unknown.**\n> \n\n> **Type:** Built Product Sample\n**Stage:** Completed sample app · Runnable locally\n**Evidence basis:** Runnable application, implemented end-to-end case flows, repository behavior, automated tests, and product screenshots\n**Last updated:** August 2026\n**Boundary:** The sample demonstrates case reconstruction, correction, provenance, local persistence, bounded public retrieval, and export. It is not deployed as a production service and does not include shared accounts, cloud collaboration, or an operational verification layer.\n> \n\n---\n\n## Why I built this\n\nThe app started from a simple observation: when information is incomplete, the mind does not like leaving the story unfinished. We connect a message to a screenshot, a remembered detail to a public rule, one person's account to another source. That is useful, but over time it becomes difficult to remember where the evidence ended and the reconstruction began.\n\nThe burden gets heavier when a situation unfolds across messages, files, corrections, public sources, and multiple possible explanations. The person has to keep reconstructing the timeline, evidence, assumptions, unresolved questions, and next step in their head.\n\nI built Explainable Trust to externalize that work. The product does not try to make uncertainty disappear by producing a more confident answer. It keeps the current state inspectable: what is known, what is only reported, what is inferred, what remains open, and how the reasoning changed when new information arrived.\n\nCustomer support and disputes are one use case, but not the boundary. The same problem appears in purchases, public events, personal decisions, and smaller everyday situations where facts arrive gradually and from sources with different strengths.\n\n---\n\n## The product question\n\nAn uncertain situation rarely arrives as a clean set of facts. It arrives as fragments with different strengths: a first-person statement, a document, an image, a public rule, a later correction, or a claim that may still be unsupported. The product needs to help reconstruct the situation without collapsing those differences into one confident narrative.\n\nThe product question is:\n\n> **Can an AI-assisted workspace help a person reconstruct a situation under uncertainty without losing the distinction between evidence, report, inference, and what is still unknown?**\n> \n\nBecause that state can change, a second requirement follows: new information should update the case without erasing how the previous state was constructed.\n\nThe working flow is:\n\n> **Describe → reconstruct → inspect → trace reasoning → correct → reconcile → expose gaps → decide what to check next**\n> \n\n## How the app works\n\nThe core design choice is simple: **the model can propose changes, but the application owns the record.**\n\n1. **Start or import a case.** The application creates a local case ledger in the browser rather than treating the chat transcript as the record.\n2. **Submit a statement and optional files.** A user can add text, PDFs, images, or text-based files, then choose **Analysis only** or **Web-assisted** for that run.\n3. **Preserve the intake before interpreting it.** The original statement remains verbatim. Uploaded files receive case-linked metadata and a SHA-256 fixity hash.\n4. **Let the model propose a change, not rewrite the case.** Gemini returns typed operations for events, claims, evidence relationships, gaps, actions, and reasoning.\n5. **Validate before committing.** Application code allocates canonical IDs, reconciles corrections against existing entities, validates the complete candidate revision, and commits it atomically. If validation fails, the last accepted case remains unchanged and the rejected run is retained for audit.\n6. **Project one ledger into several views.** The same accepted state appears as a readable response, timeline, findings, evidence inventory, gaps and actions, interactive case and reasoning DAGs, and a Toulmin argumentation view. Clickable IDs connect each view back to its sources. Selecting a node highlights the connections leading to it, so a user can trace a claim or finding through the reasoning that supports, qualifies, or leaves it unresolved instead of visually scanning the whole graph.\n7. **Carry the case forward.** A later message creates a child revision. Clear corrections retain stable entity IDs; ambiguous corrections fail closed instead of silently creating a duplicate.\n8. **Export or import through separate paths.** The user can download a case-view JSON, copy a Markdown case report or provenance dossier, and print the case view. The importer separately accepts a valid Ledger V3 JSON; the current export and import formats are not a one-click backup-and-restore pair.\n\n## Working demo — one case, two messages\n\nThis small test starts with a traffic-accident report. The user describes the collision, suspected drunk driving and leaving the scene, vehicle damage, an X-ray visit, and uncertainty about compensation and legal handling. No official police or medical evidence has been added yet.\n\n### 1 · The first message becomes a case, not only an answer\n\nThe first intake is projected into a case view with a user goal, timeline events, findings, unresolved gaps, and proposed next actions. The response can still explain the current situation in plain language, but the structured record remains separately inspectable.\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 14-52-05 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1easUBv-D5P4vsfxihyQbPHmUSTryLCbf\" caption=\"Screenshot 2026-08-19 at 14-52-05 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\nInitial reconstruction from the first user report. The workspace keeps narrative, structured case state, gaps, and next actions visible at the same time.\n\n### 2 · A later correction changes the affected state\n\nIn the second message, the user corrects the accident time from **18:30 to 19:15** after checking dashcam data and adds information about the other driver. The correction is kept as a new source statement rather than silently replacing the earlier one.\n\nThe useful behavior is not that the model can notice a correction. It is that the application can reconcile the affected event and claim while preserving the earlier source, the new source, and the revision path between them.\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 14-58-41 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1NEv9CWDj4uU7Pk4HSv0WrDs3RP2iMrxM\" caption=\"Screenshot 2026-08-19 at 14-58-41 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\nSecond intake after the correction. The current case reflects the updated time while still exposing source IDs and revision change.\n\n### 3 · Unknowns stay visible instead of being completed by the model\n\nThe case still has no admitted evidence for the official accident record or the medical result. Those remain open gaps, with actions asking for scene images/video and medical documents. A source-linked finding can also preserve its scope and limitation rather than presenting a reported statement as independently verified fact.\n\nThat distinction matters here because the product is not trying to turn a user narrative into a verified legal conclusion. It is trying to make **reported state, supporting evidence, missing evidence, and next action** easier to separate.\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 14-59-09 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1ulV9X6viT2FBtVnvate7RjLbNRDKAPMW\" caption=\"Screenshot 2026-08-19 at 14-59-09 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\n### 4 · Provenance can be inspected as a network\n\nThe case graph makes the dependency structure visible: user statements connect to events and claims; those records expose unresolved gaps; gaps connect to proposed actions. A correction can therefore be inspected for what it changed downstream instead of disappearing inside a rewritten summary.\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 15-00-18 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1LcHsTBzFbS_HzFEcsJm2pu5WJACEfaZT\" caption=\"Screenshot 2026-08-19 at 15-00-18 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\n\n<diagram-card title=\"Screenshot 2026-08-19 at 15-00-29 Explainable Trust — Traceable Case Reconstruction.png\" driveid=\"1H50sY3C-uR0QZ6tliPTNr3NB0AEyAkKi\" caption=\"Screenshot 2026-08-19 at 15-00-29 Explainable Trust — Traceable Case Reconstruction.png\"></diagram-card>\n\n\nCase-wide provenance view: user statements → events / claims → gaps → actions.\n\n## Product decisions\n\n| Decision | What it protects |\n| --- | --- |\n| **Local-first authoritative case state** | Case data and preserved attachments remain in browser storage rather than making the model conversation the source of truth. |\n| **Immutable raw intake** | A later interpretation or correction does not rewrite what the user originally submitted. |\n| **Model proposes; application accepts** | The model can suggest typed operations, but canonical IDs, validation, reconciliation, and committed case state remain application-owned. |\n| **Stable-ID correction** | A correction updates the affected entity when the target is clear instead of silently creating a duplicate record. |\n| **Explicit gaps and actions** | Missing evidence stays visible and can produce a concrete next step without pretending that the missing fact is already known. |\n| **Bounded public retrieval** | Web-assisted runs can request public information without sending the raw private case to the retrieval provider. |\n\n## What the completed sample includes\n\n| Capability | Implemented behavior |\n| --- | --- |\n| **Case workspace** | Create, rename, archive, restore, delete, import, and switch between locally stored cases. |\n| **Text and file intake** | Submit a statement with optional PDF, image, or text-based files; drag-and-drop is supported and the client applies a 12 MB total attachment limit per intake. |\n| **Structured reconstruction** | Project accepted intake into a user goal, timeline events, findings and claims, evidence relationships, open gaps, proposed actions, and an explainable response. |\n| **Corrections and revisions** | Preserve the original statement, update a clearly identified entity under its stable ID, record the revision delta, and retain earlier revisions. |\n| **Traceable inspection** | Use clickable source IDs, search and filtered record views, an evidence detail panel, a case-wide provenance graph, and a structured reasoning graph. |\n| **Two run modes** | Use the submitted record alone, or request bounded public retrieval from first-party and responsible public-authority sources when a public information need remains. |\n| **Local persistence and recovery** | Keep the authoritative ledger, run audits, attachments, and display metadata in browser IndexedDB; preserve the last accepted record after provider or validation failure. |\n| **Language and export** | Switch the interface across English, Vietnamese, Spanish, French, Chinese, and Japanese while preserving source text; export JSON, Markdown reports, a provenance dossier, or a printable case view. |\n\nThe architectural constraint is deliberate: **a provider response is not the case**. A candidate revision becomes authoritative only after application-side reconciliation, full-ledger validation, and successful browser commit.\n\n## What the sample deliberately does not include\n\n- **No truth or legal determination.** It does not independently prove that a user statement is true, decide liability, authenticate an object, determine eligibility, or guarantee that legal or policy analysis is correct.\n- **No automatic access to private systems.** It has no connector to a police, hospital, insurer, marketplace, employer, or customer account. Case-specific confirmation must come from a user-supplied record or a direct response from the responsible organization.\n- **No shared cloud workspace.** There are no user accounts, server-side case database, team permissions, real-time collaboration, or automatic cross-device sync. The authoritative case remains in the current browser.\n- **No round-trip backup package.** The current JSON export is a projected case view for review or downstream use, while import accepts the authoritative Ledger V3 format. They are not yet a single portable backup-and-restore flow.\n- **No fully offline model analysis.** In a live run, the submitted statement and supported files are sent through the application server to the configured Gemini provider. The narrower privacy boundary applies to public-web retrieval: Tavily receives only a validated public query and official-domain filters, not the raw private case.\n- **No unrestricted web research.** Public results are admitted only when a direct first-party or responsible public-authority source can support the specific public claim. Media, forums, social posts, aggregators, and model memory cannot close an evidence gap.\n- **No forced correction matching.** If the target of a correction is ambiguous, the application rejects the candidate change rather than guessing or creating a silent duplicate.\n- **No certified chain of custody.** File hashes help detect content changes, but they are not digital signatures, identity verification, notarization, or independent evidence certification.\n- **No production assurance.** The sample does not claim production-grade authentication, security/privacy audit, monitoring, service availability, regulatory compliance, or readiness for unrestricted high-stakes deployment.\n\n<aside>\n🧪\n\n**Scope statement**\n\nThis is a completed functional sample for testing traceable case reconstruction. Its output remains a structured working record for human inspection, not a legal opinion, verified investigation result, or automated decision.\n\n</aside>\n\n## If I extended the sample\n\nThe scoped sample is complete, but the original product direction was broader than a standalone case workspace. The longer-term idea is a privacy-preserving resolution channel in which the user keeps control of the case, linked organizations can update the process without taking ownership of the user's record, and the product learns from patterns only when users explicitly allow it.\n\nA real-world pilot would first test the current product behavior:\n\n1. **Correction reliability:** when do users phrase a correction clearly enough for stable-ID reconciliation, and when should the system stop and ask?\n2. **Evidence behavior:** do users understand the difference between reported claims, admitted evidence, inference, and unresolved gaps?\n3. **Recovery burden:** after several revisions, can a user still understand what changed and what they need to do next without reading the full history?\n4. **Transfer:** does the same case structure remain useful outside disputes, for example customer-support escalation, insurance, workplace incidents, or other evidence-heavy pathways?\n\n### From case workspace to resolution channel\n\nThe next product step would not be to make the app know more about the user. It would be to let the case move between parties while revealing less identity than a normal support workflow.\n\nThe design goal would be **anonymous at the application layer**: the app would not need a conventional user profile, and the server would operate on opaque case identifiers rather than treating real-world identity as part of the product. A user could choose to link a case to a company, platform, insurer, public body, or other responsible party through a bounded case channel. The linked party could then send requests for evidence, status changes, review outcomes, deadlines, or next actions back into the same case record.\n\nFor the user, this would turn repeated support contact into a visible process: **what the organization has received, what is still missing, who or what is currently waiting, what changed, and what happens next.** For the organization, especially customer service, the same structure could reduce repeated explanation, duplicate evidence requests, inconsistent handoffs, and uncertainty about the current case state.\n\n### A consented analytics model, not silent data extraction\n\nBy default, the individual case would remain private. A separate opt-in would ask whether the user wants to contribute de-identified case signals to aggregate analytics.\n\nThe commercial hypothesis is that linked organizations would pay for those aggregate operational signals, not for access to an identifiable person's case. Useful outputs could include where resolution pathways repeatedly stall, which evidence is most often missing, where customers need repeated contact, how long different states persist, and which handoffs create avoidable recovery burden.\n\nThat creates a different incentive structure from advertising or hidden profiling: the user gets a clearer resolution pathway and can choose whether their de-identified experience contributes to system learning; the organization gets a better view of recurring operational friction; and the product earns from the analytics or integration layer rather than from making identity itself more valuable.\n\n<aside>\n↳\n\n**Future-product boundary**\n\nNone of this channel, identity-minimization, organization-linking, notification, or analytics model is implemented in the completed sample. Production claims about anonymity, encryption, de-identification, consent, or data governance would require a separate architecture and security/privacy validation.\n\n</aside>\n\n## Build and repository\n\nThe public repository contains the runnable application, server boundary, Ledger V3 contract, deterministic proposal application, local persistence, retrieval controls, automated tests, evaluation configuration, and runtime notes.\n\n[Open Explainable-App on GitHub →](https://github.com/Yunero1206/Explainable-App)\n\n[Read the runtime architecture →](https://github.com/Yunero1206/Explainable-App/blob/main/docs/ARCHITECTURE.md) · [Read the public-retrieval boundary →](https://github.com/Yunero1206/Explainable-App/blob/main/docs/AUTHORITATIVE_RETRIEVAL.md)\n\n## Current takeaway\n\nThe prototype is most useful to me as a test of one product assumption: **explainability is not only a better answer. It is the ability to inspect how a changing case reached its current state, what still supports that state, and what remains unresolved.**"
   },
   "/work/vietnam-diamond-market-crisis": {
     "assets": [
@@ -441,8 +448,8 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "1pQxtn0d5nI856gVi3g8BsUPgaglsDKm6",
         "fileName": "Vietnam_Diamond_Market_Crisis_Case_Study_2_Full_Paper.docx",
-        "label": "📄 Xem trước: Vietnam_Diamond_Market_Crisis_Case_Study_2_Full_Paper.docx ↗",
-        "title": "Vietnam Diamond Market Crisis Case Study 2 Full Paper"
+        "label": "📄 Preview: Vietnam_Diamond_Market_Crisis_Case_Study_2_Full_Paper.docx ↗",
+        "title": "Vietnam’s 2026 Diamond-Market Crisis (Forensic Paper)"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1pQxtn0d5nI856gVi3g8BsUPgaglsDKm6\" data-title=\"Vietnam Diamond Market Crisis Case Study 2 Full Paper (PDF)\">📄 Vietnam Diamond Market Crisis Case Study 2 Full Paper (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1pQxtn0d5nI856gVi3g8BsUPgaglsDKm6/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n> **The more public records I collected, the less comfortable I was with a single story about “the crisis.” Investigation reporting, company responses, review announcements, buyback policies, and market signals were visible together, but the evidence did not show that they all shared one cause.**\n> \n\n> **Type:** Evidence-First Case Study\n**Stage:** Public working paper with bounded findings\n**Research object:** Vietnam’s diamond-market crisis; PNJ is a focal observation site, not the object itself\n**Evidence cut-off:** 21 July 2026\n**Boundary:** Visibility does not establish representativeness, origin, severity, guilt, product exposure, execution failure, or a market-wide causal chain.\n> \n\n## Reading & Audit Route\n\n**Quick orientation:** The crisis did not become visible in one place → The most important finding is an evidence boundary → What the paper concludes\n\n**Full reconstruction:** Pre-crisis baseline → What changed in 2026 → What the PNJ conjunction reveals\n\n**Audit path:** Main-paper Claim ID → thematic appendix → Source ID → preserved public source\n\n> **Full paper:**\n> \n> \n> <button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1pQxtn0d5nI856gVi3g8BsUPgaglsDKm6\" data-title=\"Vietnam Diamond Market Crisis Case Study 2 Full Paper.docx (PDF)\">📄 Vietnam Diamond Market Crisis Case Study 2 Full Paper.docx (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1pQxtn0d5nI856gVi3g8BsUPgaglsDKm6/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n> \n\n---\n\n## The crisis did not become visible in one place\n\nBy 2026, public uncertainty around Vietnam’s diamond market was no longer confined to product quality or technical certification.\n\nInvestigation reporting, questions about provenance and verification, company statements, board-approved external reviews, published buyback policies, and capital-market observation entered the same public information environment.\n\nThese developments did not necessarily share one cause.\n\nThey did not affect every actor in the same way.\n\nAnd their coexistence does not prove guilt, product exposure, a market-wide liquidity event, or a single causal chain.\n\nThe research problem is therefore not simply:\n\n> *Did trust collapse?*\n> \n\nIt is:\n\n> **What can be reconstructed from observable events, stakeholder decisions, enterprise responses, and public records—and where does the evidence stop?**\n> \n\n---\n\n## Research scope\n\nThe research object is the **market crisis**, not PNJ as a company.\n\nPNJ is used as a focal observation site because product, verification, repurchase policy, enterprise response, governance disclosure, and market observation intersect in one unusually dense public record.\n\nThat density makes selected interactions easier to inspect; it does not make PNJ a representative sample of the entire Vietnamese diamond market. **[C-001, C-026, C-027]**\n\n---\n\n## What existed before the crisis\n\nThe public record shows that the arrangements scrutinized in 2026 were not created by the controversy.\n\nThey already existed.\n\n### Diamond was an established business category\n\nPNJ had publicly treated diamond and gemstone jewellery as an important business category since at least 2015. Its observable portfolio subsequently broadened across bridal, premium, gifting, self-purchase, men’s, and lifestyle propositions. **[C-002, C-004]**\n\n### Verification had an institutional presence\n\nPNJ Lab—and later the P-Lab identity—provided a publicly visible technical verification infrastructure before the 2026 controversy. **[C-003, C-010]**\n\nThis establishes that a verification arrangement existed.\n\nIt does **not** establish that every part of the arrangement operated perfectly, that every institutional boundary was independent, or that the arrangement could absorb every later form of scrutiny.\n\n### Buyback and upgrade were part of the ownership journey\n\nPublished policies and promotions show that repurchase and upgrade were established customer-lifecycle mechanisms rather than concepts invented after the crisis. **[C-005]**\n\nBut three dimensions must remain separate:\n\n1. published valuation and eligibility terms;\n2. customer interpretation of those terms;\n3. operational execution under real demand.\n\nThe public record can compare policy architecture. It cannot automatically reconstruct execution. **[C-006, C-007]**\n\n### Scale was visible; resilience was not\n\nPNJ had significant publicly documented retail, manufacturing, data, and customer-service capacity before 2026. **[C-008]**\n\nThat capacity may matter when an enterprise faces operational pressure.\n\nBut the existence of capacity does not prove that it successfully absorbed a particular crisis. **[C-009, C-022]**\n\n---\n\n## What changed in 2026\n\nThe 2026 controversy moved assurance from a technical background function into public scrutiny.\n\nInvestigation reporting and PNJ’s public response changed the information available to customers, investors, media, and other market participants. **[C-011]**\n\nPNJ publicly stated its position regarding the controversy.\n\nThat statement is evidence of **what the company said**. It is not, by itself, independent proof of every underlying factual claim. **[C-012]**\n\nThe board subsequently approved external reviews covering product and diamond quality, the import–production–sales chain, risk management, and tax-related matters. **[C-013]**\n\nAt the research cut-off, however, the public record did not establish the reviewers’ full identity, methods, timing, findings, or effectiveness. **[C-014]**\n\nThis matters because an announced review is simultaneously:\n\n- an enterprise intervention;\n- a governance response;\n- and a new public event available for interpretation.\n\nThe response itself therefore becomes part of the information environment. **[C-020, C-023, C-024]**\n\n---\n\n## The most important finding is an evidence boundary\n\nThe supplied corpus is rich in historical strategy, published policies, verification infrastructure, company statements, and board announcements.\n\nIt is not equally rich in incident-level execution.\n\nThe paper therefore does **not** claim that the reviewed record establishes:\n\n- a 2026 customer sellback surge;\n- a PNJ buyback execution failure;\n- wider retailer liquidity breaks;\n- total repurchase-request volume;\n- processing or payment timing under pressure;\n- completion rates across stores;\n- diamond-specific revenue or inventory exposure;\n- the outcomes of the announced independent reviews;\n- or a causal relationship between the controversy and PNJ’s share-price movements.**[C-015, C-016, C-017, C-018]**\n\nThese are not empty spaces to be filled with a plausible story.\n\nThey are research findings about the limits of the public record.\n\n> **Absence of evidence is not evidence that an event did not occur. It is also not permission to write as though the event has been established.**\n> \n\n---\n\n## What the PNJ conjunction reveals\n\nSeveral patterns are visible even within those limits.\n\n### 1. Integration creates observability\n\nPNJ’s product business, laboratory identity, customer policies, manufacturing network, board disclosures, and listed-company status place multiple domains within one shared public record. **[C-021]**\n\nThis makes cross-domain developments easier to observe.\n\nIt does not prove that PNJ was the origin of the crisis, the most severely affected enterprise, or a complete representation of the market.\n\n### 2. Enterprise responses generate additional information\n\nClarifications and review announcements are not merely events that occur after controversy.\n\nOnce public, they become information that other actors can interpret. **[C-024]**\n\nThat does not predetermine whether the interpretation will be reassuring, concerning, or neutral.\n\n### 3. Technical assurance can become a governance question\n\nBefore the controversy, verification was primarily presented through technical capability and institutional identity.\n\nBy 2026, the response had moved toward board-authorized external product, chain, risk, and tax review.\n\nThe record therefore supports a shift from **technical assurance claims** toward **external governance assurance**. **[C-020, C-023]**\n\n### 4. Visibility is not severity\n\nPNJ is highly observable because it is a prominent listed enterprise with long-running public disclosures.\n\nA less visible private retailer may leave fewer public traces even when experiencing equal or greater stress.\n\nThe density of evidence around PNJ must therefore not be mistaken for proof that PNJ was the most central or most severely affected actor. **[C-027]**\n\n---\n\n## What this paper does differently\n\nThe paper uses a three-layer evidence architecture:\n\n### 1. Main paper\n\nThe narrative explains what the reviewed record supports.\n\nMaterial propositions carry **Claim IDs**, such as `[C-006]` or `[C-023]`.\n\n### 2. Thematic appendices\n\nEach appendix organizes evidence by domain and records:\n\n- the claim;\n- supporting evidence;\n- limitations;\n- alternative explanations;\n- and relevant Source IDs.\n\n### 3. Primary source register and archive\n\nSource IDs direct readers toward the original public source, archived link, PDF, or screenshot where necessary.\n\nThe logic is simple:\n\n> **Paper claim → thematic appendix → Source ID → preserved public source**\n> \n\nNot *“trust me.”*\n\n**Audit me.**\n\n---\n\n## What the paper concludes\n\nThe reviewed public record does not support a simple story in which confidence collapsed at a single moment and produced one linear chain of consequences.\n\nIt supports a narrower—but more defensible—reconstruction:\n\n- PNJ entered 2026 with a long-standing diamond business;\n- verification, repurchase, production, retail, and disclosure arrangements were already publicly visible;\n- the controversy made those arrangements newly contestable;\n- PNJ responded through clarification and board-authorized external review;\n- those responses became additional public information;\n- and several economically important questions remained unobservable at the research cut-off.\n\nPNJ therefore provides a **dense observation window**, not a complete map of Vietnam’s diamond-market crisis. **[C-025, C-026, C-028]**\n\nThe value of the case is not that it resolves every uncertainty.\n\nIt is that it keeps every conclusion proportional to the evidence.\n\n---\n\n## Read the full paper\n\nThe attached full working paper near the top of this page includes:\n\n- the complete empirical reconstruction;\n- evidence-status definitions;\n- the master chronology;\n- pre-crisis baseline synthesis;\n- verification and investigation records;\n- buyback-policy evidence boundaries;\n- enterprise-response records;\n- capital-market evidence requirements;\n- a master Claim Register;\n- remaining questions and deliberately withheld claims;\n- and the primary Source Register.\n\n---\n\n## Suggested citation\n\n> Pham, Phu Thanh. (2026). *Vietnam’s 2026 Diamond-Market Crisis: An Evidence-First Reconstruction Through PNJ as a Focal Publicly Observable Conjunction*. Diamond Trust Architecture. Evidence cut-off: 21 July 2026.\n> \n\n---\n\n## Editorial note\n\nThis page is a public-facing summary of the full working paper.\n\nAll findings are bounded to:\n\n- the supplied public-source corpus;\n- the evidence available at the research cut-off;\n- and the distinction between documented fact, researcher observation, interpretation, and unknown.\n\nNew evidence may change individual assessments without invalidating the evidence-first method.\n\n---\n\n## Next Research Update\n\nA meaningful update would require evidence in at least one of four areas:\n\n1. public findings, methods, or reviewer identity from the announced external reviews;\n2. incident-level evidence about verification, repurchase, processing, payment, or recovery execution;\n3. comparable records from other retailers, laboratories, customers, or market institutions;\n4. sufficiently specific financial or operating disclosures to test claims about material exposure or consequence.\n\nAny new evidence should enter through the same chain: source preservation, evidence classification, Claim Register update, alternative reading, and proportional revision of the main paper.\n\n## Continue Reading\n\n[Diamond Trust Chain Collapse — When Final Proof Needs Proof](https://app.notion.com/p/Diamond-Trust-Chain-Collapse-When-Final-Proof-Needs-Proof-3926210cf1c7818894b6c9917e03fff2?pvs=21) is the companion essay on the diamond as a compressed trust package and the need for decompression capacity when proof becomes uncertain.\n\n[Work Library](https://app.notion.com/p/Work-Library-37d6210cf1c7804b933af056f81215ea?pvs=21) · [Portfolio Home](https://app.notion.com/p/Ph-m-Thanh-Ph-s-Works-37d6210cf1c78052afafd34e27af898b?pvs=21)"
@@ -457,8 +464,8 @@ const caseDocuments = {
         "type": "paper",
         "driveId": "1-2YQr44kv5rAotPw9Eom2EqoZtuK-kZ-",
         "fileName": "Adobe_Account_Restriction_Comparative_Case_Study_2026-08-07.pdf",
-        "label": "📄 Xem trước: Adobe_Account_Restriction_Comparative_Case_Study_2026-08-07.pdf ↗",
-        "title": "Adobe Account Restriction Comparative Case Study 2026-08-07"
+        "label": "📄 Preview: Adobe_Account_Restriction_Comparative_Case_Study_2026-08-07.pdf ↗",
+        "title": "Adobe Account Restriction: Comparative Case Study"
       }
     ],
     "body": "<asset-bar>\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1-2YQr44kv5rAotPw9Eom2EqoZtuK-kZ-\" data-title=\"Adobe Account Restriction Comparative Case Study 2026-08-07 (PDF)\">📄 Adobe Account Restriction Comparative Case Study 2026-08-07 (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1-2YQr44kv5rAotPw9Eom2EqoZtuK-kZ-/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n</asset-bar>\n\n## When account recovery is not the same as workflow recovery\n\n> **Independent Comparative Case · Evidence-First Research**\n> \n\n> 12 usable public journeys · Adobe Community + Threads · Adobe official terms and appeal baseline\n> \n\n> Research cut: 7 August 2026 · Public evidence only · Not commissioned by Adobe\n> \n\n\n<diagram-card title=\"ChatGPT Image Aug 7, 2026, 12_38_05 PM.png\" driveid=\"1dYr1QQndfAy0tAxgt6vhlJ15uhTdboxB\" caption=\"ChatGPT Image Aug 7, 2026, 12_38_05 PM.png\"></diagram-card>\n\n\n> **For a designer or creator, losing Creative Cloud access can interrupt more than a subscription. It can stop an edit, export, deadline, release, or client delivery. That makes account recovery and workflow recovery two related but different states.**\n> \n\n---\n\n## Executive Summary\n\n- **Question:** Does the post-restriction resolution problem observed in Shopee reappear when enforcement interrupts an already-paid digital work tool?\n- **Evidence:** 12 usable public journeys—7 Adobe Community and 5 Threads—plus current Adobe Terms and Transparency Center material. The sample is purposive and supports pathway comparison, not prevalence or error-rate estimates.\n- **Observed pattern:** Paid or paid-as-reported access → fraud/suspicion state → restriction or cancellation → affected app/service access → support/review → divergent outcomes such as refund, restoration, extra access time, repeated escalation, replacement purchase, or reported file loss.\n- **Comparative finding:** Shopee suggested **platform decision ≠ customer problem resolved**. Adobe adds **access restored ≠ interrupted workflow restored**.\n- **Product hypothesis:** Where risk permits, resolution should run two tracks in parallel: decide the account case while preserving the minimum safe continuity of the customer’s current work and making recovery states visible.\n\n<aside>\n↳\n\n**This page is the portfolio summary.**\n\nThe full 12-page comparative case contains the evidence matrix, Adobe official-source cards, Shopee comparison, revised Explainable Resolution Case, claim-to-source map, and research handoff.\n\n<button type=\"button\" class=\"f-asset-btn primary f-asset-trigger\" data-type=\"pdf\" data-driveid=\"1-2YQr44kv5rAotPw9Eom2EqoZtuK-kZ-\" data-title=\"Adobe Account Restriction Comparative Case Study 2026-08-07.pdf (PDF)\">📄 Adobe Account Restriction Comparative Case Study 2026-08-07.pdf (PDF) (PDF) 👁️</button><a href=\"https://drive.google.com/file/d/1-2YQr44kv5rAotPw9Eom2EqoZtuK-kZ-/view\" target=\"_blank\" rel=\"noreferrer\" class=\"f-asset-ext-btn\" title=\"Mở toàn văn PDF ở tab mới\">↗</a>\n\n</aside>\n\n---\n\n## 1. Why Adobe Is a Useful Comparative Case\n\nAdobe removes much of the marketplace complexity in the Shopee case. A customer can pay Adobe directly, use the software inside an active workflow, and then experience enforcement that interrupts access.\n\nThat creates four distinct recovery layers:\n\n| Layer | What can be interrupted | Resolution question |\n| --- | --- | --- |\n| Account / subscription | Restricted, cancelled, inactive, or under review | What happened and can it be contested? |\n| Tool / asset | Apps, paid services, or cloud assets become unavailable or unstable | What remains usable right now? |\n| Customer workflow | Editing, export, creative production, or dependent work stops | How can urgent work continue safely? |\n| Downstream outcome | Deadline, release, client delivery, or submission may be threatened | Can the intended outcome still be recovered? |\n\nThe public corpus includes reported deadline, professional-work, music-release/creative-production, urgent-work, replacement-purchase, and file-loss consequences. These are treated as observed only where explicitly reported.\n\n---\n\n## 2. Evidence and Boundary\n\nThe case uses:\n\n- **7 Adobe Community journeys**;\n- **5 researcher-supplied Threads journeys**;\n- **4 adjacent/context signals** retained for counter-hypotheses but not counted as core journeys;\n- **Adobe General Terms of Use** and **Adobe Transparency Center appeal material** as official baseline.\n\nEight usable journeys are graded Strong and four Medium. Grade reflects pathway completeness—not independent verification of the user’s account history or whether Adobe’s action was correct or incorrect.\n\n- What the evidence cannot determine\n    - the internal fraud trigger or detection logic;\n    - automation versus human decision;\n    - false-positive status;\n    - prevalence or representativeness;\n    - whether an individual action complied with policy or law;\n    - whether platform steps not mentioned publicly actually occurred.\n\n---\n\n## 3. Observed Public Pathway\n\n> **Paid or paid-as-reported access → fraud/suspicion state → restriction/cancellation → affected app/service access → search for explanation/support → review/wait in some cases → outcome → access/payment recovery → possible workflow recovery**\n> \n\nThis is a synthesis of reported states, not an asserted universal Adobe process.\n\nObserved outcomes include:\n\n- refund;\n- restoration;\n- restoration plus extra access time;\n- pending or repeated escalation;\n- replacement access purchased by the customer;\n- reported permanent file loss.\n\nThe important distinction is that **money recovery, access recovery, file recovery, and workflow recovery do not necessarily move together**.\n\n---\n\n## 4. What Transfers from Shopee — and What Adobe Adds\n\n| Dimension | Shopee | Adobe | Comparative reading |\n| --- | --- | --- | --- |\n| Existing customer interest | Orders, refunds, balances, benefits | Paid software/services and cloud work | Both begin after customer commitment. |\n| Platform intervention | Account restriction / enforcement | Fraud-related restriction / cancellation | Enforcement need can coexist with resolution need. |\n| During review | Preserve marketplace interests where appropriate | Preserve minimum safe work continuity where possible | Adobe makes time-sensitive workflow cost more visible. |\n| After decision | Resolve account + affected marketplace interests | Resolve account + access/payment + interrupted work | Customer resolution extends beyond decision closure. |\n| New contribution | Decision ≠ customer problem resolved | Access restored ≠ workflow restored | Workflow recovery becomes a distinct state. |\n\n> **Comparative finding:** the platform can interrupt a tool, the tool can interrupt a workflow, and the workflow can threaten an outcome outside the platform. The resolution object therefore cannot stop at account state or subscription entitlement.\n> \n\n---\n\n## 5. Comparative Product Hypothesis — Resolve the Case and Protect the Work\n\nThe hypothesis is **not** “never suspend a paid user.” Fraud and security controls may require immediate action and may make temporary access unsafe.\n\nThe design question is whether enforcement resolution and workflow continuity can be handled as two connected tracks:\n\n| Track A — Enforcement resolution | Track B — Safe continuity / recovery |\n| --- | --- |\n| Current restriction state and safe-to-disclose reason | What apps, services, files, or functions remain usable |\n| Evidence/action required from the customer | Minimum safe continuity where risk permits |\n| Review stage and next update | Explicit mitigation path if continuity is impossible |\n| Final account/subscription decision | Paid-time, payment, file, or access recovery where permitted |\n| Remaining appeal/remedy | Interruption/recovery timeline for downstream verification |\n\n> **Design question:** What minimum safe continuity can remain while the enforcement decision is unresolved—and, when continuity cannot remain, what information lets the customer mitigate the workflow consequence immediately?\n> \n\nRead-only access, protected download/export, or temporary restricted modes are examples to investigate—not evidence-backed prescriptions. Feasibility depends on Adobe’s architecture, security risk, licensing, and content-storage design.\n\n---\n\n## 6. Explainable Resolution Case — Revised for Workflow Continuity\n\nA customer-facing resolution object would need to answer:\n\n- **Current state:** restricted, under review, evidence required, decision issued, recovery in progress;\n- **Why am I here?** safe-to-disclose reason category and what the customer can respond to;\n- **What is affected?** plan, app, service, cloud asset, function, billing/payment, and access scope;\n- **What still works?** what remains usable, retrievable, viewable, downloadable, or exportable;\n- **What can I do right now?** mitigation or alternate route while review is pending;\n- **What do you need from me?** required evidence/action and submission route;\n- **What is happening now?** acknowledgement, review stage, and case state;\n- **When will I hear back?** next update or resolution window without inventing a clock policy does not promise;\n- **What was decided?** final enforcement/subscription outcome;\n- **What happens to paid value and my work?** refund, access, compensated time, file recovery, and remaining continuity limits;\n- **What can I show someone else?** a portable incident record of timestamps, state changes, submissions, and outcome—without claiming it proves liability.\n\n---\n\n## 7. Evidence-Trail Hypothesis\n\nAdobe also adds a secondary Explainable Trust question: can a platform-generated resolution path leave a verifiable record useful after the platform decision itself?\n\nA credible record would require provenance, timestamps, actor/state identity, version history, evidence/submission status, and an export/share mechanism.\n\n> **Boundary:** such a record may establish sequence and state. It does not automatically establish causation, reasonableness, damages, or legal liability.\n> \n\n---\n\n## What This Case Can and Cannot Conclude\n\n**Supported by the current corpus**\n\n- repeated public reports link paid or paid-as-reported Adobe access with fraud/suspicion enforcement, access interruption, support/review activity, and divergent recovery states;\n- several reports explicitly describe workflow consequences;\n- refund, access restoration, compensated time, file recovery, and downstream workflow recovery are analytically distinct;\n- the evidence is consistent with the Shopee resolution hypothesis and adds workflow continuity/recovery as a separate resolution object.\n\n**Not supported**\n\n- prevalence or error-rate claims;\n- false-positive conclusions;\n- claims that subscription-fraud enforcement is automated;\n- legal findings about breach, causation, damages, or liability;\n- validation of minimum-safe-continuity or portable-record product concepts.\n\n---\n\n## What This Case Demonstrates\n\n**Comparative evidence research · privacy-first journey coding · cross-domain hypothesis testing · customer-resolution design · workflow continuity · enforcement/recovery separation · explainable resolution · evidence boundaries**\n\n---\n\n*Independent comparative work sample · Public evidence only · Research cut: 7 August 2026*"
@@ -683,6 +690,51 @@ function convertMarkdownTables(text) {
   return output.join('\n');
 }
 
+
+const KNOWN_ASSET_TITLES = {
+  "vinamilk paper 1 trusted nutrition product service discovery": "Vinamilk Paper 1: Trusted Nutrition Product-Service Discovery",
+  "vinamilk paper 2 everyday milk delivery operations scale": "Vinamilk Paper 2: Everyday Milk Delivery Operations & Scale",
+  "vinamilk paper 3 beyond the market capability allocation governance": "Vinamilk Paper 3: Beyond-the-Market Capability Allocation Governance",
+  "MFan Platform Fragmentation & Trust Chain Integration": "MFan Platform Fragmentation & Trust Chain Integration",
+  "MFan Platform Fragmentation  Trust Chain Integration": "MFan Platform Fragmentation & Trust Chain Integration",
+  "Pham Thanh Phu Elfie Product Case Trust Safe Activation v4": "Elfie Product Case: Trust-Safe Activation (V4)",
+  "Post-Signing Artist Label Operations Case Study": "Post-Signing Artist / Label Operations Case Study",
+  "Shopee Account Restriction Resolution Portfolio Final 2026-08-05": "Shopee Account Restriction Resolution Case (Aug 2026)",
+  "FanMe Controlled Growth  Native Editable Final": "FanMe Controlled Growth: Native Operating Framework",
+  "FanMe Controlled Growth Native Editable Final": "FanMe Controlled Growth: Native Operating Framework",
+  "FanMe Controlled Growth Pilot": "FanMe Controlled Growth Pilot Monograph",
+  "FanMe Controlled Growth — Native Editable Final": "FanMe Controlled Growth: Native Operating Framework",
+  "DatVietVAC Ownership Belonging Merchandise Growth Case Study": "DatVietVAC: Ownership & Belonging Merchandise Growth",
+  "DatVietVAC Fandom Cards Case Study": "DatVietVAC Fandom Cards: Collectibles Product Line Case",
+  "VieSHOP — Fan-Centred Merchandise System": "VieSHOP: Fan-Centred Merchandise System Case",
+  "DatVietVAC: Who Owns the Fan Promise? — Full Case": "DatVietVAC: Who Owns the Fan Promise? (Full Case)",
+  "DatVietVAC Evidence Pack V1.1": "DatVietVAC Evidence Pack (V1.1 Forensic Audit)",
+  "Vietnam Diamond Market Crisis Case Study 2 Full Paper": "Vietnam’s 2026 Diamond-Market Crisis (Forensic Paper)",
+  "Adobe Account Restriction Comparative Case Study 2026-08-07": "Adobe Account Restriction: Comparative Case Study"
+};
+
+function formatAssetTitle(title) {
+  if (!title) return "Document Asset";
+  let clean = String(title)
+    .replace(/[📄👁️↗]/g, '')
+    .replace(/^xem\s+trước:\s*/gi, '')
+    .replace(/\.(pdf|docx?|pptx?|xlsx?|png|jpe?g|webp)\b/gi, '')
+    .replace(/\s*\((PDF|DOCX?|PPTX?|DECK|SHEET)\)/gi, '')
+    .replace(/\s*\((PDF|DOCX?|PPTX?|DECK|SHEET)\)/gi, '')
+    .replace(/_+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (KNOWN_ASSET_TITLES[clean]) return KNOWN_ASSET_TITLES[clean];
+
+  // Capitalize if fully lowercase
+  if (clean === clean.toLowerCase() && clean.length > 2) {
+    clean = clean.replace(/\b[a-z]/g, ch => ch.toUpperCase());
+  }
+
+  return clean;
+}
+
 function renderEditorialNotion(markdown) {
   if (!markdown) return "";
 
@@ -690,27 +742,17 @@ function renderEditorialNotion(markdown) {
   let text = markdown.replace(/\r\n/g, '\n').replace(/\.png\)\s*/g, '');
 
   // 1. Asset Bar & standalone buttons — wrap each btn+ext-btn pair into a .f-asset-btn-group and clean labels
-  const cleanAssetLabel = (label) => {
-    let clean = label
-      .replace(/📄\s*/g, '')
-      .replace(/👁️?\s*/g, '')
-      .replace(/↗\s*/g, '')
-      .replace(/Xem trước:\s*/gi, '')
-      .replace(/\.pdf/gi, '')
-      .replace(/\.docx?/gi, '')
-      .replace(/\s*\([A-Z0-9\s]+\)/gi, '') // Removes (PDF), (DOCX), etc.
-      .replace(/\s*\([A-Z0-9\s]+\)/gi, '') // Repeat for double (PDF) (PDF)
-      .replace(/_+/g, ' ')
-      .trim();
-    if (clean.length > 46) {
-      clean = clean.slice(0, 44).trimEnd() + '…';
+  text = text.replace(/<button([^>]*class="[^"]*f-asset-trigger[^"]*"[^>]*)>([\s\S]*?)<\/button>/g, (match, attrs, label) => {
+    const titleMatch = attrs.match(/data-title="([^"]*)"/);
+    const rawTitle = titleMatch ? titleMatch[1] : label;
+    const cleanTitle = formatAssetTitle(rawTitle);
+    let newAttrs = attrs;
+    if (titleMatch) {
+      newAttrs = newAttrs.replace(/data-title="[^"]*"/, `data-title="${cleanTitle}"`);
+    } else {
+      newAttrs += ` data-title="${cleanTitle}"`;
     }
-    return clean;
-  };
-
-  // Clean button inner text globally across all markdown
-  text = text.replace(/(<button[^>]*class="[^"]*f-asset-trigger[^"]*"[^>]*>)([\s\S]*?)(<\/button>)/g, (m, open, label, close) => {
-    return `${open}📄 ${cleanAssetLabel(label)}${close}`;
+    return `<button${newAttrs}>📄 ${cleanTitle}</button>`;
   });
 
   // Group adjacent button + ext-btn link into a single pill group
@@ -905,11 +947,14 @@ const siteCss = `:root {
     --tracking-widest:  0.1em;
 
     /* ========================================================================
-       2. COLOR PALETTE
+       2. UNIFIED SEMANTIC COLOR SYSTEM (LIGHT / DARK / SEPIA)
        ======================================================================== */
     --paper: #faf8f5;
     --paper-card: #ffffff;
     --paper-tint: #f4efe6;
+    --header-bg: rgba(250, 248, 245, 0.96);
+    --hero-bg: #14222c;
+    --hero-text: #f7f4ec;
     --ink: #141c22;
     --ink-secondary: #334149;
     --muted: #64748b;
@@ -927,6 +972,757 @@ const siteCss = `:root {
 
     color-scheme: light;
   }
+
+  /* DARK FORENSIC THEME OVERRIDES */
+  :root[data-theme="dark"] {
+    --paper: #0c141a;
+    --paper-card: #142028;
+    --paper-tint: #1c2a34;
+    --header-bg: rgba(12, 20, 26, 0.96);
+    --hero-bg: #070d12;
+    --hero-text: #f0f6fc;
+    --ink: #e6edf3;
+    --ink-secondary: #a2b4c2;
+    --muted: #7e91a2;
+    --line: #223746;
+    --line-subtle: rgba(255, 255, 255, 0.08);
+    --copper: #e07a48;
+    --copper-dark: #f09568;
+    --navy: #f0f6fc;
+    --navy-soft: #cbd5e1;
+    --mist: #172d3a;
+    --accent: #e56b4f;
+    --emerald: #34d399;
+    --sky: #38bdf8;
+    --amber: #fbbf24;
+
+    color-scheme: dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="sepia"]) {
+      --paper: #0c141a;
+      --paper-card: #142028;
+      --paper-tint: #1c2a34;
+      --header-bg: rgba(12, 20, 26, 0.96);
+      --hero-bg: #070d12;
+      --hero-text: #f0f6fc;
+      --ink: #e6edf3;
+      --ink-secondary: #a2b4c2;
+      --muted: #7e91a2;
+      --line: #223746;
+      --line-subtle: rgba(255, 255, 255, 0.08);
+      --copper: #e07a48;
+      --copper-dark: #f09568;
+      --navy: #f0f6fc;
+      --navy-soft: #cbd5e1;
+      --mist: #172d3a;
+      --accent: #e56b4f;
+      --emerald: #34d399;
+      --sky: #38bdf8;
+      --amber: #fbbf24;
+
+      color-scheme: dark;
+    }
+  }
+
+  /* WARM SEPIA READING THEME OVERRIDES */
+  :root[data-theme="sepia"] {
+    --paper: #f7f1e5;
+    --paper-card: #fcf8f0;
+    --paper-tint: #eee5d3;
+    --header-bg: rgba(247, 241, 229, 0.96);
+    --hero-bg: #231b14;
+    --hero-text: #faf6ee;
+    --ink: #2c241c;
+    --ink-secondary: #574b3d;
+    --muted: #7c6f60;
+    --line: #d8cbbc;
+    --line-subtle: rgba(44, 36, 28, 0.08);
+    --copper: #b24d22;
+    --copper-dark: #8c3814;
+    --navy: #231b14;
+    --navy-soft: #382c21;
+    --mist: #e5ded2;
+    --accent: #a83d23;
+    --emerald: #2e7d32;
+    --sky: #0277bd;
+    --amber: #b45309;
+
+    color-scheme: light;
+  }
+
+  /* ========================================================================
+     THEME OVERRIDES: DARK & WARM SEPIA MODES
+     ======================================================================== */
+  :root[data-theme="dark"] {
+    --paper: #0e161c;
+    --paper-card: #15222b;
+    --paper-tint: #1b2a36;
+    --ink: #e6edf3;
+    --ink-secondary: #9db2c2;
+    --muted: #768a9b;
+    --line: #223746;
+    --line-subtle: rgba(255, 255, 255, 0.08);
+    --copper: #e07a48;
+    --copper-dark: #f09568;
+    --navy: #f0f6fc;
+    --navy-soft: #cbd5e1;
+    --mist: #172d3a;
+    --accent: #e56b4f;
+    --emerald: #34d399;
+    --sky: #38bdf8;
+    --amber: #fbbf24;
+    color-scheme: dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="sepia"]) {
+      --paper: #0e161c;
+      --paper-card: #15222b;
+      --paper-tint: #1b2a36;
+      --ink: #e6edf3;
+      --ink-secondary: #9db2c2;
+      --muted: #768a9b;
+      --line: #223746;
+      --line-subtle: rgba(255, 255, 255, 0.08);
+      --copper: #e07a48;
+      --copper-dark: #f09568;
+      --navy: #f0f6fc;
+      --navy-soft: #cbd5e1;
+      --mist: #172d3a;
+      --accent: #e56b4f;
+      --emerald: #34d399;
+      --sky: #38bdf8;
+      --amber: #fbbf24;
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme="sepia"] {
+    --paper: #f7f1e5;
+    --paper-card: #fdfaf4;
+    --paper-tint: #eee5d3;
+    --ink: #2c241c;
+    --ink-secondary: #574b3d;
+    --muted: #7c6f60;
+    --line: #d8cbbc;
+    --line-subtle: rgba(44, 36, 28, 0.08);
+    --copper: #b24d22;
+    --copper-dark: #8c3814;
+    --navy: #231b14;
+    --navy-soft: #382c21;
+    --mist: #e5ded2;
+    --accent: #a83d23;
+    --emerald: #2e7d32;
+    --sky: #0277bd;
+    --amber: #b45309;
+    color-scheme: light;
+  }
+
+  /* Live Pulse Beacon & Nav Indicator */
+  .f-live-beacon {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: fPulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  @keyframes fPulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  }
+  .f-nav-live-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 16px;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: var(--ink) !important;
+    font-size: var(--text-xs);
+    font-weight: var(--fw-semibold);
+    transition: all 0.2s ease;
+  }
+  .f-nav-live-pill:hover {
+    background: rgba(16, 185, 129, 0.25);
+    border-color: rgba(16, 185, 129, 0.6);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  /* Theme Switcher in Nav */
+  .f-theme-switch-group {
+    display: inline-flex;
+    align-items: center;
+    background: var(--paper-tint);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 2px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .f-theme-toggle-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 3px 8px;
+    border-radius: 14px;
+    color: var(--muted);
+    transition: all 0.15s ease;
+    line-height: 1;
+  }
+  .f-theme-toggle-btn:hover {
+    color: var(--ink);
+  }
+  .f-theme-toggle-btn.is-active {
+    background: var(--paper-card);
+    color: var(--copper);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-weight: bold;
+  }
+
+  /* ========================================================================
+     FEATURED LIVE APP SHOWCASE CARD
+     ======================================================================== */
+  .f-app-showcase-section {
+    padding: 20px 0 44px;
+    border-bottom: 1px solid var(--line);
+  }
+  .f-app-showcase-card {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 36px;
+    background: var(--paper-card);
+    border: 1px solid var(--copper);
+    border-radius: 12px;
+    padding: 36px 40px;
+    box-shadow: 0 8px 32px rgba(20, 34, 44, 0.07);
+    position: relative;
+    overflow: hidden;
+  }
+  :root[data-theme="dark"] .f-app-showcase-card {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border-color: rgba(224, 122, 72, 0.4);
+  }
+  .f-app-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .f-app-status-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #10b981;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--tracking-wider);
+    padding: 4px 10px;
+    border-radius: 14px;
+    text-transform: uppercase;
+  }
+  :root[data-theme="dark"] .f-app-status-badge {
+    color: #34d399;
+  }
+  .f-app-host-tag, .f-app-domain-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--muted);
+    background: var(--paper-tint);
+    border: 1px solid var(--line);
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .f-app-domain-tag {
+    color: var(--copper);
+    font-weight: var(--fw-semibold);
+  }
+  .f-app-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    line-height: var(--lh-tight);
+    color: var(--navy);
+    margin: 0 0 12px;
+  }
+  .f-app-question {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--copper);
+    font-size: var(--text-md);
+    line-height: var(--lh-snug);
+    margin: 0 0 14px;
+  }
+  .f-app-desc {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--ink-secondary);
+    line-height: var(--lh-relaxed);
+    margin: 0 0 20px;
+  }
+  .f-app-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .f-tech-pill {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    background: var(--paper-tint);
+    color: var(--ink-secondary);
+    border: 1px solid var(--line);
+    padding: 4px 9px;
+    border-radius: 4px;
+    font-weight: var(--fw-medium);
+  }
+  .f-app-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .f-app-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  /* ========================================================================
+     THEME ACCENT & BADGE ADAPTATION
+     ======================================================================== */
+  :root[data-theme="dark"] .f-topic-chip.active,
+  :root[data-theme="dark"] .f-view-toggle-btn.active {
+    background: var(--copper) !important;
+    border-color: var(--copper) !important;
+    color: #ffffff !important;
+  }
+  :root[data-theme="dark"] .f-maturity-badge.prototype {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+  }
+  :root[data-theme="dark"] .f-maturity-badge.working {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+  }
+  :root[data-theme="dark"] .f-maturity-badge.developed {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.35);
+  }
+  :root[data-theme="dark"] .f-maturity-badge.concept {
+    background: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+    border: 1px solid rgba(139, 92, 246, 0.35);
+  }
+  :root[data-theme="dark"] .f-maturity-badge.evidence {
+    background: rgba(234, 88, 12, 0.2);
+    color: #fb923c;
+    border: 1px solid rgba(234, 88, 12, 0.35);
+  }
+  :root[data-theme="dark"] .f-maturity-badge.default {
+    background: rgba(100, 116, 139, 0.2);
+    color: #cbd5e1;
+    border: 1px solid rgba(100, 116, 139, 0.35);
+  }
+  :root[data-theme="dark"] .f-lens-card.ops .f-lens-badge {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+  }
+  :root[data-theme="dark"] .f-lens-card.evidence .f-lens-badge {
+    background: rgba(234, 88, 12, 0.2);
+    color: #fb923c;
+  }
+  :root[data-theme="dark"] .f-lens-card.essays .f-lens-badge {
+    background: rgba(14, 165, 233, 0.2);
+    color: #38bdf8;
+  }
+  :root[data-theme="dark"] .f-lens-card.concepts .f-lens-badge {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+  }
+  :root[data-theme="dark"] .f-ledger-mode.ops {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+  }
+  :root[data-theme="dark"] .f-ledger-mode.evidence {
+    background: rgba(234, 88, 12, 0.2);
+    color: #fb923c;
+  }
+  :root[data-theme="dark"] .f-ledger-mode.essays {
+    background: rgba(14, 165, 233, 0.2);
+    color: #38bdf8;
+  }
+  :root[data-theme="dark"] .f-ledger-mode.concepts {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+  }
+  :root[data-theme="dark"] .f-table th {
+    background: #1c2b36;
+    color: #f0f6fc;
+    border-color: #253847;
+  }
+  :root[data-theme="dark"] .f-code {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--copper);
+  }
+  :root[data-theme="dark"] .f-kbd-hint {
+    background: var(--paper-tint);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+
+  /* SEPIA THEME BADGE OVERRIDES */
+  :root[data-theme="sepia"] .f-topic-chip.active,
+  :root[data-theme="sepia"] .f-view-toggle-btn.active {
+    background: var(--copper) !important;
+    border-color: var(--copper) !important;
+    color: #ffffff !important;
+  }
+  :root[data-theme="sepia"] .f-maturity-badge.prototype {
+    background: #faecd0;
+    color: #854d0e;
+    border: 1px solid #e7ce9d;
+  }
+  :root[data-theme="sepia"] .f-maturity-badge.working {
+    background: #daf0e3;
+    color: #166534;
+    border: 1px solid #b7dfca;
+  }
+  :root[data-theme="sepia"] .f-maturity-badge.developed {
+    background: #dce7f5;
+    color: #1e40af;
+    border: 1px solid #b9cee6;
+  }
+  :root[data-theme="sepia"] .f-maturity-badge.concept {
+    background: #eae2f8;
+    color: #5b21b6;
+    border: 1px solid #cfbfe6;
+  }
+  :root[data-theme="sepia"] .f-maturity-badge.evidence {
+    background: #f7e2d2;
+    color: #9a3412;
+    border: 1px solid #e6be9f;
+  }
+  :root[data-theme="sepia"] .f-maturity-badge.default {
+    background: #eae4d8;
+    color: #574b3d;
+    border: 1px solid #d0c6b6;
+  }
+  :root[data-theme="sepia"] .f-table th {
+    background: #231b14;
+    color: #faf6ee;
+    border-color: #382c21;
+  }
+
+  .f-app-btn.primary {
+    background: var(--copper);
+    color: #ffffff !important;
+    border: 1px solid var(--copper);
+    box-shadow: 0 2px 8px rgba(194, 94, 46, 0.3);
+  }
+  .f-app-btn.primary:hover {
+    background: var(--copper-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(194, 94, 46, 0.4);
+  }
+  .f-app-btn.secondary {
+    background: var(--paper-tint);
+    color: var(--ink) !important;
+    border: 1px solid var(--line);
+  }
+  .f-app-btn.secondary:hover {
+    border-color: var(--copper);
+    color: var(--copper) !important;
+  }
+
+  /* Mockup Visual Window */
+  .f-app-mockup-window {
+    background: var(--paper-tint);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .f-mockup-titlebar {
+    background: var(--paper-card);
+    border-bottom: 1px solid var(--line);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+  }
+  .f-mockup-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .f-mockup-dots i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dot-red { background: #ef4444; }
+  .dot-yellow { background: #f59e0b; }
+  .dot-green { background: #10b981; }
+  .f-mockup-url {
+    color: var(--muted);
+  }
+  .f-mockup-status {
+    color: #10b981;
+    font-weight: bold;
+  }
+  .f-mockup-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 16px;
+  }
+  .f-mockup-dag-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .f-dag-node {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+  }
+  .f-dag-node.n-source { border-left: 3px solid #3b82f6; }
+  .f-dag-node.n-activity { border-left: 3px solid #f59e0b; }
+  .f-dag-node.n-ledger { border-left: 3px solid #10b981; }
+  .f-dag-node .n-type {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    background: var(--paper-tint);
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: var(--muted);
+    font-weight: bold;
+  }
+  .f-dag-node strong {
+    color: var(--ink);
+    font-family: var(--font-sans);
+  }
+  .f-dag-node code {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .f-dag-edge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 20px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .f-edge-line {
+    width: 2px;
+    height: 12px;
+    background: var(--line);
+  }
+  .f-mockup-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    border-top: 1px dashed var(--line);
+    padding-top: 14px;
+    text-align: center;
+  }
+  .f-m-stat {
+    font-family: var(--font-sans);
+    font-size: var(--text-2xs);
+    color: var(--muted);
+  }
+  .f-m-stat strong {
+    display: block;
+    color: var(--copper);
+    font-size: var(--text-sm);
+  }
+
+  /* Featured App Badge in Library */
+  .f-work-item-featured-app {
+    border-color: var(--copper) !important;
+    background: linear-gradient(to bottom right, var(--paper-card), var(--paper-tint)) !important;
+    box-shadow: 0 4px 16px rgba(194, 94, 46, 0.12) !important;
+  }
+
+  /* ========================================================================
+     CASE READING CONTROLS & NAVIGATION RAIL
+     ======================================================================== */
+  .f-case-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 18px;
+    margin: 20px 0 28px;
+    background: var(--paper-tint);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .f-case-action-left, .f-case-action-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .f-action-pill {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    color: var(--ink-secondary);
+    padding: 6px 13px;
+    border-radius: 6px;
+    font-size: var(--text-xs);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .f-action-pill:hover {
+    border-color: var(--copper);
+    color: var(--copper);
+  }
+  .f-action-pill.accent {
+    background: var(--copper);
+    color: #fff;
+    border-color: var(--copper);
+  }
+  .f-action-pill.accent:hover {
+    background: var(--copper-dark);
+  }
+  .f-action-pill.is-saved {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: #10b981;
+    color: #059669;
+    font-weight: var(--fw-bold);
+  }
+  :root[data-theme="dark"] .f-action-pill.is-saved {
+    background: rgba(16, 185, 129, 0.25);
+    border-color: #34d399;
+    color: #34d399;
+  }
+
+  /* Next / Prev Navigation Rail */
+  .f-case-nav-rail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 50px 0 30px;
+    padding-top: 30px;
+    border-top: 2px solid var(--line);
+  }
+  .f-case-nav-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 22px;
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .f-case-nav-card:hover {
+    border-color: var(--copper);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  }
+  .f-case-nav-card.next {
+    text-align: right;
+  }
+  .f-nav-dir {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: var(--fw-bold);
+    color: var(--copper);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: 6px;
+  }
+  .f-nav-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    line-height: var(--lh-snug);
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .f-nav-type {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+  .f-toast-msg {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--paper-tint);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: var(--text-sm);
+    font-family: var(--font-sans);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 99999;
+  }
+  .f-toast-msg.is-visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  @media (max-width: 900px) {
+    .f-app-showcase-card {
+      grid-template-columns: 1fr;
+      padding: 24px;
+    }
+  }
+  @media (max-width: 650px) {
+    .f-case-nav-rail {
+      grid-template-columns: 1fr;
+    }
+    .f-case-nav-card.next {
+      text-align: left;
+    }
+  }
+
 
   /* ========================================================================
      3. BASE RESETS & GLOBAL TYPOGRAPHY
@@ -968,6 +1764,217 @@ const siteCss = `:root {
   .f-skip:focus { top: 14px; }
   .f-wrap { width: min(calc(100% - 48px), 1080px); margin-inline: auto; }
 
+  
+  
+  
+
+  /* ========================================================================
+     CLEAN SINGLE-ROW HEADER & THEME SWITCHER
+     ======================================================================== */
+  .f-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--header-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .f-nav {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .f-brand {
+    font-family: var(--font-serif);
+    font-size: 1.28rem;
+    font-weight: var(--fw-bold);
+    text-decoration: none;
+    color: var(--navy);
+    letter-spacing: var(--tracking-tight);
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .f-brand span {
+    margin-left: 10px;
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+  }
+  .f-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .f-links a {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--tracking-wide);
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: color 0.15s ease;
+  }
+  .f-links a[aria-current=page], .f-links a:hover {
+    color: var(--copper);
+  }
+  .f-theme-switch-group {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px;
+    border-radius: 6px;
+    background: var(--paper-tint);
+    border: 1px solid var(--line);
+    gap: 2px;
+    margin-left: 6px;
+  }
+  .f-theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 26px;
+    border-radius: 4px;
+    border: 0;
+    background: transparent;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.12s ease;
+    padding: 0;
+  }
+  .f-theme-toggle-btn:hover {
+    color: var(--ink);
+  }
+  .f-theme-toggle-btn.is-active {
+    background: var(--paper-card);
+    color: var(--copper);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  @media (max-width: 768px) {
+    .f-nav { min-height: 56px; gap: 12px; }
+    .f-links { gap: 14px; }
+    .f-brand span { display: none; }
+  }
+
+  /* ========================================================================
+     PRODUCTION PROTOTYPE STUDIO SHOWCASE & SCREENSHOT
+     ======================================================================== */
+  .f-proto-window-card {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  }
+  .f-proto-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 28px;
+    align-items: center;
+    padding: 28px 30px;
+  }
+  .f-proto-kicker {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--tracking-wider);
+    color: var(--copper);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .f-proto-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-semibold);
+    color: var(--navy);
+    line-height: var(--lh-snug);
+    margin: 0 0 10px;
+  }
+  .f-proto-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    margin: 0 0 18px;
+  }
+  .f-proto-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .f-proto-spec-pill {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--paper-tint);
+    border: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: var(--fw-medium);
+    color: var(--ink);
+  }
+  .f-proto-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .f-proto-screenshot-box {
+    position: relative;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    background: var(--paper-tint);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .f-proto-screenshot-box:hover {
+    border-color: var(--copper);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(194, 94, 62, 0.16);
+  }
+  .f-proto-preview-img {
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+  .f-proto-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 20, 26, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .f-proto-screenshot-box:hover .f-proto-img-overlay {
+    opacity: 1;
+  }
+  .f-proto-img-overlay span {
+    background: var(--copper);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-bold);
+    padding: 6px 14px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  @media (max-width: 860px) {
+    .f-proto-grid { grid-template-columns: 1fr; gap: 20px; padding: 22px; }
+  }
+
   /* ========================================================================
      4. HEADER & PRIMARY NAVIGATION
      ======================================================================== */
@@ -975,7 +1982,7 @@ const siteCss = `:root {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(250, 248, 245, 0.96);
+    background: var(--header-bg); border-bottom-color: var(--line);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--ink);
@@ -1158,8 +2165,7 @@ const siteCss = `:root {
     transition: all 0.18s ease;
   }
   .f-entry-item:last-child { border-bottom: 0; }
-  .f-entry-item:hover {
-    background: rgba(255, 255, 255, 0.7);
+  .f-entry-item:hover { background: var(--paper-card);
     margin-inline: -14px;
     padding-inline: 14px;
     border-radius: 6px;
@@ -1237,7 +2243,7 @@ const siteCss = `:root {
     font-size: 0.78rem;
   }
   .f-entry-step {
-    background: #ffffff;
+    background: var(--paper-card); border: 1px solid var(--line); color: var(--ink);
     border: 1px solid var(--line);
     padding: 3px 9px;
     border-radius: 4px;
@@ -1246,14 +2252,14 @@ const siteCss = `:root {
     letter-spacing: -0.01em;
   }
   .f-entry-step.alert {
-    background: #fef2f2;
-    border-color: #fecaca;
-    color: #991b1b;
+    background: rgba(239, 68, 68, 0.12);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.35);
   }
   .f-entry-step.success {
-    background: #f0fdf4;
-    border-color: #bbf7d0;
-    color: #166534;
+    background: rgba(16, 185, 129, 0.12);
+    color: #10b981;
+    border-color: rgba(16, 185, 129, 0.35);
   }
   .f-entry-arrow {
     color: var(--muted);
@@ -1270,7 +2276,7 @@ const siteCss = `:root {
   }
   .f-lens-card {
     padding: 16px 18px;
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     border-radius: 6px;
     text-decoration: none;
@@ -1284,10 +2290,10 @@ const siteCss = `:root {
     transition: all 0.18s ease;
     box-shadow: 0 2px 6px rgba(20, 28, 34, 0.02);
   }
-  .f-lens-card.ops { border-left-color: #15803d; background: #f9fdfb; }
-  .f-lens-card.evidence { border-left-color: var(--copper); background: #fdfaf7; }
-  .f-lens-card.essays { border-left-color: #0284c7; background: #f8fbfe; }
-  .f-lens-card.concepts { border-left-color: #b45309; background: #fefdf7; }
+  .f-lens-card.ops { border-left-color: #15803d; background: var(--paper-card); }
+  .f-lens-card.evidence { border-left-color: var(--copper); background: var(--paper-card); }
+  .f-lens-card.essays { border-left-color: #0284c7; background: var(--paper-card); }
+  .f-lens-card.concepts { border-left-color: #b45309; background: var(--paper-card); }
   .f-lens-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(20, 28, 34, 0.06);
@@ -1337,55 +2343,7 @@ const siteCss = `:root {
      8. METHOD SECTION
      ======================================================================== */
   .f-method-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-  .f-method-item h3 {
-    margin: 0 0 8px;
-    font-family: var(--font-serif);
-    font-size: var(--text-xl);
-    font-weight: var(--fw-bold);
-    color: var(--navy);
-  }
-  .f-method-item p {
-    margin: 0;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    line-height: var(--lh-relaxed);
-    color: var(--ink-secondary);
-  }
-  .f-method-item p + p { margin-top: 8px; }
-
-  /* ========================================================================
-     9. WORK LIBRARY (/work) HERO & ROUTES
-     ======================================================================== */
-  .f-work-hero-clean {
-    padding: 44px 0 32px;
-    border-bottom: 1px solid var(--line);
-    background: var(--paper);
-  }
-  .f-work-hero-clean h1 {
-    font-family: var(--font-serif);
-    font-size: var(--text-4xl);
-    font-weight: var(--fw-semibold);
-    line-height: var(--lh-tight);
-    letter-spacing: var(--tracking-tight);
-    color: var(--navy);
-    margin: 0 0 14px;
-    max-width: 860px;
-  }
-  .f-work-hero-clean p {
-    font-family: var(--font-sans);
-    font-size: var(--text-md);
-    line-height: var(--lh-relaxed);
-    color: var(--ink-secondary);
-    max-width: 780px;
-    margin: 0;
-  }
-
-  .f-work-quote-bar {
-    background: #ffffff;
+    -card);
     border-bottom: 1px solid var(--line);
     padding: 20px 0;
   }
@@ -1414,69 +2372,16 @@ const siteCss = `:root {
     letter-spacing: var(--tracking-wide);
   }
 
-  .f-routes-section {
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-    padding: 36px 0 40px;
-  }
-  .f-routes-section h2 {
-    margin: 0 0 4px;
-    font-family: var(--font-serif);
-    font-size: var(--text-2xl);
-    font-weight: var(--fw-semibold);
-    color: var(--navy);
-  }
-  .f-routes-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 18px;
-  }
-  .f-route-card {
-    background: #ffffff;
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--navy);
-    border-radius: 8px;
-    padding: 18px 20px;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    line-height: var(--lh-normal);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
-  }
-  .f-route-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-  }
-  .f-route-card strong {
-    display: block;
-    color: var(--navy);
-    font-size: var(--text-base);
-    margin-bottom: 6px;
-    font-family: var(--font-serif);
-    font-weight: var(--fw-semibold);
-  }
-  .f-route-card span {
-    color: var(--ink-secondary);
-    font-size: var(--text-xs);
-    line-height: 1.6;
-  }
-  .f-route-card a {
-    color: var(--copper);
-    font-weight: var(--fw-semibold);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
   /* ========================================================================
      10. WORK LIBRARY 3-TIER TOOLBAR
      ======================================================================== */
   .f-work-toolbar {
-    padding: 24px 0 14px;
+    padding: 16px 0 24px;
     border-bottom: 1px solid var(--line);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    margin-bottom: 36px;
   }
   .f-search-wrap {
     position: relative;
@@ -1487,7 +2392,7 @@ const siteCss = `:root {
     width: 100%;
     padding: 10px 40px 10px 14px;
     border: 1px solid var(--line);
-    background: #ffffff;
+    background: var(--paper-card);
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     color: var(--ink);
@@ -1532,15 +2437,15 @@ const siteCss = `:root {
   .f-toolbar-tabs {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 24px;
     overflow-x: auto;
-    padding-bottom: 2px;
+    padding-bottom: 0;
     border-bottom: 1px solid var(--line);
   }
   .f-mode-tab {
     border: 0;
     background: transparent;
-    padding: 8px 0;
+    padding: 8px 0 10px;
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     font-weight: var(--fw-bold);
@@ -1575,9 +2480,10 @@ const siteCss = `:root {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 12px 20px;
     flex-wrap: wrap;
     padding-top: 2px;
+    padding-bottom: 6px;
   }
   .f-topic-chips {
     display: flex;
@@ -1586,7 +2492,7 @@ const siteCss = `:root {
     gap: 6px;
   }
   .f-topic-chip {
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     padding: 3px 9px;
     border-radius: 4px;
@@ -1602,9 +2508,11 @@ const siteCss = `:root {
     color: var(--navy);
   }
   .f-topic-chip.active {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: #ffffff;
+    background: var(--copper);
+    border-color: var(--copper);
+    color: #ffffff !important;
+    font-weight: var(--fw-bold);
+    box-shadow: 0 1px 3px rgba(194, 94, 62, 0.25);
   }
 
   .f-toolbar-right {
@@ -1631,7 +2539,7 @@ const siteCss = `:root {
   }
   .f-view-toggle-btn {
     border: 1px solid var(--line);
-    background: #ffffff;
+    background: var(--paper-card);
     padding: 4px 9px;
     border-radius: 4px;
     font-family: var(--font-sans);
@@ -1704,7 +2612,7 @@ const siteCss = `:root {
     margin-top: 14px;
   }
   .f-work-item {
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     border-radius: 8px;
     padding: 22px 24px;
@@ -1749,6 +2657,19 @@ const siteCss = `:root {
   .f-maturity-badge.concept    { background: #ede9fe; color: #5b21b6; }
   .f-maturity-badge.evidence   { background: #ffedd5; color: #9a3412; }
   .f-maturity-badge.default    { background: #f1f5f9; color: #475569; }
+
+  
+  .f-card-live-pill {
+    background: rgba(16, 185, 129, 0.12) !important;
+    color: #10b981 !important;
+    border: 1px solid rgba(16, 185, 129, 0.35) !important;
+    font-weight: var(--fw-semibold);
+  }
+  :root[data-theme="dark"] .f-card-live-pill {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #34d399 !important;
+    border-color: rgba(16, 185, 129, 0.4) !important;
+  }
 
   .f-card-asset-pill {
     display: inline-flex;
@@ -1799,7 +2720,7 @@ const siteCss = `:root {
     font-style: italic;
     font-size: 0.98rem;
     line-height: 1.6;
-    color: #334155;
+    color: var(--ink-secondary);
   }
   .f-paper-tags {
     display: flex;
@@ -1835,7 +2756,7 @@ const siteCss = `:root {
     margin: 20px 0 60px;
     border: 1px solid var(--line);
     border-radius: 6px;
-    background: #ffffff;
+    background: var(--paper-card);
     overflow-x: auto;
     box-shadow: 0 2px 8px rgba(20, 28, 34, 0.03);
   }
@@ -1850,7 +2771,7 @@ const siteCss = `:root {
     line-height: var(--lh-normal);
   }
   .f-ledger-table th {
-    background: #f5f0e6;
+    background: var(--paper-tint);
     padding: 10px 14px;
     font-family: var(--font-mono);
     font-size: var(--text-xs);
@@ -1905,7 +2826,7 @@ const siteCss = `:root {
     position: relative;
     isolation: isolate;
     padding: 48px 0 44px;
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line);
   }
   .f-case-hero:after {
     content: "";
@@ -1914,11 +2835,11 @@ const siteCss = `:root {
     inset: 0 50%;
     width: 100vw;
     transform: translateX(-50%);
-    background: var(--navy);
+    background: var(--hero-bg);
   }
   .f-case-hero h1 {
     font-family: var(--font-serif);
-    color: #f7f4ec;
+    color: var(--hero-text);
     margin: 0;
     font-weight: var(--fw-semibold);
     font-size: var(--text-4xl);
@@ -1966,8 +2887,8 @@ const siteCss = `:root {
   }
 
   .f-case-meta {
-    background: #ffffff;
-    border-bottom: 1px solid var(--ink);
+    background: var(--paper-card);
+    border-bottom: 1px solid var(--line);
     box-shadow: 0 3px 10px rgba(17, 34, 44, 0.04);
   }
   .f-case-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
@@ -2061,8 +2982,8 @@ const siteCss = `:root {
     align-items: center;
     justify-content: center;
     padding: 9px 12px;
-    border: 1px solid var(--ink);
-    background: #ffffff;
+    border: 1px solid var(--line);
+    background: var(--paper-card);
     font-size: var(--text-xs);
     font-weight: var(--fw-bold);
     text-decoration: none;
@@ -2083,7 +3004,7 @@ const siteCss = `:root {
   /* ========================================================================
      13. MONOGRAPH ARTICLE LONG-FORM TYPOGRAPHY (.f-prose)
      ======================================================================== */
-  .f-prose { min-width: 0; color: #162025; }
+  .f-prose { min-width: 0; color: var(--ink); }
   .f-prose p {
     font-family: var(--font-serif);
     font-size: var(--text-lg);
@@ -2121,7 +3042,7 @@ const siteCss = `:root {
     letter-spacing: var(--tracking-tight);
   }
   .f-prose strong { font-weight: var(--fw-bold); color: var(--navy); }
-  .f-prose em { font-style: italic; color: #222d32; }
+  .f-prose em { font-style: italic; color: var(--ink-secondary); }
 
   .f-anchor {
     position: absolute;
@@ -2156,7 +3077,7 @@ const siteCss = `:root {
   .f-code-block {
     margin: 24px 0;
     padding: 18px 22px;
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     border-left: 4px solid var(--navy);
     border-radius: 6px;
@@ -2175,7 +3096,7 @@ const siteCss = `:root {
     font-size: var(--text-lg);
     margin-bottom: 10px;
     line-height: var(--lh-prose);
-    color: #162025;
+    color: var(--ink);
   }
   .f-list li::marker { color: var(--copper); }
   .f-numbered-list li::marker { font-weight: var(--fw-bold); color: var(--copper); font-family: var(--font-sans); }
@@ -2184,7 +3105,7 @@ const siteCss = `:root {
     margin: 28px 0;
     padding: 18px 24px;
     border-left: 4px solid var(--copper);
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     border-left-width: 4px;
     border-left-color: var(--copper);
@@ -2193,7 +3114,7 @@ const siteCss = `:root {
     font-style: italic;
     font-size: var(--text-lg);
     line-height: var(--lh-relaxed);
-    color: #111b20;
+    color: var(--ink);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
   }
   .f-prose hr.f-hr {
@@ -2206,9 +3127,9 @@ const siteCss = `:root {
   .f-callout {
     margin: 28px 0;
     padding: 20px 24px;
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
-    border-left: 4px solid var(--navy);
+    border-left: 4px solid var(--copper);
     border-radius: 6px;
     font-family: var(--font-sans);
     font-size: var(--text-md);
@@ -2221,9 +3142,9 @@ const siteCss = `:root {
     width: 100%;
     overflow-x: auto;
     margin: 32px 0;
-    border: 1px solid var(--ink);
+    border: 1px solid var(--line);
     border-radius: 6px;
-    background: #ffffff;
+    background: var(--paper-card);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   }
   .f-table {
@@ -2234,8 +3155,8 @@ const siteCss = `:root {
     line-height: var(--lh-normal);
   }
   .f-table th {
-    background: var(--navy);
-    color: #ffffff;
+    background: var(--paper-tint);
+    color: var(--navy); border: 1px solid var(--line);
     text-align: left;
     padding: 12px 16px;
     font-family: var(--font-sans);
@@ -2243,33 +3164,20 @@ const siteCss = `:root {
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
-    border: 1px solid var(--navy);
+    border: 1px solid var(--line);
   }
   .f-table td { padding: 12px 16px; border: 1px solid var(--line); vertical-align: top; }
-  .f-table tr:nth-child(even) td { background: #fbf9f5; }
+  .f-table tr:nth-child(even) td { background: var(--paper-tint); }
 
   .f-details {
     margin: 20px 0;
     border: 1px solid var(--line);
-    background: #ffffff;
+    background: var(--paper-card);
     padding: 14px 18px;
     border-radius: 6px;
   }
   .f-details summary { font-family: var(--font-sans); font-weight: var(--fw-bold); cursor: pointer; color: var(--navy); }
   .f-details-content { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line-subtle); font-size: var(--text-sm); }
-
-  .f-source-banner {
-    margin-top: 40px;
-    padding: 18px 22px;
-    background: #ffffff;
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--copper);
-    border-radius: 6px;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    line-height: var(--lh-normal);
-    color: var(--ink-secondary);
-  }
 
   /* ========================================================================
      14. RESEARCH ARTIFACT BAR & DIAGRAMS
@@ -2278,11 +3186,11 @@ const siteCss = `:root {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
-    margin: 18px 0 32px;
-    padding: 12px 16px;
-    background: #ffffff;
-    border: 1px solid var(--ink);
+    gap: 12px;
+    margin: 20px 0 32px;
+    padding: 14px 18px;
+    background: var(--paper-card);
+    border: 1px solid var(--line);
     border-left: 4px solid var(--copper);
     border-radius: 6px;
     box-shadow: 0 4px 14px rgba(17, 34, 44, 0.05);
@@ -2293,7 +3201,7 @@ const siteCss = `:root {
     gap: 0;
     border-radius: 6px;
     overflow: hidden;
-    border: 1px solid var(--ink);
+    border: 1px solid var(--copper);
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     max-width: 100%;
   }
@@ -2301,7 +3209,7 @@ const siteCss = `:root {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
+    padding: 9px 18px;
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     font-weight: var(--fw-bold);
@@ -2309,27 +3217,27 @@ const siteCss = `:root {
     cursor: pointer;
     transition: all 0.18s ease;
     border: 0;
-    background: var(--navy);
-    color: #ffffff;
+    background: var(--copper);
+    color: #ffffff !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 420px;
+    max-width: 480px;
     line-height: var(--lh-snug);
   }
-  .f-asset-btn:hover { background: var(--copper); }
-  .f-asset-btn.primary { background: var(--navy); color: #ffffff; }
-  .f-asset-btn.primary:hover { background: var(--copper); }
-  .f-asset-btn.accent { background: var(--copper); color: #ffffff; }
-  .f-asset-btn.accent:hover { background: var(--copper-dark); }
+  .f-asset-btn:hover { background: var(--copper-dark); color: #ffffff !important; }
+  .f-asset-btn.primary { background: var(--copper); color: #ffffff !important; }
+  .f-asset-btn.primary:hover { background: var(--copper-dark); color: #ffffff !important; }
+  .f-asset-btn.accent { background: var(--copper); color: #ffffff !important; }
+  .f-asset-btn.accent:hover { background: var(--copper-dark); color: #ffffff !important; }
   .f-asset-ext-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 12px;
-    background: #223744;
-    border-left: 1px solid rgba(255,255,255,0.18);
-    color: #cbd5e1;
+    padding: 0 14px;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 1px solid rgba(255,255,255,0.25);
+    color: #ffffff !important;
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     font-weight: var(--fw-bold);
@@ -2337,11 +3245,11 @@ const siteCss = `:root {
     transition: all 0.15s ease;
     flex-shrink: 0;
   }
-  .f-asset-ext-btn:hover { background: var(--copper); color: #ffffff; }
+  .f-asset-ext-btn:hover { background: rgba(0, 0, 0, 0.35); color: #ffffff !important; }
 
   .f-diagram-card {
     margin: 32px 0;
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     border-radius: 8px;
     overflow: hidden;
@@ -2349,7 +3257,7 @@ const siteCss = `:root {
   }
   .f-diagram-header {
     padding: 12px 18px;
-    background: #faf8f4;
+    background: var(--paper-tint);
     border-bottom: 1px solid var(--line);
     display: flex;
     align-items: center;
@@ -2364,11 +3272,11 @@ const siteCss = `:root {
   .f-diagram-open-btn {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
+    gap: 5px;
+    padding: 5px 12px;
     border-radius: 4px;
-    background: var(--navy);
-    color: #ffffff;
+    background: var(--copper);
+    color: #ffffff !important;
     font-size: var(--text-2xs);
     font-weight: var(--fw-bold);
     text-decoration: none;
@@ -2382,11 +3290,12 @@ const siteCss = `:root {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 22px;
-    border-radius: 3px;
-    background: rgba(17, 34, 44, 0.1);
-    color: var(--navy);
+    width: 26px;
+    height: 24px;
+    border-radius: 4px;
+    background: var(--paper-card);
+    color: var(--ink);
+    border: 1px solid var(--line);
     font-size: var(--text-xs);
     font-weight: var(--fw-bold);
     text-decoration: none;
@@ -2397,7 +3306,7 @@ const siteCss = `:root {
   .f-diagram-body {
     padding: 12px;
     text-align: center;
-    background: #faf8f5;
+    background: var(--paper);
     position: relative;
     cursor: zoom-in;
     display: flex;
@@ -2405,7 +3314,7 @@ const siteCss = `:root {
     justify-content: center;
     transition: background 0.18s ease;
   }
-  .f-diagram-body:hover { background: #f3efe8; }
+  .f-diagram-body:hover { background: var(--paper-tint); }
   .f-diagram-body img {
     max-width: 100%;
     height: auto;
@@ -2429,7 +3338,7 @@ const siteCss = `:root {
     font-size: var(--text-xs);
     color: var(--muted);
     font-style: italic;
-    background: #ffffff;
+    background: var(--paper-card);
     border-top: 1px solid var(--line-subtle);
     text-align: center;
     font-family: var(--font-sans);
@@ -2446,8 +3355,8 @@ const siteCss = `:root {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: var(--navy);
-    color: #ffffff;
+    background: var(--copper);
+    color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 6px 20px rgba(17, 34, 44, 0.25);
     display: flex;
@@ -2492,7 +3401,7 @@ const siteCss = `:root {
   .f-mobile-toc {
     display: none;
     margin-bottom: 28px;
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     border-left: 4px solid var(--copper);
     border-radius: 6px;
@@ -2534,11 +3443,11 @@ const siteCss = `:root {
     width: min(92vw, 1120px);
     height: min(86vh, 820px);
     padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--line);
     border-radius: 10px;
-    background: #0f172a;
-    color: #f8fafc;
-    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+    background: var(--paper-card);
+    color: var(--ink);
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5);
     display: none;
     flex-direction: column;
     overflow: hidden;
@@ -2571,43 +3480,48 @@ const siteCss = `:root {
   dialog.f-asset-modal.is-image-mode { background: #05090f; }
   dialog.f-asset-modal.is-image-mode .f-modal-topbar { display: none; }
   .f-modal-topbar {
-    height: 46px;
-    min-height: 46px;
-    padding: 0 10px 0 14px;
-    background: #1e293b;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 52px;
+    min-height: 52px;
+    padding: 0 14px 0 18px;
+    background: var(--paper-tint);
+    border-bottom: 1px solid var(--line);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 12px;
     flex-shrink: 0;
   }
   .f-modal-title-wrap {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     min-width: 0;
     flex: 1;
     overflow: hidden;
   }
   .f-modal-badge {
-    padding: 2px 6px;
+    padding: 3px 8px;
     border-radius: 4px;
-    background: rgba(56, 189, 248, 0.2);
-    color: #38bdf8;
-    border: 1px solid rgba(56, 189, 248, 0.35);
+    background: rgba(194, 94, 46, 0.15);
+    color: var(--copper);
+    border: 1px solid rgba(194, 94, 46, 0.3);
     font-family: var(--font-mono);
     font-size: var(--text-2xs);
-    font-weight: var(--fw-extrabold);
+    font-weight: var(--fw-bold);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     flex-shrink: 0;
   }
+  :root[data-theme="dark"] .f-modal-badge {
+    background: rgba(224, 122, 72, 0.25);
+    color: #e07a48;
+    border-color: rgba(224, 122, 72, 0.45);
+  }
   .f-modal-title {
     font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    color: #94a3b8;
+    font-size: var(--text-sm);
+    font-weight: var(--fw-bold);
+    color: var(--navy);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2615,49 +3529,50 @@ const siteCss = `:root {
   .f-modal-actions {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     flex-shrink: 0;
   }
   .f-modal-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     padding: 0;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 5px;
-    color: #94a3b8;
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--ink);
     font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    text-decoration: none;
+    font-size: 14px;
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.15s ease;
   }
   .f-modal-btn:hover {
-    background: rgba(255, 255, 255, 0.18);
-    color: #ffffff;
+    background: var(--paper);
+    color: var(--copper);
+    border-color: var(--copper);
   }
   .f-modal-btn.close {
-    background: rgba(239, 68, 68, 0.15);
-    border-color: rgba(239, 68, 68, 0.3);
-    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.25);
   }
   .f-modal-btn.close:hover {
-    background: rgba(239, 68, 68, 0.35);
+    background: #ef4444;
     color: #ffffff;
-    border-color: rgba(239, 68, 68, 0.6);
+    border-color: #ef4444;
   }
   .f-modal-img-close {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 34px;
-    height: 34px;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: rgba(0,0,0,0.55);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.65);
+    border: 1px solid rgba(255,255,255,0.3);
     color: #ffffff;
     font-size: 16px;
     display: none;
@@ -2668,18 +3583,18 @@ const siteCss = `:root {
     transition: background 0.15s ease;
     backdrop-filter: blur(4px);
   }
-  .f-modal-img-close:hover { background: rgba(220, 38, 38, 0.7); }
+  .f-modal-img-close:hover { background: rgba(220, 38, 38, 0.85); }
   dialog.f-asset-modal.is-image-mode .f-modal-img-close { display: flex; }
   .f-modal-content {
     flex: 1;
     position: relative;
-    background: #090d16;
+    background: var(--paper);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
   }
-  .f-modal-frame { width: 100%; height: 100%; border: 0; background: #ffffff; }
+  .f-modal-frame { width: 100%; height: 100%; border: 0; background: var(--paper-card); }
   .f-modal-img { max-width: 100%; max-height: 100%; object-fit: contain; cursor: zoom-in; }
   .f-modal-spinner {
     position: absolute;
@@ -2690,7 +3605,7 @@ const siteCss = `:root {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    color: #94a3b8;
+    color: var(--muted);
     font-family: var(--font-sans);
     font-size: var(--text-xs);
     pointer-events: none;
@@ -2698,8 +3613,8 @@ const siteCss = `:root {
   .f-spin-circle {
     width: 28px;
     height: 28px;
-    border: 3px solid rgba(255, 255, 255, 0.12);
-    border-top-color: #38bdf8;
+    border: 3px solid var(--line);
+    border-top-color: var(--copper);
     border-radius: 50%;
     animation: f-spin 0.8s linear infinite;
   }
@@ -2738,7 +3653,7 @@ const siteCss = `:root {
     gap: 8px;
     padding: 6px 14px;
     border-radius: 999px;
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     font-family: var(--font-mono);
     font-size: var(--text-2xs);
@@ -2789,7 +3704,7 @@ const siteCss = `:root {
     align-items: center;
     gap: 8px 12px;
     padding: 10px 16px;
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--paper-card);
     border: 1px solid var(--line);
     border-radius: 6px;
     font-family: var(--font-mono);
@@ -2812,7 +3727,7 @@ const siteCss = `:root {
     margin: 44px 0 56px;
   }
   .f-bento-card {
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     padding: 24px 22px;
     border-radius: 8px;
@@ -2886,7 +3801,7 @@ const siteCss = `:root {
     grid-template-columns: 260px 1fr;
     gap: 36px;
     padding: 32px 36px;
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
@@ -2970,7 +3885,7 @@ const siteCss = `:root {
   /* Manifesto / Philosophy Quote Callout */
   .f-about-manifesto {
     padding: 36px 40px;
-    background: #fbf8f2;
+    background: var(--paper-tint);
     border: 1px solid var(--line);
     border-left: 4px solid var(--copper);
     border-radius: 8px;
@@ -3013,9 +3928,9 @@ const siteCss = `:root {
     margin: 40px 0 56px;
   }
   .f-toolkit-col {
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
-    border-top: 3px solid var(--navy);
+    border-top: 3px solid var(--copper);
     padding: 22px 20px;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
@@ -3058,7 +3973,7 @@ const siteCss = `:root {
   /* Artistic Actions Dock */
   .f-about-cta-dock {
     padding: 32px 36px;
-    background: #ffffff;
+    background: var(--paper-card);
     border: 1px solid var(--line);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
@@ -3104,10 +4019,36 @@ const siteCss = `:root {
     border-radius: 6px;
     transition: all 0.15s ease;
   }
-  .f-about-btn.primary { background: var(--navy); color: #ffffff; }
-  .f-about-btn.primary:hover { background: var(--copper); border-color: var(--copper); }
-  .f-about-btn.secondary { background: #ffffff; color: var(--navy); border-color: var(--line); }
-  .f-about-btn.secondary:hover { background: var(--paper); border-color: var(--navy); }
+  .f-about-btn.primary {
+    background: var(--copper);
+    color: #ffffff !important;
+    border-color: var(--copper);
+  }
+  .f-about-btn.primary:hover {
+    background: var(--copper-dark);
+    border-color: var(--copper-dark);
+    color: #ffffff !important;
+  }
+  .f-about-btn.secondary {
+    background: var(--paper-card);
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .f-about-btn.secondary:hover {
+    background: var(--paper-tint);
+    border-color: var(--copper);
+    color: var(--copper);
+  }
+  :root[data-theme="dark"] .f-about-btn.primary {
+    background: var(--copper) !important;
+    color: #ffffff !important;
+    border-color: var(--copper) !important;
+  }
+  :root[data-theme="dark"] .f-about-btn.secondary {
+    background: var(--paper-card);
+    color: var(--ink);
+    border-color: var(--line);
+  }
 
   @media (max-width: 900px) {
     .f-about-bento-grid {
@@ -3202,7 +4143,7 @@ const siteCss = `:root {
     position: absolute;
     right: 50px;
     bottom: 14px;
-    background: #ffffff;
+    background: var(--paper-card);
     border: 2px solid var(--navy);
     border-radius: 8px;
     padding: 6px 12px;
@@ -3224,7 +4165,7 @@ const siteCss = `:root {
     bottom: 10px;
     width: 8px;
     height: 8px;
-    background: #ffffff;
+    background: var(--paper-card);
     border-right: 2px solid var(--navy);
     border-top: 2px solid var(--navy);
     transform: rotate(45deg);
@@ -3276,19 +4217,466 @@ const siteCss = `:root {
   /* ========================================================================
      20. PRINT STYLES
      ======================================================================== */
+  
+  /* ========================================================================
+     UNIVERSAL COMMAND PALETTE (CTRL+K / CMD+K)
+     ======================================================================== */
+  .f-nav-cmd-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .f-nav-cmd-btn:hover {
+    border-color: var(--copper);
+    color: var(--ink);
+  }
+  .f-cmd-kbd {
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: var(--paper-tint);
+    border: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: var(--fw-bold);
+    color: var(--muted);
+  }
+
+  dialog.f-cmd-dialog {
+    width: min(92vw, 620px);
+    max-height: min(82vh, 560px);
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--paper-card);
+    color: var(--ink);
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--line);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    z-index: 1200;
+    font-family: var(--font-sans);
+  }
+  dialog.f-cmd-dialog[open] {
+    display: flex;
+    animation: f-cmd-in 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes f-cmd-in {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  dialog.f-cmd-dialog::backdrop {
+    background: rgba(10, 18, 26, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .f-cmd-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-tint);
+  }
+  .f-cmd-icon {
+    font-size: 16px;
+    color: var(--copper);
+  }
+  .f-cmd-input {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: var(--text-md);
+    color: var(--ink);
+    outline: none;
+    padding: 0;
+  }
+  .f-cmd-input::placeholder {
+    color: var(--muted);
+    font-size: var(--text-sm);
+  }
+  .f-cmd-esc {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--muted);
+    background: var(--paper-card);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+  }
+  .f-cmd-results {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 400px;
+  }
+  .f-cmd-section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--muted);
+    padding: 8px 12px 4px;
+  }
+  .f-cmd-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+  .f-cmd-item:hover, .f-cmd-item.is-selected {
+    background: var(--paper-tint);
+    color: var(--copper);
+  }
+  .f-cmd-item-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .f-cmd-item-icon {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  .f-cmd-item-title {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .f-cmd-item-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .f-cmd-empty {
+    padding: 32px 16px;
+    text-align: center;
+    color: var(--muted);
+    font-size: var(--text-sm);
+  }
+  .f-cmd-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+    border-top: 1px solid var(--line);
+    background: var(--paper-tint);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--muted);
+  }
+  .f-cmd-footer span { display: flex; align-items: center; gap: 4px; }
+  .f-cmd-footer kbd {
+    background: var(--paper-card);
+    padding: 1px 4px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+  }
+
+  /* ========================================================================
+     HOMEPAGE HERO TECH MESH & EYEBROW
+     ======================================================================== */
+  .f-home-hero {
+    position: relative;
+    padding: 60px 0 54px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    overflow: hidden;
+  }
+  .f-home-hero:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--line) 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .f-home-hero .f-wrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ========================================================================
+     LIVE APP SHOWCASE TERMINAL / STUDIO WINDOW FRAME
+     ======================================================================== */
+  .f-window-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: var(--paper-tint);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--muted);
+  }
+  .f-win-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .f-win-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .f-win-dot.red { background: #ef4444; }
+  .f-win-dot.yellow { background: #f59e0b; }
+  .f-win-dot.green { background: #10b981; }
+  .f-win-title {
+    font-weight: var(--fw-semibold);
+    color: var(--ink-secondary);
+  }
+  .f-win-badge {
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    font-weight: var(--fw-bold);
+  }
+
+  /* ========================================================================
+     RELATED CASE STUDIES & EVIDENCE CROSS-REFERENCING
+     ======================================================================== */
+  .f-related-section {
+    margin: 44px 0 32px;
+    padding: 28px 0 0;
+    border-top: 2px solid var(--line);
+  }
+  .f-related-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .f-related-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+  .f-related-hint {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+  .f-related-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .f-related-card {
+    display: flex;
+    flex-direction: column;
+    padding: 22px 24px;
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .f-related-card:hover {
+    border-color: var(--copper);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+  .f-related-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--muted);
+  }
+  .f-related-mode {
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: var(--paper-tint);
+    color: var(--copper);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+  }
+  .f-related-card h4 {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--navy);
+    margin: 0 0 8px;
+    line-height: var(--lh-snug);
+    transition: color 0.15s ease;
+  }
+  .f-related-card:hover h4 { color: var(--copper); }
+  .f-related-question {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--ink-secondary);
+    margin: 0 0 16px;
+    flex: 1;
+  }
+  .f-related-foot {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-bold);
+    color: var(--copper);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  @media (max-width: 768px) {
+    .f-related-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ========================================================================
+     EXECUTIVE IMPACT DASHBOARD ON ABOUT PAGE
+     ======================================================================== */
+  .f-impact-dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 24px 28px;
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin: 28px 0 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+  .f-impact-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .f-impact-stat b {
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-bold);
+    color: var(--copper);
+    line-height: 1;
+  }
+  .f-impact-stat span {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-semibold);
+    color: var(--ink-secondary);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+  @media (max-width: 768px) {
+    .f-impact-dashboard { grid-template-columns: 1fr 1fr; gap: 20px; }
+  }
+
+  /* Work card hover arrow micro-interaction */
+  .f-work-item {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  }
+  .f-work-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+    border-color: var(--copper);
+  }
+  .f-work-item h3 a:after {
+    content: " →";
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s ease;
+    color: var(--copper);
+  }
+  .f-work-item:hover h3 a:after {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
   @media print {
-    .f-header, .f-case-rail, .f-rail-actions, .f-asset-modal, .f-back-top, .f-skip, #f-progress-bar, .f-cat-in-tab-dock { display: none !important; }
-    body { background: #fff !important; color: #000 !important; font-size: 12pt !important; }
-    .f-wrap { width: 100% !important; max-width: 100% !important; margin: 0 !important; }
-    .f-case-reading { display: block !important; padding: 0 !important; }
-    .f-case-hero { background: none !important; border-bottom: 2pt solid #000 !important; padding: 20pt 0 !important; }
+    body {
+      background: #ffffff !important;
+      color: #111b20 !important;
+      font-size: 11pt !important;
+      line-height: 1.5 !important;
+    }
+    .f-header, .f-footer, .f-theme-switch-group, .f-case-rail, 
+    .f-case-action-bar, .f-back-top, .f-cat-in-tab-dock, 
+    dialog, .f-nav-cmd-btn, .f-skip, #f-progress-bar,
+    .f-case-nav-rail, .f-related-section, .f-toast-msg {
+      display: none !important;
+    }
+    .f-case-reading {
+      display: block !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .f-case-hero {
+      border-bottom: 2pt solid #14222c !important;
+      padding: 24pt 0 16pt !important;
+      background: none !important;
+    }
     .f-case-hero:after { display: none !important; }
-    .f-case-hero h1 { color: #000 !important; font-size: 24pt !important; font-family: var(--font-serif) !important; }
-    .f-case-dek { color: #333 !important; }
-    .f-case-meta { border: 1pt solid #ccc !important; }
-    .f-prose { font-size: 11pt !important; line-height: 1.5 !important; }
-    .f-prose h2 { page-break-after: avoid; }
-    .f-diagram-card { page-break-inside: avoid; border: 1pt solid #ccc !important; }
+    .f-case-hero h1 {
+      color: #14222c !important;
+      font-size: 24pt !important;
+    }
+    .f-case-dek {
+      color: #334149 !important;
+      font-size: 12pt !important;
+    }
+    .f-case-meta {
+      border: 1pt solid #ccc !important;
+      background: #fbf9f5 !important;
+      margin-bottom: 20pt !important;
+    }
+    .f-meta-cell span { color: #14222c !important; }
+    .f-prose { color: #111b20 !important; }
+    .f-prose h2 {
+      color: #14222c !important;
+      page-break-after: avoid;
+      border-bottom: 1pt solid #ccc !important;
+    }
+    .f-prose blockquote {
+      border-left: 3pt solid #c25e2e !important;
+      background: #fdfaf7 !important;
+      color: #111b20 !important;
+      page-break-inside: avoid;
+    }
+    .f-table-wrap { border: 1pt solid #ccc !important; page-break-inside: avoid; }
+    .f-table th { background: #f0ece1 !important; color: #14222c !important; }
+    .f-anchor { display: none !important; }
   }
 
   /* ========================================================================
@@ -3334,35 +4722,201 @@ const siteCss = `:root {
   }
 `;
 
-function layoutHead(title, description, nonce) {
+function layoutHead(title, description, nonce, meta = {}) {
+  const currentPath = meta.path || "/";
+  const canonicalUrl = `https://phamthanhphu.io.vn${currentPath === "/" ? "" : currentPath}`;
+  const ogType = meta.ogType || "website";
+  const ogImage = meta.ogImage || "https://phamthanhphu.io.vn/assets/phu-portrait.webp";
+
+  // Dynamic JSON-LD Schema
+  let schemaData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Phạm Thanh Phú — Work & Research",
+    "url": "https://phamthanhphu.io.vn",
+    "author": {
+      "@type": "Person",
+      "name": "Phạm Thanh Phú",
+      "jobTitle": "Business & Product Operations / Systems Design",
+      "sameAs": [
+        "https://www.linkedin.com/in/yunero1206/",
+        "https://app.phamthanhphu.io.vn/"
+      ]
+    },
+    "description": description
+  };
+
+  if (meta.ogType === "article") {
+    schemaData = {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": title,
+      "description": description,
+      "url": canonicalUrl,
+      "author": {
+        "@type": "Person",
+        "name": "Phạm Thanh Phú"
+      },
+      "inLanguage": "en",
+      "keywords": meta.keywords || ""
+    };
+  } else if (currentPath === "/about") {
+    schemaData = {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Phạm Thanh Phú",
+        "jobTitle": "Business & Product Operations",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Phong Phu Stationery"
+        },
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "Ho Chi Minh City University of Law" },
+          { "@type": "EducationalOrganization", "name": "Judicial Academy" }
+        ],
+        "knowsAbout": ["Business Operations", "Product Strategy", "AI Decision Systems", "Evidence-First Casework"],
+        "url": canonicalUrl
+      }
+    };
+  }
+
   return `<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="${escapeHtml(description)}">
-    <meta name="theme-color" content="#14222c">
+    <meta name="theme-color" content="#14222c" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0e161c" media="(prefers-color-scheme: dark)">
     <meta name="robots" content="index, follow">
     <title>${escapeHtml(title)}</title>
+
+    <link rel="canonical" href="${canonicalUrl}">
+    <link rel="icon" type="image/svg+xml" href="${SITE_FAVICON_DATA_URL}">
+    <link rel="apple-touch-icon" href="/assets/phu-portrait.webp">
+
+    <!-- Open Graph / Facebook / LinkedIn / Zalo -->
+    <meta property="og:site_name" content="Phạm Thanh Phú — Work & Research">
+    <meta property="og:type" content="${ogType}">
+    <meta property="og:url" content="${canonicalUrl}">
+    <meta property="og:title" content="${escapeHtml(title)}">
+    <meta property="og:description" content="${escapeHtml(description)}">
+    <meta property="og:image" content="${ogImage}">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="${canonicalUrl}">
+    <meta name="twitter:title" content="${escapeHtml(title)}">
+    <meta name="twitter:description" content="${escapeHtml(description)}">
+    <meta name="twitter:image" content="${ogImage}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://drive.google.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700&display=swap" rel="stylesheet">
+
+    <!-- Anti-FOUC Early Theme Script -->
+    <script nonce="${nonce}">
+      (function(){
+        try {
+          var t = localStorage.getItem('f-theme');
+          if (t === 'dark' || t === 'sepia' || t === 'light') {
+            document.documentElement.setAttribute('data-theme', t);
+          } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          }
+        } catch(e){}
+      })();
+    </script>
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json" nonce="${nonce}">
+      ${JSON.stringify(schemaData)}
+    </script>
+
     <style nonce="${nonce}">${siteCss}</style>
   </head>`;
 }
 
-function layoutHeader(active = "") {
+function layoutHeader(active = "", nonce = "") {
   return `<header class="f-header">
     <div id="f-progress-bar"></div>
     <nav class="f-nav f-wrap" aria-label="Primary navigation">
-      <a class="f-brand" href="/">Phạm Thanh Phú <span>Work & Research</span></a>
+      <a class="f-brand" href="/">Phạm Thanh Phú <span>Work &amp; Research</span></a>
       <div class="f-links">
         <a href="/work"${active === "work" ? ' aria-current="page"' : ""}>Work Library</a>
-        <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer"${active === "app" ? ' aria-current="page"' : ""}>Explainable Trust ↗</a>
+        <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer"${active === "app" ? ' aria-current="page"' : ""} class="f-nav-live-pill" title="Explainable Trust — Live System on Render"><span class="f-live-beacon"></span>Explainable Trust ↗</a>
         <a href="/about"${active === "about" ? ' aria-current="page"' : ""}>About</a>
+        
+        <!-- Theme Switcher Group (right of About) -->
+        <div class="f-theme-switch-group" role="group" aria-label="Theme selection">
+          <button type="button" class="f-theme-toggle-btn" data-theme-val="light" title="Light Paper (☀)">☀</button>
+          <button type="button" class="f-theme-toggle-btn" data-theme-val="sepia" title="Warm Sepia (📖)">📖</button>
+          <button type="button" class="f-theme-toggle-btn" data-theme-val="dark" title="Dark Forensic (🌙)">🌙</button>
+        </div>
       </div>
     </nav>
-  </header>`;
+  </header>
+  <script nonce="${nonce}">
+    (function(){
+      function getSavedTheme() {
+        try {
+          var t = localStorage.getItem('f-theme');
+          if (t === 'dark' || t === 'sepia' || t === 'light') return t;
+        } catch(e){}
+        return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      }
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        try { localStorage.setItem('f-theme', theme); } catch(e){}
+        
+        var btns = document.querySelectorAll('.f-theme-toggle-btn');
+        btns.forEach(function(b) {
+          b.classList.toggle('is-active', b.getAttribute('data-theme-val') === theme);
+        });
+        
+        if (window.showToast) {
+          window.showToast('Theme set to ' + theme.toUpperCase());
+        }
+      }
+
+      function syncUi() {
+        var current = document.documentElement.getAttribute('data-theme') || getSavedTheme();
+        document.documentElement.setAttribute('data-theme', current);
+
+        var btns = document.querySelectorAll('.f-theme-toggle-btn');
+        btns.forEach(function(btn) {
+          btn.classList.toggle('is-active', btn.getAttribute('data-theme-val') === current);
+          btn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var val = btn.getAttribute('data-theme-val');
+            applyTheme(val);
+          };
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', syncUi);
+      } else {
+        syncUi();
+      }
+
+      // Event delegation fallback to guarantee clicks always register
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest && e.target.closest('.f-theme-toggle-btn');
+        if (btn) {
+          e.preventDefault();
+          e.stopPropagation();
+          var val = btn.getAttribute('data-theme-val');
+          if (val) applyTheme(val);
+        }
+      });
+    })();
+  </script>`;
 }
 
 function catGlobalComponent(nonce) {
@@ -3471,10 +5025,211 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '') {
   return `<footer class="f-footer">
     <div class="f-wrap f-footer-row">
       <span>Phạm Thanh Phú · ${escapeHtml(label)}</span>
-      <span><a href="mailto:phamthanhphu97@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn</a> · <a href="/work">Work Library</a></span>
+      <span><a href="mailto:phamthanhphu97@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn</a> · <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer">Explainable Trust (Render App) ↗</a> · <a href="/work">Work Library</a></span>
     </div>
   </footer>
-  ${catGlobalComponent(nonce)}`;
+  <div id="f-global-toast" class="f-toast-msg" role="status" aria-live="polite"></div>
+  
+  <!-- Universal Command Palette Modal -->
+  <dialog id="f-cmd-dialog" class="f-cmd-dialog" aria-label="Command Palette">
+    <div class="f-cmd-top">
+      <span class="f-cmd-icon">🔍</span>
+      <input type="text" id="f-cmd-input" class="f-cmd-input" placeholder="Search 22 monographs, tags, lenses, or pages..." autocomplete="off" spellcheck="false">
+      <span class="f-cmd-esc">ESC</span>
+    </div>
+    <div id="f-cmd-results" class="f-cmd-results"></div>
+    <div class="f-cmd-footer">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> select</span>
+      <span><kbd>ESC</kbd> dismiss</span>
+    </div>
+  </dialog>
+
+  
+  <script nonce="${nonce}">
+    (function(){
+      
+  const SEARCH_ITEMS = [
+    { title: "Explainable Trust (Live Prototype on Render)", path: "https://app.phamthanhphu.io.vn/", type: "Live App", badge: "Live System ⚡", ext: true },
+    { title: "Work Library: All 22 Research Monographs", path: "/work", type: "Page", badge: "Archive" },
+    { title: "About Phạm Thanh Phú: Operating Principles & Horizon", path: "/about", type: "Page", badge: "Profile" },
+    { title: "Operations & Product Lens", path: "/work?mode=product-ops", type: "Lens", badge: "Research Mode" },
+    { title: "Forensic Evidence Lens", path: "/work?mode=evidence-first", type: "Lens", badge: "Research Mode" },
+    { title: "Systems Essays Lens", path: "/work?mode=essays", type: "Lens", badge: "Research Mode" },
+    { title: "Built Concepts & Prototypes Lens", path: "/work?mode=concepts", type: "Lens", badge: "Research Mode" },
+    // 22 Case Studies
+    { title: "Vinamilk: Trusted Nutrition Product-Service Discovery", path: "/work/vinamilk-trusted-nutrition", type: "Monograph", badge: "Case 1" },
+    { title: "Creator Platform: Trust Chain Integration (MFan)", path: "/work/creator-platform-operating-model", type: "Monograph", badge: "Case 2" },
+    { title: "Elfie: Trust-Safe Activation Under Public Health Scrutiny", path: "/work/elfie-trust-safe-activation", type: "Monograph", badge: "Case 3" },
+    { title: "Post-Signing Artist / Label Operations Framework", path: "/work/post-signing-artist-label-operations", type: "Monograph", badge: "Case 4" },
+    { title: "Shopee Account Restrictions: Resolution Under Uncertainty", path: "/work/shopee-account-restrictions", type: "Monograph", badge: "Case 5" },
+    { title: "FanMe: Controlled Growth & Native Operations", path: "/work/fanme-controlled-growth", type: "Monograph", badge: "Case 6" },
+    { title: "DatVietVAC: Ownership & Belonging Merchandise Growth", path: "/work/datvietvac-ownership-belonging", type: "Monograph", badge: "Case 7" },
+    { title: "DatVietVAC: Fandom Cards Collectibles Product Line", path: "/work/datvietvac-fandom-cards", type: "Monograph", badge: "Case 8" },
+    { title: "VieSHOP: Fan-Centred Merchandise System", path: "/work/vieshop-fan-centred-merchandise-system", type: "Monograph", badge: "Case 9" },
+    { title: "DatVietVAC: Who Owns the Fan Promise? (Forensic Audit)", path: "/work/datvietvac-who-owns-the-fan-promise", type: "Monograph", badge: "Case 10" },
+    { title: "Explainable Trust: Traceable Case Reconstruction (W3C DAG)", path: "/work/explainable-trust", type: "Monograph", badge: "Case 11 · App" },
+    { title: "Vietnam’s 2026 Diamond-Market Crisis (Forensic Paper)", path: "/work/vietnam-diamond-market-crisis", type: "Monograph", badge: "Case 12" },
+    { title: "Diamond Trust-Chain Collapse & Appraisal Governance", path: "/work/diamond-trust-chain-collapse", type: "Monograph", badge: "Case 13" },
+    { title: "Adobe Account Restriction: Comparative Case Study", path: "/work/adobe-account-restriction", type: "Monograph", badge: "Case 14" },
+    { title: "Pathway Lens: Operational Cycles & Boundary Architecture", path: "/work/pathway-lens-operational-cycles", type: "Monograph", badge: "Case 15" },
+    { title: "AI Judgment: Why Model Confidence Is Not Operational Proof", path: "/work/ai-judgment-decisions", type: "Monograph", badge: "Case 16" },
+    { title: "AI Apprenticeship: Knowledge Transfer in Operational Systems", path: "/work/ai-apprenticeship", type: "Monograph", badge: "Case 17" },
+    { title: "ZaloPay for SMEs: When Paid Does Not Mean Done", path: "/work/zalopay-smes-when-paid-not-done", type: "Monograph", badge: "Case 18" },
+    { title: "METUB & Creator Economy: Monetization Architecture", path: "/work/metub-creator-economy", type: "Monograph", badge: "Case 19" },
+    { title: "MoMo AI PayLater: Risk Begins After Yes", path: "/work/momo-ai-paylater", type: "Monograph", badge: "Case 20" },
+    { title: "Artist Fandom Page: Direct-to-Consumer Trust Operations", path: "/work/artist-fandom-page", type: "Monograph", badge: "Case 21" },
+    { title: "Zalo Scam Emergency Mode: Rapid Containment Strategy", path: "/work/zalo-scam-emergency-mode", type: "Monograph", badge: "Case 22" }
+  ];
+
+
+      var cmdDialog = document.getElementById('f-cmd-dialog');
+      var cmdInput = document.getElementById('f-cmd-input');
+      var cmdResults = document.getElementById('f-cmd-results');
+      var cmdTrigger = document.getElementById('f-nav-cmd-trigger');
+      var selectedIdx = 0;
+      var currentFiltered = [];
+
+      function renderItems(items) {
+        currentFiltered = items;
+        selectedIdx = 0;
+        if (!items || items.length === 0) {
+          cmdResults.innerHTML = '<div class="f-cmd-empty">No monographs or pages found matching your query.</div>';
+          return;
+        }
+
+        var html = '';
+        var lastType = '';
+        items.forEach(function(item, idx) {
+          if (item.type !== lastType) {
+            html += '<div class="f-cmd-section-label">' + item.type + '</div>';
+            lastType = item.type;
+          }
+          var isSel = (idx === selectedIdx) ? ' is-selected' : '';
+          var extIcon = item.ext ? ' ↗' : '';
+          html += '<a href="' + item.path + '"' + (item.ext ? ' target="_blank" rel="noreferrer"' : '') + ' class="f-cmd-item' + isSel + '" data-idx="' + idx + '">' +
+            '<div class="f-cmd-item-left">' +
+              '<span class="f-cmd-item-icon">' + (item.type === 'Live App' ? '⚡' : (item.type === 'Page' ? '📄' : '📖')) + '</span>' +
+              '<span class="f-cmd-item-title">' + item.title + extIcon + '</span>' +
+            '</div>' +
+            '<span class="f-cmd-item-badge">' + item.badge + '</span>' +
+          '</a>';
+        });
+        cmdResults.innerHTML = html;
+      }
+
+      function openPalette() {
+        if (!cmdDialog) return;
+        if (typeof cmdDialog.showModal === 'function') {
+          cmdDialog.showModal();
+        } else {
+          cmdDialog.setAttribute('open', '');
+        }
+        cmdInput.value = '';
+        renderItems(SEARCH_ITEMS);
+        setTimeout(function(){ cmdInput.focus(); }, 50);
+      }
+
+      function closePalette() {
+        if (!cmdDialog) return;
+        if (typeof cmdDialog.close === 'function') {
+          cmdDialog.close();
+        } else {
+          cmdDialog.removeAttribute('open');
+        }
+      }
+
+      if (cmdTrigger) {
+        cmdTrigger.addEventListener('click', openPalette);
+      }
+
+      // Shortcut: Ctrl+K or Cmd+K
+      document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+          e.preventDefault();
+          if (cmdDialog && cmdDialog.open) {
+            closePalette();
+          } else {
+            openPalette();
+          }
+        }
+        if (e.key === 'Escape' && cmdDialog && cmdDialog.open) {
+          closePalette();
+        }
+      });
+
+      if (cmdDialog) {
+        cmdDialog.addEventListener('click', function(e) {
+          if (e.target === cmdDialog) closePalette();
+        });
+      }
+
+      if (cmdInput) {
+        cmdInput.addEventListener('input', function() {
+          var q = cmdInput.value.trim().toLowerCase();
+          if (!q) {
+            renderItems(SEARCH_ITEMS);
+            return;
+          }
+          var matched = SEARCH_ITEMS.filter(function(item) {
+            return item.title.toLowerCase().includes(q) || item.badge.toLowerCase().includes(q);
+          });
+          renderItems(matched);
+        });
+
+        cmdInput.addEventListener('keydown', function(e) {
+          if (!currentFiltered || currentFiltered.length === 0) return;
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIdx = (selectedIdx + 1) % currentFiltered.length;
+            updateSelectionUi();
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIdx = (selectedIdx - 1 + currentFiltered.length) % currentFiltered.length;
+            updateSelectionUi();
+          } else if (e.key === 'Enter') {
+            e.preventDefault();
+            var target = currentFiltered[selectedIdx];
+            if (target) {
+              if (target.ext) {
+                window.open(target.path, '_blank', 'noreferrer');
+              } else {
+                window.location.href = target.path;
+              }
+              closePalette();
+            }
+          }
+        });
+      }
+
+      function updateSelectionUi() {
+        var items = cmdResults.querySelectorAll('.f-cmd-item');
+        items.forEach(function(el, i) {
+          el.classList.toggle('is-selected', i === selectedIdx);
+          if (i === selectedIdx) {
+            el.scrollIntoView({ block: 'nearest' });
+          }
+        });
+      }
+    })();
+  </script>
+
+  ${catGlobalComponent(nonce)}
+  <script nonce="${nonce}">
+    (function(){
+      var toast = document.getElementById('f-global-toast');
+      var toastTimer = null;
+      window.showToast = function(msg) {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('is-visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function() {
+          toast.classList.remove('is-visible');
+        }, 2600);
+      };
+    })();
+  </script>`;
 }
 
 function homePage(nonce) {
@@ -3498,7 +5253,7 @@ function homePage(nonce) {
       date: "Jun 2026",
       tag: "Platform Policy",
       path: "/work/shopee-account-restrictions",
-      title: "Shopee Account Restrictions — Customer Resolution Under Platform Uncertainty",
+      title: "Shopee Account Restrictions: Customer Resolution Under Platform Uncertainty",
       question: "After a marketplace restricts a customer account, what minimum resolution pathway must remain visible so the customer can understand cause, preserve assets, contest, and recover?",
       desc: "Mapping the asymmetry between automated enforcement risk heuristics and consumer property rights, with a proposed 5-stage explainable recovery standard.",
       schematic: [
@@ -3513,7 +5268,7 @@ function homePage(nonce) {
       date: "Aug 2026",
       tag: "AI Systems Prototype",
       path: "/work/explainable-trust",
-      title: "Explainable Trust — Traceable Case Reconstruction",
+      title: "Explainable Trust: Traceable Case Reconstruction",
       question: "Can an AI-assisted workspace update a living case without erasing the reasoning and source path by which the case was constructed?",
       desc: "A working software prototype that maintains immutable W3C PROV-O DAG audit trails, local-first ledgers, and stable entity IDs across revision cycles.",
       schematic: [
@@ -3527,8 +5282,8 @@ function homePage(nonce) {
       date: "Jul 2026",
       tag: "Product Discovery",
       path: "/work/vinamilk-trusted-nutrition",
-      title: "Vinamilk — Trusted Nutrition Product-Service Discovery",
-      question: "What trusted nutrition proposition deserves to exist—and how can its valued attributes survive cold-chain delivery, scale, and allocation governance?",
+      title: "Vinamilk: Trusted Nutrition Product-Service Discovery",
+      question: "What trusted nutrition proposition deserves to exist, and how can its valued attributes survive cold-chain delivery, scale, and allocation governance?",
       desc: "A stage-gated discovery framework connecting occasion intelligence to cold-chain operational governance.",
       schematic: [
         { label: "Gate 1: Occasion Intel", type: "step" },
@@ -3595,7 +5350,7 @@ function homePage(nonce) {
 ${layoutHead("Phạm Thanh Phú — Work & Research Archive", "Evidence-first portfolio and research monographs across business operations, product strategy, and AI trust systems by Phạm Thanh Phú.", nonce)}
 <body>
   <a class="f-skip" href="#main">Skip to main content</a>
-  ${layoutHeader("home")}
+  ${layoutHeader("home", nonce)}
   <main id="main">
     <!-- 1. Refined Soothing Hero Header -->
     <header class="f-home-hero">
@@ -3623,6 +5378,61 @@ ${layoutHead("Phạm Thanh Phú — Work & Research Archive", "Evidence-first po
           <a href="/work" class="f-about-btn secondary" style="font-size:0.8rem;">
             View full catalog of ${totalWorks} monographs →
           </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 2.5 Live System Showcase: Explainable Trust Studio -->
+    <section class="f-human-section" style="background:var(--paper-tint);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:40px 0;">
+      <div class="f-wrap">
+        <div class="f-human-head" style="margin-bottom:20px;">
+          <h2>Production Prototype</h2>
+          <span>Live Runnable Software on Render</span>
+        </div>
+        <div class="f-proto-window-card">
+          <div class="f-window-bar">
+            <div class="f-win-dots">
+              <span class="f-win-dot red"></span>
+              <span class="f-win-dot yellow"></span>
+              <span class="f-win-dot green"></span>
+            </div>
+            <span class="f-win-title">app.phamthanhphu.io.vn: Explainable Trust Studio</span>
+            <span class="f-win-badge">LIVE ⚡</span>
+          </div>
+          <div class="f-proto-grid">
+            <div>
+              <span class="f-proto-kicker">W3C PROV-O · LOCAL-FIRST LEDGER V3 · BOUNDED RETRIEVAL</span>
+              <h3 class="f-proto-title">Explainable Trust: Traceable Case Reconstruction</h3>
+              <p class="f-proto-desc">
+                A live production software prototype on Render that maintains immutable DAG audit trails, local-first ledgers, and entity reconciliation across AI revision cycles.
+              </p>
+              <div class="f-proto-specs">
+                <span class="f-proto-spec-pill">Immutable DAG</span>
+                <span class="f-proto-spec-pill">Browser IndexedDB</span>
+                <span class="f-proto-spec-pill">SHA-256 Hashes</span>
+                <span class="f-proto-spec-pill">Docker on Render</span>
+              </div>
+              <div class="f-proto-actions">
+                <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" class="f-about-btn primary" style="background:var(--copper);color:#ffffff!important;">Launch Live App ↗</a>
+                <a href="/work/explainable-trust" class="f-about-btn secondary">Read Case Monograph →</a>
+              </div>
+            </div>
+            <div>
+              <div class="f-proto-screenshot-box">
+                <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" title="Click to launch Explainable Trust on Render ↗">
+                  <img src="https://lh3.googleusercontent.com/d/1K_D6jfWCZAktx3-Pp1D1NWfbB046BZle=w1000" 
+                       onerror="this.src='https://drive.google.com/thumbnail?id=1K_D6jfWCZAktx3-Pp1D1NWfbB046BZle&sz=w1000'"
+                       alt="Explainable Trust Studio Screenshot Preview" 
+                       class="f-proto-preview-img" 
+                       loading="lazy">
+                  <div class="f-proto-img-overlay">
+                    <span>Open Live App ↗</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -3695,14 +5505,16 @@ function workPage(nonce) {
       else if (maturityLower.includes('concept')) maturityCls = 'concept';
       else if (maturityLower.includes('evidence')) maturityCls = 'evidence';
 
+      const isFeaturedApp = item.path === "/work/explainable-trust";
       const rawTags = (item.tags || "").split(" · ");
       const tagsHtml = rawTags.map(t => `<span class="f-tag-click" data-tag="${escapeHtml(t.toLowerCase())}">${escapeHtml(t)}</span>`).join(`<span style="opacity:0.35;margin:0 4px;">·</span>`);
 
       return `
-        <div class="f-work-item" data-mode="${item.mode}" data-title="${escapeHtml(item.title.toLowerCase())}" data-question="${escapeHtml(item.question.toLowerCase())}" data-tags="${escapeHtml((item.tags || '').toLowerCase())}">
+        <div class="f-work-item ${isFeaturedApp ? "f-work-item-featured-app" : ""}" data-mode="${item.mode}" data-title="${escapeHtml(item.title.toLowerCase())}" data-question="${escapeHtml(item.question.toLowerCase())}" data-tags="${escapeHtml((item.tags || '').toLowerCase())}">
           <div class="f-work-item-head">
             <div class="f-work-item-badges">
               <span class="f-maturity-badge ${maturityCls}">${escapeHtml(item.maturity.split(' · ')[0])}</span>
+              ${isFeaturedApp ? '<span class="f-card-asset-pill" class="f-card-asset-pill f-card-live-pill"><span class="f-live-beacon" style="width:6px;height:6px;margin-right:3px;"></span>Live App</span>' : ''}
               ${itemAssetCount > 0 ? `<span class="f-card-asset-pill">${itemAssetCount} artifact${itemAssetCount > 1 ? 's' : ''}</span>` : ''}
             </div>
             <span class="f-work-item-type">${escapeHtml(item.type)}</span>
@@ -3763,19 +5575,21 @@ function workPage(nonce) {
 
   const topicChips = [
     { label: "All Topics", tag: "all" },
+    { label: "🔖 Saved (0)", tag: "__bookmarks__", id: "btn-filter-saved" },
+    { label: "⚡ Live Prototype", tag: "explainable-trust" },
     { label: "Fandom & Commerce", tag: "fandom" },
     { label: "AI & Trust", tag: "trust" },
     { label: "Platform Policy", tag: "restriction" },
     { label: "Supply Chain", tag: "supply" },
     { label: "Product Discovery", tag: "discovery" }
-  ].map(t => `<button type="button" class="f-topic-chip ${t.tag === 'all' ? 'active' : ''}" data-tag="${t.tag}">${t.label}</button>`).join("");
+  ].map(t => `<button type="button" class="f-topic-chip ${t.tag === 'all' ? 'active' : ''} ${t.tag === '__bookmarks__' ? 'f-bookmark-filter-chip' : ''}" ${t.id ? `id="${t.id}"` : ''} data-tag="${t.tag}">${t.label}</button>`).join("");
 
   return `<!doctype html>
 <html lang="en">
 ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalWorks} research monographs, operating case studies, essays, and software tools across business operations and AI trust.`, nonce)}
 <body>
   <a class="f-skip" href="#main">Skip to catalog</a>
-  ${layoutHeader("work")}
+  ${layoutHeader("work", nonce)}
   <main id="main">
     <!-- Work Hero with Authentic Notion Narrative -->
     <header class="f-about-hero-artistic" style="padding: 44px 0 34px;">
@@ -3800,37 +5614,12 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
       </div>
     </section>
 
-    <!-- Where to Start Routes -->
-    <section class="f-routes-section">
-      <div class="f-wrap">
-        <h2>Where to start by question</h2>
-        <div class="f-routes-grid">
-          <div class="f-route-card">
-            <strong>1. What breaks after apparent success?</strong>
-            <span>Operational recovery &amp; state integrity: <a href="/work/datvietvac-who-owns-the-fan-promise">DatVietVAC Fan Promise</a> or <a href="/work/vieshop-fan-centred-merchandise-system">VieSHOP System</a>.</span>
-          </div>
-          <div class="f-route-card">
-            <strong>2. What people can safely rely on?</strong>
-            <span>Contestation &amp; platform governance: <a href="/work/shopee-account-restrictions">Shopee Account Restrictions</a> or <a href="/work/adobe-account-restriction">Adobe Restriction</a>.</span>
-          </div>
-          <div class="f-route-card">
-            <strong>3. What deserves to be built?</strong>
-            <span>Product discovery under uncertainty: <a href="/work/vinamilk-trusted-nutrition">Vinamilk Trusted Nutrition</a> or <a href="/work/datvietvac-fandom-cards">Fandom Cards</a>.</span>
-          </div>
-          <div class="f-route-card">
-            <strong>4. What evidence should earn the next step?</strong>
-            <span>AI decision provenance: <a href="/work/explainable-trust">Explainable Trust App</a> or <a href="/work/pathway-lens-operational-cycles">Pathway Lens Cycles</a>.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Structured 3-Tier Human Editorial Toolbar -->
     <div class="f-wrap f-work-toolbar">
       <!-- Row 1: Search -->
       <div class="f-search-wrap">
-        <input class="f-search-input" id="work-search" type="search" placeholder="Search ${totalWorks} works by title, question, or tag..." aria-label="Search works">
-        <span class="f-kbd-hint">/</span>
+        <input class="f-search-input" id="work-search" type="search" placeholder="Search ${totalWorks} works by title, question, or tag... (Press / or ⌘K)" aria-label="Search works">
+        <span class="f-kbd-hint">⌘K</span>
         <button class="f-search-clear" id="work-search-clear" type="button" aria-label="Clear search" hidden>×</button>
       </div>
 
@@ -3948,6 +5737,15 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
           btn.setAttribute('aria-pressed', btn.dataset.mode === currentMode ? 'true' : 'false');
         });
 
+        // Check bookmarks
+        let savedPaths = [];
+        try { savedPaths = JSON.parse(localStorage.getItem('f-bookmarks') || '[]'); } catch(e){}
+        const savedBtn = document.getElementById('btn-filter-saved');
+        if (savedBtn) savedBtn.textContent = '🔖 Saved (' + savedPaths.length + ')';
+
+        // If tag is __bookmarks__, match only saved items
+        const isBookmarkMode = currentTag === '__bookmarks__';
+
         // Filter Editorial Cards
         sections.forEach(sec => {
           const secMode = sec.dataset.section;
@@ -3956,10 +5754,17 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
           const secItems = sec.querySelectorAll('.f-work-item');
           secItems.forEach(item => {
             const itemMode = item.dataset.mode;
+            const itemPath = item.querySelector('h3 a')?.getAttribute('href') || '';
             const matchMode = currentMode === 'all' || itemMode === currentMode;
-            const matchTag = currentTag === 'all' || 
-              (item.dataset.tags && item.dataset.tags.includes(currentTag)) ||
-              (item.dataset.title && item.dataset.title.includes(currentTag));
+            
+            let matchTag = true;
+            if (isBookmarkMode) {
+              matchTag = savedPaths.includes(itemPath);
+            } else if (currentTag !== 'all') {
+              matchTag = (item.dataset.tags && item.dataset.tags.includes(currentTag)) ||
+                         (item.dataset.title && item.dataset.title.includes(currentTag));
+            }
+
             const matchQuery = !q || 
               item.dataset.title.includes(q) || 
               item.dataset.question.includes(q) || 
@@ -3984,10 +5789,17 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
         // Filter Ledger Rows
         ledgerRows.forEach(row => {
           const rowMode = row.dataset.mode;
+          const rowPath = row.querySelector('.f-table-title a')?.getAttribute('href') || '';
           const matchMode = currentMode === 'all' || rowMode === currentMode;
-          const matchTag = currentTag === 'all' || 
-            (row.dataset.tags && row.dataset.tags.includes(currentTag)) ||
-            (row.dataset.title && row.dataset.title.includes(currentTag));
+          
+          let matchTag = true;
+          if (isBookmarkMode) {
+            matchTag = savedPaths.includes(rowPath);
+          } else if (currentTag !== 'all') {
+            matchTag = (row.dataset.tags && row.dataset.tags.includes(currentTag)) ||
+                       (row.dataset.title && row.dataset.title.includes(currentTag));
+          }
+
           const matchQuery = !q || 
             row.dataset.title.includes(q) || 
             row.dataset.question.includes(q) || 
@@ -4071,7 +5883,57 @@ function casePage(item, nonce) {
   const modeObj = finalModes.find(m => m.id === item.mode);
   const modeLabel = modeObj ? modeObj.label : item.mode;
 
+  // All case monographs list for navigation & cross-referencing
+  const allWorks = finalWorkLibrary.filter(w => w.path.startsWith("/work/"));
+  const currentIndex = allWorks.findIndex(w => w.path === item.path);
+  const prevWork = currentIndex > 0 ? allWorks[currentIndex - 1] : null;
+  const nextWork = currentIndex < allWorks.length - 1 ? allWorks[currentIndex + 1] : null;
+
+  // Related Case Studies calculation (2 highest relevance matches)
+  const itemTagList = typeof item.tags === 'string' ? item.tags.split('·').map(t => t.trim().toLowerCase()) : [];
+  const relatedWorks = allWorks
+    .filter(w => w.path !== item.path)
+    .map(w => {
+      let score = 0;
+      if (w.mode === item.mode) score += 3;
+      if (w.type === item.type) score += 2;
+      const wTagList = typeof w.tags === 'string' ? w.tags.split('·').map(t => t.trim().toLowerCase()) : [];
+      const sharedTags = wTagList.filter(t => itemTagList.includes(t));
+      score += sharedTags.length * 2;
+      return { work: w, score };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2)
+    .map(x => x.work);
+
+  const relatedHtml = `
+    <div class="f-related-section">
+      <div class="f-related-head">
+        <span class="f-related-eyebrow">Related Evidence &amp; Frameworks</span>
+        <span class="f-related-hint">Connected across research lenses</span>
+      </div>
+      <div class="f-related-grid">
+        ${relatedWorks.map(rw => `
+          <a href="${rw.path}" class="f-related-card">
+            <div class="f-related-card-top">
+              <span class="f-related-mode">${escapeHtml(rw.mode)}</span>
+              <span class="f-related-read">${rw.readMinutes || 8} min read</span>
+            </div>
+            <h4>${escapeHtml(rw.title)}</h4>
+            <p class="f-related-question">“${escapeHtml(rw.question)}”</p>
+            <div class="f-related-foot">
+              <span>Read case monograph →</span>
+            </div>
+          </a>
+        `).join("")}
+      </div>
+    </div>
+  `;
+
   // Valid Drive IDs whitelist (server-side rendered, trusted)
+  
+// (Next / Previous monograph already calculated above)
+
   const validDriveIds = JSON.stringify((doc.assets || []).map(a => a.driveId).filter(Boolean));
 
   const clientScript = `
@@ -4116,6 +5978,86 @@ function casePage(item, nonce) {
           headings.forEach(h => observer.observe(h));
         }
 
+        
+        // Font sizing controls
+        let baseFontSize = 18.5;
+        const recordEl = document.getElementById('record');
+        const decBtn = document.getElementById('f-btn-font-dec');
+        const incBtn = document.getElementById('f-btn-font-inc');
+        if (recordEl && decBtn && incBtn) {
+          decBtn.addEventListener('click', () => {
+            if (baseFontSize > 15) {
+              baseFontSize -= 1.5;
+              recordEl.style.fontSize = baseFontSize + 'px';
+            }
+          });
+          incBtn.addEventListener('click', () => {
+            if (baseFontSize < 25) {
+              baseFontSize += 1.5;
+              recordEl.style.fontSize = baseFontSize + 'px';
+            }
+          });
+        }
+
+        // Bookmark toggle
+        const bmBtn = document.getElementById('f-btn-bookmark');
+        if (bmBtn) {
+          const path = bmBtn.dataset.path;
+          let bookmarks = [];
+          try { bookmarks = JSON.parse(localStorage.getItem('f-bookmarks') || '[]'); } catch(e){}
+          function updateBmUi() {
+            const isSaved = bookmarks.includes(path);
+            bmBtn.classList.toggle('is-saved', isSaved);
+            const label = bmBtn.querySelector('.bm-text');
+            if (label) label.textContent = isSaved ? 'Bookmarked ✓' : 'Bookmark';
+          }
+          updateBmUi();
+
+          bmBtn.addEventListener('click', () => {
+            const idx = bookmarks.indexOf(path);
+            if (idx === -1) {
+              bookmarks.push(path);
+              window.showToast && window.showToast('Monograph saved to your reading list 🔖');
+            } else {
+              bookmarks.splice(idx, 1);
+              window.showToast && window.showToast('Removed from reading list');
+            }
+            try { localStorage.setItem('f-bookmarks', JSON.stringify(bookmarks)); } catch(e){}
+            updateBmUi();
+          });
+        }
+
+        // Copy Direct Heading Anchor Link
+        document.querySelectorAll('.f-anchor').forEach(anchor => {
+          anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const hash = anchor.getAttribute('href');
+            const fullUrl = window.location.origin + window.location.pathname + hash;
+            window.history.pushState(null, '', hash);
+            const targetEl = document.querySelector(hash);
+            if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(fullUrl).then(() => {
+                window.showToast && window.showToast('Direct section link copied to clipboard 🔗');
+              }).catch(() => {
+                window.showToast && window.showToast('Section anchor linked');
+              });
+            } else {
+              window.showToast && window.showToast('Section anchor linked');
+            }
+          });
+        });
+
+        // Copy Article URL
+        const copyUrlBtn = document.getElementById('f-btn-copy-url');
+        if (copyUrlBtn) {
+          copyUrlBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+              window.showToast && window.showToast('Article link copied to clipboard! 🔗');
+            });
+          });
+        }
+
         const citeBtn = document.getElementById('f-cite-btn');
         if (citeBtn) {
           citeBtn.addEventListener('click', () => {
@@ -4144,7 +6086,19 @@ function casePage(item, nonce) {
 
         window.openAssetViewer = function(opts) {
           if (!modal) return;
-          const title = opts.title || 'Document';
+          const rawTitle = opts.title || 'Document';
+          let title = rawTitle
+            .replace(/[📄👁️↗]/g, '')
+            .replace(/\.(pdf|docx?|pptx?|xlsx?|png|jpe?g|webp)\b/gi, '')
+            .replace(/\s*\((PDF|DOCX?|PPTX?|DECK|SHEET)\)/gi, '')
+            .replace(/\s*\((PDF|DOCX?|PPTX?|DECK|SHEET)\)/gi, '')
+            .replace(/_+/g, ' ')
+            .trim();
+          const titleMap = {"vinamilk paper 1 trusted nutrition product service discovery":"Vinamilk Paper 1: Trusted Nutrition Product-Service Discovery","vinamilk paper 2 everyday milk delivery operations scale":"Vinamilk Paper 2: Everyday Milk Delivery Operations & Scale","vinamilk paper 3 beyond the market capability allocation governance":"Vinamilk Paper 3: Beyond-the-Market Capability Allocation Governance","MFan Platform Fragmentation & Trust Chain Integration":"MFan Platform Fragmentation & Trust Chain Integration","MFan Platform Fragmentation Trust Chain Integration":"MFan Platform Fragmentation & Trust Chain Integration","Pham Thanh Phu Elfie Product Case Trust Safe Activation v4":"Elfie Product Case: Trust-Safe Activation (V4)","Post-Signing Artist Label Operations Case Study":"Post-Signing Artist / Label Operations Case Study","Shopee Account Restriction Resolution Portfolio Final 2026-08-05":"Shopee Account Restriction Resolution Case (Aug 2026)","FanMe Controlled Growth Native Editable Final":"FanMe Controlled Growth: Native Operating Framework","FanMe Controlled Growth Pilot":"FanMe Controlled Growth Pilot Monograph","FanMe Controlled Growth — Native Editable Final":"FanMe Controlled Growth: Native Operating Framework","DatVietVAC Ownership Belonging Merchandise Growth Case Study":"DatVietVAC: Ownership & Belonging Merchandise Growth","DatVietVAC Fandom Cards Case Study":"DatVietVAC Fandom Cards: Collectibles Product Line Case","VieSHOP — Fan-Centred Merchandise System":"VieSHOP: Fan-Centred Merchandise System Case","DatVietVAC: Who Owns the Fan Promise? — Full Case":"DatVietVAC: Who Owns the Fan Promise? (Full Case)","DatVietVAC Evidence Pack V1.1":"DatVietVAC Evidence Pack (V1.1 Forensic Audit)","Vietnam Diamond Market Crisis Case Study 2 Full Paper":"Vietnam’s 2026 Diamond-Market Crisis (Forensic Paper)","Adobe Account Restriction Comparative Case Study 2026-08-07":"Adobe Account Restriction: Comparative Case Study"};
+          if (titleMap[title]) title = titleMap[title];
+          else if (title === title.toLowerCase() && title.length > 2) {
+            title = title.replace(/\b[a-z]/g, ch => ch.toUpperCase());
+          }
           const type = opts.type || 'paper';
           const driveId = opts.driveId || '';
           const isImage = (type === 'image' || type === 'diagram');
@@ -4157,6 +6111,7 @@ function casePage(item, nonce) {
 
           if (!isImage) {
             modalTitle.textContent = title;
+            modalTitle.title = title;
             modalBadge.textContent = badge;
             modalDrive.href = driveId ? 'https://drive.google.com/file/d/' + driveId + '/view' : '#';
             modalDownload.href = driveId ? 'https://drive.google.com/uc?export=download&id=' + driveId : '#';
@@ -4232,7 +6187,7 @@ function casePage(item, nonce) {
             e.preventDefault();
             const target = e.currentTarget;
             window.openAssetViewer({
-              title: target.dataset.title || target.getAttribute('title') || 'T\u00e0i li\u1ec7u \u0111\u00ednh k\u00e8m',
+              title: target.dataset.title || target.getAttribute('title') || 'Attached Document',
               driveId: target.dataset.driveid,
               type: target.dataset.type || 'paper',
               badge: target.dataset.badge
@@ -4245,10 +6200,10 @@ function casePage(item, nonce) {
 
   return `<!doctype html>
 <html lang="en">
-${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce)}
+${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path: item.path, ogType: 'article', keywords: item.tags })}
 <body>
   <a class="f-skip" href="#record">Skip to monograph text</a>
-  ${layoutHeader("work")}
+  ${layoutHeader("work", nonce)}
   <main>
     <section class="f-case-hero">
       <div class="f-wrap">
@@ -4300,10 +6255,12 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce)}
 
       <article class="f-prose" id="record">
         ${renderedProse}
-        <div class="f-source-banner">
-          <strong>Source Provenance:</strong> This web edition preserves the research question, core analytical framework, and claim boundaries. The full living register is maintained in Notion.
-          <br><br>
-          <a href="${item.source}" target="_blank" rel="noreferrer" class="f-text-link" style="color:var(--copper);">Open the primary research document in Notion ↗</a>
+
+        ${relatedHtml}
+
+        <div class="f-case-nav-rail">
+          ${prevWork ? `<a href="${prevWork.path}" class="f-nav-prev"><span class="f-nav-sub">← Previous Monograph</span><span class="f-nav-title">${escapeHtml(prevWork.title)}</span></a>` : `<div></div>`}
+          ${nextWork ? `<a href="${nextWork.path}" class="f-nav-next"><span class="f-nav-sub">Next Monograph →</span><span class="f-nav-title">${escapeHtml(nextWork.title)}</span></a>` : `<div></div>`}
         </div>
       </article>
     </div>
@@ -4341,10 +6298,10 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce)}
 function aboutPage(nonce) {
   return `<!doctype html>
 <html lang="en">
-${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Business & Product Operations professional with 6+ years of commercial ownership, workflow systemization, and evidence-first systems design. Based in Ho Chi Minh City.", nonce)}
+${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Business & Product Operations professional with 6+ years of commercial ownership, workflow systemization, and evidence-first systems design. Based in Ho Chi Minh City.", nonce, { path: "/about" })}
 <body>
   <a class="f-skip" href="#about-content">Skip to about content</a>
-  ${layoutHeader("about")}
+  ${layoutHeader("about", nonce)}
   <main id="about-content">
     <!-- 1. Artistic Hero with Status & Coordinates -->
     <section class="f-about-hero-artistic" style="padding: 48px 0 38px;">
@@ -4365,10 +6322,38 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
           <span class="f-coord-divider">/</span>
           <span class="f-coord-tag"><strong>FOCUS:</strong> Business &amp; Product Ops</span>
         </div>
+      
+        <div class="f-about-hero-actions" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="mailto:phamthanhphu97@gmail.com?subject=Contact%20-%20Pham%20Thanh%20Phu" class="f-about-btn primary">Direct Email: phamthanhphu97@gmail.com ✉</a>
+          <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
+          <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust (Render App) ↗</a>
+          <a href="mailto:phamthanhphu97@gmail.com?subject=Request%20Full%20CV%20-%20Pham%20Thanh%20Phu" class="f-about-btn secondary">Request Full CV / Dossier 📄</a>
+        </div>
+
       </div>
     </section>
 
     <div class="f-wrap">
+      <!-- Executive Impact Dashboard -->
+      <div class="f-impact-dashboard">
+        <div class="f-impact-stat">
+          <b>22</b>
+          <span>Research Monographs</span>
+        </div>
+        <div class="f-impact-stat">
+          <b>1</b>
+          <span>Live App on Render</span>
+        </div>
+        <div class="f-impact-stat">
+          <b>4</b>
+          <span>Analytical Lenses</span>
+        </div>
+        <div class="f-impact-stat">
+          <b>100%</b>
+          <span>Traceable Evidence</span>
+        </div>
+      </div>
+
       <!-- 2. Bento Grid of Key Metric Pillars -->
       <section class="f-about-bento-grid" aria-label="Key Operating Highlights">
         <div class="f-bento-card">
@@ -4555,7 +6540,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
           <p>Open to Business Operations, Program &amp; Product Operations, and Advisory roles in Ho Chi Minh City.</p>
         </div>
         <div class="f-cta-dock-btns">
-          <a href="mailto:phamthanhphu97@gmail.com" class="f-about-btn primary">Email Phú ↗</a>
+          <a href="mailto:phamthanhphu97@gmail.com" class="f-about-btn primary">Email Phu ↗</a>
           <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
           <a href="/work" class="f-about-btn secondary">Browse ${totalWorks} Works →</a>
           <a href="https://app.phamthanhphu.io.vn/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust App ↗</a>
@@ -4581,6 +6566,16 @@ async function handleRequest(request, env, ctx) {
     "Cache-Control": "public, max-age=31536000, immutable",
     "X-Content-Type-Options": "nosniff"
   };
+  
+  if (path === "/favicon.ico" || path === "/favicon.svg") {
+    return new Response(SITE_FAVICON_SVG, {
+      headers: {
+        "Content-Type": "image/svg+xml",
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    });
+  }
+
   if (path === "/assets/home-cat.webp") {
     return new Response(HOME_CAT_WEBP, {
       headers: { ...staticHeaders, "Content-Type": "image/webp" }
@@ -4651,13 +6646,13 @@ async function handleRequest(request, env, ctx) {
   // Fallback 404
   return new Response(`<!doctype html>
 <html lang="en">
-${layoutHead("404 Not Found — Phạm Thanh Phú", "Tài liệu nghiên cứu không tồn tại hoặc đã được di chuyển trong Thư viện Nghiên cứu.", nonce)}
+${layoutHead("404 Not Found — Phạm Thanh Phú", "Research monograph not found or has been moved in the Work Library.", nonce)}
 <body>
-  ${layoutHeader()}
+  ${layoutHeader("", nonce)}
   <main class="f-wrap" style="padding:80px 0;">
     <span class="f-overline" style="color:var(--copper);font-family:var(--font-mono);font-size:var(--text-xs);font-weight:var(--fw-bold);letter-spacing:var(--tracking-wide);text-transform:uppercase;">404 Error</span>
-    <h1 style="color:var(--navy);font-family:var(--font-serif);font-size:var(--text-3xl);margin:8px 0 16px;">Tài liệu nghiên cứu không tồn tại</h1>
-    <p style="color:var(--muted);font-family:var(--font-sans);font-size:var(--text-md);margin-bottom:24px;">Liên kết bạn đang tìm có thể đã được cập nhật hoặc di chuyển đến một mục mới trong thư viện.</p>
+    <h1 style="color:var(--navy);font-family:var(--font-serif);font-size:var(--text-3xl);margin:8px 0 16px;">Research Document Not Found</h1>
+    <p style="color:var(--muted);font-family:var(--font-sans);font-size:var(--text-md);margin-bottom:24px;">The document link you are looking for may have been updated or moved to a new section in the archive.</p>
     <a href="/work" class="f-rail-btn" style="display:inline-block;padding:10px 18px;">← Trở về Thư viện Nghiên cứu (Work Library)</a>
   </main>
   ${layoutFooter("Ho Chi Minh City · 2026", nonce)}
