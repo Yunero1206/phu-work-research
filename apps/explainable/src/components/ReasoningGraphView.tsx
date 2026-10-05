@@ -1029,7 +1029,7 @@ export const ReasoningGraphView: React.FC<ReasoningGraphViewProps> = ({
   const isEmpty = initialNodes.length === 0;
 
   const renderCanvasContent = () => (
-    <div className="relative flex-1 w-full h-full min-h-[350px]">
+    <div className="relative flex-1 w-full h-full min-h-0">
       {isEmpty ? (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-slate-400 bg-white">
           <GitFork className="w-10 h-10 text-slate-300 mb-2" />
