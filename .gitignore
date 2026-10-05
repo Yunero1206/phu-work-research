@@ -5,3 +5,4 @@ site.tar.gz
 Thumbs.db
 .env
 .env.*
+.npm-cache/

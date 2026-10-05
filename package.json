@@ -3,9 +3,15 @@
   "displayName": "Phạm Thanh Phú — Work & Research",
   "private": true,
   "type": "module",
+  "workspaces": ["apps/explainable"],
+  "engines": { "node": ">=22" },
   "scripts": {
-    "dev": "node scripts/dev.mjs",
+    "dev": "npm run build && node scripts/preview.mjs",
     "build": "node scripts/build.mjs",
-    "validate": "node scripts/validate-artifact.mjs"
+    "validate": "node scripts/validate-artifact.mjs",
+    "test": "npm test --workspace apps/explainable",
+    "lint": "npm run lint --workspace apps/explainable",
+    "verify": "npm run lint && npm test && npm run build && npm run validate",
+    "preview": "node scripts/preview.mjs"
   }
 }

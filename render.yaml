@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: phu-portfolio-static
+    runtime: static
+    buildCommand: npm ci && npm run verify
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+      - path: /explainable/assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+    routes:
+      - type: redirect
+        source: /explainable
+        destination: /explainable/
+      - type: redirect
+        source: /apps/explainable-trust
+        destination: /explainable/
+      - type: redirect
+        source: /apps/explainable-trust/*
+        destination: /explainable/
+      - type: redirect
+        source: /apps/explainable-trust_old
+        destination: /explainable/
+      # No global SPA rewrite: portfolio routes and missing assets retain 404s.
