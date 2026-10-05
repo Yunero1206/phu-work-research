@@ -3019,6 +3019,44 @@ const siteCss = `:root {
   }
   .f-entry-item:hover .f-entry-title { color: var(--copper); }
 
+  .f-entry-item.f-entry-featured {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 14px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--copper);
+    border-radius: 14px;
+    background: var(--paper-card);
+  }
+  .f-entry-item.f-entry-featured:hover {
+    margin-inline: 0;
+    border-color: var(--copper);
+  }
+  .f-entry-featured .f-entry-main { min-width: 0; }
+  .f-entry-featured .f-entry-meta-side {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-bottom: 12px;
+    padding-top: 0;
+  }
+  .f-entry-featured .f-entry-title { font-size: clamp(1.4rem, 2.5vw, 1.8rem); }
+  .f-entry-featured-visual {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper-tint);
+  }
+  .f-entry-featured-visual img { display: block; width: 100%; height: auto; }
+  .f-entry-item:focus-visible { outline: 3px solid var(--copper); outline-offset: 4px; }
+  @media (max-width: 820px) {
+    .f-entry-item.f-entry-featured { grid-template-columns: 1fr; gap: 20px; padding: 18px; }
+  }
+
   .f-entry-meta-side {
     display: flex;
     flex-direction: column;
@@ -3291,9 +3329,21 @@ const siteCss = `:root {
     align-items: center;
     gap: 24px;
     overflow-x: auto;
+    overflow-y: hidden;
     padding-bottom: 0;
     border-bottom: 1px solid var(--line);
   }
+  .f-search-input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+  .f-work-empty {
+    margin: 24px 0 60px;
+    padding: 32px 24px;
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    background: var(--paper-card);
+    text-align: center;
+  }
+  .f-work-empty p { margin: 0 0 18px; color: var(--muted); }
+  .f-work-empty[hidden] { display: none; }
   .f-mode-tab {
     border: 0;
     background: transparent;
@@ -3314,7 +3364,7 @@ const siteCss = `:root {
   .f-mode-tab[aria-pressed=true]:after {
     content: "";
     position: absolute;
-    bottom: -1px;
+    bottom: 0;
     left: 0;
     right: 0;
     height: 2px;
@@ -3617,6 +3667,7 @@ const siteCss = `:root {
   }
   .f-ledger-table {
     width: 100%;
+    min-width: 760px;
     border-collapse: collapse;
     font-family: var(--font-sans);
     font-size: var(--text-sm);
@@ -3640,7 +3691,7 @@ const siteCss = `:root {
     vertical-align: middle;
   }
   .f-ledger-table tr:hover td {
-    background: rgba(247, 244, 236, 0.6);
+    background: var(--paper-tint);
   }
   .f-ledger-table tr[hidden] {
     display: none;
@@ -3684,9 +3735,7 @@ const siteCss = `:root {
     content: "";
     position: absolute;
     z-index: -2;
-    inset: 0 50%;
-    width: 100vw;
-    transform: translateX(-50%);
+    inset: 0;
     background: var(--hero-bg);
   }
   .f-case-hero h1 {
@@ -3821,6 +3870,7 @@ const siteCss = `:root {
     padding-left: 20px;
     font-size: var(--text-xs);
   }
+  .f-toc-item.level-1 .f-toc-link { font-weight: var(--fw-bold); color: var(--navy); }
 
   .f-rail-actions {
     border-top: 1px solid var(--line);
@@ -5163,6 +5213,7 @@ const siteCss = `:root {
   }
   .f-cmd-input {
     flex: 1;
+    min-width: 0;
     border: 0;
     background: transparent;
     font-family: var(--font-sans);
@@ -5183,6 +5234,9 @@ const siteCss = `:root {
     padding: 2px 6px;
     border-radius: 4px;
     border: 1px solid var(--line);
+    cursor: pointer;
+    min-width: 30px;
+    min-height: 30px;
   }
   .f-cmd-results {
     flex: 1;
@@ -5574,11 +5628,11 @@ const siteCss = `:root {
   }
   @media (max-width: 640px) {
     .f-wrap { width: min(calc(100% - 32px), 1080px); }
-    .f-nav { min-height: 58px; gap: 10px; flex-direction: column; align-items: flex-start; }
+    .f-nav { position: relative; min-height: 58px; gap: 10px; flex-direction: column; align-items: flex-start; }
     .f-brand { white-space: nowrap; }
     .f-links { width: 100%; gap: 10px; }
     .f-links a { font-size: var(--text-xs); }
-    .f-theme-switch-group { margin-left: 0; }
+    .f-theme-switch-group { position: absolute; top: 12px; right: 0; margin-left: 0; }
     .f-work-item-badges { flex-wrap: wrap; }
     .f-work-item-type { white-space: normal; overflow-wrap: anywhere; max-width: 100%; }
     .f-asset-btn { white-space: normal; overflow-wrap: anywhere; min-width: 0; text-align: left; }
@@ -5725,15 +5779,14 @@ function layoutHeader(active = "", nonce = "") {
       <a class="f-brand" href="/">Phạm Thanh Phú <span>Work &amp; Research</span></a>
       <div class="f-links">
         <a href="/work"${active === "work" ? ' aria-current="page"' : ""}>Work Library</a>
-        <a href="/explainable/" target="_blank" rel="noreferrer"${active === "app" ? ' aria-current="page"' : ""} class="f-nav-live-pill" title="Explainable Trust — Interactive Showcase"><span class="f-live-beacon"></span>Explainable Trust ↗</a>
         <a href="/about"${active === "about" ? ' aria-current="page"' : ""}>About</a>
         <button type="button" id="f-nav-cmd-trigger" class="f-nav-cmd-btn" aria-label="Search works and pages" aria-haspopup="dialog">Search <span class="f-cmd-kbd">⌘K</span></button>
         
         <!-- Theme Switcher Group (right of About) -->
         <div class="f-theme-switch-group" role="group" aria-label="Theme selection">
-          <button type="button" class="f-theme-toggle-btn" data-theme-val="light" title="Light Paper (☀)">☀</button>
-          <button type="button" class="f-theme-toggle-btn" data-theme-val="sepia" title="Warm Sepia (📖)">📖</button>
-          <button type="button" class="f-theme-toggle-btn" data-theme-val="dark" title="Dark Forensic (🌙)">🌙</button>
+          <button type="button" class="f-theme-toggle-btn" data-theme-val="light" title="Light Paper (☀)" aria-label="Light theme" aria-pressed="false">☀</button>
+          <button type="button" class="f-theme-toggle-btn" data-theme-val="sepia" title="Warm Sepia (📖)" aria-label="Sepia theme" aria-pressed="false">📖</button>
+          <button type="button" class="f-theme-toggle-btn" data-theme-val="dark" title="Dark Forensic (🌙)" aria-label="Dark theme" aria-pressed="false">🌙</button>
         </div>
       </div>
     </nav>
@@ -5755,6 +5808,7 @@ function layoutHeader(active = "", nonce = "") {
         var btns = document.querySelectorAll('.f-theme-toggle-btn');
         btns.forEach(function(b) {
           b.classList.toggle('is-active', b.getAttribute('data-theme-val') === theme);
+          b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-val') === theme));
         });
         
         if (window.showToast) {
@@ -5769,6 +5823,7 @@ function layoutHeader(active = "", nonce = "") {
         var btns = document.querySelectorAll('.f-theme-toggle-btn');
         btns.forEach(function(btn) {
           btn.classList.toggle('is-active', btn.getAttribute('data-theme-val') === current);
+          btn.setAttribute('aria-pressed', String(btn.getAttribute('data-theme-val') === current));
           btn.onclick = function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -5904,7 +5959,7 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '') {
   return `<footer class="f-footer">
     <div class="f-wrap f-footer-row">
       <span>Phạm Thanh Phú · ${escapeHtml(label)}</span>
-      <span><a href="mailto:phamthanhphu97@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn</a> · <a href="/explainable/" target="_blank" rel="noreferrer">Explainable Trust (Public Demo on Render) ↗</a> · <a href="/work">Work Library</a></span>
+      <span><a href="mailto:phamthanhphu97@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn</a> · <a href="/work">Work Library</a></span>
     </div>
   </footer>
   <div id="f-global-toast" class="f-toast-msg" role="status" aria-live="polite"></div>
@@ -5914,7 +5969,7 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '') {
     <div class="f-cmd-top">
       <span class="f-cmd-icon">🔍</span>
       <input type="text" id="f-cmd-input" class="f-cmd-input" aria-label="Search works and pages" placeholder="Search ${totalWorks} works, tags, lenses, or pages..." autocomplete="off" spellcheck="false">
-      <span class="f-cmd-esc">ESC</span>
+      <button type="button" id="f-cmd-close" class="f-cmd-esc" aria-label="Close search" title="Close (Esc)">×</button>
     </div>
     <div id="f-cmd-results" class="f-cmd-results"></div>
     <div class="f-cmd-footer">
@@ -5929,7 +5984,6 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '') {
     (function(){
       
   const SEARCH_ITEMS = ${JSON.stringify([
-    { title: "Explainable Trust (Interactive Showcase)", path: "/explainable/", type: "Showcase", badge: "Interactive Showcase", ext: true },
     { title: `Work Library: All ${totalWorks} Works`, path: "/work", type: "Page", badge: "Archive" },
     { title: "About Phạm Thanh Phú: Operating Principles & Horizon", path: "/about", type: "Page", badge: "Profile" },
     ...finalModes.map(mode => ({ title: mode.label, path: `/work?mode=${mode.id}`, type: "Lens", badge: "Research Mode" })),
@@ -5940,6 +5994,7 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '') {
       var cmdInput = document.getElementById('f-cmd-input');
       var cmdResults = document.getElementById('f-cmd-results');
       var cmdTrigger = document.getElementById('f-nav-cmd-trigger');
+      var cmdClose = document.getElementById('f-cmd-close');
       var selectedIdx = 0;
       var currentFiltered = [];
 
@@ -6001,6 +6056,7 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '') {
       if (cmdTrigger) {
         cmdTrigger.addEventListener('click', openPalette);
       }
+      if (cmdClose) cmdClose.addEventListener('click', closePalette);
 
       // Shortcut: Ctrl+K or Cmd+K
       document.addEventListener('keydown', function(e) {
@@ -6183,6 +6239,7 @@ function homePage(nonce) {
   ];
 
   const entriesHtml = featuredInquiries.map(item => {
+    const isVieWorld = item.path === '/work/vieworld';
     const schematicHtml = item.schematic ? `
       <div class="f-entry-schematic">
         ${item.schematic.map((step, idx) => `
@@ -6193,12 +6250,13 @@ function homePage(nonce) {
     ` : "";
 
     return `
-      <a class="f-entry-item" href="${item.path}">
+      <a class="f-entry-item${isVieWorld ? ' f-entry-featured' : ''}" href="${item.path}">
+        ${isVieWorld ? '<div class="f-entry-featured-visual"><img src="/assets/vieworld-moments.webp" alt="VieWorld prototype — Home and Moments" width="1200" height="692" loading="lazy" decoding="async"></div><div class="f-entry-main">' : ''}
         <div class="f-entry-meta-side">
           <span class="f-entry-date">${item.date}</span>
           <span class="f-entry-tag">${item.tag}</span>
         </div>
-        <div class="f-entry-main">
+        ${isVieWorld ? '' : '<div class="f-entry-main">'}
           <h3 class="f-entry-title">${escapeHtml(item.title)}</h3>
           <p class="f-entry-question">“${escapeHtml(item.question)}”</p>
           ${schematicHtml}
@@ -6247,7 +6305,6 @@ ${layoutHead("Phạm Thanh Phú — Work & Research Archive", "Evidence-first po
         <div class="f-cta-dock-btns">
           <a href="/work" class="f-about-btn primary">Browse ${totalWorks} Works in Library →</a>
           <a href="/about" class="f-about-btn secondary">How I Think &amp; Operate →</a>
-          <a href="/explainable/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust (Showcase) ↗</a>
         </div>
       </div>
     </header>
@@ -6270,60 +6327,6 @@ ${layoutHead("Phạm Thanh Phú — Work & Research Archive", "Evidence-first po
       </div>
     </section>
 
-
-    <!-- 2.5 Publicly Deployed Prototype Showcase: Explainable Trust Studio -->
-    <section class="f-human-section" style="background:var(--paper-tint);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:40px 0;">
-      <div class="f-wrap">
-        <div class="f-human-head" style="margin-bottom:20px;">
-          <h2>Interactive Product Showcase</h2>
-          <span>Interactive Showcase · Static Deployment</span>
-        </div>
-        <div class="f-proto-window-card">
-          <div class="f-window-bar">
-            <div class="f-win-dots">
-              <span class="f-win-dot red"></span>
-              <span class="f-win-dot yellow"></span>
-              <span class="f-win-dot green"></span>
-            </div>
-            <span class="f-win-title">phamthanhphu.io.vn/explainable: Explainable Trust Studio</span>
-            <span class="f-win-badge">INTERACTIVE SHOWCASE</span>
-          </div>
-          <div class="f-proto-grid">
-            <div>
-              <span class="f-proto-kicker">EVIDENCE · LEDGER V3 · TRACEABLE REVISIONS</span>
-              <h3 class="f-proto-title">Explainable Trust: Traceable Case Reconstruction</h3>
-              <p class="f-proto-desc">
-                Explore a fictional delivery dispute in four steps. Authored evidence and reasoning pass the application validation boundary, while source links, ledger revisions, contradictions, and unresolved gaps remain inspectable. No live model or web retrieval is used.
-              </p>
-              <div class="f-proto-specs">
-                <span class="f-proto-spec-pill">Source-Linked Revision DAG</span>
-                <span class="f-proto-spec-pill">Browser IndexedDB</span>
-                <span class="f-proto-spec-pill">Authored Demo Sources</span>
-                <span class="f-proto-spec-pill">Static · No API</span>
-              </div>
-              <div class="f-proto-actions">
-                <a href="/explainable/" target="_blank" rel="noreferrer" class="f-about-btn primary" style="background:var(--copper);color:#ffffff!important;">Explore Interactive Showcase ↗</a>
-                <a href="/work/explainable-trust" class="f-about-btn secondary">Read Case Monograph →</a>
-              </div>
-            </div>
-            <div>
-              <div class="f-proto-screenshot-box">
-                <a href="/explainable/" target="_blank" rel="noreferrer" title="Explore Explainable Trust showcase ↗">
-                  <img src="https://lh3.googleusercontent.com/d/1K_D6jfWCZAktx3-Pp1D1NWfbB046BZle=w1000" 
-                       alt="Explainable Trust Studio Screenshot Preview" 
-                       class="f-proto-preview-img" 
-                       loading="lazy">
-                  <p id="f-proto-preview-fallback" hidden style="padding:24px;margin:0;">Preview unavailable. Open the showcase ↗</p>
-                  <div class="f-proto-img-overlay">
-                    <span>Open Showcase ↗</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- 3. Four Research Lenses -->
     <section class="f-human-section">
@@ -6524,10 +6527,10 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
         <div class="f-toolbar-right">
           <div class="f-view-switch">
             <span>View:</span>
-            <button type="button" class="f-view-toggle-btn active" id="btn-view-cards">Cards</button>
-            <button type="button" class="f-view-toggle-btn" id="btn-view-ledger">Index Table</button>
+            <button type="button" class="f-view-toggle-btn active" id="btn-view-cards" aria-pressed="true">Cards</button>
+            <button type="button" class="f-view-toggle-btn" id="btn-view-ledger" aria-pressed="false">Index Table</button>
           </div>
-          <span class="f-toolbar-count" id="work-count">${totalWorks} works found</span>
+          <span class="f-toolbar-count" id="work-count" role="status" aria-live="polite">${totalWorks} works found</span>
         </div>
       </div>
     </div>
@@ -6535,6 +6538,13 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
     <!-- View 1: Catalog Editorial Cards -->
     <div class="f-wrap" id="catalog-container">
       ${sectionsHtml}
+    </div>
+
+    <div class="f-wrap">
+      <div id="work-empty" class="f-work-empty" hidden>
+        <p>No works match the current search and filters.</p>
+        <button type="button" id="work-reset-filters" class="f-about-btn secondary">Reset filters</button>
+      </div>
     </div>
 
     <!-- View 2: Compact Ledger Table -->
@@ -6573,6 +6583,8 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
       const btnLedger = document.getElementById('btn-view-ledger');
       const catalogContainer = document.getElementById('catalog-container');
       const ledgerContainer = document.getElementById('ledger-container');
+      const emptyState = document.getElementById('work-empty');
+      const resetFilters = document.getElementById('work-reset-filters');
 
       let currentMode = 'all';
       let currentTag = 'all';
@@ -6580,6 +6592,8 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
       function setView(isTable) {
         btnLedger.classList.toggle('active', isTable);
         btnCards.classList.toggle('active', !isTable);
+        btnLedger.setAttribute('aria-pressed', String(isTable));
+        btnCards.setAttribute('aria-pressed', String(!isTable));
         catalogContainer.style.display = isTable ? 'none' : 'block';
         ledgerContainer.classList.toggle('is-active', isTable);
       }
@@ -6674,6 +6688,8 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
           } else {
             sec.setAttribute('hidden', '');
           }
+          const sectionCount = sec.querySelector('.f-section-count-badge');
+          if (sectionCount) sectionCount.textContent = secVisible + ' work' + (secVisible === 1 ? '' : 's');
         });
 
         // Filter Ledger Rows
@@ -6705,7 +6721,20 @@ ${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalW
         });
 
         count.textContent = visibleCount + ' work' + (visibleCount === 1 ? '' : 's') + ' found';
+        emptyState.hidden = visibleCount > 0;
       }
+
+      resetFilters.addEventListener('click', () => {
+        search.value = '';
+        currentMode = 'all';
+        currentTag = 'all';
+        topicChips.forEach(c => c.classList.toggle('active', c.dataset.tag === 'all'));
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.delete('mode');
+        window.history.replaceState({}, '', newUrl);
+        update();
+        search.focus();
+      });
 
       search.addEventListener('input', update);
       clear.addEventListener('click', () => {
@@ -6849,11 +6878,11 @@ function casePage(item, nonce) {
         const prose = document.getElementById('record');
         const tocList = document.getElementById('f-toc-list');
         if (prose && tocList) {
-          const headings = [...prose.querySelectorAll('h2, h3')];
+          const headings = [...prose.querySelectorAll('h1, h2, h3')];
           headings.forEach(h => {
             if (!h.id) return;
             const li = document.createElement('li');
-            li.className = 'f-toc-item' + (h.tagName === 'H3' ? ' level-3' : '');
+            li.className = 'f-toc-item' + (h.tagName === 'H1' ? ' level-1' : (h.tagName === 'H3' ? ' level-3' : ''));
             const a = document.createElement('a');
             a.className = 'f-toc-link';
             a.href = '#' + h.id;
@@ -7265,7 +7294,6 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
         <div class="f-about-hero-actions" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
           <a href="mailto:phamthanhphu97@gmail.com?subject=Contact%20-%20Pham%20Thanh%20Phu" class="f-about-btn primary">Direct Email: phamthanhphu97@gmail.com ✉</a>
           <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
-          <a href="/explainable/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust (Showcase) ↗</a>
           <a href="mailto:phamthanhphu97@gmail.com?subject=Request%20Full%20CV%20-%20Pham%20Thanh%20Phu" class="f-about-btn secondary">Request Full CV / Dossier 📄</a>
         </div>
 
@@ -7482,7 +7510,6 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
           <a href="mailto:phamthanhphu97@gmail.com" class="f-about-btn primary">Email Phu ↗</a>
           <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
           <a href="/work" class="f-about-btn secondary">Browse ${totalWorks} Works →</a>
-          <a href="/explainable/" target="_blank" rel="noreferrer" class="f-about-btn secondary">Explainable Trust (Showcase) ↗</a>
         </div>
       </section>
     </div>

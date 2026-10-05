@@ -22,6 +22,7 @@ import { caseReferenceTarget } from '../presentation/caseReferences.js';
 import { useLanguage } from '../contexts/LanguageContext.js';
 import { CaseKeyButton } from './CaseKeyButton.js';
 import { translateAssessment, translateMatchStatus, translatePriority } from '../lib/translations.js';
+import { showcaseText } from '../lib/showcaseText.js';
 
 const ReasoningGraphView = lazy(() =>
   import('./ReasoningGraphView.js').then((m) => ({ default: m.ReasoningGraphView }))
@@ -49,6 +50,7 @@ export const RightCaseRecord: React.FC<RightCaseRecordProps> = ({
   focusSection,
 }) => {
   const { locale, t } = useLanguage();
+  const showcase = showcaseText(locale);
   const [activeTab, setActiveTab] = useState<TabType>(() => {
     if (focusSection === 'graph') return 'graph';
     if (focusSection === 'gaps') return 'gaps';
@@ -808,7 +810,13 @@ export const RightCaseRecord: React.FC<RightCaseRecordProps> = ({
       {isMobileOpen && (
         <div className="lg:hidden fixed inset-0 z-40 flex justify-end">
           <div className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs" onClick={onCloseMobile} />
-          <div className="relative w-80 sm:w-[440px] max-w-full h-full bg-slate-100 shadow-2xl z-50">{renderContent()}</div>
+          <div role="dialog" aria-modal="true" aria-label={showcase.record} className="relative w-80 sm:w-[440px] max-w-full h-full bg-slate-100 shadow-2xl z-50 flex flex-col">
+            <div className="flex items-center justify-between px-3 py-2 bg-white border-b border-slate-200 shrink-0">
+              <span className="text-xs font-semibold text-slate-600">{showcase.record}</span>
+              <button type="button" onClick={onCloseMobile} aria-label={showcase.close} className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900"><X size={16} /></button>
+            </div>
+            <div className="flex-1 min-h-0">{renderContent()}</div>
+          </div>
         </div>
       )}
     </>

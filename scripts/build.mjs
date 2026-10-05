@@ -10,6 +10,7 @@ const dist = resolve(root, 'dist');
 // The only recursive removal target is the known build directory in this repo.
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
+await cp(resolve(root, 'public'), dist, { recursive: true });
 const hash = code => `'sha256-${createHash('sha256').update(code).digest('base64')}'`;
 function staticHtml(html) {
   const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].filter(m => !/\bsrc=/.test(m[0])).map(m => hash(m[1]));
