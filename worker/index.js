@@ -3103,71 +3103,74 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
 function aboutPage(nonce) {
   return `<!doctype html>
 <html lang="en">
-${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Business & Product Operations professional with 6+ years of commercial ownership, workflow systemization, and evidence-first systems design. Based in Ho Chi Minh City.", nonce, { path: "/about" })}
+${layoutHead("About — Phạm Thanh Phú", "Phạm Thanh Phú — 6+ years in B2B operations, with independent work in product strategy and AI trust. Based in Ho Chi Minh City.", nonce, { path: "/about" })}
 <body>
   <a class="f-skip" href="#about-content">Skip to about content</a>
   ${layoutHeader("about", nonce)}
   <main id="about-content">
-    <!-- 1. Artistic Hero with Status & Coordinates -->
+    <!-- Introduction and contact -->
     <section class="f-about-hero-artistic">
       <div class="f-wrap">
-        <h1>Commercial ground truth first.<br><em>Systems, product governance &amp; AI trust next.</em></h1>
+        <h1>I learned operations by doing the work.<br><em>I’m still learning how to make it clearer.</em></h1>
         <p class="f-about-hero-dek">
-          Business and operations professional with <strong>6+ years of founder-side ownership</strong> across B2B commercial operations, recurring-account retention, supplier and partner coordination, workflow design, and business systemization. I extend that operating foundation through independent product, platform, governance, and AI-trust work grounded in public evidence and explicit claim boundaries.
+          For <strong>6+ years</strong>, I’ve worked on the founder side of <strong>Phong Phu Stationery in Dong Thap</strong>, handling B2B accounts, suppliers, pricing, fulfilment, and the routines that keep them connected.
+        </p>
+        <p class="f-about-hero-dek">
+          I’m now based in Ho Chi Minh City and interested in Business Operations, Product Operations, and Product Strategy. My independent work gives me room to explore those interests through research, operating models, and prototypes—and to keep learning from what I find.
         </p>
         
         <div class="f-about-coords-bar">
-          <span class="f-coord-tag"><strong>ROLE:</strong> Founder-side Operations</span>
+          <span class="f-coord-tag"><strong>EXPERIENCE:</strong> B2B Operations</span>
           <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>BASE:</strong> Ho Chi Minh City</span>
+          <span class="f-coord-tag"><strong>BASED:</strong> Ho Chi Minh City</span>
           <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>ORIGIN:</strong> Dong Thap</span>
+          <span class="f-coord-tag"><strong>FROM:</strong> Dong Thap</span>
           <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>LEGAL:</strong> HCMUL · Judicial Academy</span>
+          <span class="f-coord-tag"><strong>EDUCATION:</strong> HCMUL · Judicial Academy</span>
           <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>FOCUS:</strong> Business &amp; Product Ops</span>
+          <span class="f-coord-tag"><strong>INTERESTS:</strong> Business &amp; Product Ops</span>
         </div>
       
         <div class="f-about-hero-actions">
-          <a href="mailto:phamthanhphu97@gmail.com?subject=Contact%20-%20Pham%20Thanh%20Phu" class="f-about-btn primary">Direct Email: phamthanhphu97@gmail.com ✉</a>
-          <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
-          <a href="mailto:phamthanhphu97@gmail.com?subject=Request%20Full%20CV%20-%20Pham%20Thanh%20Phu" class="f-about-btn secondary">Request Full CV / Dossier 📄</a>
+          <a href="mailto:phamthanhphu97@gmail.com?subject=Contact%20-%20Pham%20Thanh%20Phu" class="f-about-btn primary">Email me: phamthanhphu97@gmail.com ✉</a>
+          <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn ↗</a>
+          <a href="mailto:phamthanhphu97@gmail.com?subject=Request%20Full%20CV%20-%20Pham%20Thanh%20Phu" class="f-about-btn secondary">Request my CV →</a>
         </div>
 
       </div>
     </section>
 
     <div class="f-wrap">
-      <!-- Executive Impact Dashboard -->
+      <!-- Portfolio at a glance -->
       <div class="f-impact-dashboard">
         <div class="f-impact-stat">
           <b>${totalWorks}</b>
-          <span>Research &amp; Applied Works</span>
+          <span>Public Research &amp; Applied Works</span>
         </div>
         <div class="f-impact-stat">
           <b>1</b>
-          <span>Live System Prototype</span>
+          <span>VieWorld App Prototype</span>
         </div>
         <div class="f-impact-stat">
           <b>${totalModes}</b>
           <span>Research Modes</span>
         </div>
         <div class="f-impact-stat">
-          <b>Explicit</b>
-          <span>Evidence Boundaries</span>
+          <b>Visible</b>
+          <span>Assumptions &amp; Evidence Limits</span>
         </div>
       </div>
 
-      <!-- 2. Bento Grid of Key Metric Pillars -->
+      <!-- Operating experience in numbers -->
       <section class="f-about-bento-grid" aria-label="Key Operating Highlights">
         <div class="f-bento-card">
           <div class="f-bento-card-top">
             <span class="f-bento-val">6+</span>
             <span class="f-bento-unit">Years</span>
           </div>
-          <h3>Commercial Ownership</h3>
-          <p>Founder-side Business Development &amp; Operations Manager at Phong Phu Stationery (Dong Thap, Jul 2019–Present).</p>
-          <div class="f-bento-tag">Sourcing · Pricing · Fulfilment · QC</div>
+          <h3>Running B2B Operations</h3>
+          <p>Business Development &amp; Operations Manager at Phong Phu Stationery, Dong Thap (July 2019–present).</p>
+          <div class="f-bento-tag">Sourcing · Pricing · Fulfilment · Quality</div>
         </div>
 
         <div class="f-bento-card">
@@ -3175,19 +3178,19 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
             <span class="f-bento-val">~800M</span>
             <span class="f-bento-unit">VND / Qtr</span>
           </div>
-          <h3>B2B Revenue &amp; Margin</h3>
-          <p>Average quarterly B2B and institutional supply revenue, excluding retail, while sustaining a 30–35% operating margin after expenses.</p>
-          <div class="f-bento-tag">B2B Supply Revenue · Operating Margin</div>
+          <h3>Quarterly B2B Revenue</h3>
+          <p>Average B2B and institutional supply revenue, excluding retail. Operating margin after expenses: 30–35%.</p>
+          <div class="f-bento-tag">B2B Supply · Margin After Expenses</div>
         </div>
 
         <div class="f-bento-card">
           <div class="f-bento-card-top">
             <span class="f-bento-val">~95%</span>
-            <span class="f-bento-unit">Retention</span>
+            <span class="f-bento-unit">Account Retention</span>
           </div>
-          <h3>50+ Recurring Accounts</h3>
-          <p>Sustained ~95% recurring-account retention by account count across 50+ institutional and corporate clients.</p>
-          <div class="f-bento-tag">Institutional Accounts · Long-Term Trust</div>
+          <h3>50+ Recurring Clients</h3>
+          <p>Institutional and corporate clients, with retention measured by account count.</p>
+          <div class="f-bento-tag">Institutional &amp; Corporate Accounts</div>
         </div>
 
         <div class="f-bento-card">
@@ -3195,157 +3198,157 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
             <span class="f-bento-val">&gt;90%</span>
             <span class="f-bento-unit">Delegated</span>
           </div>
-          <h3>Systemized &amp; Delegated</h3>
-          <p>Transferred &gt;90% of operating work since summer 2025 by moving core data into KiotViet and adding an experienced manager, part-time support, and delivery capacity.</p>
-          <div class="f-bento-tag">KiotViet · SOPs · Workflow Design</div>
+          <h3>Operating Work Delegated</h3>
+          <p>Since summer 2025, I’ve handed over most daily operating work, supported by KiotViet, an experienced manager, part-time help, and delivery capacity.</p>
+          <div class="f-bento-tag">KiotViet · SOPs · Handover</div>
         </div>
       </section>
 
-      <!-- 3. The Three Operating Horizons (Triptych Narrative) -->
-      <section class="f-about-triptych" aria-label="Operating Narrative">
-        <!-- Horizon 1 -->
+      <!-- Experience and independent work -->
+      <section class="f-about-triptych" aria-label="Experience and Independent Work">
+        <!-- B2B operations -->
         <article class="f-horizon-card">
           <aside class="f-horizon-aside">
-            <span class="f-horizon-num">Horizon 01</span>
-            <h3>Physical Commercial Grounding</h3>
+            <span class="f-horizon-num">01 · Operating Experience</span>
+            <h3>The Work Behind an Order</h3>
             <span class="f-horizon-sub">Dong Thap · 2019 – Present</span>
           </aside>
           <div class="f-horizon-content">
             <p>
-              My operating foundation began with the unglamorous but consequential work of keeping <strong>50+ institutional accounts, 10+ supplier partners, pricing, warehouse dispatch, cash collections, and dispute resolution connected</strong> in a live commercial market in Dong Thap.
+              At Phong Phu Stationery, I worked with <strong>50+ institutional and corporate accounts and 10+ supplier partners</strong>. My day-to-day work connected sourcing, pricing, stock, dispatch, payment collection, and the problems that surfaced between them.
             </p>
             <p>
-              I translated fragmented demand from public-sector units, schools, factories, hospitals, courts, SMEs, and corporate branches of companies including Olam and Emivest into reliable purchasing, pricing, inventory, and delivery decisions—balancing customer value, capacity, margin, working capital, and fulfilment risk.
+              Customers ranged from schools, hospitals, courts, and public-sector units to factories, SMEs, and corporate branches, including Olam and Emivest. The challenge was to meet their needs while keeping purchasing, stock, delivery, margin, and cash flow workable.
             </p>
             <div class="f-horizon-highlights">
               <div class="f-horizon-chip">
-                <strong>Supplier Crisis Resilience</strong>
-                When a supplier reduced discounts on an affected product line from 22% to 15%, I confirmed the policy, mobilized five alternative suppliers and brands, validated samples with customers, and replaced more than 80% of the affected line within one week.
+                <strong>Replacing an affected product line</strong>
+                When a supplier cut the discount on a product line from 22% to 15%, I checked the policy, found five alternative suppliers and brands, and tested samples with customers. More than 80% of the affected line was replaced within one week.
               </div>
               <div class="f-horizon-chip">
-                <strong>Process Standardization</strong>
-                Moved product, pricing, VAT, invoice, inventory, and account data into KiotViet to improve visibility and handoffs; recruited an experienced manager and support capacity to reduce founder dependency.
+                <strong>Making handover possible</strong>
+                I moved product, pricing, VAT, invoice, inventory, and account data into KiotViet and recruited an experienced manager, with part-time and delivery support. That made the work easier to hand over.
               </div>
             </div>
           </div>
         </article>
 
-        <!-- Horizon 2 -->
+        <!-- Commercial and legal support -->
         <article class="f-horizon-card">
           <aside class="f-horizon-aside">
-            <span class="f-horizon-num">Horizon 02</span>
-            <h3>Legal Discipline &amp; Operations Support</h3>
+            <span class="f-horizon-num">02 · Commercial &amp; Legal Support</span>
+            <h3>Care With Records and Decisions</h3>
             <span class="f-horizon-sub">Ho Chi Minh City &amp; Dong Thap</span>
           </aside>
           <div class="f-horizon-content">
             <p>
-              Combining a <strong>Bachelor of Commercial Law (Ho Chi Minh City University of Law)</strong> and <strong>Lawyer Training Certificate (Judicial Academy)</strong> with live operations to maintain rigorous documentation, risk-transfer boundaries, and confidential stakeholder alignment.
+              I bring a <strong>Bachelor of Commercial Law from Ho Chi Minh City University of Law</strong> and a <strong>Lawyer Training Certificate from the Judicial Academy</strong> to this work. I try to keep the record clear: what was agreed, what happened, and what still needs to be checked.
             </p>
             <p>
-              Alongside business operations, I provide independent commercial and legal operations support for 4+ continuing confidential clients—converting complex requirements into structured records, timelines, risk-aware options, and practical next steps.
+              Alongside business operations, I provide independent commercial and legal operations support to 4+ continuing clients. I help organize documents, timelines, options, and next steps, while keeping client details confidential.
             </p>
             <div class="f-horizon-highlights">
               <div class="f-horizon-chip">
-                <strong>Evidence &amp; Risk Structuring</strong>
-                Organized evidence, timelines, obligations, and negotiation preparation for 2+ resolved commercial matters with total value above VND 5B.
+                <strong>Preparing commercial matters</strong>
+                For 2+ resolved commercial matters with a combined value above VND 5B, I organized evidence, timelines, obligations, and negotiation preparation.
               </div>
               <div class="f-horizon-chip">
-                <strong>Tax &amp; Contract Workflows</strong>
-                Supported quarterly tax-document workflows for 5+ business households with annual revenue above VND 1B while maintaining confidential handling across contract, lease, payment, vendor, and commercial matters.
+                <strong>Keeping tax documents organized</strong>
+                I supported quarterly tax-document workflows for 5+ business households with annual revenue above VND 1B, alongside confidential handling of contract, lease, payment, vendor, and commercial records.
               </div>
             </div>
           </div>
         </article>
 
-        <!-- Horizon 3 -->
+        <!-- Independent research and prototypes -->
         <article class="f-horizon-card">
           <aside class="f-horizon-aside">
-            <span class="f-horizon-num">Horizon 03</span>
-            <h3>Product Systems &amp; AI Trust</h3>
+            <span class="f-horizon-num">03 · Independent Product Work</span>
+            <h3>Learning Through Product Work</h3>
             <span class="f-horizon-sub">${totalWorks} Public Research &amp; Applied Works</span>
           </aside>
           <div class="f-horizon-content">
             <p>
-              Earlier creator and community work—including venue activations, independent short-form content, and support around platform rules, monetization, Content ID, copyright, and account-support paths—gave me direct exposure to audience behavior and creator–fan operating realities.
+              Earlier creator and community work exposed me to venue activations, short-form content, platform rules, monetization, Content ID, copyright, and account-support issues. Those experiences gave me a closer view of the day-to-day needs of creators and fans.
             </p>
             <p>
-              I later completed the <strong>Value Chain Management Specialization (University of Illinois Urbana-Champaign, 2026)</strong> and published ${totalWorks} public research and applied works, extending my operating foundation through independent outside-in work across HealthTech, fandom commerce, platform governance, and AI decision systems.
+              In 2026, I completed the <strong>Value Chain Management Specialization at the University of Illinois Urbana-Champaign</strong>. My ${totalWorks} public works explore HealthTech, fandom commerce, platform governance, and AI decision systems using public sources. They are independent studies and prototypes, with assumptions and unanswered questions kept visible.
             </p>
             <div class="f-horizon-highlights">
               <div class="f-horizon-chip">
-                <strong>Product Strategy &amp; Activation (Elfie &amp; FanMe)</strong>
-                For Elfie, mapped activation quality, event taxonomy, user routines, guardrails, and a 0–12-week validation roadmap. For FanMe, designed a controlled-growth operating plan spanning artist onboarding, commerce, fulfilment, recovery, metrics, and go/no-go gates.
+                <strong>Elfie &amp; FanMe: planning what to test</strong>
+                Elfie explores activation quality, event taxonomy, user routines, safeguards, and a 0–12-week validation roadmap. FanMe lays out a controlled artist-launch plan covering onboarding, commerce, fulfilment, recovery, metrics, and go/no-go decisions.
               </div>
               <div class="f-horizon-chip">
-                <strong>Governance &amp; Explainable Trust (Shopee &amp; App)</strong>
-                Through independent public-evidence work, mapped explainable customer-resolution pathways for account restrictions (Shopee and Adobe) and developed the publicly deployed Explainable Trust working prototype.
+                <strong>Customer resolution &amp; Explainable Trust</strong>
+                The Shopee and Adobe studies map what a customer can understand and do when an account is restricted. Explainable Trust is now a static, interactive showcase: a fictional case makes evidence, revision history, reasoning, and unresolved gaps visible.
               </div>
             </div>
           </div>
         </article>
       </section>
 
-      <!-- 4. Artistic Manifesto / Ethos Block -->
+      <!-- Working approach -->
       <section class="f-about-manifesto">
-        <span class="f-manifesto-kicker">[ OPERATING ETHOS &amp; PRINCIPLES ]</span>
+        <span class="f-manifesto-kicker">HOW I TRY TO WORK</span>
         <blockquote>
-          “Every durable business is built on two visible boundaries: what was promised, and what evidence confirms it was delivered. I turn messy, multi-stakeholder tensions into clear workflows, measurable accountability, and calm, reliable execution.”
+          “I like to start with what happened, what people need, and what the record actually supports. Then I try to make the next step clearer: who owns it, what they need, and how we’ll know it helped.”
         </blockquote>
-        <span class="f-manifesto-author">— Phạm Thanh Phú · Business Operations &amp; Systems Thinking</span>
+        <span class="f-manifesto-author">— Phạm Thanh Phú</span>
       </section>
 
-      <!-- 5. Capabilities & Tooling Ledger -->
-      <section aria-label="Capabilities and Tooling">
+      <!-- Skills and learning -->
+      <section aria-label="Skills and Learning">
         <div class="f-human-head">
-          <h2>Capabilities &amp; Core Tooling</h2>
-          <span>Capabilities developed through operating experience, formal learning, and independent applied work</span>
+          <h2>Skills I Use &amp; Topics I’m Developing</h2>
+          <span>Built through operating experience, formal study, and independent projects.</span>
         </div>
         <div class="f-about-toolkit-grid">
           <div class="f-toolkit-col">
             <h4>Operations &amp; Delivery</h4>
             <ul class="f-toolkit-list">
-              <li>Process Mapping &amp; SOP Design</li>
-              <li>Sourcing &amp; Vendor Management</li>
-              <li>Inventory &amp; KiotViet ERP Setup</li>
-              <li>Working Capital &amp; Margin Control</li>
-              <li>Partner Coordination &amp; Quality Control</li>
-              <li>Incident Containment &amp; Recovery</li>
+              <li>Process mapping &amp; SOPs</li>
+              <li>Sourcing &amp; supplier coordination</li>
+              <li>Inventory &amp; KiotViet workflows</li>
+              <li>Cash flow &amp; margin tracking</li>
+              <li>Partner coordination &amp; quality checks</li>
+              <li>Handling operating exceptions</li>
             </ul>
           </div>
           <div class="f-toolkit-col">
             <h4>Product &amp; Strategy</h4>
             <ul class="f-toolkit-list">
-              <li>Problem Discovery &amp; User Journeys</li>
-              <li>Event Taxonomy &amp; Funnel Metrics</li>
-              <li>Experiment Hypotheses &amp; Guardrails</li>
-              <li>Value Chain Management (UIUC)</li>
-              <li>Stage Gates &amp; Transfer Testing</li>
-              <li>Customer Resolution &amp; Contestability</li>
+              <li>Problem framing &amp; user journeys</li>
+              <li>Event taxonomy &amp; funnel metrics</li>
+              <li>Experiment plans &amp; safeguards</li>
+              <li>Value chain management (UIUC)</li>
+              <li>Pilot gates &amp; repeatability</li>
+              <li>Customer resolution &amp; review paths</li>
             </ul>
           </div>
           <div class="f-toolkit-col">
             <h4>Data, Legal &amp; AI</h4>
             <ul class="f-toolkit-list">
               <li>Excel, Google Sheets, SQL, Python, Tableau</li>
-              <li>Commercial Law (HCMUL) &amp; Judicial Academy</li>
-              <li>ChatGPT, Claude &amp; Generative AI Tools</li>
-              <li>AI Decision Provenance &amp; Evaluation Frameworks</li>
-              <li>Notion, Asana, Trello Project Tracking</li>
-              <li>TOEIC 825 Professional English</li>
+              <li>Commercial records &amp; legal training</li>
+              <li>Generative AI tools (ChatGPT, Claude)</li>
+              <li>AI provenance &amp; evaluation studies</li>
+              <li>Notion, Asana, Trello</li>
+              <li>English (TOEIC 825)</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- 6. Action & Contact Dock -->
+      <!-- Opportunities and contact -->
       <section class="f-about-cta-dock">
         <div class="f-cta-dock-text">
-          <h3>Let's explore meaningful collaboration.</h3>
-          <p>Open to Business Operations, Product Operations, and Product Strategy roles in Ho Chi Minh City.</p>
+          <h3>Let’s talk.</h3>
+          <p>Open to roles in Business Operations, Product Operations, and Product Strategy in Ho Chi Minh City.</p>
         </div>
         <div class="f-cta-dock-btns">
-          <a href="mailto:phamthanhphu97@gmail.com" class="f-about-btn primary">Email Phu ↗</a>
-          <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
+          <a href="mailto:phamthanhphu97@gmail.com" class="f-about-btn primary">Email me ↗</a>
+          <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn ↗</a>
           <a href="/work" class="f-about-btn secondary">Browse ${totalWorks} Works →</a>
         </div>
       </section>
