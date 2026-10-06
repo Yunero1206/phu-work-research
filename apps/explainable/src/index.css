@@ -1,12 +1,20 @@
+@import "../../../public/assets/fonts.css";
 @import "tailwindcss";
 @import "@xyflow/react/dist/style.css";
 
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Nunito", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
 @layer base {
   body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-sans);
   }
+  h1, h2, h3, h4 { font-family: var(--font-display); }
   code, pre, .font-mono {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: var(--font-mono);
   }
 }
 

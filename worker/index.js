@@ -1,3 +1,5 @@
+import { siteCss } from "./styles.js";
+
 // ============================================================================
 // Pham Thanh Phu — Work & Research Master Cloudflare Worker
 // Authored case narratives and linked Google Drive source assets
@@ -1743,3916 +1745,6 @@ function renderEditorialNotion(markdown) {
   return renderedBlocks.join('\n\n');
 }
 
-const siteCss = `:root {
-    /* ========================================================================
-       1. UNIFIED TYPOGRAPHY DESIGN TOKENS
-       ======================================================================== */
-    /* Font Families */
-    --font-serif: "Newsreader", Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
-    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-
-    /* Backward-compatibility Aliases */
-    --serif: var(--font-serif);
-    --sans: var(--font-sans);
-    --mono: var(--font-mono);
-
-    /* Modular Fluid Type Scale */
-    --text-2xs: 0.6875rem; /* 11px - Micro badges, kbd hints, zoom hints */
-    --text-xs:  0.75rem;   /* 12px - Meta dates, tags, pills, overlines */
-    --text-sm:  0.875rem;  /* 14px - Nav links, UI buttons, table text, rail */
-    --text-base: 1rem;     /* 16px - Base body text, inputs, form controls */
-    --text-md:  1.0625rem; /* 17px - Intro ledes, sub-paragraphs, cards */
-    --text-lg:  1.156rem;  /* 18.5px - Monograph editorial prose, blockquotes */
-    --text-xl:  1.25rem;   /* 20px - Card titles, h4, route headers */
-    --text-2xl: 1.5rem;    /* 24px - Section heads, h3, modal titles */
-    --text-3xl: clamp(1.75rem, 2.7vw, 2.25rem); /* Subsection hero, h2 */
-    --text-4xl: clamp(2.25rem, 4.2vw, 3.2rem);  /* Page titles, case hero h1 */
-    --text-display: clamp(2.8rem, 5.5vw, 4.8rem); /* Large home hero headline */
-
-    /* Font Weights */
-    --fw-regular:   400;
-    --fw-medium:    500;
-    --fw-semibold:  600;
-    --fw-bold:      700;
-    --fw-extrabold: 800;
-
-    /* Line Heights */
-    --lh-tight:   1.15;
-    --lh-snug:    1.3;
-    --lh-normal:  1.5;
-    --lh-relaxed: 1.65;
-    --lh-prose:   1.82;
-
-    /* Letter Spacing */
-    --tracking-tighter: -0.03em;
-    --tracking-tight:   -0.015em;
-    --tracking-normal:  0;
-    --tracking-wide:    0.04em;
-    --tracking-wider:   0.08em;
-    --tracking-widest:  0.1em;
-
-    /* ========================================================================
-       2. UNIFIED SEMANTIC COLOR SYSTEM (LIGHT / DARK / SEPIA)
-       ======================================================================== */
-    --paper: #faf8f5;
-    --paper-card: #ffffff;
-    --paper-tint: #f4efe6;
-    --header-bg: rgba(250, 248, 245, 0.96);
-    --hero-bg: #14222c;
-    --hero-text: #f7f4ec;
-    --ink: #141c22;
-    --ink-secondary: #334149;
-    --muted: #64748b;
-    --line: #ded8cb;
-    --line-subtle: rgba(20, 28, 34, 0.08);
-    --copper: #c25e2e;
-    --copper-dark: #9e4318;
-    --navy: #14222c;
-    --navy-soft: #1c3540;
-    --mist: #dfe9e8;
-    --accent: #b84a2f;
-    --emerald: #15803d;
-    --sky: #0284c7;
-    --amber: #b45309;
-
-    color-scheme: light;
-  }
-
-  /* DARK FORENSIC THEME OVERRIDES */
-  :root[data-theme="dark"] {
-    --paper: #0c141a;
-    --paper-card: #142028;
-    --paper-tint: #1c2a34;
-    --header-bg: rgba(12, 20, 26, 0.96);
-    --hero-bg: #070d12;
-    --hero-text: #f0f6fc;
-    --ink: #e6edf3;
-    --ink-secondary: #a2b4c2;
-    --muted: #7e91a2;
-    --line: #223746;
-    --line-subtle: rgba(255, 255, 255, 0.08);
-    --copper: #e07a48;
-    --copper-dark: #f09568;
-    --navy: #f0f6fc;
-    --navy-soft: #cbd5e1;
-    --mist: #172d3a;
-    --accent: #e56b4f;
-    --emerald: #34d399;
-    --sky: #38bdf8;
-    --amber: #fbbf24;
-
-    color-scheme: dark;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="sepia"]) {
-      --paper: #0c141a;
-      --paper-card: #142028;
-      --paper-tint: #1c2a34;
-      --header-bg: rgba(12, 20, 26, 0.96);
-      --hero-bg: #070d12;
-      --hero-text: #f0f6fc;
-      --ink: #e6edf3;
-      --ink-secondary: #a2b4c2;
-      --muted: #7e91a2;
-      --line: #223746;
-      --line-subtle: rgba(255, 255, 255, 0.08);
-      --copper: #e07a48;
-      --copper-dark: #f09568;
-      --navy: #f0f6fc;
-      --navy-soft: #cbd5e1;
-      --mist: #172d3a;
-      --accent: #e56b4f;
-      --emerald: #34d399;
-      --sky: #38bdf8;
-      --amber: #fbbf24;
-
-      color-scheme: dark;
-    }
-  }
-
-  /* WARM SEPIA READING THEME OVERRIDES */
-  :root[data-theme="sepia"] {
-    --paper: #f7f1e5;
-    --paper-card: #fcf8f0;
-    --paper-tint: #eee5d3;
-    --header-bg: rgba(247, 241, 229, 0.96);
-    --hero-bg: #231b14;
-    --hero-text: #faf6ee;
-    --ink: #2c241c;
-    --ink-secondary: #574b3d;
-    --muted: #7c6f60;
-    --line: #d8cbbc;
-    --line-subtle: rgba(44, 36, 28, 0.08);
-    --copper: #b24d22;
-    --copper-dark: #8c3814;
-    --navy: #231b14;
-    --navy-soft: #382c21;
-    --mist: #e5ded2;
-    --accent: #a83d23;
-    --emerald: #2e7d32;
-    --sky: #0277bd;
-    --amber: #b45309;
-
-    color-scheme: light;
-  }
-
-  /* ========================================================================
-     THEME OVERRIDES: DARK & WARM SEPIA MODES
-     ======================================================================== */
-  :root[data-theme="dark"] {
-    --paper: #0e161c;
-    --paper-card: #15222b;
-    --paper-tint: #1b2a36;
-    --ink: #e6edf3;
-    --ink-secondary: #9db2c2;
-    --muted: #768a9b;
-    --line: #223746;
-    --line-subtle: rgba(255, 255, 255, 0.08);
-    --copper: #e07a48;
-    --copper-dark: #f09568;
-    --navy: #f0f6fc;
-    --navy-soft: #cbd5e1;
-    --mist: #172d3a;
-    --accent: #e56b4f;
-    --emerald: #34d399;
-    --sky: #38bdf8;
-    --amber: #fbbf24;
-    color-scheme: dark;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]):not([data-theme="sepia"]) {
-      --paper: #0e161c;
-      --paper-card: #15222b;
-      --paper-tint: #1b2a36;
-      --ink: #e6edf3;
-      --ink-secondary: #9db2c2;
-      --muted: #768a9b;
-      --line: #223746;
-      --line-subtle: rgba(255, 255, 255, 0.08);
-      --copper: #e07a48;
-      --copper-dark: #f09568;
-      --navy: #f0f6fc;
-      --navy-soft: #cbd5e1;
-      --mist: #172d3a;
-      --accent: #e56b4f;
-      --emerald: #34d399;
-      --sky: #38bdf8;
-      --amber: #fbbf24;
-      color-scheme: dark;
-    }
-  }
-
-  :root[data-theme="sepia"] {
-    --paper: #f7f1e5;
-    --paper-card: #fdfaf4;
-    --paper-tint: #eee5d3;
-    --ink: #2c241c;
-    --ink-secondary: #574b3d;
-    --muted: #7c6f60;
-    --line: #d8cbbc;
-    --line-subtle: rgba(44, 36, 28, 0.08);
-    --copper: #b24d22;
-    --copper-dark: #8c3814;
-    --navy: #231b14;
-    --navy-soft: #382c21;
-    --mist: #e5ded2;
-    --accent: #a83d23;
-    --emerald: #2e7d32;
-    --sky: #0277bd;
-    --amber: #b45309;
-    color-scheme: light;
-  }
-
-  /* Live Pulse Beacon & Nav Indicator */
-  .f-live-beacon {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-    animation: fPulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-  @keyframes fPulse {
-    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-    70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-  }
-  .f-nav-live-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 10px;
-    border-radius: 16px;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    color: var(--ink) !important;
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    transition: all 0.2s ease;
-  }
-  .f-nav-live-pill:hover {
-    background: rgba(16, 185, 129, 0.25);
-    border-color: rgba(16, 185, 129, 0.6);
-    text-decoration: none;
-    transform: translateY(-1px);
-  }
-
-  /* Theme Switcher in Nav */
-  .f-theme-switch-group {
-    display: inline-flex;
-    align-items: center;
-    background: var(--paper-tint);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 2px;
-    margin-left: 10px;
-    vertical-align: middle;
-  }
-  .f-theme-toggle-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 13px;
-    padding: 3px 8px;
-    border-radius: 14px;
-    color: var(--muted);
-    transition: all 0.15s ease;
-    line-height: 1;
-  }
-  .f-theme-toggle-btn:hover {
-    color: var(--ink);
-  }
-  .f-theme-toggle-btn.is-active {
-    background: var(--paper-card);
-    color: var(--copper);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    font-weight: bold;
-  }
-
-  /* ========================================================================
-     FEATURED LIVE APP SHOWCASE CARD
-     ======================================================================== */
-  .f-app-showcase-section {
-    padding: 20px 0 44px;
-    border-bottom: 1px solid var(--line);
-  }
-  .f-app-showcase-card {
-    display: grid;
-    grid-template-columns: 1.25fr 1fr;
-    gap: 36px;
-    background: var(--paper-card);
-    border: 1px solid var(--copper);
-    border-radius: 12px;
-    padding: 36px 40px;
-    box-shadow: 0 8px 32px rgba(20, 34, 44, 0.07);
-    position: relative;
-    overflow: hidden;
-  }
-  :root[data-theme="dark"] .f-app-showcase-card {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    border-color: rgba(224, 122, 72, 0.4);
-  }
-  .f-app-badge-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .f-app-status-badge {
-    display: inline-flex;
-    align-items: center;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    color: #10b981;
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wider);
-    padding: 4px 10px;
-    border-radius: 14px;
-    text-transform: uppercase;
-  }
-  :root[data-theme="dark"] .f-app-status-badge {
-    color: #34d399;
-  }
-  .f-app-host-tag, .f-app-domain-tag {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--muted);
-    background: var(--paper-tint);
-    border: 1px solid var(--line);
-    padding: 3px 8px;
-    border-radius: 6px;
-  }
-  .f-app-domain-tag {
-    color: var(--copper);
-    font-weight: var(--fw-semibold);
-  }
-  .f-app-title {
-    font-family: var(--font-serif);
-    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
-    line-height: var(--lh-tight);
-    color: var(--navy);
-    margin: 0 0 12px;
-  }
-  .f-app-question {
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--copper);
-    font-size: var(--text-md);
-    line-height: var(--lh-snug);
-    margin: 0 0 14px;
-  }
-  .f-app-desc {
-    font-family: var(--font-sans);
-    font-size: var(--text-base);
-    color: var(--ink-secondary);
-    line-height: var(--lh-relaxed);
-    margin: 0 0 20px;
-  }
-  .f-app-tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 24px;
-  }
-  .f-tech-pill {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    background: var(--paper-tint);
-    color: var(--ink-secondary);
-    border: 1px solid var(--line);
-    padding: 4px 9px;
-    border-radius: 4px;
-    font-weight: var(--fw-medium);
-  }
-  .f-app-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .f-app-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-semibold);
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-  
-  /* ========================================================================
-     THEME ACCENT & BADGE ADAPTATION
-     ======================================================================== */
-  :root[data-theme="dark"] .f-topic-chip.active,
-  :root[data-theme="dark"] .f-view-toggle-btn.active {
-    background: var(--copper) !important;
-    border-color: var(--copper) !important;
-    color: #ffffff !important;
-  }
-  :root[data-theme="dark"] .f-maturity-badge.prototype {
-    background: rgba(245, 158, 11, 0.2);
-    color: #fbbf24;
-    border: 1px solid rgba(245, 158, 11, 0.35);
-  }
-  :root[data-theme="dark"] .f-maturity-badge.working {
-    background: rgba(16, 185, 129, 0.2);
-    color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.35);
-  }
-  :root[data-theme="dark"] .f-maturity-badge.developed {
-    background: rgba(59, 130, 246, 0.2);
-    color: #60a5fa;
-    border: 1px solid rgba(59, 130, 246, 0.35);
-  }
-  :root[data-theme="dark"] .f-maturity-badge.concept {
-    background: rgba(139, 92, 246, 0.2);
-    color: #a78bfa;
-    border: 1px solid rgba(139, 92, 246, 0.35);
-  }
-  :root[data-theme="dark"] .f-maturity-badge.evidence {
-    background: rgba(234, 88, 12, 0.2);
-    color: #fb923c;
-    border: 1px solid rgba(234, 88, 12, 0.35);
-  }
-  :root[data-theme="dark"] .f-maturity-badge.default {
-    background: rgba(100, 116, 139, 0.2);
-    color: #cbd5e1;
-    border: 1px solid rgba(100, 116, 139, 0.35);
-  }
-  :root[data-theme="dark"] .f-lens-card.ops .f-lens-badge {
-    background: rgba(16, 185, 129, 0.2);
-    color: #34d399;
-  }
-  :root[data-theme="dark"] .f-lens-card.evidence .f-lens-badge {
-    background: rgba(234, 88, 12, 0.2);
-    color: #fb923c;
-  }
-  :root[data-theme="dark"] .f-lens-card.essays .f-lens-badge {
-    background: rgba(14, 165, 233, 0.2);
-    color: #38bdf8;
-  }
-  :root[data-theme="dark"] .f-lens-card.concepts .f-lens-badge {
-    background: rgba(245, 158, 11, 0.2);
-    color: #fbbf24;
-  }
-  :root[data-theme="dark"] .f-ledger-mode.ops {
-    background: rgba(16, 185, 129, 0.2);
-    color: #34d399;
-  }
-  :root[data-theme="dark"] .f-ledger-mode.evidence {
-    background: rgba(234, 88, 12, 0.2);
-    color: #fb923c;
-  }
-  :root[data-theme="dark"] .f-ledger-mode.essays {
-    background: rgba(14, 165, 233, 0.2);
-    color: #38bdf8;
-  }
-  :root[data-theme="dark"] .f-ledger-mode.concepts {
-    background: rgba(245, 158, 11, 0.2);
-    color: #fbbf24;
-  }
-  :root[data-theme="dark"] .f-table th {
-    background: #1c2b36;
-    color: #f0f6fc;
-    border-color: #253847;
-  }
-  :root[data-theme="dark"] .f-code {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--copper);
-  }
-  :root[data-theme="dark"] .f-kbd-hint {
-    background: var(--paper-tint);
-    color: var(--muted);
-    border: 1px solid var(--line);
-  }
-
-  /* SEPIA THEME BADGE OVERRIDES */
-  :root[data-theme="sepia"] .f-topic-chip.active,
-  :root[data-theme="sepia"] .f-view-toggle-btn.active {
-    background: var(--copper) !important;
-    border-color: var(--copper) !important;
-    color: #ffffff !important;
-  }
-  :root[data-theme="sepia"] .f-maturity-badge.prototype {
-    background: #faecd0;
-    color: #854d0e;
-    border: 1px solid #e7ce9d;
-  }
-  :root[data-theme="sepia"] .f-maturity-badge.working {
-    background: #daf0e3;
-    color: #166534;
-    border: 1px solid #b7dfca;
-  }
-  :root[data-theme="sepia"] .f-maturity-badge.developed {
-    background: #dce7f5;
-    color: #1e40af;
-    border: 1px solid #b9cee6;
-  }
-  :root[data-theme="sepia"] .f-maturity-badge.concept {
-    background: #eae2f8;
-    color: #5b21b6;
-    border: 1px solid #cfbfe6;
-  }
-  :root[data-theme="sepia"] .f-maturity-badge.evidence {
-    background: #f7e2d2;
-    color: #9a3412;
-    border: 1px solid #e6be9f;
-  }
-  :root[data-theme="sepia"] .f-maturity-badge.default {
-    background: #eae4d8;
-    color: #574b3d;
-    border: 1px solid #d0c6b6;
-  }
-  :root[data-theme="sepia"] .f-table th {
-    background: #231b14;
-    color: #faf6ee;
-    border-color: #382c21;
-  }
-
-  .f-app-btn.primary {
-    background: var(--copper);
-    color: #ffffff !important;
-    border: 1px solid var(--copper);
-    box-shadow: 0 2px 8px rgba(194, 94, 46, 0.3);
-  }
-  .f-app-btn.primary:hover {
-    background: var(--copper-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(194, 94, 46, 0.4);
-  }
-  .f-app-btn.secondary {
-    background: var(--paper-tint);
-    color: var(--ink) !important;
-    border: 1px solid var(--line);
-  }
-  .f-app-btn.secondary:hover {
-    border-color: var(--copper);
-    color: var(--copper) !important;
-  }
-
-  /* Mockup Visual Window */
-  .f-app-mockup-window {
-    background: var(--paper-tint);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
-  }
-  .f-mockup-titlebar {
-    background: var(--paper-card);
-    border-bottom: 1px solid var(--line);
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-  }
-  .f-mockup-dots {
-    display: flex;
-    gap: 6px;
-  }
-  .f-mockup-dots i {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  .dot-red { background: #ef4444; }
-  .dot-yellow { background: #f59e0b; }
-  .dot-green { background: #10b981; }
-  .f-mockup-url {
-    color: var(--muted);
-  }
-  .f-mockup-status {
-    color: #10b981;
-    font-weight: bold;
-  }
-  .f-mockup-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
-    gap: 16px;
-  }
-  .f-mockup-dag-preview {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .f-dag-node {
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: var(--text-xs);
-  }
-  .f-dag-node.n-source { border-left: 3px solid #3b82f6; }
-  .f-dag-node.n-activity { border-left: 3px solid #f59e0b; }
-  .f-dag-node.n-ledger { border-left: 3px solid #10b981; }
-  .f-dag-node .n-type {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    background: var(--paper-tint);
-    padding: 2px 5px;
-    border-radius: 3px;
-    color: var(--muted);
-    font-weight: bold;
-  }
-  .f-dag-node strong {
-    color: var(--ink);
-    font-family: var(--font-sans);
-  }
-  .f-dag-node code {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--muted);
-  }
-  .f-dag-edge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-left: 20px;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--muted);
-  }
-  .f-edge-line {
-    width: 2px;
-    height: 12px;
-    background: var(--line);
-  }
-  .f-mockup-stat-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    border-top: 1px dashed var(--line);
-    padding-top: 14px;
-    text-align: center;
-  }
-  .f-m-stat {
-    font-family: var(--font-sans);
-    font-size: var(--text-2xs);
-    color: var(--muted);
-  }
-  .f-m-stat strong {
-    display: block;
-    color: var(--copper);
-    font-size: var(--text-sm);
-  }
-
-  /* Featured App Badge in Library */
-  .f-work-item-featured-app {
-    border-color: var(--copper) !important;
-    background: linear-gradient(to bottom right, var(--paper-card), var(--paper-tint)) !important;
-    box-shadow: 0 4px 16px rgba(194, 94, 46, 0.12) !important;
-  }
-
-  /* ========================================================================
-     CASE READING CONTROLS & NAVIGATION RAIL
-     ======================================================================== */
-  .f-case-action-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 12px 18px;
-    margin: 20px 0 28px;
-    background: var(--paper-tint);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-  }
-  .f-case-action-left, .f-case-action-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .f-action-pill {
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    color: var(--ink-secondary);
-    padding: 6px 13px;
-    border-radius: 6px;
-    font-size: var(--text-xs);
-    font-weight: var(--fw-medium);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .f-action-pill:hover {
-    border-color: var(--copper);
-    color: var(--copper);
-  }
-  .f-action-pill.accent {
-    background: var(--copper);
-    color: #fff;
-    border-color: var(--copper);
-  }
-  .f-action-pill.accent:hover {
-    background: var(--copper-dark);
-  }
-  .f-action-pill.is-saved {
-    background: rgba(16, 185, 129, 0.15);
-    border-color: #10b981;
-    color: #059669;
-    font-weight: var(--fw-bold);
-  }
-  :root[data-theme="dark"] .f-action-pill.is-saved {
-    background: rgba(16, 185, 129, 0.25);
-    border-color: #34d399;
-    color: #34d399;
-  }
-
-  /* Next / Prev Navigation Rail */
-  .f-case-nav-rail {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 50px 0 30px;
-    padding-top: 30px;
-    border-top: 2px solid var(--line);
-  }
-  .f-case-nav-card {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 22px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-  .f-case-nav-card:hover {
-    border-color: var(--copper);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-  }
-  .f-case-nav-card.next {
-    text-align: right;
-  }
-  .f-nav-dir {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-bold);
-    color: var(--copper);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    margin-bottom: 6px;
-  }
-  .f-nav-title {
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    line-height: var(--lh-snug);
-    color: var(--navy);
-    margin-bottom: 6px;
-  }
-  .f-nav-type {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    color: var(--muted);
-  }
-  .f-toast-msg {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: var(--paper-tint);
-    color: var(--ink);
-    padding: 10px 22px;
-    border-radius: 30px;
-    font-size: var(--text-sm);
-    font-family: var(--font-sans);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    pointer-events: none;
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 99999;
-  }
-  .f-toast-msg.is-visible {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
-
-  @media (max-width: 900px) {
-    .f-app-showcase-card {
-      grid-template-columns: 1fr;
-      padding: 24px;
-    }
-  }
-  @media (max-width: 650px) {
-    .f-case-nav-rail {
-      grid-template-columns: 1fr;
-    }
-    .f-case-nav-card.next {
-      text-align: left;
-    }
-  }
-
-
-  /* ========================================================================
-     3. BASE RESETS & GLOBAL TYPOGRAPHY
-     ======================================================================== */
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--font-sans);
-    font-size: var(--text-base);
-    line-height: var(--lh-relaxed);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  }
-  a { color: inherit; }
-  button, input, select { font-family: var(--font-sans); }
-  :focus-visible { outline: 2px solid var(--copper); outline-offset: 4px; }
-
-  /* Modern Typography Enhancements */
-  h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
-  p, blockquote, li { text-wrap: pretty; }
-
-  .f-skip {
-    position: fixed;
-    left: 18px;
-    top: -100px;
-    z-index: 100;
-    background: var(--navy);
-    color: #fff;
-    padding: 10px 16px;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-  }
-  .f-skip:focus { top: 14px; }
-  .f-wrap { width: min(calc(100% - 48px), 1080px); margin-inline: auto; }
-
-  
-  
-  
-
-  /* ========================================================================
-     CLEAN SINGLE-ROW HEADER & THEME SWITCHER
-     ======================================================================== */
-  .f-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: var(--header-bg);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
-  }
-  .f-nav {
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  .f-brand {
-    font-family: var(--font-serif);
-    font-size: 1.28rem;
-    font-weight: var(--fw-bold);
-    text-decoration: none;
-    color: var(--navy);
-    letter-spacing: var(--tracking-tight);
-    display: inline-flex;
-    align-items: baseline;
-  }
-  .f-brand span {
-    margin-left: 10px;
-    color: var(--muted);
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-  }
-  .f-links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .f-links a {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wide);
-    text-decoration: none;
-    text-transform: uppercase;
-    color: var(--ink);
-    transition: color 0.15s ease;
-  }
-  .f-links a[aria-current=page], .f-links a:hover {
-    color: var(--copper);
-  }
-  .f-theme-switch-group {
-    display: inline-flex;
-    align-items: center;
-    padding: 3px;
-    border-radius: 6px;
-    background: var(--paper-tint);
-    border: 1px solid var(--line);
-    gap: 2px;
-    margin-left: 6px;
-  }
-  .f-theme-toggle-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 26px;
-    border-radius: 4px;
-    border: 0;
-    background: transparent;
-    font-size: 13px;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.12s ease;
-    padding: 0;
-  }
-  .f-theme-toggle-btn:hover {
-    color: var(--ink);
-  }
-  .f-theme-toggle-btn.is-active {
-    background: var(--paper-card);
-    color: var(--copper);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  }
-  @media (max-width: 768px) {
-    .f-nav { min-height: 56px; gap: 12px; }
-    .f-links { gap: 14px; }
-    .f-brand span { display: none; }
-  }
-
-  /* ========================================================================
-     PRODUCTION PROTOTYPE STUDIO SHOWCASE & SCREENSHOT
-     ======================================================================== */
-  .f-proto-window-card {
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-  }
-  .f-proto-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 28px;
-    align-items: center;
-    padding: 28px 30px;
-  }
-  .f-proto-kicker {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wider);
-    color: var(--copper);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .f-proto-title {
-    font-family: var(--font-serif);
-    font-size: var(--text-2xl);
-    font-weight: var(--fw-semibold);
-    color: var(--navy);
-    line-height: var(--lh-snug);
-    margin: 0 0 10px;
-  }
-  .f-proto-desc {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--ink-secondary);
-    margin: 0 0 18px;
-  }
-  .f-proto-specs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 22px;
-  }
-  .f-proto-spec-pill {
-    padding: 4px 10px;
-    border-radius: 4px;
-    background: var(--paper-tint);
-    border: 1px solid var(--line);
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-medium);
-    color: var(--ink);
-  }
-  .f-proto-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .f-proto-screenshot-box {
-    position: relative;
-    border-radius: 8px;
-    border: 1px solid var(--line);
-    overflow: hidden;
-    background: var(--paper-tint);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .f-proto-screenshot-box:hover {
-    border-color: var(--copper);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 26px rgba(194, 94, 62, 0.16);
-  }
-  .f-proto-preview-img {
-    width: 100%;
-    height: auto;
-    max-height: 220px;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-  }
-  .f-proto-preview-img[hidden] { display: none; }
-  .f-proto-img-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(12, 20, 26, 0.45);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-  .f-proto-screenshot-box:hover .f-proto-img-overlay {
-    opacity: 1;
-  }
-  .f-proto-img-overlay span {
-    background: var(--copper);
-    color: #ffffff;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    padding: 6px 14px;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  }
-  @media (max-width: 860px) {
-    .f-proto-grid { grid-template-columns: 1fr; gap: 20px; padding: 22px; }
-  }
-
-  /* ========================================================================
-     4. HEADER & PRIMARY NAVIGATION
-     ======================================================================== */
-  .f-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: var(--header-bg); border-bottom-color: var(--line);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--ink);
-  }
-  .f-nav {
-    min-height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
-  .f-brand {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: var(--fw-bold);
-    text-decoration: none;
-    color: var(--navy);
-    letter-spacing: var(--tracking-tight);
-  }
-  .f-brand span {
-    margin-left: 10px;
-    color: var(--muted);
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-  }
-  .f-links {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-  }
-  .f-links a {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wide);
-    text-decoration: none;
-    text-transform: uppercase;
-    color: var(--ink);
-    transition: color 0.15s ease;
-  }
-  .f-links a[aria-current=page], .f-links a:hover {
-    color: var(--copper);
-  }
-
-  /* Reading Progress Bar */
-  #f-progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: var(--copper);
-    width: 0%;
-    z-index: 100;
-    transition: width 0.1s ease-out;
-  }
-
-  /* ========================================================================
-     5. HOME PAGE & EDITORIAL INTRO
-     ======================================================================== */
-  .f-human-intro {
-    padding: 44px 0 32px;
-    border-bottom: 1px solid var(--line);
-  }
-  .f-intro-kicker {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    color: var(--copper);
-    margin-bottom: 10px;
-  }
-  .f-human-intro h1 {
-    font-family: var(--font-serif);
-    font-size: var(--text-3xl);
-    font-weight: var(--fw-semibold);
-    line-height: var(--lh-tight);
-    letter-spacing: var(--tracking-tight);
-    color: var(--navy);
-    margin: 0 0 16px;
-    max-width: 860px;
-    text-wrap: balance;
-  }
-  .f-intro-prose {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-    font-family: var(--font-sans);
-    font-size: var(--text-md);
-    line-height: var(--lh-relaxed);
-    color: var(--ink-secondary);
-    margin-bottom: 20px;
-  }
-  .f-intro-prose p { margin: 0; }
-  .f-intro-links {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 18px;
-    padding-top: 2px;
-  }
-  .f-intro-link {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    color: var(--navy);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.15s ease;
-  }
-  .f-intro-link:hover { color: var(--copper); }
-  .f-intro-link.primary {
-    color: var(--copper);
-    font-weight: var(--fw-extrabold);
-  }
-
-  .f-home-cover {
-    width: 100%;
-    height: clamp(140px, 20vw, 260px);
-    margin: 0;
-    overflow: hidden;
-    background: #eee7d8;
-    border-bottom: 1px solid var(--ink);
-  }
-  .f-home-cover img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  /* ========================================================================
-     6. EDITORIAL INQUIRIES & SECTIONS
-     ======================================================================== */
-  .f-human-section {
-    padding: 38px 0 42px;
-    border-bottom: 1px solid var(--line);
-  }
-  .f-human-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--navy);
-  }
-  .f-human-head h2 {
-    margin: 0;
-    font-family: var(--font-serif);
-    font-size: var(--text-2xl);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-tight);
-    color: var(--navy);
-  }
-  .f-human-head span {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--muted);
-    font-weight: var(--fw-semibold);
-  }
-
-  .f-entry-list {
-    display: flex;
-    flex-direction: column;
-  }
-  .f-entry-item {
-    display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 28px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--line);
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-    transition: all 0.18s ease;
-  }
-  .f-entry-item:last-child { border-bottom: 0; }
-  .f-entry-item:hover { background: var(--paper-card);
-    margin-inline: -14px;
-    padding-inline: 14px;
-    border-radius: 6px;
-  }
-  .f-entry-item:hover .f-entry-title { color: var(--copper); }
-
-  .f-entry-item.f-entry-featured {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-    align-items: center;
-    gap: 28px;
-    margin-bottom: 14px;
-    padding: 24px;
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--copper);
-    border-radius: 14px;
-    background: var(--paper-card);
-  }
-  .f-entry-item.f-entry-featured:hover {
-    margin-inline: 0;
-    border-color: var(--copper);
-  }
-  .f-entry-featured .f-entry-main { min-width: 0; }
-  .f-entry-featured .f-entry-meta-side {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 12px;
-    margin-bottom: 12px;
-    padding-top: 0;
-  }
-  .f-entry-featured .f-entry-title { font-size: clamp(1.4rem, 2.5vw, 1.8rem); }
-  .f-entry-featured-visual {
-    min-width: 0;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: var(--paper-tint);
-  }
-  .f-entry-featured-visual img { display: block; width: 100%; height: auto; }
-  .f-entry-item:focus-visible { outline: 3px solid var(--copper); outline-offset: 4px; }
-  @media (max-width: 820px) {
-    .f-entry-item.f-entry-featured { grid-template-columns: 1fr; gap: 20px; padding: 18px; }
-  }
-
-  .f-entry-meta-side {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-top: 3px;
-  }
-  .f-entry-date {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    color: var(--muted);
-  }
-  .f-entry-tag {
-    font-family: var(--font-sans);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-extrabold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    color: var(--copper);
-  }
-
-  .f-entry-main {
-    display: flex;
-    flex-direction: column;
-  }
-  .f-entry-title {
-    margin: 0 0 8px;
-    font-family: var(--font-serif);
-    font-size: 1.28rem;
-    font-weight: var(--fw-bold);
-    line-height: var(--lh-snug);
-    letter-spacing: var(--tracking-tight);
-    color: var(--navy);
-    transition: color 0.15s ease;
-  }
-  .f-entry-question {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.02rem;
-    line-height: 1.55;
-    color: var(--ink-secondary);
-    margin: 0 0 10px;
-  }
-  .f-entry-desc {
-    font-family: var(--font-sans);
-    font-size: 0.92rem;
-    line-height: 1.6;
-    color: var(--ink-secondary);
-    margin: 0 0 12px;
-  }
-  .f-entry-foot {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    color: var(--muted);
-    font-weight: var(--fw-medium);
-  }
-  .f-entry-foot span { display: inline-flex; align-items: center; gap: 4px; }
-
-  .f-entry-schematic {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-    margin: 2px 0 12px;
-    font-family: var(--font-sans);
-    font-size: 0.78rem;
-  }
-  .f-entry-step {
-    background: var(--paper-card); border: 1px solid var(--line); color: var(--ink);
-    border: 1px solid var(--line);
-    padding: 3px 9px;
-    border-radius: 4px;
-    color: var(--ink);
-    font-weight: var(--fw-medium);
-    letter-spacing: -0.01em;
-  }
-  .f-entry-step.alert {
-    background: rgba(239, 68, 68, 0.12);
-    color: #ef4444;
-    border-color: rgba(239, 68, 68, 0.35);
-  }
-  .f-entry-step.success {
-    background: rgba(16, 185, 129, 0.12);
-    color: #10b981;
-    border-color: rgba(16, 185, 129, 0.35);
-  }
-  .f-entry-arrow {
-    color: var(--muted);
-    font-size: 0.8rem;
-  }
-
-  /* ========================================================================
-     7. RESEARCH LENSES CARDS
-     ======================================================================== */
-  .f-lenses-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 18px;
-  }
-  .f-lens-card {
-    padding: 16px 18px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 8px;
-    position: relative;
-    border-left: 4px solid transparent;
-    transition: all 0.18s ease;
-    box-shadow: 0 2px 6px rgba(20, 28, 34, 0.02);
-  }
-  .f-lens-card.ops { border-left-color: #15803d; background: var(--paper-card); }
-  .f-lens-card.evidence { border-left-color: var(--copper); background: var(--paper-card); }
-  .f-lens-card.essays { border-left-color: #0284c7; background: var(--paper-card); }
-  .f-lens-card.concepts { border-left-color: #b45309; background: var(--paper-card); }
-  .f-lens-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(20, 28, 34, 0.06);
-  }
-  .f-lens-top-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  .f-lens-badge {
-    font-family: var(--font-sans);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-extrabold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-  .f-lens-card.ops .f-lens-badge { background: #dcfce7; color: #166534; }
-  .f-lens-card.evidence .f-lens-badge { background: #ffedd5; color: #9a3412; }
-  .f-lens-card.essays .f-lens-badge { background: #e0f2fe; color: #075985; }
-  .f-lens-card.concepts .f-lens-badge { background: #fef9c3; color: #854d0e; }
-
-  .f-lens-count {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    color: var(--muted);
-  }
-  .f-lens-card h3 {
-    margin: 2px 0 0;
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    font-weight: var(--fw-bold);
-    color: var(--navy);
-  }
-  .f-lens-card p {
-    margin: 0;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    line-height: var(--lh-normal);
-    color: var(--ink-secondary);
-  }
-
-  /* ========================================================================
-     8. METHOD SECTION
-     ======================================================================== */
-  .f-method-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-  }
-  .f-work-quote-bar {
-    background: var(--paper-card);
-    border-bottom: 1px solid var(--line);
-    padding: 20px 0;
-  }
-  .f-work-quote-bar blockquote {
-    margin: 0;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: var(--text-md);
-    font-weight: var(--fw-medium);
-    line-height: var(--lh-relaxed);
-    color: var(--navy);
-    border-left: 3px solid var(--copper);
-    padding-left: 18px;
-  }
-  .f-work-meta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    margin-top: 12px;
-    font-size: var(--text-xs);
-    color: var(--muted);
-    font-family: var(--font-mono);
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-  }
-
-  /* ========================================================================
-     10. WORK LIBRARY 3-TIER TOOLBAR
-     ======================================================================== */
-  .f-work-toolbar {
-    padding: 16px 0 24px;
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 36px;
-  }
-  .f-search-wrap {
-    position: relative;
-    width: 100%;
-    max-width: 540px;
-  }
-  .f-search-input {
-    width: 100%;
-    padding: 10px 40px 10px 14px;
-    border: 1px solid var(--line);
-    background: var(--paper-card);
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    color: var(--ink);
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(20, 28, 34, 0.03);
-    transition: all 0.15s ease;
-  }
-  .f-search-input:focus {
-    outline: none;
-    border-color: var(--copper);
-    box-shadow: 0 0 0 3px rgba(194, 94, 46, 0.12);
-  }
-  .f-kbd-hint {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-semibold);
-    color: var(--muted);
-    background: rgba(20, 28, 34, 0.06);
-    padding: 2px 6px;
-    border-radius: 3px;
-    border: 1px solid var(--line);
-    pointer-events: none;
-  }
-  .f-search-input:focus + .f-kbd-hint, .f-search-input:not(:placeholder-shown) + .f-kbd-hint { display: none; }
-  .f-search-clear {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-    color: var(--muted);
-    font-size: 1.1rem;
-    padding: 0 4px;
-  }
-
-  .f-toolbar-tabs {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .f-search-input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
-  .f-work-empty {
-    margin: 24px 0 60px;
-    padding: 32px 24px;
-    border: 1px dashed var(--line);
-    border-radius: 12px;
-    background: var(--paper-card);
-    text-align: center;
-  }
-  .f-work-empty p { margin: 0 0 18px; color: var(--muted); }
-  .f-work-empty[hidden] { display: none; }
-  .f-mode-tab {
-    border: 0;
-    background: transparent;
-    padding: 8px 0 10px;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--muted);
-    cursor: pointer;
-    position: relative;
-    white-space: nowrap;
-    transition: color 0.15s ease;
-  }
-  .f-mode-tab:hover { color: var(--navy); }
-  .f-mode-tab[aria-pressed=true] { color: var(--copper); }
-  .f-mode-tab[aria-pressed=true]:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--copper);
-  }
-  .f-tab-count {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    margin-left: 4px;
-    opacity: 0.8;
-  }
-
-  .f-toolbar-subrow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px 20px;
-    flex-wrap: wrap;
-    padding-top: 2px;
-    padding-bottom: 6px;
-  }
-  .f-topic-chips {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-  }
-  .f-topic-chip {
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    padding: 3px 9px;
-    border-radius: 4px;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .f-topic-chip:hover {
-    border-color: var(--navy);
-    color: var(--navy);
-  }
-  .f-topic-chip.active {
-    background: var(--copper);
-    border-color: var(--copper);
-    color: #ffffff !important;
-    font-weight: var(--fw-bold);
-    box-shadow: 0 1px 3px rgba(194, 94, 62, 0.25);
-  }
-
-  .f-toolbar-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .f-toolbar-count {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    color: var(--muted);
-  }
-  .f-view-switch {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    color: var(--muted);
-    white-space: nowrap;
-  }
-  .f-view-toggle-btn {
-    border: 1px solid var(--line);
-    background: var(--paper-card);
-    padding: 4px 9px;
-    border-radius: 4px;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .f-view-toggle-btn:hover {
-    color: var(--navy);
-    border-color: var(--navy);
-  }
-  .f-view-toggle-btn.active {
-    background: var(--copper);
-    border-color: var(--copper);
-    color: #ffffff;
-  }
-
-  /* ========================================================================
-     11. WORK CATALOG DOSSIER CARDS
-     ======================================================================== */
-  .f-catalog-section {
-    padding: 36px 0 16px;
-  }
-  .f-catalog-section:not(:last-child) {
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 36px;
-  }
-  .f-catalog-section[hidden] { display: none; }
-
-  .f-section-head {
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--navy);
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .f-section-title-wrap h2 {
-    margin: 0 0 4px;
-    font-family: var(--font-serif);
-    font-size: clamp(1.4rem, 2.2vw, 1.7rem);
-    font-weight: var(--fw-semibold);
-    color: var(--navy);
-    letter-spacing: -0.015em;
-  }
-  .f-section-title-wrap p {
-    margin: 0;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    color: var(--ink-secondary);
-    line-height: var(--lh-normal);
-  }
-  .f-section-count-badge {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    color: var(--copper);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .f-title-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 14px;
-  }
-  .f-work-item {
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 22px 24px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-  }
-  .f-work-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-    border-color: rgba(194, 94, 62, 0.35);
-  }
-  .f-work-item-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .f-work-item-badges {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .f-maturity-badge {
-    display: inline-block;
-    font-family: var(--font-sans);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-semibold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    padding: 3px 8px;
-    border-radius: 4px;
-  }
-  .f-maturity-badge.prototype  { background: #fef3c7; color: #92400e; }
-  .f-maturity-badge.working    { background: #d1fae5; color: #065f46; }
-  .f-maturity-badge.developed  { background: #dbeafe; color: #1e40af; }
-  .f-maturity-badge.concept    { background: #ede9fe; color: #5b21b6; }
-  .f-maturity-badge.evidence   { background: #ffedd5; color: #9a3412; }
-  .f-maturity-badge.default    { background: #f1f5f9; color: #475569; }
-
-  
-  .f-card-live-pill {
-    background: rgba(16, 185, 129, 0.12) !important;
-    color: #10b981 !important;
-    border: 1px solid rgba(16, 185, 129, 0.35) !important;
-    font-weight: var(--fw-semibold);
-  }
-  :root[data-theme="dark"] .f-card-live-pill {
-    background: rgba(16, 185, 129, 0.2) !important;
-    color: #34d399 !important;
-    border-color: rgba(16, 185, 129, 0.4) !important;
-  }
-
-  .f-card-asset-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-family: var(--font-sans);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-semibold);
-    color: var(--navy);
-    background: var(--paper);
-    border: 1px solid var(--line);
-    padding: 2px 7px;
-    border-radius: 4px;
-  }
-  .f-work-item-type {
-    font-family: var(--font-sans);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-semibold);
-    color: var(--navy);
-    background: var(--paper);
-    border: 1px solid var(--line);
-    padding: 3px 10px;
-    border-radius: 4px;
-    letter-spacing: var(--tracking-wide);
-    white-space: nowrap;
-  }
-  .f-work-item h3 {
-    margin: 0;
-    font-family: var(--font-serif);
-    font-size: clamp(1.22rem, 1.8vw, 1.4rem);
-    font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.015em;
-    color: var(--navy);
-    text-wrap: auto;
-    transition: color 0.15s ease;
-  }
-  .f-work-item h3 a {
-    text-decoration: none;
-    color: inherit;
-  }
-  .f-work-item:hover h3 {
-    color: var(--copper);
-  }
-  .f-item-question {
-    margin: 0;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.98rem;
-    line-height: 1.6;
-    color: var(--ink-secondary);
-  }
-  .f-paper-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 8px;
-    align-items: center;
-    margin-top: 2px;
-  }
-  .f-keywords-label {
-    font-weight: var(--fw-bold);
-    color: var(--navy);
-    font-family: var(--font-sans);
-    font-size: var(--text-2xs);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-  }
-  .f-tag-click {
-    font-size: var(--text-xs);
-    color: var(--muted);
-    font-family: var(--font-sans);
-    cursor: pointer;
-    transition: color 0.15s ease;
-  }
-  .f-tag-click:hover {
-    color: var(--copper);
-    text-decoration: underline;
-  }
-  .f-work-item[hidden] { display: none; }
-
-  /* Compact Ledger Table View */
-  .f-ledger-table-wrap {
-    display: none;
-    margin: 20px 0 60px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--paper-card);
-    overflow-x: auto;
-    box-shadow: 0 2px 8px rgba(20, 28, 34, 0.03);
-  }
-  .f-ledger-table-wrap.is-active {
-    display: block;
-  }
-  .f-ledger-table {
-    width: 100%;
-    min-width: 760px;
-    border-collapse: collapse;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    line-height: var(--lh-normal);
-  }
-  .f-ledger-table th {
-    background: var(--paper-tint);
-    padding: 10px 14px;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    color: var(--navy);
-    border-bottom: 1px solid var(--line);
-    text-align: left;
-  }
-  .f-ledger-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--line);
-    vertical-align: middle;
-  }
-  .f-ledger-table tr:hover td {
-    background: var(--paper-tint);
-  }
-  .f-ledger-table tr[hidden] {
-    display: none;
-  }
-  .f-ledger-title {
-    font-family: var(--font-serif);
-    font-size: var(--text-base);
-    font-weight: var(--fw-bold);
-    color: var(--navy);
-    text-decoration: none;
-  }
-  .f-ledger-title:hover {
-    color: var(--copper);
-    text-decoration: underline;
-  }
-  .f-ledger-mode {
-    font-family: var(--font-sans);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-semibold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    padding: 2px 7px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-  .f-ledger-mode.ops { background: #dcfce7; color: #166534; }
-  .f-ledger-mode.evidence { background: #ffedd5; color: #9a3412; }
-  .f-ledger-mode.essays { background: #e0f2fe; color: #075985; }
-  .f-ledger-mode.concepts { background: #fef9c3; color: #854d0e; }
-
-  /* ========================================================================
-     12. CASE STUDY MONOGRAPH HERO & READING LAYOUT
-     ======================================================================== */
-  .f-case-hero {
-    position: relative;
-    isolation: isolate;
-    padding: 48px 0 44px;
-    border-bottom: 1px solid var(--line);
-  }
-  .f-case-hero:after {
-    content: "";
-    position: absolute;
-    z-index: -2;
-    inset: 0;
-    background: var(--hero-bg);
-  }
-  .f-case-hero h1 {
-    font-family: var(--font-serif);
-    color: var(--hero-text);
-    margin: 0;
-    font-weight: var(--fw-semibold);
-    font-size: var(--text-4xl);
-    line-height: var(--lh-tight);
-    letter-spacing: var(--tracking-tight);
-  }
-  .f-case-hero .f-crumb {
-    color: #dce5e4;
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    font-family: var(--font-sans);
-  }
-  .f-case-hero .f-crumb a { color: #fff1e6; text-decoration: none; }
-  .f-case-hero .f-crumb span { margin: 0 6px; opacity: 0.6; }
-  .f-case-dek {
-    max-width: 840px;
-    margin: 18px 0 0;
-    color: #e4ebea;
-    font-size: var(--text-md);
-    line-height: var(--lh-relaxed);
-    font-family: var(--font-sans);
-  }
-  .f-case-hero-stats {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 18px;
-    flex-wrap: wrap;
-  }
-  .f-hero-stat {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-medium);
-    color: #f1f5f9;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-  }
-
-  .f-case-meta {
-    background: var(--paper-card);
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 3px 10px rgba(17, 34, 44, 0.04);
-  }
-  .f-case-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .f-meta-cell {
-    padding: 16px 20px;
-    border-right: 1px solid var(--line);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .f-meta-cell:last-child { border-right: 0; }
-  .f-meta-cell b {
-    display: block;
-    margin-bottom: 4px;
-    color: var(--copper);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-extrabold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    font-family: var(--font-sans);
-  }
-  .f-meta-cell span {
-    font-size: var(--text-sm);
-    line-height: var(--lh-snug);
-    color: var(--navy);
-    font-weight: var(--fw-semibold);
-    font-family: var(--font-sans);
-  }
-
-  .f-case-reading {
-    display: grid;
-    grid-template-columns: 240px minmax(0, 1fr);
-    gap: 64px;
-    padding: 48px 0 80px;
-    align-items: start;
-  }
-  .f-case-rail {
-    position: sticky;
-    top: 84px;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-    padding-right: 12px;
-  }
-  .f-rail-title {
-    font-size: var(--text-xs);
-    font-weight: var(--fw-extrabold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-    font-family: var(--font-sans);
-  }
-  .f-toc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border-left: 2px solid var(--line);
-  }
-  .f-toc-item { padding-left: 12px; }
-  .f-toc-link {
-    display: block;
-    color: var(--muted);
-    font-size: var(--text-sm);
-    line-height: var(--lh-normal);
-    font-weight: var(--fw-medium);
-    font-family: var(--font-sans);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-  .f-toc-link:hover, .f-toc-link.is-active {
-    color: var(--copper);
-    font-weight: var(--fw-bold);
-  }
-  .f-toc-item.level-3 {
-    padding-left: 20px;
-    font-size: var(--text-xs);
-  }
-  .f-toc-item.level-1 .f-toc-link { font-weight: var(--fw-bold); color: var(--navy); }
-
-  .f-rail-actions {
-    border-top: 1px solid var(--line);
-    padding-top: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .f-rail-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 9px 12px;
-    border: 1px solid var(--line);
-    background: var(--paper-card);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    text-decoration: none;
-    color: var(--ink);
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    font-family: var(--font-sans);
-    border-radius: 4px;
-    transition: all 0.15s ease;
-  }
-  .f-rail-btn:hover {
-    background: var(--navy);
-    color: #fff;
-    border-color: var(--navy);
-  }
-
-  /* ========================================================================
-     13. MONOGRAPH ARTICLE LONG-FORM TYPOGRAPHY (.f-prose)
-     ======================================================================== */
-  .f-prose { min-width: 0; color: var(--ink); }
-  .f-prose p {
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    line-height: var(--lh-prose);
-    margin: 0 0 20px;
-  }
-  .f-prose h2 {
-    margin: 48px 0 16px;
-    font-family: var(--font-serif);
-    font-size: var(--text-3xl);
-    font-weight: var(--fw-bold);
-    line-height: var(--lh-tight);
-    letter-spacing: var(--tracking-tight);
-    color: var(--navy);
-    position: relative;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--line-subtle);
-  }
-  .f-prose h2:first-child { margin-top: 0; }
-  .f-prose h3 {
-    margin: 36px 0 12px;
-    font-family: var(--font-serif);
-    font-size: var(--text-2xl);
-    font-weight: var(--fw-bold);
-    line-height: var(--lh-snug);
-    color: var(--navy);
-    position: relative;
-  }
-  .f-prose h4 {
-    margin: 24px 0 10px;
-    font-family: var(--font-sans);
-    font-size: var(--text-md);
-    font-weight: var(--fw-bold);
-    color: var(--navy-soft);
-    letter-spacing: var(--tracking-tight);
-  }
-  .f-prose strong { font-weight: var(--fw-bold); color: var(--navy); }
-  .f-prose em { font-style: italic; color: var(--ink-secondary); }
-
-  .f-anchor {
-    position: absolute;
-    left: -22px;
-    color: var(--line);
-    text-decoration: none;
-    font-weight: 400;
-    opacity: 0;
-    transition: opacity 0.15s ease;
-    font-family: var(--font-sans);
-  }
-  .f-prose h2:hover .f-anchor, .f-prose h3:hover .f-anchor { opacity: 1; color: var(--copper); }
-
-  .f-inline-link {
-    color: var(--copper);
-    font-weight: var(--fw-bold);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    transition: color 0.15s ease;
-  }
-  .f-inline-link:hover { color: var(--copper-dark); }
-
-  .f-code {
-    overflow-wrap: anywhere;
-    font-family: var(--font-mono);
-    font-size: 0.88em;
-    background: rgba(17, 34, 44, 0.06);
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 1px solid rgba(17, 34, 44, 0.1);
-    color: var(--navy);
-  }
-  .f-code-block {
-    margin: 24px 0;
-    padding: 18px 22px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--navy);
-    border-radius: 6px;
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    line-height: var(--lh-relaxed);
-    color: var(--navy);
-    overflow-x: auto;
-    box-shadow: 0 3px 10px rgba(17, 34, 44, 0.04);
-  }
-  .f-code-block code { font-family: inherit; background: transparent; padding: 0; border: 0; color: inherit; }
-
-  .f-list, .f-numbered-list { margin: 16px 0 24px; padding-left: 24px; }
-  .f-list li, .f-numbered-list li {
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    margin-bottom: 10px;
-    line-height: var(--lh-prose);
-    color: var(--ink);
-  }
-  .f-list li::marker { color: var(--copper); }
-  .f-numbered-list li::marker { font-weight: var(--fw-bold); color: var(--copper); font-family: var(--font-sans); }
-
-  .f-prose blockquote {
-    margin: 28px 0;
-    padding: 18px 24px;
-    border-left: 4px solid var(--copper);
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-left-width: 4px;
-    border-left-color: var(--copper);
-    border-radius: 6px;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: var(--text-lg);
-    line-height: var(--lh-relaxed);
-    color: var(--ink);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-  }
-  .f-prose hr.f-hr {
-    margin: 44px 0;
-    border: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--line), transparent);
-  }
-
-  .f-callout {
-    margin: 28px 0;
-    padding: 20px 24px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--copper);
-    border-radius: 6px;
-    font-family: var(--font-sans);
-    font-size: var(--text-md);
-    line-height: var(--lh-relaxed);
-    box-shadow: 0 4px 14px rgba(17, 34, 44, 0.04);
-    color: var(--ink);
-  }
-
-  .f-table-wrap {
-    width: 100%;
-    overflow-x: auto;
-    margin: 32px 0;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--paper-card);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  }
-  .f-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    line-height: var(--lh-normal);
-  }
-  .f-table th {
-    background: var(--paper-tint);
-    color: var(--navy); border: 1px solid var(--line);
-    text-align: left;
-    padding: 12px 16px;
-    font-family: var(--font-sans);
-    font-weight: var(--fw-bold);
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    border: 1px solid var(--line);
-  }
-  .f-table td { padding: 12px 16px; border: 1px solid var(--line); vertical-align: top; }
-  .f-table tr:nth-child(even) td { background: var(--paper-tint); }
-
-  .f-details {
-    margin: 20px 0;
-    border: 1px solid var(--line);
-    background: var(--paper-card);
-    padding: 14px 18px;
-    border-radius: 6px;
-  }
-  .f-details summary { font-family: var(--font-sans); font-weight: var(--fw-bold); cursor: pointer; color: var(--navy); }
-  .f-details-content { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line-subtle); font-size: var(--text-sm); }
-
-  /* ========================================================================
-     14. RESEARCH ARTIFACT BAR & DIAGRAMS
-     ======================================================================== */
-  .f-asset-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
-    margin: 20px 0 32px;
-    padding: 14px 18px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--copper);
-    border-radius: 6px;
-    box-shadow: 0 4px 14px rgba(17, 34, 44, 0.05);
-  }
-  .f-asset-btn-group {
-    display: inline-flex;
-    align-items: stretch;
-    gap: 0;
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid var(--copper);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-    max-width: 100%;
-  }
-  .f-asset-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 18px;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.18s ease;
-    border: 0;
-    background: var(--copper);
-    color: #ffffff !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 480px;
-    line-height: var(--lh-snug);
-  }
-  .f-asset-btn:hover { background: var(--copper-dark); color: #ffffff !important; }
-  .f-asset-btn.primary { background: var(--copper); color: #ffffff !important; }
-  .f-asset-btn.primary:hover { background: var(--copper-dark); color: #ffffff !important; }
-  .f-asset-btn.accent { background: var(--copper); color: #ffffff !important; }
-  .f-asset-btn.accent:hover { background: var(--copper-dark); color: #ffffff !important; }
-  .f-asset-ext-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 14px;
-    background: rgba(0, 0, 0, 0.2);
-    border-left: 1px solid rgba(255,255,255,0.25);
-    color: #ffffff !important;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    text-decoration: none;
-    transition: all 0.15s ease;
-    flex-shrink: 0;
-  }
-  .f-asset-ext-btn:hover { background: rgba(0, 0, 0, 0.35); color: #ffffff !important; }
-
-  .f-diagram-card {
-    margin: 32px 0;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(17, 34, 44, 0.06);
-  }
-  .f-diagram-header {
-    padding: 12px 18px;
-    background: var(--paper-tint);
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    color: var(--navy);
-  }
-  .f-diagram-title { display: flex; align-items: center; gap: 6px; flex: 1 1 180px; min-width: 0; overflow-wrap: anywhere; }
-  .f-diagram-header-actions { display: flex; align-items: center; gap: 8px; }
-  .f-diagram-open-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 12px;
-    border-radius: 4px;
-    background: var(--copper);
-    color: #ffffff !important;
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-bold);
-    text-decoration: none;
-    cursor: pointer;
-    border: 0;
-    transition: background 0.15s ease;
-    font-family: var(--font-sans);
-  }
-  .f-diagram-open-btn:hover { background: var(--copper); }
-  .f-diagram-ext-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 24px;
-    border-radius: 4px;
-    background: var(--paper-card);
-    color: var(--ink);
-    border: 1px solid var(--line);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    text-decoration: none;
-    transition: background 0.15s ease;
-    font-family: var(--font-sans);
-  }
-  .f-diagram-ext-btn:hover { background: var(--copper); color: #ffffff; }
-  .f-diagram-body {
-    padding: 12px;
-    text-align: center;
-    background: var(--paper);
-    position: relative;
-    cursor: zoom-in;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.18s ease;
-  }
-  .f-diagram-body:hover { background: var(--paper-tint); }
-  .f-diagram-body img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    display: block;
-    margin: 0 auto;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    transition: transform 0.2s ease;
-  }
-  .f-diagram-body:hover img { transform: scale(1.008); }
-  .f-diagram-zoom-hint {
-    margin-top: 8px;
-    font-family: var(--font-sans);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-semibold);
-    color: var(--muted);
-    letter-spacing: var(--tracking-wide);
-  }
-  .f-diagram-caption {
-    padding: 10px 18px;
-    font-size: var(--text-xs);
-    color: var(--muted);
-    font-style: italic;
-    background: var(--paper-card);
-    border-top: 1px solid var(--line-subtle);
-    text-align: center;
-    font-family: var(--font-sans);
-  }
-
-  /* ========================================================================
-     15. BACK TO TOP, TOAST & MOBILE TOC
-     ======================================================================== */
-  .f-back-top {
-    position: fixed;
-    right: 24px;
-    bottom: 24px;
-    z-index: 40;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--copper);
-    color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 6px 20px rgba(17, 34, 44, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: var(--fw-bold);
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(12px);
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .f-back-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
-  .f-back-top:hover {
-    background: var(--copper);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(198, 99, 54, 0.35);
-  }
-
-  .f-toast {
-    position: fixed;
-    bottom: 28px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--navy);
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    z-index: 1100;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.2s ease;
-  }
-  .f-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  .f-mobile-toc {
-    display: none;
-    margin-bottom: 28px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--copper);
-    border-radius: 6px;
-    padding: 12px 16px;
-  }
-  .f-mobile-toc summary {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-extrabold);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--navy);
-    cursor: pointer;
-  }
-  .f-mobile-toc-list {
-    list-style: none;
-    padding: 12px 0 0;
-    margin: 12px 0 0;
-    border-top: 1px solid var(--line-subtle);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .f-mobile-toc-link {
-    font-size: var(--text-sm);
-    color: var(--muted);
-    text-decoration: none;
-    font-family: var(--font-sans);
-  }
-  .f-mobile-toc-link:hover {
-    color: var(--copper);
-    font-weight: var(--fw-bold);
-  }
-
-  /* ========================================================================
-     16. ASSET MODAL VIEWER
-     ======================================================================== */
-  dialog.f-asset-modal {
-    width: min(92vw, 1120px);
-    height: min(86vh, 820px);
-    padding: 0;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: var(--paper-card);
-    color: var(--ink);
-    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5);
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    position: fixed;
-    inset: 0;
-    margin: auto;
-    z-index: 1000;
-  }
-  dialog.f-asset-modal[open] {
-    display: flex;
-    animation: f-modal-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  @keyframes f-modal-in {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  dialog.f-asset-modal::backdrop {
-    background: rgba(10, 18, 26, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  dialog.f-asset-modal.is-fullscreen {
-    width: 100vw;
-    max-width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
-    border: 0;
-  }
-  dialog.f-asset-modal.is-image-mode { background: #05090f; }
-  dialog.f-asset-modal.is-image-mode .f-modal-topbar { display: none; }
-  .f-modal-topbar {
-    height: 52px;
-    min-height: 52px;
-    padding: 0 14px 0 18px;
-    background: var(--paper-tint);
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-shrink: 0;
-  }
-  .f-modal-title-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-    flex: 1;
-    overflow: hidden;
-  }
-  .f-modal-badge {
-    padding: 3px 8px;
-    border-radius: 4px;
-    background: rgba(194, 94, 46, 0.15);
-    color: var(--copper);
-    border: 1px solid rgba(194, 94, 46, 0.3);
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    flex-shrink: 0;
-  }
-  :root[data-theme="dark"] .f-modal-badge {
-    background: rgba(224, 122, 72, 0.25);
-    color: #e07a48;
-    border-color: rgba(224, 122, 72, 0.45);
-  }
-  .f-modal-title {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    color: var(--navy);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .f-modal-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .f-modal-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    color: var(--ink);
-    font-family: var(--font-sans);
-    font-size: 14px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.15s ease;
-  }
-  .f-modal-btn:hover {
-    background: var(--paper);
-    color: var(--copper);
-    border-color: var(--copper);
-  }
-  .f-modal-btn.close {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-    border-color: rgba(239, 68, 68, 0.25);
-  }
-  .f-modal-btn.close:hover {
-    background: #ef4444;
-    color: #ffffff;
-    border-color: #ef4444;
-  }
-  .f-modal-img-close {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.65);
-    border: 1px solid rgba(255,255,255,0.3);
-    color: #ffffff;
-    font-size: 16px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    transition: background 0.15s ease;
-    backdrop-filter: blur(4px);
-  }
-  .f-modal-img-close:hover { background: rgba(220, 38, 38, 0.85); }
-  dialog.f-asset-modal.is-image-mode .f-modal-img-close { display: flex; }
-  .f-modal-content {
-    flex: 1;
-    position: relative;
-    background: var(--paper);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .f-modal-frame { width: 100%; height: 100%; border: 0; background: var(--paper-card); }
-  .f-modal-img { max-width: 100%; max-height: 100%; object-fit: contain; cursor: zoom-in; }
-  .f-modal-spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    color: var(--muted);
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    pointer-events: none;
-  }
-  .f-spin-circle {
-    width: 28px;
-    height: 28px;
-    border: 3px solid var(--line);
-    border-top-color: var(--copper);
-    border-radius: 50%;
-    animation: f-spin 0.8s linear infinite;
-  }
-  @keyframes f-spin { to { transform: rotate(360deg); } }
-
-  /* ========================================================================
-     17. HOME HERO & EDITORIAL PRESENTATION
-     ======================================================================== */
-  .f-home-hero {
-    padding: 44px 0 34px;
-    background: radial-gradient(circle at 80% 20%, rgba(194, 94, 62, 0.04) 0%, transparent 50%),
-                var(--paper);
-    border-bottom: 1px solid var(--line);
-  }
-  .f-home-hero h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(2.3rem, 4.2vw, 3.6rem);
-    font-weight: var(--fw-medium);
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-    color: var(--navy);
-    margin: 0 0 24px;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .f-about-hero-artistic {
-    padding: 72px 0 52px;
-    background: radial-gradient(circle at 80% 20%, rgba(194, 94, 62, 0.04) 0%, transparent 50%),
-                var(--paper);
-    border-bottom: 1px solid var(--line);
-  }
-  .f-about-status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--ink-secondary);
-    margin-bottom: 22px;
-  }
-  .f-status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
-    display: inline-block;
-  }
-  .f-about-hero-artistic h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(2.2rem, 3.8vw, 3.4rem);
-    font-weight: var(--fw-medium);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    color: var(--navy);
-    margin: 0 0 18px;
-    max-width: 920px;
-  }
-  .f-about-hero-artistic h1 em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--copper);
-    font-weight: var(--fw-regular);
-  }
-  .f-about-hero-dek {
-    font-family: var(--font-sans);
-    font-size: var(--text-lg);
-    line-height: var(--lh-relaxed);
-    color: var(--ink-secondary);
-    max-width: 800px;
-    margin: 0 0 24px;
-  }
-  .f-about-hero-dek strong {
-    color: var(--ink);
-    font-weight: var(--fw-semibold);
-  }
-  .f-about-coords-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 12px;
-    padding: 10px 16px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--muted);
-    max-width: fit-content;
-  }
-  .f-coord-tag strong {
-    color: var(--navy);
-  }
-  .f-coord-divider {
-    color: var(--line);
-  }
-
-  /* Bento Grid with Soothing Soft Cards */
-  .f-about-bento-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 44px 0 56px;
-  }
-  .f-bento-card {
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    padding: 24px 22px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-  .f-bento-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-    border-color: rgba(194, 94, 62, 0.3);
-  }
-  .f-bento-card-top {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    margin-bottom: 10px;
-  }
-  .f-bento-val {
-    font-family: var(--font-serif);
-    font-size: clamp(1.9rem, 2.6vw, 2.5rem);
-    font-weight: var(--fw-bold);
-    line-height: 1;
-    color: var(--navy);
-    letter-spacing: -0.02em;
-  }
-  .f-bento-unit {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    color: var(--copper);
-    text-transform: uppercase;
-  }
-  .f-bento-card h3 {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    color: var(--ink);
-    margin: 0 0 6px;
-  }
-  .f-bento-card p {
-    margin: 0 0 14px;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    line-height: var(--lh-normal);
-    color: var(--ink-secondary);
-  }
-  .f-bento-tag {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding-top: 10px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    margin-top: auto;
-  }
-
-  /* Artistic Triptych Horizons */
-  .f-about-triptych {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    margin: 48px 0;
-  }
-  .f-horizon-card {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 36px;
-    padding: 32px 36px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-    position: relative;
-    transition: border-color 0.2s ease;
-  }
-  .f-horizon-card:hover {
-    border-color: rgba(14, 27, 46, 0.25);
-  }
-  .f-horizon-aside {
-    border-right: 1px solid var(--line);
-    padding-right: 28px;
-  }
-  .f-horizon-num {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    color: var(--copper);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    display: block;
-  }
-  .f-horizon-aside h3 {
-    font-family: var(--font-serif);
-    font-size: var(--text-2xl);
-    font-weight: var(--fw-semibold);
-    line-height: var(--lh-tight);
-    color: var(--navy);
-    margin: 0 0 10px;
-    letter-spacing: -0.015em;
-  }
-  .f-horizon-sub {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: var(--text-sm);
-    color: var(--ink-secondary);
-    line-height: var(--lh-normal);
-  }
-  .f-horizon-content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .f-horizon-content p {
-    margin: 0;
-    font-family: var(--font-sans);
-    font-size: var(--text-base);
-    line-height: var(--lh-relaxed);
-    color: var(--ink);
-  }
-  .f-horizon-content p strong {
-    color: var(--navy);
-    font-weight: var(--fw-semibold);
-  }
-  .f-horizon-highlights {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 6px;
-  }
-  .f-horizon-chip {
-    padding: 14px 16px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--copper);
-    border-radius: 6px;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    line-height: var(--lh-normal);
-    color: var(--ink-secondary);
-  }
-  .f-horizon-chip strong {
-    display: block;
-    color: var(--navy);
-    margin-bottom: 4px;
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-  }
-
-  /* Manifesto / Philosophy Quote Callout */
-  .f-about-manifesto {
-    padding: 36px 40px;
-    background: var(--paper-tint);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--copper);
-    border-radius: 8px;
-    margin: 56px 0;
-    position: relative;
-  }
-  .f-manifesto-kicker {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--copper);
-    margin-bottom: 10px;
-    display: block;
-    font-weight: var(--fw-semibold);
-  }
-  .f-about-manifesto blockquote {
-    font-family: var(--font-serif);
-    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
-    font-style: italic;
-    line-height: 1.5;
-    color: var(--navy);
-    margin: 0 0 14px;
-    padding: 0;
-    border: 0;
-  }
-  .f-manifesto-author {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    color: var(--ink-secondary);
-    display: block;
-  }
-
-  /* Capabilities & Tooling Ledger */
-  .f-about-toolkit-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 40px 0 56px;
-  }
-  .f-toolkit-col {
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-top: 3px solid var(--copper);
-    padding: 22px 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-  }
-  .f-toolkit-col h4 {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    color: var(--navy);
-    margin: 0 0 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--line);
-  }
-  .f-toolkit-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-  }
-  .f-toolkit-list li {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    line-height: var(--lh-normal);
-    color: var(--ink-secondary);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .f-toolkit-list li::before {
-    content: "▫";
-    color: var(--copper);
-    font-size: 0.85rem;
-    line-height: 1;
-  }
-
-  /* Artistic Actions Dock */
-  .f-about-cta-dock {
-    padding: 32px 36px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin: 48px 0 72px;
-  }
-  .f-cta-dock-text h3 {
-    font-family: var(--font-serif);
-    font-size: var(--text-2xl);
-    font-weight: var(--fw-semibold);
-    color: var(--navy);
-    margin: 0 0 4px;
-    letter-spacing: -0.015em;
-  }
-  .f-cta-dock-text p {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    color: var(--ink-secondary);
-    margin: 0;
-  }
-  .f-cta-dock-btns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .f-about-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 18px;
-    border: 1px solid var(--navy);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    font-family: var(--font-sans);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.15s ease;
-  }
-  .f-about-btn.primary {
-    background: var(--copper);
-    color: #ffffff !important;
-    border-color: var(--copper);
-  }
-  .f-about-btn.primary:hover {
-    background: var(--copper-dark);
-    border-color: var(--copper-dark);
-    color: #ffffff !important;
-  }
-  .f-about-btn.secondary {
-    background: var(--paper-card);
-    color: var(--ink);
-    border-color: var(--line);
-  }
-  .f-about-btn.secondary:hover {
-    background: var(--paper-tint);
-    border-color: var(--copper);
-    color: var(--copper);
-  }
-  :root[data-theme="dark"] .f-about-btn.primary {
-    background: var(--copper) !important;
-    color: #ffffff !important;
-    border-color: var(--copper) !important;
-  }
-  :root[data-theme="dark"] .f-about-btn.secondary {
-    background: var(--paper-card);
-    color: var(--ink);
-    border-color: var(--line);
-  }
-
-  @media (max-width: 900px) {
-    .f-about-bento-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-    .f-horizon-card {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    .f-horizon-aside {
-      border-right: none;
-      border-bottom: 1px solid var(--line);
-      padding-right: 0;
-      padding-bottom: 16px;
-    }
-    .f-about-toolkit-grid {
-      grid-template-columns: 1fr;
-    }
-    .f-horizon-highlights {
-      grid-template-columns: 1fr;
-    }
-  }
-  @media (max-width: 600px) {
-    .f-about-bento-grid {
-      grid-template-columns: 1fr;
-    }
-    .f-about-manifesto {
-      padding: 24px 20px;
-    }
-    .f-horizon-card {
-      padding: 20px 18px;
-    }
-    .f-about-cta-dock {
-      padding: 24px 20px;
-      flex-direction: column;
-      align-items: stretch;
-    }
-  }
-
-  /* ========================================================================
-     18. CAT-IN-TAB COMPANION
-     ======================================================================== */
-  .f-cat-in-tab-dock {
-    position: fixed;
-    right: 24px;
-    bottom: 18px;
-    z-index: 999;
-    user-select: none;
-    cursor: pointer;
-    display: flex;
-    align-items: flex-end;
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), right 0.35s ease, left 0.35s ease;
-  }
-  .f-cat-in-tab-dock:hover {
-    transform: scale(1.12) translateY(-3px);
-  }
-  .f-cat-in-tab-dock.petted {
-    animation: f-cat-jump 0.35s ease;
-  }
-  @keyframes f-cat-jump {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-12px) scale(1.2); }
-  }
-
-  .f-tab-cat-svg {
-    width: 44px;
-    height: 44px;
-    display: block;
-    image-rendering: pixelated;
-    shape-rendering: crispEdges;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.18));
-    transition: transform 0.2s ease;
-  }
-  .f-c-tail {
-    transform-origin: 23px 18px;
-    animation: f-c-wag 2s ease-in-out infinite alternate;
-  }
-  @keyframes f-c-wag {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(-14deg); }
-    100% { transform: rotate(10deg); }
-  }
-  .f-c-eye {
-    animation: f-c-blink 3.8s infinite;
-  }
-  @keyframes f-c-blink {
-    0%, 95%, 100% { transform: scaleY(1); }
-    97% { transform: scaleY(0.1); transform-origin: 10px 13px; }
-  }
-
-  .f-tab-cat-bubble {
-    position: absolute;
-    right: 50px;
-    bottom: 14px;
-    background: var(--paper-card);
-    border: 2px solid var(--navy);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    color: var(--navy);
-    white-space: nowrap;
-    box-shadow: 0 4px 14px rgba(17, 34, 44, 0.15);
-    opacity: 0;
-    transform: translateY(6px) scale(0.95);
-    pointer-events: none;
-    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .f-tab-cat-bubble:after {
-    content: "";
-    position: absolute;
-    right: -6px;
-    bottom: 10px;
-    width: 8px;
-    height: 8px;
-    background: var(--paper-card);
-    border-right: 2px solid var(--navy);
-    border-top: 2px solid var(--navy);
-    transform: rotate(45deg);
-  }
-  .f-tab-cat-bubble.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  .f-cat-in-tab-dock.is-left {
-    right: auto;
-    left: 24px;
-  }
-  .f-cat-in-tab-dock.is-left .f-tab-cat-svg {
-    transform: scaleX(-1);
-  }
-  .f-cat-in-tab-dock.is-left .f-tab-cat-bubble {
-    right: auto;
-    left: 50px;
-  }
-  .f-cat-in-tab-dock.is-left .f-tab-cat-bubble:after {
-    right: auto;
-    left: -6px;
-    border-right: 0;
-    border-top: 0;
-    border-left: 2px solid var(--navy);
-    border-bottom: 2px solid var(--navy);
-  }
-
-  @media (max-width: 640px) {
-    .f-cat-in-tab-dock, .f-cat-in-tab-dock.is-left {
-      position: relative;
-      right: auto;
-      left: auto;
-      bottom: auto;
-      width: 44px;
-      margin: 16px 24px 16px auto;
-    }
-    .f-cat-in-tab-dock.is-left { margin: 16px auto 16px 24px; }
-  }
-
-  /* ========================================================================
-     19. FOOTER
-     ======================================================================== */
-  .f-footer {
-    border-top: 1px solid var(--ink);
-    padding: 22px 0 32px;
-    font-size: var(--text-xs);
-    color: var(--muted);
-    letter-spacing: var(--tracking-wide);
-    font-family: var(--font-sans);
-  }
-  .f-footer-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-  }
-  .f-footer-row a { text-decoration: underline; text-underline-offset: 4px; }
-
-  /* ========================================================================
-     20. PRINT STYLES
-     ======================================================================== */
-  
-  /* ========================================================================
-     UNIVERSAL COMMAND PALETTE (CTRL+K / CMD+K)
-     ======================================================================== */
-  .f-nav-cmd-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 10px;
-    border-radius: 6px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    color: var(--muted);
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .f-nav-cmd-btn:hover {
-    border-color: var(--copper);
-    color: var(--ink);
-  }
-  .f-cmd-kbd {
-    padding: 1px 5px;
-    border-radius: 3px;
-    background: var(--paper-tint);
-    border: 1px solid var(--line);
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: var(--fw-bold);
-    color: var(--muted);
-  }
-
-  dialog.f-cmd-dialog {
-    width: min(92vw, 620px);
-    max-height: min(82vh, 560px);
-    padding: 0;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: var(--paper-card);
-    color: var(--ink);
-    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--line);
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    position: fixed;
-    inset: 0;
-    margin: auto;
-    z-index: 1200;
-    font-family: var(--font-sans);
-  }
-  dialog.f-cmd-dialog[open] {
-    display: flex;
-    animation: f-cmd-in 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  @keyframes f-cmd-in {
-    from { opacity: 0; transform: scale(0.97); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  dialog.f-cmd-dialog::backdrop {
-    background: rgba(10, 18, 26, 0.65);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .f-cmd-top {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--line);
-    background: var(--paper-tint);
-  }
-  .f-cmd-icon {
-    font-size: 16px;
-    color: var(--copper);
-  }
-  .f-cmd-input {
-    flex: 1;
-    min-width: 0;
-    border: 0;
-    background: transparent;
-    font-family: var(--font-sans);
-    font-size: var(--text-md);
-    color: var(--ink);
-    outline: none;
-    padding: 0;
-  }
-  .f-cmd-input::placeholder {
-    color: var(--muted);
-    font-size: var(--text-sm);
-  }
-  .f-cmd-esc {
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--muted);
-    background: var(--paper-card);
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 1px solid var(--line);
-    cursor: pointer;
-    min-width: 30px;
-    min-height: 30px;
-  }
-  .f-cmd-results {
-    flex: 1;
-    overflow-y: auto;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    max-height: 400px;
-  }
-  .f-cmd-section-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
-    color: var(--muted);
-    padding: 8px 12px 4px;
-  }
-  .f-cmd-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: var(--ink);
-    cursor: pointer;
-    transition: all 0.12s ease;
-  }
-  .f-cmd-item:hover, .f-cmd-item.is-selected {
-    background: var(--paper-tint);
-    color: var(--copper);
-  }
-  .f-cmd-item-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-  }
-  .f-cmd-item-icon {
-    font-size: 14px;
-    opacity: 0.8;
-  }
-  .f-cmd-item-title {
-    font-size: var(--text-sm);
-    font-weight: var(--fw-semibold);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .f-cmd-item-badge {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    color: var(--muted);
-    flex-shrink: 0;
-  }
-  .f-cmd-empty {
-    padding: 32px 16px;
-    text-align: center;
-    color: var(--muted);
-    font-size: var(--text-sm);
-  }
-  .f-cmd-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 18px;
-    border-top: 1px solid var(--line);
-    background: var(--paper-tint);
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--muted);
-  }
-  .f-cmd-footer span { display: flex; align-items: center; gap: 4px; }
-  .f-cmd-footer kbd {
-    background: var(--paper-card);
-    padding: 1px 4px;
-    border-radius: 3px;
-    border: 1px solid var(--line);
-  }
-
-  /* ========================================================================
-     HOMEPAGE HERO TECH MESH & EYEBROW
-     ======================================================================== */
-  .f-home-hero {
-    position: relative;
-    padding: 60px 0 54px;
-    border-bottom: 1px solid var(--line);
-    background: var(--paper);
-    overflow: hidden;
-  }
-  .f-home-hero:before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(var(--line) 1.2px, transparent 1.2px);
-    background-size: 24px 24px;
-    opacity: 0.55;
-    pointer-events: none;
-  }
-  .f-home-hero .f-wrap {
-    position: relative;
-    z-index: 2;
-  }
-
-  /* ========================================================================
-     LIVE APP SHOWCASE TERMINAL / STUDIO WINDOW FRAME
-     ======================================================================== */
-  .f-window-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 16px;
-    background: var(--paper-tint);
-    border-bottom: 1px solid var(--line);
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--muted);
-  }
-  .f-win-dots {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .f-win-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  .f-win-dot.red { background: #ef4444; }
-  .f-win-dot.yellow { background: #f59e0b; }
-  .f-win-dot.green { background: #10b981; }
-  .f-win-title {
-    font-weight: var(--fw-semibold);
-    color: var(--ink-secondary);
-  }
-  .f-win-badge {
-    padding: 2px 7px;
-    border-radius: 4px;
-    background: rgba(16, 185, 129, 0.15);
-    color: #10b981;
-    font-weight: var(--fw-bold);
-  }
-
-  /* ========================================================================
-     RELATED CASE STUDIES & EVIDENCE CROSS-REFERENCING
-     ======================================================================== */
-  .f-related-section {
-    margin: 44px 0 32px;
-    padding: 28px 0 0;
-    border-top: 2px solid var(--line);
-  }
-  .f-related-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 18px;
-    flex-wrap: wrap;
-  }
-  .f-related-eyebrow {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    color: var(--copper);
-  }
-  .f-related-hint {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    color: var(--muted);
-  }
-  .f-related-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .f-related-card {
-    display: flex;
-    flex-direction: column;
-    padding: 22px 24px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .f-related-card:hover {
-    border-color: var(--copper);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  }
-  .f-related-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    font-family: var(--font-mono);
-    font-size: var(--text-2xs);
-    color: var(--muted);
-  }
-  .f-related-mode {
-    padding: 2px 7px;
-    border-radius: 4px;
-    background: var(--paper-tint);
-    color: var(--copper);
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-  }
-  .f-related-card h4 {
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    font-weight: var(--fw-semibold);
-    color: var(--navy);
-    margin: 0 0 8px;
-    line-height: var(--lh-snug);
-    transition: color 0.15s ease;
-  }
-  .f-related-card:hover h4 { color: var(--copper); }
-  .f-related-question {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: var(--text-sm);
-    line-height: var(--lh-relaxed);
-    color: var(--ink-secondary);
-    margin: 0 0 16px;
-    flex: 1;
-  }
-  .f-related-foot {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-bold);
-    color: var(--copper);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  @media (max-width: 768px) {
-    .f-related-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ========================================================================
-     EXECUTIVE IMPACT DASHBOARD ON ABOUT PAGE
-     ======================================================================== */
-  .f-impact-dashboard {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    padding: 24px 28px;
-    background: var(--paper-card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    margin: 28px 0 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  }
-  .f-impact-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .f-impact-stat b {
-    font-family: var(--font-serif);
-    font-size: var(--text-3xl);
-    font-weight: var(--fw-bold);
-    color: var(--copper);
-    line-height: 1;
-  }
-  .f-impact-stat span {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: var(--fw-semibold);
-    color: var(--ink-secondary);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-  }
-  @media (max-width: 768px) {
-    .f-impact-dashboard { grid-template-columns: 1fr 1fr; gap: 20px; }
-  }
-
-  /* Work card hover arrow micro-interaction */
-  .f-work-item {
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
-  }
-  .f-work-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
-    border-color: var(--copper);
-  }
-  .f-work-item h3 a:after {
-    content: " →";
-    display: inline-block;
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: all 0.2s ease;
-    color: var(--copper);
-  }
-  .f-work-item:hover h3 a:after {
-    opacity: 1;
-    transform: translateX(4px);
-  }
-
-  @media print {
-    body {
-      background: #ffffff !important;
-      color: #111b20 !important;
-      font-size: 11pt !important;
-      line-height: 1.5 !important;
-    }
-    .f-header, .f-footer, .f-theme-switch-group, .f-case-rail, 
-    .f-case-action-bar, .f-back-top, .f-cat-in-tab-dock, 
-    dialog, .f-nav-cmd-btn, .f-skip, #f-progress-bar,
-    .f-case-nav-rail, .f-related-section, .f-toast-msg {
-      display: none !important;
-    }
-    .f-case-reading {
-      display: block !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-    .f-case-hero {
-      border-bottom: 2pt solid #14222c !important;
-      padding: 24pt 0 16pt !important;
-      background: none !important;
-    }
-    .f-case-hero:after { display: none !important; }
-    .f-case-hero h1 {
-      color: #14222c !important;
-      font-size: 24pt !important;
-    }
-    .f-case-dek {
-      color: #334149 !important;
-      font-size: 12pt !important;
-    }
-    .f-case-meta {
-      border: 1pt solid #ccc !important;
-      background: #fbf9f5 !important;
-      margin-bottom: 20pt !important;
-    }
-    .f-meta-cell span { color: #14222c !important; }
-    .f-prose { color: #111b20 !important; }
-    .f-prose h2 {
-      color: #14222c !important;
-      page-break-after: avoid;
-      border-bottom: 1pt solid #ccc !important;
-    }
-    .f-prose blockquote {
-      border-left: 3pt solid #c25e2e !important;
-      background: #fdfaf7 !important;
-      color: #111b20 !important;
-      page-break-inside: avoid;
-    }
-    .f-table-wrap { border: 1pt solid #ccc !important; page-break-inside: avoid; }
-    .f-table th { background: #f0ece1 !important; color: #14222c !important; }
-    .f-anchor { display: none !important; }
-  }
-
-  /* ========================================================================
-     21. RESPONSIVE BREAKPOINTS
-     ======================================================================== */
-  @media (max-width: 920px) {
-    .f-nav { flex-wrap: wrap; padding-block: 12px; }
-    .f-links { flex-wrap: wrap; gap: 12px; }
-    .f-home-grid, .f-routes-grid, .f-case-reading { grid-template-columns: 1fr; gap: 36px; }
-    .f-case-meta-grid { grid-template-columns: 1fr 1fr; }
-    .f-meta-cell:nth-child(2) { border-right: 0; }
-    .f-meta-cell:nth-child(3) { border-top: 1px solid var(--line); }
-    .f-meta-cell:nth-child(4) { border-top: 1px solid var(--line); border-right: 0; }
-    .f-case-rail { display: none; }
-    .f-mobile-toc { display: block; }
-    .f-work-item { grid-template-columns: 1fr; gap: 8px; }
-    .f-work-item .f-item-meta { text-align: left; }
-    .f-about-stats-grid, .f-about-story-grid, .f-about-cards-row { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 820px) {
-    .f-human-intro { padding: 36px 0 24px; }
-    .f-intro-prose { grid-template-columns: 1fr; gap: 14px; }
-    .f-entry-item { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
-    .f-entry-meta-side { flex-direction: row; gap: 10px; }
-    .f-lenses-grid { grid-template-columns: 1fr; }
-    .f-method-grid { grid-template-columns: 1fr; gap: 20px; }
-  }
-  @media (max-width: 640px) {
-    .f-wrap { width: min(calc(100% - 32px), 1080px); }
-    .f-nav { position: relative; min-height: 58px; gap: 10px; flex-direction: column; align-items: flex-start; }
-    .f-brand { white-space: nowrap; }
-    .f-links { width: 100%; gap: 10px; }
-    .f-links a { font-size: var(--text-xs); }
-    .f-theme-switch-group { position: absolute; top: 12px; right: 0; margin-left: 0; }
-    .f-work-item-badges { flex-wrap: wrap; }
-    .f-work-item-type { white-space: normal; overflow-wrap: anywhere; max-width: 100%; }
-    .f-asset-btn { white-space: normal; overflow-wrap: anywhere; min-width: 0; text-align: left; }
-    .f-footer-row { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .f-tab-cat-bubble { max-width: calc(100vw - 108px); white-space: normal; }
-    .f-map-grid { grid-template-columns: 1fr; }
-    .f-map-item:nth-child(even) { padding-left: 0; border-left: 0; }
-    .f-case-meta-grid { grid-template-columns: 1fr; }
-    .f-meta-cell { border-right: 0; border-bottom: 1px solid var(--line); padding: 14px 16px; }
-    .f-search-row { flex-direction: column; align-items: stretch; }
-    .f-search-box { max-width: 100%; }
-    .f-work-meta-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .f-work-item { padding: 18px 16px; }
-    .f-home-hero { padding: 36px 0 28px; }
-    .f-about-hero-artistic { padding: 36px 0 28px; }
-    .f-work-hero-clean { padding: 36px 0 28px; }
-    .f-case-hero { padding: 36px 0 32px; }
-    .f-case-reading { padding: 32px 0 60px; }
-  }
-`;
 
 function layoutHead(title, description, nonce, meta = {}) {
   const currentPath = meta.path || "/";
@@ -5743,18 +1835,15 @@ function layoutHead(title, description, nonce, meta = {}) {
     <meta name="twitter:description" content="${escapeHtml(description)}">
     <meta name="twitter:image" content="${ogImage}">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://drive.google.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600;1,6..72,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/fonts.css">
 
     <!-- Anti-FOUC Early Theme Script -->
     <script nonce="${nonce}">
       (function(){
         try {
           var t = localStorage.getItem('f-theme');
-          if (t === 'dark' || t === 'sepia' || t === 'light') {
+          if (t === 'sepia') t = 'light';
+          if (t === 'dark' || t === 'light') {
             document.documentElement.setAttribute('data-theme', t);
           } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -5776,79 +1865,35 @@ function layoutHeader(active = "", nonce = "") {
   return `<header class="f-header">
     <div id="f-progress-bar"></div>
     <nav class="f-nav f-wrap" aria-label="Primary navigation">
-      <a class="f-brand" href="/">Phạm Thanh Phú <span>Work &amp; Research</span></a>
+      <a class="f-brand" href="/">Phạm Thanh Phú</a>
       <div class="f-links">
-        <a href="/work"${active === "work" ? ' aria-current="page"' : ""}>Work Library</a>
+        <a href="/work"${active === "work" ? ' aria-current="page"' : ""}>Work</a>
         <a href="/about"${active === "about" ? ' aria-current="page"' : ""}>About</a>
-        <button type="button" id="f-nav-cmd-trigger" class="f-nav-cmd-btn" aria-label="Search works and pages" aria-haspopup="dialog">Search <span class="f-cmd-kbd">⌘K</span></button>
-        
-        <!-- Theme Switcher Group (right of About) -->
-        <div class="f-theme-switch-group" role="group" aria-label="Theme selection">
-          <button type="button" class="f-theme-toggle-btn" data-theme-val="light" title="Light Paper (☀)" aria-label="Light theme" aria-pressed="false">☀</button>
-          <button type="button" class="f-theme-toggle-btn" data-theme-val="sepia" title="Warm Sepia (📖)" aria-label="Sepia theme" aria-pressed="false">📖</button>
-          <button type="button" class="f-theme-toggle-btn" data-theme-val="dark" title="Dark Forensic (🌙)" aria-label="Dark theme" aria-pressed="false">🌙</button>
-        </div>
+        <button type="button" class="f-theme-toggle" id="f-theme-toggle" aria-label="Switch to dark theme" aria-pressed="false" title="Switch to dark theme">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4a8 8 0 0 1 0 16V4Z" fill="currentColor"/><path d="M12 4a8 8 0 1 0 0 16" stroke="currentColor" stroke-width="1.5"/><path d="M12 1v1M12 22v1M1 12h1M22 12h1M4.2 4.2l.7.7M19.1 19.1l.7.7M4.2 19.8l.7-.7M19.1 4.9l.7-.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
       </div>
     </nav>
   </header>
   <script nonce="${nonce}">
     (function(){
-      function getSavedTheme() {
-        try {
-          var t = localStorage.getItem('f-theme');
-          if (t === 'dark' || t === 'sepia' || t === 'light') return t;
-        } catch(e){}
-        return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      function syncTheme() {
+        var button = document.getElementById('f-theme-toggle');
+        if (!button) return;
+        var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        button.setAttribute('aria-pressed', String(dark));
+        button.setAttribute('aria-label', 'Switch to ' + (dark ? 'light' : 'dark') + ' theme');
+        button.title = button.getAttribute('aria-label');
+        button.onclick = function() {
+          var theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+          try { localStorage.setItem('f-theme', theme); } catch(e) {}
+          syncTheme();
+        };
       }
-
-      function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        try { localStorage.setItem('f-theme', theme); } catch(e){}
-        
-        var btns = document.querySelectorAll('.f-theme-toggle-btn');
-        btns.forEach(function(b) {
-          b.classList.toggle('is-active', b.getAttribute('data-theme-val') === theme);
-          b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-val') === theme));
-        });
-        
-        if (window.showToast) {
-          window.showToast('Theme set to ' + theme.toUpperCase());
-        }
-      }
-
-      function syncUi() {
-        var current = document.documentElement.getAttribute('data-theme') || getSavedTheme();
-        document.documentElement.setAttribute('data-theme', current);
-
-        var btns = document.querySelectorAll('.f-theme-toggle-btn');
-        btns.forEach(function(btn) {
-          btn.classList.toggle('is-active', btn.getAttribute('data-theme-val') === current);
-          btn.setAttribute('aria-pressed', String(btn.getAttribute('data-theme-val') === current));
-          btn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var val = btn.getAttribute('data-theme-val');
-            applyTheme(val);
-          };
-        });
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', syncUi);
-      } else {
-        syncUi();
-      }
-
-      // Event delegation fallback to guarantee clicks always register
-      document.addEventListener('click', function(e) {
-        var btn = e.target.closest && e.target.closest('.f-theme-toggle-btn');
-        if (btn) {
-          e.preventDefault();
-          e.stopPropagation();
-          var val = btn.getAttribute('data-theme-val');
-          if (val) applyTheme(val);
-        }
-      });
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncTheme);
+      else syncTheme();
     })();
   </script>`;
 }
@@ -5955,7 +2000,7 @@ function catGlobalComponent(nonce) {
   </script>`;
 }
 
-function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '') {
+function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '', showCompanion = true) {
   return `<footer class="f-footer">
     <div class="f-wrap f-footer-row">
       <span>Phạm Thanh Phú · ${escapeHtml(label)}</span>
@@ -6129,7 +2174,7 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '') {
     })();
   </script>
 
-  ${catGlobalComponent(nonce)}
+  ${showCompanion ? catGlobalComponent(nonce) : ""}
   <script nonce="${nonce}">
     (function(){
       var preview = document.querySelector('.f-proto-preview-img');
@@ -6162,636 +2207,344 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '') {
 }
 
 function homePage(nonce) {
-  const featuredInquiries = [
-    {
-      date: "Oct 2026",
-      tag: "Ecosystem & Product Build",
-      path: "/work/vieworld",
-      title: "VieWorld: A Fandom Worth Returning To",
-      question: "What makes a fandom feel like a place, and what remains when a Moment ends?",
-      desc: "An independently authored ecosystem with a working prototype: free community, selected memory, personal expression and explicit operating boundaries.",
-      schematic: [
-        { label: "1. Moment", type: "step" },
-        { label: "2. Place", type: "step" },
-        { label: "3. Position", type: "step" },
-        { label: "4. Continuity", type: "success" }
-      ],
-      meta: "Working prototype · Source audit 4 Oct 2026"
-    },
-    {
-      date: "Aug 2026",
-      tag: "Operations & Commerce",
-      path: "/work/datvietvac-who-owns-the-fan-promise",
-      title: "DatVietVAC: Who Owns the Fan Promise?",
-      question: "Once VieSHOP accepts a fan transaction, can the selling entity prove what it committed to, trace the obligation through execution, and close it without the customer having to force a response?",
-      desc: "A forensic reconstruction of 4 customer lifecycle records, terms versioning, order-state semantics, and how customer service serves as a control surface rather than an escalation sponge.",
-      schematic: [
-        { label: "1. Order Accepted", type: "step" },
-        { label: "2. Execution Drift", type: "alert" },
-        { label: "3. Backlog Audit", type: "step" },
-        { label: "4. Customer Recovery", type: "success" }
-      ],
-      meta: "8 min read · Part 1 & Evidence Pack V1.2"
-    },
-    {
-      date: "Jun 2026",
-      tag: "Platform Policy",
-      path: "/work/shopee-account-restrictions",
-      title: "Shopee Account Restrictions: Customer Resolution Under Platform Uncertainty",
-      question: "After a marketplace restricts a customer account, what minimum resolution pathway must remain visible so the customer can understand cause, preserve assets, contest, and recover?",
-      desc: "Mapping the asymmetry between automated enforcement risk heuristics and consumer property rights, with a proposed 5-stage explainable recovery standard.",
-      schematic: [
-        { label: "1. Algorithmic Ban", type: "step" },
-        { label: "2. Asset Lockout", type: "alert" },
-        { label: "3. Evidence Boundary", type: "step" },
-        { label: "4. Resolution Matrix", type: "success" }
-      ],
-      meta: "6 min read · Developed Work Sample"
-    },
-    {
-      date: "Sep 2026",
-      tag: "AI Systems Prototype",
-      path: "/work/explainable-trust",
-      title: "Explainable Trust: Traceable Case Reconstruction",
-      question: "Can an AI-assisted workspace update a living case without erasing the reasoning and source path by which the case was constructed?",
-      desc: "A four-step interactive showcase that traces evidence through validated ledger revisions, findings, unresolved gaps, and an inspectable reasoning graph.",
-      schematic: [
-        { label: "1. Raw Intake", type: "step" },
-        { label: "2. Source-Linked Revision DAG", type: "step" },
-        { label: "3. Validated Case Ledger", type: "success" }
-      ],
-      meta: "Interactive Showcase · Static Deployment"
-    },
-    {
-      date: "Jul 2026",
-      tag: "Product Discovery",
-      path: "/work/vinamilk-trusted-nutrition",
-      title: "Vinamilk: Trusted Nutrition Product-Service Discovery",
-      question: "What trusted nutrition proposition deserves to exist, and how can its valued attributes survive cold-chain delivery, scale, and allocation governance?",
-      desc: "A stage-gated discovery framework connecting occasion intelligence to cold-chain operational governance.",
-      schematic: [
-        { label: "Gate 1: Occasion Intel", type: "step" },
-        { label: "Gate 2: Cold-Chain Feasibility", type: "step" },
-        { label: "Gate 3: Allocation Governance", type: "success" }
-      ],
-      meta: "12 min read · 3 Discovery Papers"
-    }
-  ];
-
-  const entriesHtml = featuredInquiries.map(item => {
-    const isVieWorld = item.path === '/work/vieworld';
-    const schematicHtml = item.schematic ? `
-      <div class="f-entry-schematic">
-        ${item.schematic.map((step, idx) => `
-          <span class="f-entry-step ${step.type}">${escapeHtml(step.label)}</span>
-          ${idx < item.schematic.length - 1 ? '<span class="f-entry-arrow">→</span>' : ''}
-        `).join("")}
-      </div>
-    ` : "";
-
-    return `
-      <a class="f-entry-item${isVieWorld ? ' f-entry-featured' : ''}" href="${item.path}">
-        ${isVieWorld ? '<div class="f-entry-featured-visual"><img src="/assets/vieworld-moments.webp" alt="VieWorld prototype — Home and Moments" width="1200" height="692" loading="lazy" decoding="async"></div><div class="f-entry-main">' : ''}
-        <div class="f-entry-meta-side">
-          <span class="f-entry-date">${item.date}</span>
-          <span class="f-entry-tag">${item.tag}</span>
-        </div>
-        ${isVieWorld ? '' : '<div class="f-entry-main">'}
-          <h3 class="f-entry-title">${escapeHtml(item.title)}</h3>
-          <p class="f-entry-question">“${escapeHtml(item.question)}”</p>
-          ${schematicHtml}
-          <p class="f-entry-desc">${escapeHtml(item.desc)}</p>
-          <div class="f-entry-foot">
-            <span>${escapeHtml(item.meta)}</span>
-          </div>
-        </div>
-      </a>
-    `;
-  }).join("");
-
-  const lensMeta = {
-    "product-ops": { cls: "ops", badge: "Operations & Product" },
-    "evidence-first": { cls: "evidence", badge: "Forensic Evidence" },
-    "essays": { cls: "essays", badge: "Systems Essays" },
-    "concepts": { cls: "concepts", badge: "Built Prototypes" }
-  };
-
-  const lensesHtml = finalModes.map(mode => {
-    const count = finalWorkLibrary.filter(item => item.mode === mode.id && item.path.startsWith("/work/")).length;
-    const meta = lensMeta[mode.id] || { cls: "ops", badge: "Research Lens" };
-    return `
-      <a class="f-lens-card ${meta.cls}" href="/work?mode=${mode.id}">
-        <div class="f-lens-top-bar">
-          <span class="f-lens-badge">${meta.badge}</span>
-          <span class="f-lens-count">${count} works</span>
-        </div>
-        <h3>${escapeHtml(mode.label)}</h3>
-        <p>${escapeHtml(mode.description)}</p>
-      </a>
-    `;
-  }).join("");
-
-  return `<!doctype html>
+  return `<!DOCTYPE html>
 <html lang="en">
-${layoutHead("Phạm Thanh Phú — Work & Research Archive", "Evidence-first portfolio and research monographs across business operations, product strategy, and AI trust systems by Phạm Thanh Phú.", nonce)}
+${layoutHead("Phạm Thanh Phú — Business & Product Operations", "Business Operations, Product Operations, and Product Strategy — selected work and an evidence-first operating approach.", nonce)}
 <body>
   <a class="f-skip" href="#main">Skip to main content</a>
   ${layoutHeader("home", nonce)}
   <main id="main">
-    <!-- 1. Refined Soothing Hero Header -->
-    <header class="f-home-hero">
-      <div class="f-wrap">
-        <h1>Observations on where product promises break, how operations recover, and what evidence remains traceable.</h1>
-        <div class="f-cta-dock-btns">
-          <a href="/work" class="f-about-btn primary">Browse ${totalWorks} Works in Library →</a>
-          <a href="/about" class="f-about-btn secondary">How I Think &amp; Operate →</a>
-        </div>
+    <header class="f-home-hero f-wrap">
+      <div class="f-home-identity">
+        <p class="f-home-role">Business Operations · Product Operations · Product Strategy</p>
+        <h1>I'm drawn to messy operating problems.</h1>
+        <p class="f-home-intent">I enjoy exploring how they work, and keep learning how to make systems, ownership, and the next step clearer.</p>
       </div>
+      <figure class="f-home-photo">
+        <img src="/assets/editorial-cafe-v2.webp" alt="" width="1400" height="1050" fetchpriority="high" decoding="async">
+      </figure>
     </header>
 
-    <!-- 2. Selected Inquiries (Editorial List) -->
-    <section class="f-human-section">
-      <div class="f-wrap">
-        <div class="f-human-head">
-          <h2>Selected Inquiries</h2>
-          <span>${featuredInquiries.length} Featured Case Monographs</span>
+    <section class="f-home-selected f-wrap" id="selected-work" aria-labelledby="selected-work-title">
+      <div class="f-home-section-head">
+        <h2 id="selected-work-title">Selected Work</h2>
+        <a class="f-editorial-link" href="/work">View all work <span aria-hidden="true">→</span></a>
+      </div>
+      <a class="f-home-feature" href="/work/vieworld" aria-labelledby="vieworld-home-title">
+        <img class="f-home-feature-image" src="/assets/vieworld-meadow.webp" alt="Meadow scene from the VieWorld prototype" width="1400" height="788" decoding="async">
+        <div class="f-home-work-copy">
+          <span class="f-home-category">Product &amp; Operations</span>
+          <h3 id="vieworld-home-title">VieWorld</h3>
+          <p>Designing an independent fandom ecosystem that feels like home.</p>
+          <span class="f-editorial-link">View case <span aria-hidden="true">→</span></span>
         </div>
-        <div class="f-entry-list">
-          ${entriesHtml}
-        </div>
-        <div style="margin-top:24px;text-align:right;">
-          <a href="/work" class="f-about-btn secondary" style="font-size:0.8rem;">
-            View full catalog of ${totalWorks} monographs →
-          </a>
-        </div>
+      </a>
+      <div class="f-home-work-grid">
+        <a class="f-home-work-row" href="/work/fanme-controlled-growth" aria-labelledby="fanme-home-title">
+          <img class="f-home-artifact" src="/assets/fanme-cover.webp" alt="" width="700" height="394" loading="lazy" decoding="async">
+          <div class="f-home-work-copy">
+            <span class="f-home-category">Launch &amp; Operations</span>
+            <h3 id="fanme-home-title">FanMe — Controlled Growth</h3>
+            <p>A bounded artist-launch pilot, with ownership, readiness, and scale gates.</p>
+            <span class="f-editorial-link">Read case <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a class="f-home-work-row" href="/work/vinamilk-trusted-nutrition" aria-labelledby="vinamilk-home-title">
+          <img class="f-home-artifact" src="/assets/vinamilk-cover.webp" alt="" width="541" height="700" loading="lazy" decoding="async">
+          <div class="f-home-work-copy">
+            <span class="f-home-category">Product Discovery</span>
+            <h3 id="vinamilk-home-title">Vinamilk — Trusted Nutrition</h3>
+            <p>Connecting product-service discovery with delivery, scale, and governance.</p>
+            <span class="f-editorial-link">Read research <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a class="f-home-work-row" href="/work/shopee-account-restrictions" aria-labelledby="shopee-home-title">
+          <img class="f-home-artifact" src="/assets/shopee-cover.webp" alt="" width="500" height="281" loading="lazy" decoding="async">
+          <div class="f-home-work-copy">
+            <span class="f-home-category">Evidence &amp; Resolution</span>
+            <h3 id="shopee-home-title">Shopee — Account Restrictions</h3>
+            <p>A customer resolution pathway under platform uncertainty.</p>
+            <span class="f-editorial-link">Explore case <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a class="f-home-work-row" href="/work/explainable-trust" aria-labelledby="explainable-home-title">
+          <img src="/assets/explainable-cover.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
+          <div class="f-home-work-copy">
+            <span class="f-home-category">Systems &amp; Evidence</span>
+            <h3 id="explainable-home-title">Explainable Trust</h3>
+            <p>Making reasoning, sources, and case revisions visible and inspectable.</p>
+            <span class="f-editorial-link">Read case <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
       </div>
     </section>
 
-
-    <!-- 3. Four Research Lenses -->
-    <section class="f-human-section">
-      <div class="f-wrap">
-        <div class="f-human-head">
-          <h2>Four Research Lenses</h2>
-          <span>Navigation by Research Mode</span>
-        </div>
-        <div class="f-lenses-grid">
-          ${lensesHtml}
-        </div>
-      </div>
+    <section class="f-home-approach f-wrap" aria-labelledby="approach-title">
+      <h2 id="approach-title">How I work</h2>
+      <ul class="f-home-principles">
+        <li>Ground truth first</li><li>Clear ownership</li><li>Evidence visible</li>
+      </ul>
+      <a class="f-editorial-link" href="/about">More about my approach <span aria-hidden="true">→</span></a>
     </section>
 
-    <!-- 4. A Note on Method -->
-    <section class="f-human-section" style="border-bottom:none;">
-      <div class="f-wrap">
-        <div class="f-human-head">
-          <h2>A Note on Method</h2>
-          <span>Operating Philosophy</span>
-        </div>
-        <div class="f-method-grid">
-          <article class="f-horizon-chip" style="padding:22px 24px;border-radius:8px;">
-            <strong style="font-size:1.05rem;margin-bottom:8px;">Start from a concrete tension</strong>
-            <p style="margin:0 0 10px;font-size:0.92rem;line-height:1.7;color:var(--ink-secondary);">
-              I start from an observation that does not quite fit: an unexpected account restriction, a quiet store morning, a supplier policy shift, a fan product bottleneck, or an AI output that lacks provenance.
-            </p>
-            <p style="margin:0;font-size:0.92rem;line-height:1.7;color:var(--ink-secondary);">
-              Then I map the moving parts behind it rather than settling for high-level slogans or comfortable assumptions.
-            </p>
-          </article>
-          <article class="f-horizon-chip" style="padding:22px 24px;border-radius:8px;">
-            <strong style="font-size:1.05rem;margin-bottom:8px;">Follow the mechanism, not the slogan</strong>
-            <p style="margin:0 0 10px;font-size:0.92rem;line-height:1.7;color:var(--ink-secondary);">
-              I look closely at what happens after apparent agreement: the handoff after payment, the owner of an exception, the data quality behind a recommendation, and the recovery pathway when an assumption breaks down.
-            </p>
-            <p style="margin:0;font-size:0.92rem;line-height:1.7;color:var(--ink-secondary);">
-              That is why this library explicitly separates confirmed facts, outside-in inferences, working models, and open hypotheses.
-            </p>
-          </article>
-        </div>
-      </div>
+    <section class="f-home-proof f-wrap" aria-label="Operating foundation">
+      <p><strong>6+ years</strong><span>Founder-side operations</span></p>
+      <p><strong>50+ accounts</strong><span>Recurring institutional B2B</span></p>
+      <p><strong>~95% retention</strong><span>Relationship-led operations</span></p>
     </section>
   </main>
-  ${layoutFooter("Ho Chi Minh City · 2026", nonce)}
+
+  ${layoutFooter("Ho Chi Minh City · 2026", nonce, false)}
 </body>
 </html>`;
 }
 
 function workPage(nonce) {
-  const modeClassMap = {
-    "product-ops": "ops",
-    "evidence-first": "evidence",
-    "essays": "essays",
-    "concepts": "concepts"
-  };
-
+  const works = finalWorkLibrary.filter(item => item.path.startsWith('/work/'));
+  const topicGroups = [
+    { id: 'demo', label: 'Public Demo', paths: ['explainable-trust'] },
+    { id: 'fandom', label: 'Fandom & Commerce', paths: ['creator-platform-operating-model', 'post-signing-artist-label-operations', 'fanme-controlled-growth', 'datvietvac-ownership-belonging', 'datvietvac-fandom-cards', 'vieshop-fan-centred-merchandise-system', 'datvietvac-who-owns-the-fan-promise', 'vieworld', 'metub-creator-economy', 'artist-fandom-page', 'shopee-account-restrictions'] },
+    { id: 'trust', label: 'AI & Trust', paths: ['elfie-trust-safe-activation', 'explainable-trust', 'vietnam-diamond-market-crisis', 'diamond-trust-chain-collapse', 'pathway-lens-operational-cycles', 'ai-judgment-decisions', 'ai-apprenticeship', 'momo-ai-paylater', 'zalo-scam-emergency-mode'] },
+    { id: 'policy', label: 'Platform Policy', paths: ['shopee-account-restrictions', 'adobe-account-restriction', 'elfie-trust-safe-activation', 'momo-ai-paylater', 'zalo-scam-emergency-mode'] },
+    { id: 'supply', label: 'Supply Chain', paths: ['vinamilk-trusted-nutrition', 'fanme-controlled-growth', 'datvietvac-ownership-belonging', 'datvietvac-fandom-cards', 'vieshop-fan-centred-merchandise-system'] },
+    { id: 'discovery', label: 'Product Discovery', paths: ['vinamilk-trusted-nutrition', 'elfie-trust-safe-activation', 'datvietvac-ownership-belonging', 'datvietvac-fandom-cards', 'vieshop-fan-centred-merchandise-system', 'vieworld', 'artist-fandom-page', 'zalo-scam-emergency-mode'] }
+  ];
+  const bookmarkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/></svg>';
+  const itemAttributes = item => `data-path="${item.path}" data-mode="${item.mode}" data-search="${escapeHtml([item.title, item.question, item.tags, item.type, item.maturity].join(' ').toLowerCase())}" data-topics="${topicGroups.filter(topic => topic.paths.includes(item.path.slice(6))).map(topic => topic.id).join(' ')}"`;
   const sectionsHtml = finalModes.map(mode => {
-    const items = finalWorkLibrary.filter(item => item.mode === mode.id && item.path.startsWith("/work/"));
-    const itemsHtml = items.map(item => {
-      const itemAssetCount = (caseDocuments[item.path]?.assets || []).length;
-      const maturityLower = (item.maturity || '').toLowerCase();
-      let maturityCls = 'default';
-      if (maturityLower.includes('prototype')) maturityCls = 'prototype';
-      else if (maturityLower.includes('working')) maturityCls = 'working';
-      else if (maturityLower.includes('developed')) maturityCls = 'developed';
-      else if (maturityLower.includes('concept')) maturityCls = 'concept';
-      else if (maturityLower.includes('evidence')) maturityCls = 'evidence';
-
-      const isFeaturedApp = item.path === "/work/explainable-trust";
-      const rawTags = (item.tags || "").split(" · ");
-      const tagsHtml = rawTags.map(t => `<span class="f-tag-click" data-tag="${escapeHtml(t.toLowerCase())}">${escapeHtml(t)}</span>`).join(`<span style="opacity:0.35;margin:0 4px;">·</span>`);
-
-      return `
-        <div class="f-work-item ${isFeaturedApp ? "f-work-item-featured-app" : ""}" data-mode="${item.mode}" data-title="${escapeHtml(item.title.toLowerCase())}" data-question="${escapeHtml(item.question.toLowerCase())}" data-tags="${escapeHtml((item.tags || '').toLowerCase())}">
-          <div class="f-work-item-head">
-            <div class="f-work-item-badges">
-              <span class="f-maturity-badge ${maturityCls}">${escapeHtml(item.maturity.split(' · ')[0])}</span>
-              ${isFeaturedApp ? '<span class="f-card-asset-pill f-card-live-pill"><span class="f-live-beacon" style="width:6px;height:6px;margin-right:3px;"></span>Public Demo</span>' : ''}
-              ${itemAssetCount > 0 ? `<span class="f-card-asset-pill">${itemAssetCount} artifact${itemAssetCount > 1 ? 's' : ''}</span>` : ''}
-            </div>
-            <span class="f-work-item-type">${escapeHtml(item.type)}</span>
+    const items = works.filter(item => item.mode === mode.id);
+    return `<section class="f-catalog-section" data-section="${mode.id}" aria-labelledby="mode-${mode.id}">
+      <div class="f-section-head">
+        <div class="f-section-title-wrap">
+          <h2 id="mode-${mode.id}"><span>${escapeHtml(mode.num)}</span> ${escapeHtml(mode.label)}</h2>
+          <p>${escapeHtml(mode.description)}</p>
+        </div>
+        <span class="f-section-count-badge">${items.length} works</span>
+      </div>
+      <div class="f-title-grid">${items.map(item => {
+        const assets = (caseDocuments[item.path]?.assets || []).length;
+        const tags = (item.tags || '').split(' · ').filter(Boolean);
+        return `<article class="f-work-item" ${itemAttributes(item)}>
+          <div class="f-work-item-heading">
+            <h3><a href="${item.path}">${escapeHtml(item.title)} <span aria-hidden="true">→</span></a></h3>
+            <button class="f-work-save" type="button" data-save-path="${item.path}" data-save-title="${escapeHtml(item.title)}" aria-pressed="false" aria-label="Save ${escapeHtml(item.title)}">${bookmarkIcon}</button>
           </div>
-          <h3><a href="${item.path}">${escapeHtml(item.title)}</a></h3>
           <p class="f-item-question">“${escapeHtml(item.question)}”</p>
-          <div class="f-paper-tags">
-            <span class="f-keywords-label">KEYWORDS:</span>
-            ${tagsHtml}
+          <div class="f-work-item-meta">
+            <span>${escapeHtml(item.maturity.split(' · ')[0])}</span>
+            ${item.path === '/work/explainable-trust' ? '<span class="f-work-demo">Public Demo</span>' : ''}
+            ${assets ? `<span>${assets} artifact${assets === 1 ? '' : 's'}</span>` : ''}
           </div>
-        </div>
-      `;
-    }).join("");
-
-    return `
-      <section class="f-catalog-section" data-section="${mode.id}">
-        <div class="f-section-head">
-          <div class="f-section-title-wrap">
-            <h2>${escapeHtml(mode.num)} · ${escapeHtml(mode.label)}</h2>
-            <p>${escapeHtml(mode.description)}</p>
-          </div>
-          <span class="f-section-count-badge">${items.length} works</span>
-        </div>
-        <div class="f-title-grid">${itemsHtml}</div>
-      </section>
-    `;
-  }).join("");
-
-  const ledgerRowsHtml = finalWorkLibrary.filter(item => item.path.startsWith("/work/")).map((item, idx) => {
-    const modeCls = modeClassMap[item.mode] || "ops";
-    const modeObj = finalModes.find(m => m.id === item.mode);
-    const modeLabel = modeObj ? modeObj.short : item.mode;
-
-    return `
-      <tr class="f-ledger-row" data-mode="${item.mode}" data-title="${escapeHtml(item.title.toLowerCase())}" data-question="${escapeHtml(item.question.toLowerCase())}" data-tags="${escapeHtml((item.tags || '').toLowerCase())}">
-        <td style="font-family:var(--font-mono);color:var(--muted);width:36px;font-size:0.75rem;">${String(idx + 1).padStart(2, '0')}</td>
-        <td>
-          <a class="f-ledger-title" href="${item.path}">${escapeHtml(item.title)}</a>
-          <div style="color:var(--ink-secondary);font-size:0.78rem;font-style:italic;margin-top:2px;">“${escapeHtml(item.question)}”</div>
-        </td>
-        <td style="width:140px;">
-          <span class="f-ledger-mode ${modeCls}">${escapeHtml(modeLabel)}</span>
-        </td>
-        <td style="width:160px;font-family:var(--font-sans);font-size:0.74rem;color:var(--muted);">
-          ${escapeHtml(item.maturity)}
-        </td>
-      </tr>
-    `;
-  }).join("");
-
-  const modeTabs = [
-    `<button class="f-mode-tab" type="button" data-mode="all" aria-pressed="true">All Works <span class="f-tab-count">(${finalWorkLibrary.length})</span></button>`,
-    ...finalModes.map(mode => {
-      const count = finalWorkLibrary.filter(i => i.mode === mode.id).length;
-      return `<button class="f-mode-tab" type="button" data-mode="${mode.id}" aria-pressed="false">${escapeHtml(mode.short)} <span class="f-tab-count">(${count})</span></button>`;
-    })
-  ].join("");
-
-  const topicChips = [
-    { label: "All Topics", tag: "all" },
-    { label: "🔖 Saved (0)", tag: "__bookmarks__", id: "btn-filter-saved" },
-    { label: "⚡ Public Demo", tag: "explainable-trust" },
-    { label: "Fandom & Commerce", tag: "fandom" },
-    { label: "AI & Trust", tag: "trust" },
-    { label: "Platform Policy", tag: "restriction" },
-    { label: "Supply Chain", tag: "supply" },
-    { label: "Product Discovery", tag: "discovery" }
-  ].map(t => `<button type="button" class="f-topic-chip ${t.tag === 'all' ? 'active' : ''} ${t.tag === '__bookmarks__' ? 'f-bookmark-filter-chip' : ''}" ${t.id ? `id="${t.id}"` : ''} data-tag="${t.tag}">${t.label}</button>`).join("");
+          <details class="f-work-details">
+            <summary>Details &amp; keywords</summary>
+            <p>${escapeHtml(item.type)}</p>
+            <div class="f-paper-tags">${tags.map(tag => `<button type="button" class="f-tag-click" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`).join('')}</div>
+          </details>
+        </article>`;
+      }).join('')}</div>
+    </section>`;
+  }).join('');
+  const modeTabs = [{ id: 'all', short: 'All works' }, ...finalModes].map(mode => `<button class="f-mode-tab" type="button" data-mode="${mode.id}" aria-pressed="${mode.id === 'all'}">${escapeHtml(mode.short)} <span class="f-tab-count">${mode.id === 'all' ? works.length : works.filter(item => item.mode === mode.id).length}</span></button>`).join('');
 
   return `<!doctype html>
 <html lang="en">
-${layoutHead("Work Library — Phạm Thanh Phú", `Complete catalog of ${totalWorks} research monographs, operating case studies, essays, and software tools across business operations and AI trust.`, nonce, { path: "/work" })}
+${layoutHead('Work Library — Phạm Thanh Phú', `Complete catalog of ${totalWorks} research monographs, operating case studies, essays, and software tools across business operations and AI trust.`, nonce, { path: '/work' })}
 <body>
   <a class="f-skip" href="#main">Skip to catalog</a>
-  ${layoutHeader("work", nonce)}
-  <main id="main">
-    <!-- Work Hero with Authentic Notion Narrative -->
-    <header class="f-about-hero-artistic" style="padding: 44px 0 34px;">
-      <div class="f-wrap">
-        <h1 style="max-width: 100%; margin-bottom: 16px;">Work Library &amp; Operating Monographs</h1>
-        <p class="f-about-hero-dek" style="margin-bottom: 0;">
-          The cases look different on the surface, but I keep coming back to a small set of operating questions: what deserves to be built, what breaks after apparent success, what people can safely rely on, and what evidence should earn the next step.
-        </p>
+  ${layoutHeader('work', nonce)}
+  <main id="main" class="f-work-page">
+    <header class="f-work-hero f-wrap">
+      <h1>Work Library <span>&amp; Operating Monographs</span></h1>
+      <p class="f-work-intro">The cases look different on the surface, but I keep coming back to a small set of operating questions: what deserves to be built, what breaks after apparent success, what people can safely rely on, and what evidence should earn the next step.</p>
+      <div class="f-work-meta-row">
+        <p>${totalWorks} Works <span>·</span> ${totalModes} Research Modes <span>·</span> ${totalArtifacts}+ Downloadable Artifacts</p>
+        <details class="f-work-boundary">
+          <summary>Evidence boundary</summary>
+          <blockquote>“Every piece in this library separates confirmed public facts from working inferences, keeping the boundary of evidence visible.”</blockquote>
+          <p>Living Archive · 2026</p>
+        </details>
       </div>
     </header>
 
-    <!-- Quote Bar -->
-    <section class="f-work-quote-bar">
-      <div class="f-wrap">
-        <blockquote>
-          “Every piece in this library separates confirmed public facts from working inferences, keeping the boundary of evidence visible.”
-        </blockquote>
-        <div class="f-work-meta-row">
-          <span>${totalWorks} Works · ${totalModes} Research Modes · ${totalArtifacts}+ Downloadable Artifacts</span>
-          <span>Living Archive · 2026</span>
+    <section class="f-wrap f-work-toolbar" aria-label="Find work">
+      <div class="f-work-search-row">
+        <div class="f-search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input class="f-search-input" id="work-search" type="search" placeholder="Search by title, question, or keyword" aria-label="Search works" autocomplete="off" aria-keyshortcuts="/">
+          <kbd class="f-kbd-hint">/</kbd>
+          <button class="f-search-clear" id="work-search-clear" type="button" aria-label="Clear search" hidden>×</button>
+        </div>
+        <div class="f-work-refinements">
+          <label class="f-work-topic">Topic <select id="work-topic" aria-label="Filter by topic"><option value="all">All topics</option>${topicGroups.map(topic => `<option value="${topic.id}">${escapeHtml(topic.label)}</option>`).join('')}</select></label>
+          <button type="button" id="btn-filter-saved" class="f-work-saved" aria-pressed="false">${bookmarkIcon}<span>Saved (0)</span></button>
+        </div>
+      </div>
+      <div class="f-work-toolbar-bottom">
+        <nav class="f-toolbar-tabs" aria-label="Filter works by mode">${modeTabs}</nav>
+        <div class="f-work-results">
+          <span class="f-toolbar-count" id="work-count" role="status" aria-live="polite">${works.length} works</span>
+          <div class="f-view-switch" role="group" aria-label="Display works">
+            <button type="button" class="f-view-toggle-btn" id="btn-view-cards" aria-pressed="true" aria-controls="catalog-container">Overview</button>
+            <button type="button" class="f-view-toggle-btn" id="btn-view-ledger" aria-pressed="false" aria-controls="ledger-container">Index</button>
+          </div>
+          <button type="button" id="work-clear-filters" class="f-work-clear" hidden>Clear filters</button>
         </div>
       </div>
     </section>
 
-    <!-- Structured 3-Tier Human Editorial Toolbar -->
-    <div class="f-wrap f-work-toolbar">
-      <!-- Row 1: Search -->
-      <div class="f-search-wrap">
-        <input class="f-search-input" id="work-search" type="search" placeholder="Search ${totalWorks} works by title, question, or tag... (Press / or ⌘K)" aria-label="Search works">
-        <span class="f-kbd-hint">⌘K</span>
-        <button class="f-search-clear" id="work-search-clear" type="button" aria-label="Clear search" hidden>×</button>
-      </div>
-
-      <!-- Row 2: Mode Tabs (Underline Navigation) -->
-      <nav class="f-toolbar-tabs" aria-label="Filter works by mode">
-        ${modeTabs}
-      </nav>
-
-      <!-- Row 3: Topic Chips (Left) + View Switch & Count (Right) -->
-      <div class="f-toolbar-subrow">
-        <div class="f-topic-chips">
-          ${topicChips}
-        </div>
-        <div class="f-toolbar-right">
-          <div class="f-view-switch">
-            <span>View:</span>
-            <button type="button" class="f-view-toggle-btn active" id="btn-view-cards" aria-pressed="true">Cards</button>
-            <button type="button" class="f-view-toggle-btn" id="btn-view-ledger" aria-pressed="false">Index Table</button>
-          </div>
-          <span class="f-toolbar-count" id="work-count" role="status" aria-live="polite">${totalWorks} works found</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- View 1: Catalog Editorial Cards -->
-    <div class="f-wrap" id="catalog-container">
-      ${sectionsHtml}
-    </div>
-
-    <div class="f-wrap">
-      <div id="work-empty" class="f-work-empty" hidden>
-        <p>No works match the current search and filters.</p>
-        <button type="button" id="work-reset-filters" class="f-about-btn secondary">Reset filters</button>
-      </div>
-    </div>
-
-    <!-- View 2: Compact Ledger Table -->
-    <div class="f-wrap">
-      <div class="f-ledger-table-wrap" id="ledger-container">
+    <div class="f-wrap" id="catalog-container">${sectionsHtml}</div>
+    <div class="f-wrap" id="ledger-container" hidden>
+      <div class="f-ledger-table-wrap">
         <table class="f-ledger-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Case Title &amp; Core Question</th>
-              <th>Lens</th>
-              <th>Maturity</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${ledgerRowsHtml}
-          </tbody>
+          <caption class="f-work-sr-only">Work index: case title, core question, research mode, and maturity</caption>
+          <thead><tr><th scope="col">#</th><th scope="col">Case title &amp; core question</th><th scope="col">Lens</th><th scope="col">Maturity</th></tr></thead>
+          <tbody>${works.map((item, idx) => `<tr class="f-ledger-row" ${itemAttributes(item)}>
+            <td class="f-ledger-number">${String(idx + 1).padStart(2, '0')}</td>
+            <td class="f-ledger-case"><a class="f-ledger-title" href="${item.path}">${escapeHtml(item.title)}</a><p>“${escapeHtml(item.question)}”</p></td>
+            <td data-label="Lens">${escapeHtml(finalModes.find(mode => mode.id === item.mode)?.short || item.mode)}</td>
+            <td data-label="Maturity">${escapeHtml(item.maturity)}</td>
+          </tr>`).join('')}</tbody>
         </table>
       </div>
     </div>
+    <div class="f-wrap"><div id="work-empty" class="f-work-empty" hidden>
+      <h2>No works found</h2>
+      <p id="work-empty-message">Try another keyword, or clear the filters to browse all ${works.length} works.</p>
+      <button type="button" id="work-reset-filters" class="f-editorial-link">Reset filters <span aria-hidden="true">→</span></button>
+    </div></div>
   </main>
-  ${layoutFooter(`Master Library · ${totalWorks} Works`, nonce)}
-
+  ${layoutFooter(`Master Library · ${totalWorks} Works`, nonce, false)}
   <script nonce="${nonce}">
-    (()=>{
+    (() => {
       const search = document.getElementById('work-search');
-      const clear = document.getElementById('work-search-clear');
-      const count = document.getElementById('work-count');
+      const clearSearch = document.getElementById('work-search-clear');
+      const clearFilters = document.getElementById('work-clear-filters');
+      const topic = document.getElementById('work-topic');
+      const savedToggle = document.getElementById('btn-filter-saved');
       const tabs = Array.from(document.querySelectorAll('.f-mode-tab'));
       const items = Array.from(document.querySelectorAll('.f-work-item'));
-      const sections = Array.from(document.querySelectorAll('.f-catalog-section'));
-      const ledgerRows = Array.from(document.querySelectorAll('.f-ledger-row'));
-      const topicChips = Array.from(document.querySelectorAll('.f-topic-chip'));
-      const tagClicks = Array.from(document.querySelectorAll('.f-tag-click'));
-      const btnCards = document.getElementById('btn-view-cards');
-      const btnLedger = document.getElementById('btn-view-ledger');
-      const catalogContainer = document.getElementById('catalog-container');
-      const ledgerContainer = document.getElementById('ledger-container');
-      const emptyState = document.getElementById('work-empty');
-      const resetFilters = document.getElementById('work-reset-filters');
+      const rows = Array.from(document.querySelectorAll('.f-ledger-row'));
+      const saveButtons = Array.from(document.querySelectorAll('.f-work-save'));
+      const knownPaths = new Set(items.map(item => item.dataset.path));
+      const overview = document.getElementById('catalog-container');
+      const index = document.getElementById('ledger-container');
+      const overviewButton = document.getElementById('btn-view-cards');
+      const indexButton = document.getElementById('btn-view-ledger');
+      const empty = document.getElementById('work-empty');
+      let mode = 'all';
+      let savedOnly = false;
+      let view = 'overview';
 
-      let currentMode = 'all';
-      let currentTag = 'all';
-
-      function setView(isTable) {
-        btnLedger.classList.toggle('active', isTable);
-        btnCards.classList.toggle('active', !isTable);
-        btnLedger.setAttribute('aria-pressed', String(isTable));
-        btnCards.setAttribute('aria-pressed', String(!isTable));
-        catalogContainer.style.display = isTable ? 'none' : 'block';
-        ledgerContainer.classList.toggle('is-active', isTable);
+      function bookmarks() {
+        try {
+          const value = JSON.parse(localStorage.getItem('f-bookmarks') || '[]');
+          return Array.isArray(value) ? value.filter(path => typeof path === 'string') : [];
+        } catch { return []; }
       }
-
-      btnCards.addEventListener('click', () => setView(false));
-      btnLedger.addEventListener('click', () => setView(true));
-
-      // Topic Chip Filtering
-      topicChips.forEach(chip => {
-        chip.addEventListener('click', () => {
-          topicChips.forEach(c => c.classList.remove('active'));
-          chip.classList.add('active');
-          currentTag = chip.dataset.tag;
-          update();
-        });
-      });
-
-      // Interactive Tag Click inside Cards
-      tagClicks.forEach(tagEl => {
-        tagEl.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const tagVal = tagEl.dataset.tag;
-          search.value = tagVal;
-          update();
-          search.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-      });
-
-      // URL parameters for mode
-      const urlParams = new URLSearchParams(window.location.search);
-      const initialMode = urlParams.get('mode');
-      if (initialMode && tabs.some(m => m.dataset.mode === initialMode)) {
-        currentMode = initialMode;
+      function readUrl() {
+        const params = new URLSearchParams(location.search);
+        mode = tabs.some(tab => tab.dataset.mode === params.get('mode')) ? params.get('mode') : 'all';
+        topic.value = Array.from(topic.options).some(option => option.value === params.get('topic')) ? params.get('topic') : 'all';
+        search.value = params.get('q') || '';
+        savedOnly = params.get('saved') === '1';
+        let preferred = 'overview';
+        try { preferred = localStorage.getItem('f-work-view') || preferred; } catch {}
+        view = params.get('view') === 'index' ? 'index' : params.get('view') === 'overview' ? 'overview' : preferred === 'index' ? 'index' : 'overview';
       }
-
-      function update() {
-        const q = search.value.trim().toLowerCase();
-        clear.hidden = !q;
-        let visibleCount = 0;
-
-        tabs.forEach(btn => {
-          btn.setAttribute('aria-pressed', btn.dataset.mode === currentMode ? 'true' : 'false');
-        });
-
-        // Check bookmarks
-        let savedPaths = [];
-        try { savedPaths = JSON.parse(localStorage.getItem('f-bookmarks') || '[]'); } catch(e){}
-        const savedBtn = document.getElementById('btn-filter-saved');
-        if (savedBtn) savedBtn.textContent = '🔖 Saved (' + savedPaths.length + ')';
-
-        // If tag is __bookmarks__, match only saved items
-        const isBookmarkMode = currentTag === '__bookmarks__';
-
-        // Filter Editorial Cards
-        sections.forEach(sec => {
-          const secMode = sec.dataset.section;
-          let secVisible = 0;
-
-          const secItems = sec.querySelectorAll('.f-work-item');
-          secItems.forEach(item => {
-            const itemMode = item.dataset.mode;
-            const itemPath = item.querySelector('h3 a')?.getAttribute('href') || '';
-            const matchMode = currentMode === 'all' || itemMode === currentMode;
-            
-            let matchTag = true;
-            if (isBookmarkMode) {
-              matchTag = savedPaths.includes(itemPath);
-            } else if (currentTag === 'explainable-trust') {
-              matchTag = itemPath === '/work/explainable-trust';
-            } else if (currentTag !== 'all') {
-              matchTag = (item.dataset.tags && item.dataset.tags.includes(currentTag)) ||
-                         (item.dataset.title && item.dataset.title.includes(currentTag));
-            }
-
-            const matchQuery = !q || 
-              item.dataset.title.includes(q) || 
-              item.dataset.question.includes(q) || 
-              item.dataset.tags.includes(q);
-
-            if (matchMode && matchTag && matchQuery) {
-              item.removeAttribute('hidden');
-              secVisible++;
-              visibleCount++;
-            } else {
-              item.setAttribute('hidden', '');
-            }
-          });
-
-          if (secVisible > 0) {
-            sec.removeAttribute('hidden');
-          } else {
-            sec.setAttribute('hidden', '');
-          }
-          const sectionCount = sec.querySelector('.f-section-count-badge');
-          if (sectionCount) sectionCount.textContent = secVisible + ' work' + (secVisible === 1 ? '' : 's');
-        });
-
-        // Filter Ledger Rows
-        ledgerRows.forEach(row => {
-          const rowMode = row.dataset.mode;
-          const rowPath = row.querySelector('.f-ledger-title')?.getAttribute('href') || '';
-          const matchMode = currentMode === 'all' || rowMode === currentMode;
-          
-          let matchTag = true;
-          if (isBookmarkMode) {
-            matchTag = savedPaths.includes(rowPath);
-          } else if (currentTag === 'explainable-trust') {
-            matchTag = rowPath === '/work/explainable-trust';
-          } else if (currentTag !== 'all') {
-            matchTag = (row.dataset.tags && row.dataset.tags.includes(currentTag)) ||
-                       (row.dataset.title && row.dataset.title.includes(currentTag));
-          }
-
-          const matchQuery = !q || 
-            row.dataset.title.includes(q) || 
-            row.dataset.question.includes(q) || 
-            row.dataset.tags.includes(q);
-
-          if (matchMode && matchTag && matchQuery) {
-            row.removeAttribute('hidden');
-          } else {
-            row.setAttribute('hidden', '');
-          }
-        });
-
-        count.textContent = visibleCount + ' work' + (visibleCount === 1 ? '' : 's') + ' found';
-        emptyState.hidden = visibleCount > 0;
+      function writeUrl(replace = false) {
+        const url = new URL(location.href);
+        const values = {mode: mode === 'all' ? '' : mode, topic: topic.value === 'all' ? '' : topic.value, q: search.value.trim(), saved: savedOnly ? '1' : '', view};
+        for (const [key, value] of Object.entries(values)) value ? url.searchParams.set(key, value) : url.searchParams.delete(key);
+        if (url.href !== location.href) history[replace ? 'replaceState' : 'pushState']({}, '', url);
       }
-
-      resetFilters.addEventListener('click', () => {
-        search.value = '';
-        currentMode = 'all';
-        currentTag = 'all';
-        topicChips.forEach(c => c.classList.toggle('active', c.dataset.tag === 'all'));
-        const newUrl = new URL(window.location);
-        newUrl.searchParams.delete('mode');
-        window.history.replaceState({}, '', newUrl);
+      function render() {
+        const saved = new Set(bookmarks());
+        const terms = search.value.trim().toLowerCase().split(' ').filter(Boolean);
+        const matches = item => (mode === 'all' || item.dataset.mode === mode)
+          && (topic.value === 'all' || item.dataset.topics.split(' ').includes(topic.value))
+          && (!savedOnly || saved.has(item.dataset.path))
+          && terms.every(term => item.dataset.search.includes(term));
+        for (const item of items) item.hidden = !matches(item);
+        for (const row of rows) row.hidden = !matches(row);
+        for (const section of document.querySelectorAll('.f-catalog-section')) {
+          const visible = Array.from(section.querySelectorAll('.f-work-item')).filter(item => !item.hidden).length;
+          section.hidden = !visible;
+          section.querySelector('.f-section-count-badge').textContent = visible + ' work' + (visible === 1 ? '' : 's');
+        }
+        for (const tab of tabs) tab.setAttribute('aria-pressed', String(tab.dataset.mode === mode));
+        for (const button of saveButtons) {
+          const active = saved.has(button.dataset.savePath);
+          button.setAttribute('aria-pressed', String(active));
+          button.setAttribute('aria-label', (active ? 'Remove from saved: ' : 'Save ') + button.dataset.saveTitle);
+          button.title = active ? 'Remove from saved' : 'Save work';
+        }
+        savedToggle.setAttribute('aria-pressed', String(savedOnly));
+        savedToggle.querySelector('span').textContent = 'Saved (' + Array.from(saved).filter(path => knownPaths.has(path)).length + ')';
+        clearSearch.hidden = !search.value;
+        const filtered = mode !== 'all' || topic.value !== 'all' || terms.length || savedOnly;
+        clearFilters.hidden = !filtered;
+        const visibleCount = items.filter(item => !item.hidden).length;
+        document.getElementById('work-count').textContent = visibleCount + (filtered ? ' of ' + items.length + ' works' : ' works');
+        empty.hidden = visibleCount > 0;
+        document.getElementById('work-empty-message').textContent = savedOnly && !bookmarks().some(path => knownPaths.has(path))
+          ? 'Save a work with its bookmark button, then find it here. Saved works stay in this browser.'
+          : 'Try another keyword, or clear the filters to browse all ' + items.length + ' works.';
+        overview.hidden = view === 'index' || !visibleCount;
+        index.hidden = view !== 'index' || !visibleCount;
+        overviewButton.setAttribute('aria-pressed', String(view === 'overview'));
+        indexButton.setAttribute('aria-pressed', String(view === 'index'));
+      }
+      function update(replace = false) { writeUrl(replace); render(); }
+      function reset() {
+        mode = 'all'; topic.value = 'all'; search.value = ''; savedOnly = false;
+        update(); search.focus();
+      }
+      function setView(next) {
+        view = next;
+        try { localStorage.setItem('f-work-view', view); } catch {}
         update();
-        search.focus();
+      }
+      overviewButton.addEventListener('click', () => setView('overview'));
+      indexButton.addEventListener('click', () => setView('index'));
+      topic.addEventListener('change', () => update());
+      savedToggle.addEventListener('click', () => { savedOnly = !savedOnly; update(); });
+      search.addEventListener('input', () => update(true));
+      clearSearch.addEventListener('click', () => { search.value = ''; update(true); search.focus(); });
+      clearFilters.addEventListener('click', reset);
+      document.getElementById('work-reset-filters').addEventListener('click', reset);
+      for (const tab of tabs) tab.addEventListener('click', () => { mode = tab.dataset.mode; update(); });
+      for (const button of saveButtons) button.addEventListener('click', () => {
+        const saved = new Set(bookmarks());
+        saved.has(button.dataset.savePath) ? saved.delete(button.dataset.savePath) : saved.add(button.dataset.savePath);
+        try { localStorage.setItem('f-bookmarks', JSON.stringify(Array.from(saved))); } catch { return; }
+        render();
       });
-
-      search.addEventListener('input', update);
-      clear.addEventListener('click', () => {
-        search.value = '';
-        search.focus();
-        update();
+      for (const tag of document.querySelectorAll('.f-tag-click')) tag.addEventListener('click', () => {
+        search.value = tag.dataset.tag;
+        update(true); search.focus();
+        search.scrollIntoView({behavior: 'smooth', block: 'center'});
       });
-
-      tabs.forEach(btn => {
-        btn.addEventListener('click', () => {
-          currentMode = btn.dataset.mode;
-          const newUrl = new URL(window.location);
-          if (currentMode === 'all') {
-            newUrl.searchParams.delete('mode');
-          } else {
-            newUrl.searchParams.set('mode', currentMode);
-          }
-          window.history.replaceState({}, '', newUrl);
-          update();
-        });
+      window.addEventListener('popstate', () => { readUrl(); render(); });
+      window.addEventListener('storage', event => { if (event.key === 'f-bookmarks') render(); });
+      window.addEventListener('pageshow', () => { readUrl(); render(); });
+      document.addEventListener('keydown', event => {
+        if (document.querySelector('dialog[open]') || event.ctrlKey || event.metaKey || event.altKey) return;
+        const editing = event.target.isContentEditable || event.target.closest('input, textarea, select');
+        if (event.key === 'Escape' && event.target === search && search.value) {
+          search.value = ''; update(true); return;
+        }
+        if (editing) return;
+        if (event.key === '/') { event.preventDefault(); search.focus(); }
+        if (event.key.toLowerCase() === 'v') setView(view === 'index' ? 'overview' : 'index');
+        if (['1','2','3','4','5'].includes(event.key)) tabs[Number(event.key) - 1]?.click();
       });
-
-      // Power Keyboard Shortcuts (/, Esc, V, 1-5)
-      document.addEventListener('keydown', e => {
-        if (document.querySelector('dialog[open]')) return;
-        if (e.ctrlKey || e.metaKey || e.altKey) return;
-        if (e.target.isContentEditable || e.target.matches('textarea, input:not(#work-search), select')) return;
-        if (e.key === '/' && document.activeElement !== search) {
-          e.preventDefault();
-          search.focus();
-        }
-        if (e.key === 'Escape') {
-          search.value = '';
-          currentTag = 'all';
-          topicChips.forEach(c => c.classList.toggle('active', c.dataset.tag === 'all'));
-          update();
-          search.blur();
-        }
-        if ((e.key === 'v' || e.key === 'V') && document.activeElement !== search) {
-          const isCurrentlyTable = ledgerContainer.classList.contains('is-active');
-          setView(!isCurrentlyTable);
-        }
-        if (['1','2','3','4','5'].includes(e.key) && document.activeElement !== search) {
-          const idx = parseInt(e.key) - 1;
-          if (tabs[idx]) {
-            tabs[idx].click();
-          }
-        }
-      });
-
-      // Initial run
-      update();
+      readUrl(); render();
     })();
   </script>
 </body>
 </html>`;
 }
+
 
 function casePage(item, nonce) {
   const doc = caseDocuments[item.path] || { assets: [], body: "" };
@@ -6840,8 +2593,8 @@ function casePage(item, nonce) {
         ${relatedWorks.map(rw => `
           <a href="${rw.path}" class="f-related-card">
             <div class="f-related-card-top">
-              <span class="f-related-mode">${escapeHtml(rw.mode)}</span>
-              <span class="f-related-read">${rw.readMinutes || 8} min read</span>
+              <span class="f-related-mode">${escapeHtml(finalModes.find(mode => mode.id === rw.mode)?.label || rw.mode)}</span>
+              <span class="f-related-read">${getReadingStats(caseDocuments[rw.path]?.body || '').minutes} min read</span>
             </div>
             <h4>${escapeHtml(rw.title)}</h4>
             <p class="f-related-question">“${escapeHtml(rw.question)}”</p>
@@ -6867,18 +2620,11 @@ function casePage(item, nonce) {
     <script nonce="${nonce}">
       (()=>{
         const bar = document.getElementById('f-progress-bar');
-        window.addEventListener('scroll', () => {
-          const total = document.documentElement.scrollHeight - window.innerHeight;
-          if (total > 0) {
-            const pct = (window.scrollY / total) * 100;
-            bar.style.width = pct + '%';
-          }
-        }, { passive: true });
-
         const prose = document.getElementById('record');
         const tocList = document.getElementById('f-toc-list');
         if (prose && tocList) {
-          const headings = [...prose.querySelectorAll('h1, h2, h3')];
+          const mainHeadings = [...prose.querySelectorAll('h1[id], h2[id]')];
+          const headings = mainHeadings.length ? mainHeadings : [...prose.querySelectorAll('h3[id]')];
           headings.forEach(h => {
             if (!h.id) return;
             const li = document.createElement('li');
@@ -6893,39 +2639,88 @@ function casePage(item, nonce) {
             if (mobileToc) mobileToc.appendChild(li.cloneNode(true));
           });
 
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const id = entry.target.id;
-                document.querySelectorAll('.f-toc-link').forEach(link => {
-                  link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
-                });
-              }
+          const tocLinks = [...document.querySelectorAll('.f-toc-link')];
+          function updateReadingPosition() {
+            const visibleHeadings = headings.filter(h => h.getClientRects().length);
+            let active = visibleHeadings[0];
+            for (const heading of visibleHeadings) {
+              if (heading.getBoundingClientRect().top <= 140) active = heading;
+              else break;
+            }
+            tocLinks.forEach(link => {
+              const selected = !!active && link.hash === '#' + active.id;
+              link.classList.toggle('is-active', selected);
+              if (selected) link.setAttribute('aria-current', 'location');
+              else link.removeAttribute('aria-current');
             });
-          }, { rootMargin: '-80px 0px -70% 0px' });
-
-          headings.forEach(h => observer.observe(h));
+            if (bar) {
+              const bounds = prose.getBoundingClientRect();
+              const total = Math.max(1, bounds.height - window.innerHeight + 100);
+              bar.style.width = Math.max(0, Math.min(100, (100 - bounds.top) / total * 100)) + '%';
+            }
+          }
+          let readingFrame;
+          function scheduleReadingPosition() {
+            if (readingFrame) return;
+            readingFrame = requestAnimationFrame(() => { readingFrame = null; updateReadingPosition(); });
+          }
+          window.addEventListener('scroll', scheduleReadingPosition, { passive: true });
+          window.addEventListener('resize', scheduleReadingPosition);
+          new ResizeObserver(scheduleReadingPosition).observe(prose);
+          function revealSection(hash) {
+            let id;
+            try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+            const heading = document.getElementById(id);
+            if (!heading || !prose.contains(heading)) return;
+            let ancestor = heading.parentElement;
+            while (ancestor && ancestor !== prose) {
+              if (ancestor.tagName === 'DETAILS') ancestor.open = true;
+              ancestor = ancestor.parentElement;
+            }
+            heading.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+            scheduleReadingPosition();
+          }
+          tocLinks.forEach(link => link.addEventListener('click', e => {
+            e.preventDefault();
+            const hash = link.hash;
+            const mobileToc = link.closest('.f-mobile-toc');
+            if (mobileToc) mobileToc.open = false;
+            history.pushState(null, '', hash);
+            revealSection(hash);
+          }));
+          window.addEventListener('hashchange', () => revealSection(location.hash));
+          if (location.hash) revealSection(location.hash);
+          updateReadingPosition();
         }
 
         
         // Font sizing controls
-        let baseFontSize = 18.5;
         const recordEl = document.getElementById('record');
         const decBtn = document.getElementById('f-btn-font-dec');
         const incBtn = document.getElementById('f-btn-font-inc');
-        if (recordEl && decBtn && incBtn) {
-          decBtn.addEventListener('click', () => {
-            if (baseFontSize > 15) {
-              baseFontSize = Math.max(15, baseFontSize - 1.5);
-              recordEl.style.setProperty('--text-lg', baseFontSize + 'px');
-            }
+        const resetSizeBtn = document.getElementById('f-btn-font-reset');
+        if (recordEl && decBtn && incBtn && resetSizeBtn) {
+          const defaultSize = parseFloat(getComputedStyle(recordEl).getPropertyValue('--reading-size')) || 18;
+          let readingSize = defaultSize;
+          try {
+            const savedSize = Number(localStorage.getItem('f-reading-size'));
+            if (savedSize >= 15 && savedSize <= 25) readingSize = savedSize;
+          } catch {}
+          function updateSize(save = false) {
+            recordEl.style.setProperty('--reading-size', readingSize + 'px');
+            resetSizeBtn.textContent = readingSize + 'px';
+            decBtn.disabled = readingSize <= 15;
+            incBtn.disabled = readingSize >= 25;
+            if (save) { try { localStorage.setItem('f-reading-size', String(readingSize)); } catch {} }
+          }
+          decBtn.addEventListener('click', () => { readingSize = Math.max(15, readingSize - 1); updateSize(true); });
+          incBtn.addEventListener('click', () => { readingSize = Math.min(25, readingSize + 1); updateSize(true); });
+          resetSizeBtn.addEventListener('click', () => {
+            readingSize = defaultSize;
+            try { localStorage.removeItem('f-reading-size'); } catch {}
+            updateSize();
           });
-          incBtn.addEventListener('click', () => {
-            if (baseFontSize < 25) {
-              baseFontSize = Math.min(25, baseFontSize + 1.5);
-              recordEl.style.setProperty('--text-lg', baseFontSize + 'px');
-            }
-          });
+          updateSize();
         }
 
         // Bookmark toggle
@@ -6933,17 +2728,26 @@ function casePage(item, nonce) {
         if (bmBtn) {
           const path = bmBtn.dataset.path;
           let bookmarks = [];
-          try { bookmarks = JSON.parse(localStorage.getItem('f-bookmarks') || '[]'); } catch(e){}
+          function readBookmarks() {
+            try {
+              const saved = JSON.parse(localStorage.getItem('f-bookmarks') || '[]');
+              bookmarks = Array.isArray(saved) ? saved.filter(value => typeof value === 'string') : [];
+            } catch { bookmarks = []; }
+          }
           function updateBmUi() {
             const isSaved = bookmarks.includes(path);
             bmBtn.classList.toggle('is-saved', isSaved);
             bmBtn.setAttribute('aria-pressed', String(isSaved));
             const label = bmBtn.querySelector('.bm-text');
-            if (label) label.textContent = isSaved ? 'Bookmarked ✓' : 'Bookmark';
+            if (label) label.textContent = isSaved ? 'Saved ✓' : 'Save';
           }
+          readBookmarks();
           updateBmUi();
+          window.addEventListener('pageshow', () => { readBookmarks(); updateBmUi(); });
+          window.addEventListener('storage', e => { if (e.key === 'f-bookmarks') { readBookmarks(); updateBmUi(); } });
 
           bmBtn.addEventListener('click', () => {
+            readBookmarks();
             const idx = bookmarks.indexOf(path);
             if (idx === -1) {
               bookmarks.push(path);
@@ -6964,8 +2768,8 @@ function casePage(item, nonce) {
             const hash = anchor.getAttribute('href');
             const fullUrl = window.location.origin + window.location.pathname + hash;
             window.history.pushState(null, '', hash);
-            const targetEl = document.querySelector(hash);
-            if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+            const targetEl = document.getElementById(decodeURIComponent(hash.slice(1)));
+            if (targetEl) targetEl.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
             if (navigator.clipboard && navigator.clipboard.writeText) {
               navigator.clipboard.writeText(fullUrl).then(() => {
                 window.showToast && window.showToast('Direct section link copied to clipboard 🔗');
@@ -7049,6 +2853,10 @@ function casePage(item, nonce) {
 
           // Image mode vs document mode
           modal.classList.toggle('is-image-mode', isImage);
+          modal.classList.remove('is-fullscreen');
+          modalFullscreen.textContent = '\\u26f6';
+          modal.setAttribute('aria-label', title + ' preview');
+          modalFrame.title = title + ' preview';
 
           if (!isImage) {
             modalTitle.textContent = title;
@@ -7134,6 +2942,14 @@ function casePage(item, nonce) {
         }
 
         document.querySelectorAll('.f-asset-trigger').forEach(btn => {
+          if (btn.tagName !== 'BUTTON' && btn.tagName !== 'A') {
+            btn.setAttribute('role', 'button');
+            btn.tabIndex = 0;
+            btn.setAttribute('aria-label', 'Enlarge ' + (btn.dataset.title || 'image'));
+            btn.addEventListener('keydown', e => {
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+            });
+          }
           btn.addEventListener('click', (e) => {
             e.preventDefault();
             const target = e.currentTarget;
@@ -7144,6 +2960,26 @@ function casePage(item, nonce) {
               badge: target.dataset.badge
             });
           });
+        });
+        document.querySelectorAll('.f-table-wrap').forEach(table => {
+          table.tabIndex = 0;
+          table.setAttribute('role', 'region');
+          table.setAttribute('aria-label', 'Scrollable table');
+          const hint = document.createElement('p');
+          hint.className = 'f-table-hint';
+          hint.textContent = 'Scroll to see the full table →';
+          table.before(hint);
+          const updateTableHint = () => { hint.hidden = table.scrollWidth <= table.clientWidth + 1; };
+          new ResizeObserver(updateTableHint).observe(table);
+          updateTableHint();
+        });
+        document.querySelectorAll('.f-anchor').forEach(anchor => {
+          const headingText = anchor.parentElement.textContent.replace(/^#\\s*/, '');
+          anchor.setAttribute('aria-label', 'Copy link to ' + headingText);
+          anchor.parentElement.setAttribute('aria-label', headingText);
+        });
+        document.querySelectorAll('.f-asset-ext-btn').forEach(link => {
+          if (!link.getAttribute('aria-label')) link.setAttribute('aria-label', 'Open document in Google Drive');
         });
       })();
     </script>
@@ -7160,45 +2996,44 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
       <div class="f-wrap">
         <div class="f-crumb">
           <a href="/work">Work Library</a>
-          <span>/</span>
-          <span>${escapeHtml(item.type)}</span>
+          <span class="f-crumb-divider" aria-hidden="true">/</span>
+          <span>${escapeHtml(modeLabel)}</span>
         </div>
         <h1>${escapeHtml(item.title)}</h1>
         <p class="f-case-dek">${escapeHtml(item.question)}</p>
         <div class="f-case-hero-stats">
-          ${assetCount > 0 ? `<span class="f-hero-stat">📄 ${assetCount} artifact${assetCount > 1 ? 's' : ''}</span>` : ''}
-          <span class="f-hero-stat">⏱ ~${readMinutes} min read</span>
+          <span class="f-hero-stat">${readMinutes} min read</span>
+          ${assetCount > 0 ? `<span class="f-hero-stat">${assetCount} artifact${assetCount > 1 ? 's' : ''}</span>` : ''}
         </div>
       </div>
     </section>
 
     <div class="f-case-meta">
-      <div class="f-wrap f-case-meta-grid">
+      <dl class="f-wrap f-case-meta-grid">
         <div class="f-meta-cell">
-          <b>Maturity</b>
-          <span>${escapeHtml(item.maturity)}</span>
+          <dt>Maturity</dt>
+          <dd>${escapeHtml(item.maturity)}</dd>
         </div>
         <div class="f-meta-cell">
-          <b>Research Type</b>
-          <span>${escapeHtml(item.type)}</span>
+          <dt>Research Type</dt>
+          <dd>${escapeHtml(item.type)}</dd>
         </div>
         <div class="f-meta-cell">
-          <b>Research Mode</b>
-          <span>${escapeHtml(modeLabel)}</span>
+          <dt>Research Mode</dt>
+          <dd>${escapeHtml(modeLabel)}</dd>
         </div>
         <div class="f-meta-cell">
-          <b>Evidence Basis</b>
-          <span>${escapeHtml(item.evidenceBasis || 'Outside-In · Public Evidence')}</span>
+          <dt>Evidence Basis</dt>
+          <dd>${escapeHtml(item.evidenceBasis || 'Outside-In · Public Evidence')}</dd>
         </div>
-      </div>
+      </dl>
     </div>
 
     <div class="f-wrap f-case-reading">
-      <aside class="f-case-rail">
+      <aside class="f-case-rail" aria-label="Table of contents">
         <div class="f-rail-title">Contents</div>
         <ul id="f-toc-list" class="f-toc-list"></ul>
         <div class="f-rail-actions">
-          <button type="button" id="f-cite-btn" class="f-rail-btn" data-title="${escapeHtml(item.title)}">Cite this monograph</button>
           <a href="/work" class="f-rail-btn">← All Works</a>
         </div>
       </aside>
@@ -7206,11 +3041,13 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
       <article class="f-prose" id="record">
         <div class="f-case-action-bar" role="group" aria-label="Reading controls">
           <div class="f-case-action-left">
-            <button type="button" id="f-btn-bookmark" class="f-action-pill" data-path="${escapeHtml(item.path)}" aria-pressed="false"><span class="bm-text">Bookmark</span></button>
+            <button type="button" id="f-btn-bookmark" class="f-action-pill" data-path="${escapeHtml(item.path)}" aria-pressed="false"><span class="bm-text">Save</span></button>
             <button type="button" id="f-btn-copy-url" class="f-action-pill">Copy link</button>
+            <button type="button" id="f-cite-btn" class="f-action-pill" data-title="${escapeHtml(item.title)}">Cite</button>
           </div>
           <div class="f-case-action-right">
             <button type="button" id="f-btn-font-dec" class="f-action-pill" aria-label="Decrease text size">A−</button>
+            <button type="button" id="f-btn-font-reset" class="f-action-pill f-reading-size" aria-label="Reset text size" title="Reset text size">18px</button>
             <button type="button" id="f-btn-font-inc" class="f-action-pill" aria-label="Increase text size">A+</button>
           </div>
         </div>
@@ -7229,17 +3066,17 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
       </article>
     </div>
 
-    <dialog id="f-asset-modal" class="f-asset-modal">
+    <dialog id="f-asset-modal" class="f-asset-modal" aria-label="Artifact preview">
       <div class="f-modal-topbar">
         <div class="f-modal-title-wrap">
           <span id="f-modal-badge" class="f-modal-badge">PDF</span>
           <span id="f-modal-title" class="f-modal-title">Document</span>
         </div>
         <div class="f-modal-actions">
-          <button id="f-modal-fullscreen" class="f-modal-btn" title="Toggle fullscreen">&#x26F6;</button>
-          <a id="f-modal-drive" class="f-modal-btn" href="#" target="_blank" rel="noreferrer" title="Open in Google Drive">&#x2197;</a>
-          <a id="f-modal-download" class="f-modal-btn" href="#" download title="Download">&#x2913;</a>
-          <button id="f-modal-close" class="f-modal-btn close" title="Close (Esc)">&#x2715;</button>
+          <button id="f-modal-fullscreen" class="f-modal-btn" aria-label="Toggle fullscreen" title="Toggle fullscreen">&#x26F6;</button>
+          <a id="f-modal-drive" class="f-modal-btn" href="#" target="_blank" rel="noreferrer" aria-label="Open in Google Drive" title="Open in Google Drive">&#x2197;</a>
+          <a id="f-modal-download" class="f-modal-btn" href="#" download aria-label="Download document" title="Download">&#x2913;</a>
+          <button id="f-modal-close" class="f-modal-btn close" aria-label="Close preview" title="Close (Esc)">&#x2715;</button>
         </div>
       </div>
       <div class="f-modal-content">
@@ -7247,17 +3084,17 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
           <div class="f-spin-circle"></div>
           <span>Loading preview&hellip;</span>
         </div>
-        <iframe id="f-modal-frame" class="f-modal-frame" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms" style="display:none;"></iframe>
+        <iframe id="f-modal-frame" class="f-modal-frame" title="Document preview" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms" style="display:none;"></iframe>
         <img id="f-modal-img" class="f-modal-img" style="display:none;" alt="Preview">
         <div id="f-modal-error" hidden role="status" style="padding:24px;text-align:center;">
           <p>Preview could not be loaded.</p>
           <a id="f-modal-error-link" class="f-about-btn secondary" target="_blank" rel="noreferrer">Open in Google Drive ↗</a>
         </div>
-        <button id="f-modal-img-close" class="f-modal-img-close" title="Close">&#x2715;</button>
+        <button id="f-modal-img-close" class="f-modal-img-close" aria-label="Close preview" title="Close">&#x2715;</button>
       </div>
     </dialog>
   </main>
-  ${layoutFooter(item.maturity, nonce)}
+  ${layoutFooter(item.maturity, nonce, false)}
   ${clientScript}
 </body>
 </html>`;
@@ -7272,7 +3109,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
   ${layoutHeader("about", nonce)}
   <main id="about-content">
     <!-- 1. Artistic Hero with Status & Coordinates -->
-    <section class="f-about-hero-artistic" style="padding: 48px 0 38px;">
+    <section class="f-about-hero-artistic">
       <div class="f-wrap">
         <h1>Commercial ground truth first.<br><em>Systems, product governance &amp; AI trust next.</em></h1>
         <p class="f-about-hero-dek">
@@ -7291,7 +3128,7 @@ ${layoutHead("About — Phạm Thanh Phú", "About Phạm Thanh Phú — Busines
           <span class="f-coord-tag"><strong>FOCUS:</strong> Business &amp; Product Ops</span>
         </div>
       
-        <div class="f-about-hero-actions" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+        <div class="f-about-hero-actions">
           <a href="mailto:phamthanhphu97@gmail.com?subject=Contact%20-%20Pham%20Thanh%20Phu" class="f-about-btn primary">Direct Email: phamthanhphu97@gmail.com ✉</a>
           <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn Profile ↗</a>
           <a href="mailto:phamthanhphu97@gmail.com?subject=Request%20Full%20CV%20-%20Pham%20Thanh%20Phu" class="f-about-btn secondary">Request Full CV / Dossier 📄</a>
@@ -7554,26 +3391,12 @@ async function handleRequest(request, env, ctx) {
     });
   }
 
-  // 2. API Health Endpoint
-  if (path === "/api/health") {
-    return new Response(JSON.stringify({
-      status: "ok",
-      app_url: "/explainable/"
-    }), {
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "X-Content-Type-Options": "nosniff",
-        "Cache-Control": "no-store"
-      }
-    });
-  }
-
-  // 3. Generate cryptographic nonce per-request for CSP
+  // Generate cryptographic nonce per-request for CSP
   const nonceBytes = new Uint8Array(16);
   crypto.getRandomValues(nonceBytes);
   const nonce = btoa(String.fromCharCode(...nonceBytes));
 
-  // 4. Security Headers for HTML Pages
+  // Security Headers for HTML Pages
   const htmlHeaders = {
     "Content-Type": "text/html; charset=utf-8",
     "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
@@ -7598,7 +3421,7 @@ async function handleRequest(request, env, ctx) {
     return new Response(workPage(nonce), { headers: htmlHeaders });
   }
 
-  // Redirect legacy app subpaths directly to the active subdomain
+  // Redirect legacy app subpaths to the integrated showcase
   if (path === "/apps/explainable-trust" || path === "/apps/explainable-trust/" || path === "/apps/explainable-trust_old" || path.startsWith("/apps/explainable-trust/")) {
     return Response.redirect(new URL("/explainable/", request.url).href, 301);
   }
@@ -7617,7 +3440,7 @@ ${layoutHead("404 Not Found — Phạm Thanh Phú", "Research monograph not foun
   ${layoutHeader("", nonce)}
   <main class="f-wrap" style="padding:80px 0;">
     <span class="f-overline" style="color:var(--copper);font-family:var(--font-mono);font-size:var(--text-xs);font-weight:var(--fw-bold);letter-spacing:var(--tracking-wide);text-transform:uppercase;">404 Error</span>
-    <h1 style="color:var(--navy);font-family:var(--font-serif);font-size:var(--text-3xl);margin:8px 0 16px;">Research Document Not Found</h1>
+    <h1 style="color:var(--navy);font-family:var(--font-display);font-size:var(--text-3xl);margin:8px 0 16px;">Research Document Not Found</h1>
     <p style="color:var(--muted);font-family:var(--font-sans);font-size:var(--text-md);margin-bottom:24px;">The document link you are looking for may have been updated or moved to a new section in the archive.</p>
     <a href="/work" class="f-rail-btn" style="display:inline-block;padding:10px 18px;">← Trở về Thư viện Nghiên cứu (Work Library)</a>
   </main>

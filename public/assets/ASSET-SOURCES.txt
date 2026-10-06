@@ -1,0 +1,30 @@
+Editorial homepage assets — 6 October 2026
+
+Typography
+Nunito (headings), Inter (body/UI), JetBrains Mono (technical metadata).
+Official Google Fonts files, self-hosted Latin, Latin Extended and Vietnamese subsets.
+Source stylesheet: https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Nunito:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap
+SIL Open Font License copies are included in assets/fonts/.
+The shared font definitions and roles are in assets/fonts.css.
+
+Hero photograph: editorial-cafe-v2.webp
+Generated with the built-in image_gen tool using the supplied homepage mockup as a visual reference.
+It is a decorative atmosphere image, not a photograph of Phu's personal workplace.
+Final prompt:
+Use case: photorealistic-natural. Asset type: a standalone editorial website hero photograph.
+The attached image is a reference website mockup; ONLY use the warm cafe photograph in the upper right as the visual reference, not the website layout.
+Generate a landscape 4:3 photograph matching that reference: golden dried flowering branches sharply in focus across the left foreground; a softly blurred quiet cafe interior on the right with warm cream walls, dark wooden chairs and tables, one modest pendant light, a couple of framed pictures.
+Natural camera texture, intimate calm editorial atmosphere, amber and warm brown accents, natural window light, shallow depth of field.
+Image fills the entire canvas. No people, no logos, no text, no UI, no borders, no gradients or graphic effects.
+This is a decorative atmosphere photo, not a real personal portrait or case artifact.
+
+VieWorld imagery
+vieworld-meadow.webp: optimized from Vieworld/static/images/presence-meadow.png.
+
+Case imagery
+fanme-cover.webp: existing FanMe Controlled Growth Pilot case cover from Drive file 1CrBb6akpk5skhweDvBlmARZQaoRQSY-U.
+vinamilk-cover.webp: first-page preview of Vinamilk Paper I, Trusted Nutrition Product-Service Discovery, from Drive file 1nPQ5ijQQ_i4KoqyFtg1JIWzBiNthoAbj.
+shopee-cover.webp: existing Shopee case cover from Drive file 1usqgZCJbA7udggiW8W9UBlv3NgGJb0WM.
+explainable-cover.webp: screenshot of the local fictional Explainable Trust scenario and reasoning graph.
+
+All case URLs and long-form content are retained.

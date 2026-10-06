@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { PanelLeft, PanelRight, RotateCcw } from 'lucide-react';
 import { LeftSidebar } from './components/LeftSidebar';
 import { RightCaseRecord } from './components/RightCaseRecord';
-import { ReasoningGraphView } from './components/ReasoningGraphView';
 import { ReferenceDetailModal } from './components/ReferenceDetailModal';
 import { ExportModal } from './components/ExportModal';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -14,6 +13,10 @@ import { useLanguage } from './contexts/LanguageContext';
 import { showcaseText } from './lib/showcaseText';
 import type { CaseReference } from './types';
 import { caseReferenceFromId } from './presentation/caseReferences';
+
+const ReasoningGraphView = lazy(() =>
+  import('./components/ReasoningGraphView').then(module => ({ default: module.ReasoningGraphView }))
+);
 
 export default function App() {
   const { locale } = useLanguage();
@@ -51,7 +54,7 @@ export default function App() {
             <ol className="grid grid-cols-4 gap-1.5" aria-label={t.narrative}>{t.steps.map((name, i) => <li key={i}><button onClick={() => updateCase(current.id, { step: i })} aria-current={i === current.step ? 'step' : undefined} className={`w-full text-left rounded-lg px-2 py-2 text-xs sm:text-sm border ${i === current.step ? 'bg-slate-900 text-white border-slate-900' : 'bg-slate-50 text-slate-600 border-slate-200'}`}><span className="block font-mono text-xs opacity-70">0{i + 1}</span>{name}</button></li>)}</ol>
           </div>
           <div className="flex gap-3 border-b border-slate-200 px-4 sm:px-6 bg-white shrink-0" role="tablist" aria-label="Case view"><button role="tab" aria-selected={tab === 'scenario'} onClick={() => setTab('scenario')} className={`py-3 text-sm border-b-2 ${tab === 'scenario' ? 'border-slate-900 font-semibold' : 'border-transparent text-slate-500'}`}>{t.narrative}</button><button role="tab" aria-selected={tab === 'graph'} onClick={() => setTab('graph')} className={`py-3 text-sm border-b-2 ${tab === 'graph' ? 'border-slate-900 font-semibold' : 'border-transparent text-slate-500'}`}>{t.graph}</button></div>
-          {tab === 'graph' ? <div className="flex-1 min-h-0" role="tabpanel"><ReasoningGraphView key={`${current.id}-${current.step}`} caseData={presentation} onSelectReference={selectReference} focusedReference={selected} className="h-full" /></div> : <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5" role="tabpanel">
+          {tab === 'graph' ? <div className="flex-1 min-h-0" role="tabpanel"><Suspense fallback={<div role="status" className="h-full grid place-items-center text-sm text-slate-500">{t.graph}…</div>}><ReasoningGraphView key={`${current.id}-${current.step}`} caseData={presentation} onSelectReference={selectReference} focusedReference={selected} className="h-full" /></Suspense></div> : <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5" role="tabpanel">
             <article className="bg-white border border-slate-200 rounded-xl p-5"><p className="text-xs uppercase tracking-wider text-slate-500 mb-2">{t.step} {current.step + 1} / 4</p><h2 className="font-semibold text-lg mb-3">{t.steps[current.step]}</h2><p className="text-sm sm:text-base leading-7">{rich(SCENARIO_STEPS[current.step].summary)}</p></article>
             <section><h2 className="font-semibold text-sm mb-3">{t.sources}</h2><div className="space-y-3">{ledger.statements.map(s => <article id={`statement-${s.id}`} key={s.id} className={`bg-white border rounded-xl p-4 ${selected?.id === s.id ? 'border-indigo-500' : 'border-slate-200'}`}><CaseKeyButton reference={{ kind: 'statement', id: s.id }} onSelect={selectReference} /><p className="mt-2 text-sm leading-6 whitespace-pre-wrap">{s.text}</p></article>)}{ledger.evidence.map(e => <article key={e.id} className="bg-white border border-slate-200 rounded-xl p-4"><div className="flex items-center gap-2"><CaseKeyButton reference={{ kind: 'evidence', id: e.id }} onSelect={selectReference} /><h3 className="font-medium text-sm">{e.label}</h3></div><p className="mt-2 text-sm leading-6 whitespace-pre-wrap">{e.content.raw_text}</p></article>)}</div></section>
           </div>}
