@@ -3,8 +3,8 @@
 @import "@xyflow/react/dist/style.css";
 
 @theme {
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: "Nunito", "Inter", sans-serif;
+  --font-sans: "STIX Two Text", Georgia, "Times New Roman", serif;
+  --font-display: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -12,7 +12,7 @@
   body {
     font-family: var(--font-sans);
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
   code, pre, .font-mono {
     font-family: var(--font-mono);
   }

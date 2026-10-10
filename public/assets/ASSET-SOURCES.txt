@@ -1,9 +1,11 @@
 Editorial homepage assets — 6 October 2026
 
-Typography
-Nunito (headings), Inter (body/UI), JetBrains Mono (technical metadata).
+Typography — updated 10 October 2026
+Be Vietnam Pro (headings, weights 600/700/800), STIX Two Text (body/UI, normal and italic, weights 400–700), JetBrains Mono (technical metadata).
 Official Google Fonts files, self-hosted Latin, Latin Extended and Vietnamese subsets.
-Source stylesheet: https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Nunito:wght@400..800&family=JetBrains+Mono:wght@400..700&display=swap
+Heading/body source stylesheet: https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap
+Monospace source stylesheet: https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..700&display=swap
+Licenses: https://github.com/google/fonts/tree/main/ofl/bevietnampro and https://github.com/google/fonts/tree/main/ofl/stixtwotext
 SIL Open Font License copies are included in assets/fonts/.
 The shared font definitions and roles are in assets/fonts.css.
 

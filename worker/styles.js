@@ -149,14 +149,13 @@ export const siteCss = String.raw`:root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   a { color: inherit; }
   button, input, select { font-family: var(--font-sans); }
   :focus-visible { outline: 2px solid var(--copper); outline-offset: 4px; }
 
   /* Modern Typography Enhancements */
-  h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); text-wrap: balance; }
   p, blockquote, li { text-wrap: pretty; }
 
   .f-skip {
@@ -633,7 +632,7 @@ export const siteCss = String.raw`:root {
 
   .f-prose h3 { position: relative; margin: 34px 0 14px; font: 800 clamp(1.25rem, 2vw, 1.5rem)/1.3 var(--font-display); color: var(--navy); }
 
-  .f-prose h4 { margin: 26px 0 12px; font: 600 18px/1.4 var(--font-sans); color: var(--navy); }
+  .f-prose h4 { margin: 26px 0 12px; font: 600 18px/1.4 var(--font-display); color: var(--navy); }
   .f-prose, .f-prose :is(h1,h2,h3,h4) { scroll-margin-top: 104px; }
 
   .f-prose strong { font-weight: 600; color: var(--navy); }

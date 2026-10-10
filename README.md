@@ -27,7 +27,7 @@ The preview runs at `http://127.0.0.1:3000`. For frontend editing with hot reloa
 
 `worker/index.js` retains the portfolio content and page renderer. `worker/case-updates-2026-10.js` contains the PNJ October reader and the Shopee commerce-recovery extension; the earlier research cuts remain intact. The renderer runs **at build time**, producing HTML and assets in `dist/`. The build replaces request nonces with per-page CSP hashes. No Worker, Express server, model endpoint, or secrets are shipped. Use the root preview for the integrated artifact; rebuild after portfolio edits.
 
-The portfolio's shared layout and responsive styles live in `worker/styles.js`. Homepage, Work Library, About, and all case pages share the editorial paper/navy/copper palette. `public/assets/fonts.css` defines self-hosted Nunito headings, Inter body/UI, and JetBrains Mono metadata; the showcase imports the same font definitions. Asset sources and font licenses are retained under `public/assets/`.
+The portfolio's shared layout and responsive styles live in `worker/styles.js`. Homepage, Work Library, About, and all case pages share the editorial paper/navy/copper palette. `public/assets/fonts.css` defines self-hosted Be Vietnam Pro headings, STIX Two Text body/UI (including italic), and JetBrains Mono metadata; the showcase imports the same font definitions. Asset sources and font licenses are retained under `public/assets/`.
 
 ## Explainable Trust
 
