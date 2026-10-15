@@ -3,10 +3,19 @@
 @import "@xyflow/react/dist/style.css";
 
 @theme {
-  --font-sans: "STIX Two Text", Georgia, "Times New Roman", serif;
+  --font-sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "STIX Two Text", Georgia, "Times New Roman", serif;
   --font-display: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
+
+/* The portfolio frame follows its saved theme; evidence colors retain their meaning. */
+.showcase-header { --frame-paper: #fcfbf8; --frame-ink: #0b2348; --frame-muted: #586b84; --frame-line: #e7dfd4; --frame-accent: #b84f2d; background: var(--frame-paper); color: var(--frame-ink); border-color: var(--frame-line); }
+.showcase-header[data-theme="dark"] { --frame-paper: #0e161c; --frame-ink: #f0f6fc; --frame-muted: #9db2c2; --frame-line: #223746; --frame-accent: #f09568; }
+.showcase-muted { color: var(--frame-muted); }
+.showcase-brand { text-decoration: none; }
+.showcase-brand:hover, .showcase-portfolio { color: var(--frame-accent); }
+[role="tabpanel"] article > p:not(:first-child) { font-family: var(--font-serif); }
 
 @layer base {
   body {

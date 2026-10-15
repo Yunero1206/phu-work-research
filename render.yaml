@@ -17,7 +17,42 @@ services:
       - path: /*
         name: X-Frame-Options
         value: SAMEORIGIN
-      - path: /*
+      # Page routes revalidate; asset rules below do not overlap these paths.
+      - path: /
+        name: Cache-Control
+        value: no-cache
+      - path: /work
+        name: Cache-Control
+        value: no-cache
+      - path: /work/*
+        name: Cache-Control
+        value: no-cache
+      - path: /about
+        name: Cache-Control
+        value: no-cache
+      - path: /explainable/
+        name: Cache-Control
+        value: no-cache
+      - path: /**/*.html
+        name: Cache-Control
+        value: no-cache
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache
+      - path: /404.html
+        name: Cache-Control
+        value: no-cache
+      # Only generated, content-hashed assets are immutable.
+      - path: /assets/site-*.css
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /assets/fonts/*.woff2
+        name: Cache-Control
+        value: public, max-age=86400, stale-while-revalidate=604800
+      - path: /assets/*.webp
+        name: Cache-Control
+        value: public, max-age=86400, stale-while-revalidate=604800
+      - path: /assets/fonts.css
         name: Cache-Control
         value: no-cache
       - path: /explainable/assets/*

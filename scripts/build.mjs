@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import worker, { portfolioRoutes } from '../worker/index.js';
+import { siteCss } from '../worker/styles.js';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const dist = resolve(root, 'dist');
@@ -11,12 +12,14 @@ const dist = resolve(root, 'dist');
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 await cp(resolve(root, 'public'), dist, { recursive: true });
+const cssName = `site-${createHash('sha256').update(siteCss).digest('hex').slice(0, 12)}.css`;
+await writeFile(resolve(dist, 'assets', cssName), siteCss);
 const hash = code => `'sha256-${createHash('sha256').update(code).digest('base64')}'`;
 function staticHtml(html) {
   const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].filter(m => !/\bsrc=/.test(m[0])).map(m => hash(m[1]));
   const styles = [...html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)].map(m => hash(m[1]));
   const csp = `default-src 'self' https://drive.google.com https://docs.google.com https://accounts.google.com; script-src 'self' ${[...new Set(scripts)].join(' ')}; style-src 'self' https://fonts.googleapis.com ${[...new Set(styles)].join(' ')}; style-src-attr 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://drive.google.com https://*.googleusercontent.com https://ssl.gstatic.com data:; frame-src 'self' https://drive.google.com https://docs.google.com https://accounts.google.com; connect-src 'self' https://drive.google.com; object-src 'none'; base-uri 'self'; form-action 'self'`;
-  return html.replace(/ nonce="[^"]*"/g, '').replace(/<head>/i, `<head>\n<meta http-equiv="Content-Security-Policy" content="${csp}">`);
+  return html.replace('href="/assets/site.css"', `href="/assets/${cssName}"`).replace(/ nonce="[^"]*"/g, '').replace(/<head>/i, `<head>\n<meta http-equiv="Content-Security-Policy" content="${csp}">`);
 }
 for (const route of portfolioRoutes) {
   const response = await worker.fetch(new Request(`https://phamthanhphu.io.vn${route}`), {}, {});
@@ -25,7 +28,7 @@ for (const route of portfolioRoutes) {
   await mkdir(folder, { recursive: true });
   await writeFile(resolve(folder, 'index.html'), staticHtml(await response.text()));
 }
-for (const route of ['/favicon.svg', '/favicon.ico', '/assets/home-cat.webp', '/assets/phu-portrait.webp']) {
+for (const route of ['/favicon.svg', '/favicon.ico']) {
   const response = await worker.fetch(new Request(`https://phamthanhphu.io.vn${route}`), {}, {});
   if (response.status !== 200) throw new Error(`Portfolio asset ${route}: ${response.status}`);
   const filename = resolve(dist, `.${route}`);

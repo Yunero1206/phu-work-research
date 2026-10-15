@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { PanelLeft, PanelRight, RotateCcw } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
+import { ShowcaseHeader } from './components/ShowcaseHeader';
 import { LeftSidebar } from './components/LeftSidebar';
 import { RightCaseRecord } from './components/RightCaseRecord';
 import { ReferenceDetailModal } from './components/ReferenceDetailModal';
@@ -45,7 +46,7 @@ export default function App() {
   function rich(text: string) { return text.split(/(\b(?:EV|U|E|C|G|A)\d{2,}\b)/g).map((part, i) => { const ref = caseReferenceFromId(part); return ref ? <CaseKeyButton key={i} reference={ref} onSelect={selectReference} /> : <span key={i}>{part}</span>; }); }
   if (!loaded) return <div className="h-screen grid place-items-center">Explainable Trust…</div>;
   return <ErrorBoundary><div className="h-dvh w-full flex flex-col overflow-hidden bg-slate-50 text-slate-900">
-    <header className="shrink-0 border-b border-slate-200 bg-white px-3 sm:px-5 py-3 flex gap-3 items-center justify-between"><button className="lg:hidden p-2" aria-label={t.openCases} onClick={() => setLeftOpen(true)}><PanelLeft size={20} /></button><div className="min-w-0"><p className="font-semibold text-sm">Explainable Trust <span className="hidden sm:inline text-slate-500 font-normal">/ {t.mode}</span></p><p className="text-xs sm:text-sm text-slate-500 mt-0.5">{t.boundary}</p></div><button className="lg:hidden p-2 shrink-0" aria-label={t.record} onClick={() => setRightOpen(true)}><PanelRight size={20} /></button><a href="/" className="hidden lg:block text-sm text-slate-600 underline">{t.portfolio}</a></header>
+    <ShowcaseHeader mode={t.mode} boundary={t.boundary} portfolio={t.portfolio} openCases={t.openCases} record={t.record} onOpenCases={() => setLeftOpen(true)} onOpenRecord={() => setRightOpen(true)} />
     <div className="flex flex-1 overflow-hidden">
       <LeftSidebar cases={workspace.cases} currentCaseId={workspace.currentCaseId} onSelectCase={id => setWorkspace(w => ({ ...w, currentCaseId: id }))} onLoadSample={loadSample} onUpdateCase={updateCase} onDeleteCase={id => setWorkspace(w => { const cases = w.cases.filter(c => c.id !== id); return { ...w, cases, currentCaseId: w.currentCaseId === id ? cases[0]?.id ?? null : w.currentCaseId }; })} isMobileOpen={leftOpen} onCloseMobile={() => setLeftOpen(false)} />
       <main className="flex-1 min-w-0 flex flex-col overflow-hidden">

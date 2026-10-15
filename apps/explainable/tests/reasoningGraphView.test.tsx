@@ -74,8 +74,8 @@ describe('ReasoningGraphView and Graph Tab Integration', () => {
     expect(graphTabBtn).toBeDefined();
     fireEvent.click(graphTabBtn);
 
-    // Wait for lazy Reasoning DAG component to load by waiting for direction button
-    const directionBtn = await screen.findByRole('button', { name: /tb/i });
+    // The first lazy import also transforms React Flow; allow cold CI workers to finish it.
+    const directionBtn = await screen.findByRole('button', { name: /tb/i }, { timeout: 5000 });
     expect(directionBtn).toBeDefined();
     fireEvent.click(directionBtn);
     expect(screen.getByRole('button', { name: /lr/i })).toBeDefined();
@@ -101,5 +101,5 @@ describe('ReasoningGraphView and Graph Tab Integration', () => {
     // Close modal by clicking collapse button
     fireEvent.click(collapseBtn);
     expect(screen.queryByRole('button', { name: /thu nhỏ/i })).toBeNull();
-  });
+  }, 10000);
 });
