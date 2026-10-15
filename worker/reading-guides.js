@@ -32,36 +32,6 @@ export const caseReadingGuides = {
   }
 };
 
-export const readingPaths = [
-  {
-    title: 'Product & operations',
-    description: 'From discovery to launch and a working product.',
-    works: [
-      { path: '/work/vinamilk-trusted-nutrition', title: 'Vinamilk', focus: 'Discovery gates' },
-      { path: '/work/fanme-controlled-growth', title: 'FanMe', focus: 'Launch readiness' },
-      { path: '/work/vieworld', title: 'VieWorld', focus: 'Product & system build' }
-    ]
-  },
-  {
-    title: 'Business & commercial ops',
-    description: 'Follow the promise through delivery and recovery.',
-    works: [
-      { path: '/work/creator-platform-operating-model', title: 'MFan', focus: 'Journey continuity' },
-      { path: '/work/vieshop-fan-centred-merchandise-system', title: 'VieSHOP', focus: 'Commerce operations' },
-      { path: '/work/shopee-account-restrictions', title: 'Shopee', focus: 'Customer recovery' }
-    ]
-  },
-  {
-    title: 'AI & trust systems',
-    description: 'Inspect evidence, reliance, and what stays uncertain.',
-    works: [
-      { path: '/work/explainable-trust', title: 'Explainable Trust', focus: 'Runnable showcase' },
-      { path: '/work/pathway-lens-operational-cycles', title: 'Pathway Lens', focus: 'Risk & recovery model' },
-      { path: '/work/pnj-after-the-diamond-shock', title: 'PNJ', focus: 'Longitudinal evidence' }
-    ]
-  }
-];
-
 export const casePrototypes = {
   '/work/vieworld': { href: 'https://vieworld.phamthanhphu.io.vn/', label: 'Explore VieWorld prototype' },
   '/work/explainable-trust': { href: '/explainable/', label: 'Explore interactive showcase' }

@@ -9,7 +9,8 @@
     "dev": "npm run build && node scripts/preview.mjs",
     "build": "node scripts/build.mjs",
     "validate": "node scripts/validate-artifact.mjs",
-    "test": "npm test --workspace apps/explainable",
+    "test": "npm run test:portfolio && npm test --workspace apps/explainable",
+    "test:portfolio": "node --test tests/portfolio.test.mjs",
     "lint": "npm run lint --workspace apps/explainable",
     "verify": "npm run lint && npm test && npm run build && npm run validate",
     "preview": "node scripts/preview.mjs"

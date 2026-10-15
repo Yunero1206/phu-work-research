@@ -1,6 +1,6 @@
 import { siteCss } from "./styles.js";
 import { finalModes, finalWorkLibrary, caseDocuments, totalWorks, totalModes, totalArtifacts } from "./case-library.js";
-import { caseReadingGuides, readingPaths, casePrototypes } from "./reading-guides.js";
+import { caseReadingGuides, casePrototypes } from "./reading-guides.js";
 
 // ============================================================================
 // Pham Thanh Phu — Work & Research static page renderer
@@ -546,8 +546,10 @@ function layoutHeader(active = "", nonce = "") {
         <button type="button" class="f-cmd-trigger" id="f-nav-cmd-trigger" aria-label="Search works and pages" aria-haspopup="dialog" aria-controls="f-cmd-dialog" aria-keyshortcuts="Control+k Meta+k" title="Search works and pages (Ctrl+K / ⌘K)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Search</span><kbd aria-hidden="true">Ctrl K</kbd>
         </button>
-        <button type="button" class="f-theme-toggle" id="f-theme-toggle" aria-label="Switch to dark theme" aria-pressed="false" title="Switch to dark theme">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4a8 8 0 0 1 0 16V4Z" fill="currentColor"/><path d="M12 4a8 8 0 1 0 0 16" stroke="currentColor" stroke-width="1.5"/><path d="M12 1v1M12 22v1M1 12h1M22 12h1M4.2 4.2l.7.7M19.1 19.1l.7.7M4.2 19.8l.7-.7M19.1 4.9l.7-.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <button type="button" class="f-theme-toggle" id="f-theme-toggle" aria-label="Switch to dark theme" title="Switch to dark theme">
+          <svg class="f-theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.5 13.3A8.5 8.5 0 0 1 10.7 3.5a8.5 8.5 0 1 0 9.8 9.8Z"/></svg>
+          <svg class="f-theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round"/></svg>
+          <span data-theme-label>Dark</span>
         </button>
       </div>
     </nav>
@@ -559,8 +561,8 @@ function layoutHeader(active = "", nonce = "") {
         if (!button) return;
         var dark = document.documentElement.getAttribute('data-theme') === 'dark';
         document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-        button.setAttribute('aria-pressed', String(dark));
         button.setAttribute('aria-label', 'Switch to ' + (dark ? 'light' : 'dark') + ' theme');
+        button.querySelector('[data-theme-label]').textContent = dark ? 'Light' : 'Dark';
         button.title = button.getAttribute('aria-label');
         button.onclick = function() {
           var theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -681,7 +683,7 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '', showCompan
   return `<footer class="f-footer">
     <div class="f-wrap f-footer-row">
       <span>Phạm Thanh Phú · ${escapeHtml(label)}</span>
-      <span><a href="mailto:phamthanhphu97@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn</a> · <a href="/work">Work Library</a></span>
+      <span><a href="mailto:phamthanhphu97@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer">LinkedIn</a></span>
     </div>
   </footer>
   <div id="f-global-toast" class="f-toast-msg" role="status" aria-live="polite"></div>
@@ -882,19 +884,12 @@ ${layoutHead("Phạm Thanh Phú — Business & Product Operations", "Business Op
         <p class="f-home-role">Business Operations · Product Operations · Product Strategy</p>
         <h1>I'm drawn to messy operating problems.</h1>
         <p class="f-home-intent">I enjoy exploring how they work, and keep learning how to make systems, ownership, and the next step clearer.</p>
-        <div class="f-home-actions"><a class="f-editorial-link" href="#selected-work">Explore selected work <span aria-hidden="true">↓</span></a><a class="f-home-contact" href="/about">About &amp; contact <span aria-hidden="true">→</span></a></div>
+        <p class="f-home-experience">6+ years in founder-side B2B operations.</p>
       </div>
       <figure class="f-home-photo">
-        <img src="/assets/editorial-cafe-v2.webp" alt="" width="1400" height="1050" fetchpriority="high" decoding="async">
+        <img src="/assets/editorial-cafe-v2.webp" alt="" width="1400" height="1050" loading="lazy" decoding="async">
       </figure>
     </header>
-
-    <section class="f-home-proof f-wrap" aria-label="Operating foundation at Phong Phu Stationery">
-      <p><strong>6+ years</strong><span>Founder-side B2B operations</span></p>
-      <p><strong>50+ accounts</strong><span>Recurring institutional &amp; corporate clients</span></p>
-      <p><strong>~95%</strong><span>Account retention · Measured by account count</span></p>
-      <a href="/about" class="f-home-proof-context">Phong Phu Stationery · Experience &amp; context <span aria-hidden="true">→</span></a>
-    </section>
 
     <section class="f-home-selected f-wrap" id="selected-work" aria-labelledby="selected-work-title">
       <div class="f-home-section-head">
@@ -914,37 +909,29 @@ ${layoutHead("Phạm Thanh Phú — Business & Product Operations", "Business Op
         <a class="f-home-work-row" href="/work/fanme-controlled-growth" aria-labelledby="fanme-home-title">
           <img class="f-home-artifact" src="/assets/fanme-cover.webp" alt="" width="700" height="394" loading="lazy" decoding="async">
           <div class="f-home-work-copy">
-            <span class="f-home-category">Launch &amp; Operations</span>
             <h3 id="fanme-home-title">FanMe — Controlled Growth</h3>
             <p>A bounded artist-launch pilot, with ownership, readiness, and scale gates.</p>
-            <span class="f-editorial-link">Read case <span aria-hidden="true">→</span></span>
           </div>
         </a>
         <a class="f-home-work-row" href="/work/vinamilk-trusted-nutrition" aria-labelledby="vinamilk-home-title">
           <img class="f-home-artifact" src="/assets/vinamilk-cover.webp" alt="" width="541" height="700" loading="lazy" decoding="async">
           <div class="f-home-work-copy">
-            <span class="f-home-category">Product Discovery</span>
             <h3 id="vinamilk-home-title">Vinamilk — Trusted Nutrition</h3>
             <p>Connecting product-service discovery with delivery, scale, and governance.</p>
-            <span class="f-editorial-link">Read research <span aria-hidden="true">→</span></span>
           </div>
         </a>
         <a class="f-home-work-row" href="/work/shopee-account-restrictions" aria-labelledby="shopee-home-title">
           <img class="f-home-artifact" src="/assets/shopee-cover.webp" alt="" width="500" height="281" loading="lazy" decoding="async">
           <div class="f-home-work-copy">
-            <span class="f-home-category">Evidence &amp; Resolution</span>
             <h3 id="shopee-home-title">Shopee — Account Restrictions</h3>
             <p>From account resolution to preserving the customer’s commerce outcome.</p>
-            <span class="f-editorial-link">Explore case <span aria-hidden="true">→</span></span>
           </div>
         </a>
         <a class="f-home-work-row" href="/work/explainable-trust" aria-labelledby="explainable-home-title">
           <img src="/assets/explainable-cover.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
           <div class="f-home-work-copy">
-            <span class="f-home-category">Systems &amp; Evidence</span>
             <h3 id="explainable-home-title">Explainable Trust</h3>
             <p>Making reasoning, sources, and case revisions visible and inspectable.</p>
-            <span class="f-editorial-link">Read case <span aria-hidden="true">→</span></span>
           </div>
         </a>
       </div>
@@ -968,7 +955,7 @@ ${layoutHead("Phạm Thanh Phú — Business & Product Operations", "Business Op
 function workPage(nonce) {
   const works = finalWorkLibrary.filter(item => item.path.startsWith('/work/'));
   const topicGroups = [
-    { id: 'demo', label: 'Public Demo', paths: ['explainable-trust'] },
+    { id: 'demo', label: 'Public Demo', paths: ['explainable-trust', 'vieworld'] },
     { id: 'fandom', label: 'Fandom & Commerce', paths: ['creator-platform-operating-model', 'post-signing-artist-label-operations', 'fanme-controlled-growth', 'datvietvac-ownership-belonging', 'datvietvac-fandom-cards', 'vieshop-fan-centred-merchandise-system', 'datvietvac-who-owns-the-fan-promise', 'vieworld', 'metub-creator-economy', 'artist-fandom-page', 'shopee-account-restrictions'] },
     { id: 'trust', label: 'AI & Trust', paths: ['elfie-trust-safe-activation', 'explainable-trust', 'vietnam-diamond-market-crisis', 'diamond-trust-chain-collapse', 'pnj-after-the-diamond-shock', 'pathway-lens-operational-cycles', 'ai-judgment-decisions', 'ai-apprenticeship', 'momo-ai-paylater', 'zalo-scam-emergency-mode'] },
     { id: 'policy', label: 'Platform Policy', paths: ['shopee-account-restrictions', 'adobe-account-restriction', 'elfie-trust-safe-activation', 'momo-ai-paylater', 'zalo-scam-emergency-mode'] },
@@ -976,242 +963,145 @@ function workPage(nonce) {
     { id: 'discovery', label: 'Product Discovery', paths: ['vinamilk-trusted-nutrition', 'elfie-trust-safe-activation', 'datvietvac-ownership-belonging', 'datvietvac-fandom-cards', 'vieshop-fan-centred-merchandise-system', 'vieworld', 'artist-fandom-page', 'zalo-scam-emergency-mode'] }
   ];
   const bookmarkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/></svg>';
-  const itemAttributes = item => `data-path="${item.path}" data-mode="${item.mode}" data-search="${escapeHtml([item.title, item.question, item.tags, item.type, item.maturity].join(' ').toLowerCase())}" data-topics="${topicGroups.filter(topic => topic.paths.includes(item.path.slice(6))).map(topic => topic.id).join(' ')}"`;
   const sectionsHtml = finalModes.map(mode => {
     const items = works.filter(item => item.mode === mode.id);
-    return `<section class="f-catalog-section" data-section="${mode.id}" aria-labelledby="mode-${mode.id}">
-      <div class="f-section-head">
-        <div class="f-section-title-wrap">
-          <h2 id="mode-${mode.id}"><span>${escapeHtml(mode.num)}</span> ${escapeHtml(mode.label)}</h2>
-          <p>${escapeHtml(mode.description)}</p>
-        </div>
-        <span class="f-section-count-badge">${items.length} works</span>
-      </div>
+    return `<section class="f-catalog-section" aria-labelledby="mode-${mode.id}">
+      <div class="f-section-head"><h2 id="mode-${mode.id}">${escapeHtml(mode.short)}</h2><span class="f-section-count-badge">${items.length} works</span></div>
       <div class="f-title-grid">${items.map(item => {
         const assets = (caseDocuments[item.path]?.assets || []).length;
-        const tags = (item.tags || '').split(' · ').filter(Boolean);
-        return `<article class="f-work-item" ${itemAttributes(item)}>
-          <div class="f-work-item-heading">
-            <h3><a href="${item.path}">${escapeHtml(item.title)} <span aria-hidden="true">→</span></a></h3>
-            <button class="f-work-save" type="button" data-save-path="${item.path}" data-save-title="${escapeHtml(item.title)}" aria-pressed="false" aria-label="Save ${escapeHtml(item.title)}">${bookmarkIcon}</button>
-          </div>
-          <p class="f-item-question">“${escapeHtml(item.question)}”</p>
-          <div class="f-work-item-meta">
-            <span>${escapeHtml(item.maturity.split(' · ')[0])}</span>
-            ${item.path === '/work/explainable-trust' ? '<span class="f-work-demo">Public Demo</span>' : ''}
-            ${assets ? `<span>${assets} artifact${assets === 1 ? '' : 's'}</span>` : ''}
-          </div>
-          <details class="f-work-details">
-            <summary>Details &amp; keywords</summary>
-            <p>${escapeHtml(item.type)}</p>
-            <div class="f-paper-tags">${tags.map(tag => `<button type="button" class="f-tag-click" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`).join('')}</div>
+        const topics = topicGroups.filter(topic => topic.paths.includes(item.path.slice(6))).map(topic => topic.id).join(' ');
+        return `<article class="f-work-item" data-path="${item.path}" data-mode="${item.mode}" data-topics="${topics}" data-search="${escapeHtml([item.title, item.question, item.tags, item.type, item.maturity].join(' ').toLowerCase())}">
+          <div class="f-work-item-heading"><h3><a href="${item.path}">${escapeHtml(item.title)} <span aria-hidden="true">→</span></a></h3><button class="f-work-save" type="button" data-save-path="${item.path}" data-save-title="${escapeHtml(item.title)}" aria-pressed="false" aria-label="Save ${escapeHtml(item.title)}">${bookmarkIcon}</button></div>
+          <div class="f-work-item-meta"><span>${escapeHtml(item.maturity.split(' · ')[0])}</span></div>
+          <details class="f-work-details"><summary><span class="f-item-question">${escapeHtml(item.question)}</span></summary>
+            <p>${escapeHtml(item.type)}${assets ? ` · ${assets} artifact${assets === 1 ? '' : 's'}` : ''}</p>
+            <div class="f-paper-tags">${(item.tags || '').split(' · ').filter(Boolean).map(tag => `<button type="button" class="f-tag-click" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`).join('')}</div>
           </details>
         </article>`;
       }).join('')}</div>
     </section>`;
   }).join('');
-  const modeTabs = [{ id: 'all', short: 'All works' }, ...finalModes].map(mode => `<button class="f-mode-tab" type="button" data-mode="${mode.id}" aria-pressed="${mode.id === 'all'}">${escapeHtml(mode.short)} <span class="f-tab-count">${mode.id === 'all' ? works.length : works.filter(item => item.mode === mode.id).length}</span></button>`).join('');
-
   return `<!doctype html>
 <html lang="en">
-${layoutHead('Work Library — Phạm Thanh Phú', `Complete catalog of ${totalWorks} research monographs, operating case studies, essays, and software tools across business operations and AI trust.`, nonce, { path: '/work' })}
+${layoutHead('Work Library — Phạm Thanh Phú', `Research, operating case studies, essays, and product prototypes. Browse all ${totalWorks} works.`, nonce, { path: '/work' })}
 <body>
   <a class="f-skip" href="#main">Skip to catalog</a>
   ${layoutHeader('work', nonce)}
   <main id="main" class="f-work-page">
-    <header class="f-work-hero f-wrap">
-      <h1>Work Library <span>&amp; Operating Monographs</span></h1>
-      <p class="f-work-intro">The cases look different on the surface, but I keep coming back to a small set of operating questions: what deserves to be built, what breaks after apparent success, what people can safely rely on, and what evidence should earn the next step.</p>
-      <div class="f-work-meta-row">
-        <p>${totalWorks} Works <span>·</span> ${totalModes} Research Modes <span>·</span> ${totalArtifacts}+ Downloadable Artifacts</p>
-        <details class="f-work-boundary">
-          <summary>Evidence boundary</summary>
-          <blockquote>“Every piece in this library separates confirmed public facts from working inferences, keeping the boundary of evidence visible.”</blockquote>
-          <p>Living Archive · 2026</p>
-        </details>
-      </div>
+    <header class="f-work-hero f-wrap"><div class="f-work-heading"><h1>Work Library</h1>
+      <details class="f-library-about"><summary>About the library</summary><div class="f-library-about-panel">
+        <p>The cases look different on the surface, but I keep coming back to a small set of operating questions: what deserves to be built, what breaks after apparent success, what people can safely rely on, and what evidence should earn the next step.</p>
+        <p>${totalModes} research modes · ${totalArtifacts}+ downloadable artifacts</p>
+        <blockquote>Every piece in this library separates confirmed public facts from working inferences, keeping the boundary of evidence visible.</blockquote>
+      </div></details></div>
     </header>
-
-    <section class="f-wrap f-reading-paths" aria-labelledby="reading-paths-title">
-      <div class="f-reading-paths-heading"><h2 id="reading-paths-title">A few places to start</h2><p>Three cases for each interest, then the full library below.</p></div>
-      <div class="f-reading-path-grid">${readingPaths.map(group => `<details class="f-reading-path" open><summary>${escapeHtml(group.title)}<span>3 cases</span></summary><p>${escapeHtml(group.description)}</p><ol>${group.works.map(work => `<li><a href="${work.path}"><span>${escapeHtml(work.title)}</span><span class="f-path-focus">${escapeHtml(work.focus)} <span aria-hidden="true">→</span></span></a></li>`).join('')}</ol></details>`).join('')}</div>
-    </section>
-
     <section class="f-wrap f-work-toolbar" aria-label="Find work">
-      <div class="f-work-search-row">
-        <div class="f-search-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
-          <input class="f-search-input" id="work-search" type="search" placeholder="Search by title, question, or keyword" aria-label="Search works" autocomplete="off" aria-keyshortcuts="/">
-          <kbd class="f-kbd-hint">/</kbd>
-          <button class="f-search-clear" id="work-search-clear" type="button" aria-label="Clear search" hidden>×</button>
-        </div>
-        <div class="f-work-refinements">
-          <label class="f-work-topic">Topic <select id="work-topic" aria-label="Filter by topic"><option value="all">All topics</option>${topicGroups.map(topic => `<option value="${topic.id}">${escapeHtml(topic.label)}</option>`).join('')}</select></label>
-          <button type="button" id="btn-filter-saved" class="f-work-saved" aria-pressed="false">${bookmarkIcon}<span>Saved (0)</span></button>
-        </div>
+      <div class="f-work-search-row"><div class="f-search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+        <input class="f-search-input" id="work-search" type="search" placeholder="Search work" aria-label="Search works" autocomplete="off" aria-keyshortcuts="/">
+        <button class="f-search-clear" id="work-search-clear" type="button" aria-label="Clear search" hidden>×</button>
       </div>
-      <div class="f-work-toolbar-bottom">
-        <nav class="f-toolbar-tabs" aria-label="Filter works by mode">${modeTabs}</nav>
-        <div class="f-work-results">
-          <span class="f-toolbar-count" id="work-count" role="status" aria-live="polite">${works.length} works</span>
-          <div class="f-view-switch" role="group" aria-label="Display works">
-            <button type="button" class="f-view-toggle-btn" id="btn-view-cards" aria-pressed="true" aria-controls="catalog-container">Overview</button>
-            <button type="button" class="f-view-toggle-btn" id="btn-view-ledger" aria-pressed="false" aria-controls="ledger-container">Index</button>
-          </div>
-          <button type="button" id="work-clear-filters" class="f-work-clear" hidden>Clear filters</button>
-        </div>
-      </div>
+      <details class="f-filter-panel" id="work-filters"><summary>Filters <span id="work-filter-count" hidden></span></summary><div class="f-filter-fields">
+        <label>Research mode<select id="work-mode" aria-label="Filter by research mode"><option value="all">All modes</option>${finalModes.map(mode => `<option value="${mode.id}">${escapeHtml(mode.short)}</option>`).join('')}</select></label>
+        <label>Topic<select id="work-topic" aria-label="Filter by topic"><option value="all">All topics</option>${topicGroups.map(topic => `<option value="${topic.id}">${escapeHtml(topic.label)}</option>`).join('')}</select></label>
+        <button type="button" id="btn-filter-saved" class="f-work-saved" aria-pressed="false">${bookmarkIcon}<span>Saved (0)</span></button>
+      </div></details></div>
+      <div class="f-work-results"><span id="work-count" class="f-toolbar-count" role="status" aria-live="polite">${works.length} works</span><button type="button" id="work-clear-filters" class="f-work-clear" hidden>Clear filters</button></div>
     </section>
-
     <div class="f-wrap" id="catalog-container">${sectionsHtml}</div>
-    <div class="f-wrap" id="ledger-container" hidden>
-      <div class="f-ledger-table-wrap">
-        <table class="f-ledger-table">
-          <caption class="f-work-sr-only">Work index: case title, core question, research mode, and maturity</caption>
-          <thead><tr><th scope="col">#</th><th scope="col">Case title &amp; core question</th><th scope="col">Lens</th><th scope="col">Maturity</th></tr></thead>
-          <tbody>${works.map((item, idx) => `<tr class="f-ledger-row" ${itemAttributes(item)}>
-            <td class="f-ledger-number">${String(idx + 1).padStart(2, '0')}</td>
-            <td class="f-ledger-case"><a class="f-ledger-title" href="${item.path}">${escapeHtml(item.title)}</a><p>“${escapeHtml(item.question)}”</p></td>
-            <td data-label="Lens">${escapeHtml(finalModes.find(mode => mode.id === item.mode)?.short || item.mode)}</td>
-            <td data-label="Maturity">${escapeHtml(item.maturity)}</td>
-          </tr>`).join('')}</tbody>
-        </table>
-      </div>
-    </div>
-    <div class="f-wrap"><div id="work-empty" class="f-work-empty" hidden>
-      <h2>No works found</h2>
-      <p id="work-empty-message">Try another keyword, or clear the filters to browse all ${works.length} works.</p>
-      <button type="button" id="work-reset-filters" class="f-editorial-link">Reset filters <span aria-hidden="true">→</span></button>
-    </div></div>
+    <div class="f-wrap"><div id="work-empty" class="f-work-empty" hidden><h2>No works found</h2><p id="work-empty-message">Try another keyword or clear the filters.</p><button type="button" id="work-reset-filters" class="f-editorial-link">Reset filters <span aria-hidden="true">→</span></button></div></div>
   </main>
-  ${layoutFooter(`Master Library · ${totalWorks} Works`, nonce, false)}
+  ${layoutFooter('Ho Chi Minh City · 2026', nonce, false)}
   <script nonce="${nonce}">
     (() => {
       const search = document.getElementById('work-search');
-      const compactPaths = window.matchMedia('(max-width: 720px)');
-      const syncReadingPaths = () => document.querySelectorAll('.f-reading-path').forEach(panel => { panel.open = !compactPaths.matches; });
-      syncReadingPaths();
-      compactPaths.addEventListener('change', syncReadingPaths);
       const clearSearch = document.getElementById('work-search-clear');
       const clearFilters = document.getElementById('work-clear-filters');
+      const modeSelect = document.getElementById('work-mode');
       const topic = document.getElementById('work-topic');
       const savedToggle = document.getElementById('btn-filter-saved');
-      const tabs = Array.from(document.querySelectorAll('.f-mode-tab'));
+      const filters = document.getElementById('work-filters');
+      const filterCount = document.getElementById('work-filter-count');
+      const panels = [filters, document.querySelector('.f-library-about')];
       const items = Array.from(document.querySelectorAll('.f-work-item'));
-      const rows = Array.from(document.querySelectorAll('.f-ledger-row'));
       const saveButtons = Array.from(document.querySelectorAll('.f-work-save'));
       const knownPaths = new Set(items.map(item => item.dataset.path));
-      const overview = document.getElementById('catalog-container');
-      const index = document.getElementById('ledger-container');
-      const overviewButton = document.getElementById('btn-view-cards');
-      const indexButton = document.getElementById('btn-view-ledger');
-      const empty = document.getElementById('work-empty');
-      let mode = 'all';
       let savedOnly = false;
-      let view = 'overview';
-
       function bookmarks() {
-        try {
-          const value = JSON.parse(localStorage.getItem('f-bookmarks') || '[]');
-          return Array.isArray(value) ? value.filter(path => typeof path === 'string') : [];
-        } catch { return []; }
+        try { const value = JSON.parse(localStorage.getItem('f-bookmarks') || '[]'); return Array.isArray(value) ? value.filter(path => typeof path === 'string') : []; }
+        catch { return []; }
       }
       function readUrl() {
         const params = new URLSearchParams(location.search);
-        mode = tabs.some(tab => tab.dataset.mode === params.get('mode')) ? params.get('mode') : 'all';
-        topic.value = Array.from(topic.options).some(option => option.value === params.get('topic')) ? params.get('topic') : 'all';
+        for (const [select, key] of [[modeSelect, 'mode'], [topic, 'topic']]) select.value = Array.from(select.options).some(option => option.value === params.get(key)) ? params.get(key) : 'all';
         search.value = params.get('q') || '';
         savedOnly = params.get('saved') === '1';
-        let preferred = 'overview';
-        try { preferred = localStorage.getItem('f-work-view') || preferred; } catch {}
-        view = params.get('view') === 'index' ? 'index' : params.get('view') === 'overview' ? 'overview' : preferred === 'index' ? 'index' : 'overview';
       }
-      function writeUrl(replace = false) {
+      function writeUrl(replace) {
         const url = new URL(location.href);
-        const values = {mode: mode === 'all' ? '' : mode, topic: topic.value === 'all' ? '' : topic.value, q: search.value.trim(), saved: savedOnly ? '1' : '', view};
+        const values = {mode: modeSelect.value === 'all' ? '' : modeSelect.value, topic: topic.value === 'all' ? '' : topic.value, q: search.value.trim(), saved: savedOnly ? '1' : ''};
+        url.searchParams.delete('view');
         for (const [key, value] of Object.entries(values)) value ? url.searchParams.set(key, value) : url.searchParams.delete(key);
         if (url.href !== location.href) history[replace ? 'replaceState' : 'pushState']({}, '', url);
       }
       function render() {
         const saved = new Set(bookmarks());
         const terms = search.value.trim().toLowerCase().split(' ').filter(Boolean);
-        const matches = item => (mode === 'all' || item.dataset.mode === mode)
-          && (topic.value === 'all' || item.dataset.topics.split(' ').includes(topic.value))
-          && (!savedOnly || saved.has(item.dataset.path))
-          && terms.every(term => item.dataset.search.includes(term));
-        for (const item of items) item.hidden = !matches(item);
-        for (const row of rows) row.hidden = !matches(row);
+        for (const item of items) item.hidden = !((modeSelect.value === 'all' || item.dataset.mode === modeSelect.value) && (topic.value === 'all' || item.dataset.topics.split(' ').includes(topic.value)) && (!savedOnly || saved.has(item.dataset.path)) && terms.every(term => item.dataset.search.includes(term)));
         for (const section of document.querySelectorAll('.f-catalog-section')) {
           const visible = Array.from(section.querySelectorAll('.f-work-item')).filter(item => !item.hidden).length;
           section.hidden = !visible;
           section.querySelector('.f-section-count-badge').textContent = visible + ' work' + (visible === 1 ? '' : 's');
         }
-        for (const tab of tabs) tab.setAttribute('aria-pressed', String(tab.dataset.mode === mode));
         for (const button of saveButtons) {
           const active = saved.has(button.dataset.savePath);
           button.setAttribute('aria-pressed', String(active));
           button.setAttribute('aria-label', (active ? 'Remove from saved: ' : 'Save ') + button.dataset.saveTitle);
-          button.title = active ? 'Remove from saved' : 'Save work';
         }
         savedToggle.setAttribute('aria-pressed', String(savedOnly));
         savedToggle.querySelector('span').textContent = 'Saved (' + Array.from(saved).filter(path => knownPaths.has(path)).length + ')';
         clearSearch.hidden = !search.value;
-        const filtered = mode !== 'all' || topic.value !== 'all' || terms.length || savedOnly;
+        const activeFilters = Number(modeSelect.value !== 'all') + Number(topic.value !== 'all') + Number(savedOnly);
+        filterCount.hidden = !activeFilters;
+        filterCount.textContent = activeFilters;
+        const filtered = activeFilters > 0 || terms.length > 0;
         clearFilters.hidden = !filtered;
         const visibleCount = items.filter(item => !item.hidden).length;
         document.getElementById('work-count').textContent = visibleCount + (filtered ? ' of ' + items.length + ' works' : ' works');
-        empty.hidden = visibleCount > 0;
-        document.getElementById('work-empty-message').textContent = savedOnly && !bookmarks().some(path => knownPaths.has(path))
-          ? 'Save a work with its bookmark button, then find it here. Saved works stay in this browser.'
-          : 'Try another keyword, or clear the filters to browse all ' + items.length + ' works.';
-        overview.hidden = view === 'index' || !visibleCount;
-        index.hidden = view !== 'index' || !visibleCount;
-        overviewButton.setAttribute('aria-pressed', String(view === 'overview'));
-        indexButton.setAttribute('aria-pressed', String(view === 'index'));
+        document.getElementById('work-empty').hidden = visibleCount > 0;
+        document.getElementById('catalog-container').hidden = !visibleCount;
+        document.getElementById('work-empty-message').textContent = savedOnly && !bookmarks().some(path => knownPaths.has(path)) ? 'Saved works stay in this browser. Save a work with its bookmark button to find it here.' : 'Try another keyword, or clear the filters to browse all ' + items.length + ' works.';
       }
       function update(replace = false) { writeUrl(replace); render(); }
-      function reset() {
-        mode = 'all'; topic.value = 'all'; search.value = ''; savedOnly = false;
-        update(); search.focus();
-      }
-      function setView(next) {
-        view = next;
-        try { localStorage.setItem('f-work-view', view); } catch {}
-        update();
-      }
-      overviewButton.addEventListener('click', () => setView('overview'));
-      indexButton.addEventListener('click', () => setView('index'));
+      function reset() { modeSelect.value = 'all'; topic.value = 'all'; search.value = ''; savedOnly = false; update(); search.focus(); }
+      modeSelect.addEventListener('change', () => update());
       topic.addEventListener('change', () => update());
       savedToggle.addEventListener('click', () => { savedOnly = !savedOnly; update(); });
       search.addEventListener('input', () => update(true));
       clearSearch.addEventListener('click', () => { search.value = ''; update(true); search.focus(); });
       clearFilters.addEventListener('click', reset);
       document.getElementById('work-reset-filters').addEventListener('click', reset);
-      for (const tab of tabs) tab.addEventListener('click', () => { mode = tab.dataset.mode; update(); });
       for (const button of saveButtons) button.addEventListener('click', () => {
         const saved = new Set(bookmarks());
         saved.has(button.dataset.savePath) ? saved.delete(button.dataset.savePath) : saved.add(button.dataset.savePath);
         try { localStorage.setItem('f-bookmarks', JSON.stringify(Array.from(saved))); } catch { return; }
         render();
       });
-      for (const tag of document.querySelectorAll('.f-tag-click')) tag.addEventListener('click', () => {
-        search.value = tag.dataset.tag;
-        update(true); search.focus();
-        search.scrollIntoView({behavior: 'smooth', block: 'center'});
-      });
+      for (const tag of document.querySelectorAll('.f-tag-click')) tag.addEventListener('click', () => { search.value = tag.dataset.tag; update(true); search.focus(); search.scrollIntoView({block:'center'}); });
+      for (const panel of panels) panel.addEventListener('toggle', () => { if (panel.open) panels.filter(other => other !== panel).forEach(other => { other.open = false; }); });
+      document.addEventListener('click', event => panels.forEach(panel => { if (!panel.contains(event.target)) panel.open = false; }));
       window.addEventListener('popstate', () => { readUrl(); render(); });
-      window.addEventListener('storage', event => { if (event.key === 'f-bookmarks') render(); });
       window.addEventListener('pageshow', () => { readUrl(); render(); });
+      window.addEventListener('storage', event => { if (event.key === 'f-bookmarks') render(); });
       document.addEventListener('keydown', event => {
         if (document.querySelector('dialog[open]') || event.ctrlKey || event.metaKey || event.altKey) return;
-        const editing = event.target.isContentEditable || event.target.closest('input, textarea, select');
-        if (event.key === 'Escape' && event.target === search && search.value) {
-          search.value = ''; update(true); return;
+        if (event.key === 'Escape') {
+          const panel = panels.find(panel => panel.open);
+          if (panel) { panel.open = false; panel.querySelector('summary').focus(); return; }
+          if (event.target === search && search.value) { search.value = ''; update(true); return; }
         }
-        if (editing) return;
+        if (event.target.isContentEditable || event.target.closest('input, textarea, select')) return;
         if (event.key === '/') { event.preventDefault(); search.focus(); }
-        if (event.key.toLowerCase() === 'v') setView(view === 'index' ? 'overview' : 'index');
-        if (['1','2','3','4','5'].includes(event.key)) tabs[Number(event.key) - 1]?.click();
       });
       readUrl(); render();
     })();
@@ -1237,11 +1127,8 @@ function casePage(item, nonce) {
   const modeObj = finalModes.find(m => m.id === item.mode);
   const modeLabel = modeObj ? modeObj.label : item.mode;
 
-  // All case monographs list for navigation & cross-referencing
+  // All case monographs for cross-referencing
   const allWorks = finalWorkLibrary.filter(w => w.path.startsWith("/work/"));
-  const currentIndex = allWorks.findIndex(w => w.path === item.path);
-  const prevWork = currentIndex > 0 ? allWorks[currentIndex - 1] : null;
-  const nextWork = currentIndex < allWorks.length - 1 ? allWorks[currentIndex + 1] : null;
 
   // Related Case Studies calculation (2 highest relevance matches)
   const itemTagList = typeof item.tags === 'string' ? item.tags.split('·').map(t => t.trim().toLowerCase()) : [];
@@ -1285,9 +1172,6 @@ function casePage(item, nonce) {
   `;
 
   // Valid Drive IDs whitelist (server-side rendered, trusted)
-  
-// (Next / Previous monograph already calculated above)
-
   const validDriveIds = JSON.stringify([...new Set([
     ...(doc.assets || []).map(asset => asset.driveId).filter(Boolean),
     ...[...(doc.body || '').matchAll(/(?:data-driveid|driveid)="([A-Za-z0-9_-]+)"/g)].map(match => match[1])
@@ -1298,6 +1182,19 @@ function casePage(item, nonce) {
       (()=>{
         const bar = document.getElementById('f-progress-bar');
         const prose = document.getElementById('record');
+        const readingMenus = [...document.querySelectorAll('.f-reading-tools, .f-mobile-toc')];
+        readingMenus.forEach(menu => menu.addEventListener('toggle', () => {
+          if (menu.open) readingMenus.forEach(other => { if (other !== menu) other.open = false; });
+        }));
+        document.addEventListener('click', event => {
+          readingMenus.forEach(menu => { if (!menu.contains(event.target)) menu.open = false; });
+        });
+        document.addEventListener('keydown', event => {
+          if (event.key !== 'Escape') return;
+          readingMenus.forEach(menu => {
+            if (menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
+          });
+        });
         const tocList = document.getElementById('f-toc-list');
         if (prose && tocList) {
           const mainHeadings = [...prose.querySelectorAll('h1[id], h2[id]')];
@@ -1703,14 +1600,14 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
       </div>
     </section>
 
-    ${guide ? `<section class="f-case-brief f-wrap" aria-labelledby="case-brief-title">
-      <h2 id="case-brief-title">30-second overview</h2>
+    <details class="f-case-info f-wrap"><summary>About this case</summary>
+    ${guide ? `<section class="f-case-brief" aria-label="Case overview">
       <dl><div><dt>Problem</dt><dd>${escapeHtml(guide.problem)}</dd></div><div><dt>Approach</dt><dd>${escapeHtml(guide.approach)}</dd></div><div><dt>Output &amp; next test</dt><dd>${escapeHtml(guide.output)}</dd></div></dl>
       <p class="f-case-brief-boundary"><strong>Evidence boundary</strong> ${escapeHtml(guide.boundary)}</p>
     </section>` : ''}
 
     <div class="f-case-meta">
-      <dl class="f-wrap f-case-meta-grid">
+      <dl class="f-case-meta-grid">
         <div class="f-meta-cell">
           <dt>Maturity</dt>
           <dd>${escapeHtml(item.maturity)}</dd>
@@ -1730,6 +1627,8 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
       </dl>
     </div>
 
+    </details>
+
     <div class="f-wrap f-case-reading">
       <aside class="f-case-rail" aria-label="Table of contents">
         <div class="f-rail-title">Contents</div>
@@ -1741,8 +1640,13 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
 
       <article class="f-prose" id="record">
         <div class="f-case-action-bar" role="group" aria-label="Reading controls">
+          <details class="f-mobile-toc">
+            <summary>Contents</summary>
+            <ul id="f-mobile-toc-list" class="f-mobile-toc-list"></ul>
+          </details>
+          <button type="button" id="f-btn-bookmark" class="f-action-pill" data-path="${escapeHtml(item.path)}" aria-pressed="false"><span class="bm-text">Save</span></button>
+          <details class="f-reading-tools"><summary>Reading tools</summary><div class="f-reading-tools-panel">
           <div class="f-case-action-left">
-            <button type="button" id="f-btn-bookmark" class="f-action-pill" data-path="${escapeHtml(item.path)}" aria-pressed="false"><span class="bm-text">Save</span></button>
             <button type="button" id="f-btn-copy-url" class="f-action-pill">Copy link</button>
             <button type="button" id="f-cite-btn" class="f-action-pill" data-title="${escapeHtml(item.title)}">Cite</button>
           </div>
@@ -1751,19 +1655,12 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
             <button type="button" id="f-btn-font-reset" class="f-action-pill f-reading-size" aria-label="Reset text size" title="Reset text size">18px</button>
             <button type="button" id="f-btn-font-inc" class="f-action-pill" aria-label="Increase text size">A+</button>
           </div>
+          </div></details>
         </div>
-        <details class="f-mobile-toc">
-          <summary>Contents</summary>
-          <ul id="f-mobile-toc-list" class="f-mobile-toc-list"></ul>
-        </details>
         ${renderedProse}
 
         ${relatedHtml}
 
-        <div class="f-case-nav-rail">
-          ${prevWork ? `<a href="${prevWork.path}" class="f-nav-prev"><span class="f-nav-sub">← Previous Monograph</span><span class="f-nav-title">${escapeHtml(prevWork.title)}</span></a>` : `<div></div>`}
-          ${nextWork ? `<a href="${nextWork.path}" class="f-nav-next"><span class="f-nav-sub">Next Monograph →</span><span class="f-nav-title">${escapeHtml(nextWork.title)}</span></a>` : `<div></div>`}
-        </div>
       </article>
     </div>
 
