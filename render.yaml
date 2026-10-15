@@ -8,6 +8,8 @@ services:
       - key: NODE_VERSION
         value: "22"
     headers:
+      # Existing services retain omitted rules: remove the old /* Cache-Control
+      # no-cache rule in the Render Dashboard when migrating these settings.
       - path: /*
         name: X-Content-Type-Options
         value: nosniff

@@ -29,6 +29,8 @@ The preview runs at `http://127.0.0.1:3000`. For frontend editing with hot reloa
 
 The portfolio's shared layout and responsive styles live in `worker/styles.js`. Homepage, Work Library, About, and all case pages share the editorial paper/navy/copper palette. `public/assets/fonts.css` defines self-hosted Be Vietnam Pro headings and compact controls, STIX Two Text editorial body (including italic), and JetBrains Mono metadata; the showcase imports the same font definitions and retains STIX for scenario narratives. Its header follows the portfolio theme preference. Asset sources and font licenses are retained under `public/assets/`. Only content-hashed CSS and showcase bundles use immutable caching; fixed-name fonts and images use a shorter lifetime. The cat companion is limited to About.
 
+For an existing Render Blueprint service, [Render preserves header rules omitted from a later YAML](https://render.com/docs/blueprint-spec#static-sites). When migrating the cache settings, remove the previous `/*` → `Cache-Control: no-cache` rule from the service's Headers settings if it remains there; the explicit page rules now cover HTML. Keep the global security headers. Verify the actual response headers after syncing: hashed CSS should be immutable, and fixed-name fonts/images should have a one-day lifetime. A Git deployment alone does not prove the old dashboard rule was removed.
+
 ## Explainable Trust
 
 Source: [`apps/explainable`](apps/explainable). The four-step fictional QuickBite scenario uses authored proposals validated through the existing schema and `applyProposal` commit boundary. It demonstrates evidence, findings, timeline, source references, reasoning and provenance graphs, gaps, actions, and revision history.
