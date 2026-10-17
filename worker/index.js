@@ -1,6 +1,10 @@
 import { siteCss } from "./styles.js";
-import { finalModes, finalWorkLibrary, caseDocuments, totalWorks, totalModes, totalArtifacts } from "./case-library.js";
+import { finalModes, finalWorkLibrary, caseDocuments, totalWorks } from "./case-library.js";
 import { caseReadingGuides, casePrototypes } from "./reading-guides.js";
+import { workPreviews } from "./work-previews.js";
+import { renderWorkStory } from "./work-stories.js";
+import { escapeHtml } from "./html.js";
+import { homeContent, aboutContent } from "./editorial-pages.js";
 
 // ============================================================================
 // Pham Thanh Phu — Work & Research static page renderer
@@ -21,16 +25,6 @@ function getReadingStats(text) {
   const words = clean.trim().split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(1, Math.round(words / 220));
   return { words, minutes, time: `${minutes} min read` };
-}
-
-function escapeHtml(str) {
-  if (!str) return "";
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 }
 
 const NOTION_URL_MAP = {
@@ -257,7 +251,17 @@ function formatAssetTitle(title) {
   return clean;
 }
 
-function renderEditorialNotion(markdown) {
+function assetFormat(asset, fallbackType = '') {
+  const extension = asset?.fileName?.match(/\.([a-z0-9]+)$/i)?.[1].toLowerCase();
+  const format = extension || asset?.type || fallbackType;
+  const documents = { pdf: 'PDF', doc: 'DOC', docx: 'DOCX', ppt: 'PPT', pptx: 'PPTX', xls: 'XLS', xlsx: 'XLSX' };
+  if (documents[format]) return { type: format, badge: documents[format] };
+  if (/^(image|diagram|png|jpe?g|webp|svg)$/.test(format)) return { type: 'image', badge: 'IMAGE' };
+  if (format === 'deck') return { type: 'deck', badge: 'DECK' };
+  return { type: 'document', badge: 'DOCUMENT' };
+}
+
+function renderEditorialNotion(markdown, assets = []) {
   if (!markdown) return "";
 
   // Normalize newlines and clean stray .png)
@@ -269,13 +273,20 @@ function renderEditorialNotion(markdown) {
     const titleMatch = attrs.match(/data-title="([^"]*)"/);
     const rawTitle = titleMatch ? titleMatch[1] : label;
     const cleanTitle = formatAssetTitle(rawTitle);
+    const driveId = attrs.match(/data-driveid="([^"]*)"/)?.[1];
+    const metadata = assets.find(asset => asset.driveId === driveId);
+    const format = assetFormat(metadata, attrs.match(/data-type="([^"]*)"/)?.[1]);
     let newAttrs = attrs;
     if (titleMatch) {
       newAttrs = newAttrs.replace(/data-title="[^"]*"/, `data-title="${cleanTitle}"`);
     } else {
       newAttrs += ` data-title="${cleanTitle}"`;
     }
-    return `<button${newAttrs}>📄 ${cleanTitle}</button>`;
+    for (const [key, value] of Object.entries({ 'data-type': format.type, 'data-badge': format.badge })) {
+      const attribute = new RegExp(`${key}="[^"]*"`);
+      newAttrs = attribute.test(newAttrs) ? newAttrs.replace(attribute, `${key}="${value}"`) : newAttrs + ` ${key}="${value}"`;
+    }
+    return `<button${newAttrs}>📄 ${cleanTitle} <span class="f-asset-format">${format.badge}</span></button>`;
   });
 
   // Group adjacent button + ext-btn link into a single pill group
@@ -541,8 +552,10 @@ function layoutHeader(active = "", nonce = "") {
     <nav class="f-nav f-wrap" aria-label="Primary navigation">
       <a class="f-brand" href="/">Phạm Thanh Phú</a>
       <div class="f-links">
+        <div class="f-nav-pages">
         <a href="/work"${active === "work" ? ' aria-current="page"' : ""}>Work</a>
         <a href="/about"${active === "about" ? ' aria-current="page"' : ""}>About</a>
+        </div>
         <button type="button" class="f-cmd-trigger" id="f-nav-cmd-trigger" aria-label="Search works and pages" aria-haspopup="dialog" aria-controls="f-cmd-dialog" aria-keyshortcuts="Control+k Meta+k" title="Search works and pages (Ctrl+K / ⌘K)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Search</span><kbd aria-hidden="true">Ctrl K</kbd>
         </button>
@@ -711,7 +724,10 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '', showCompan
     { title: `Work Library: All ${totalWorks} Works`, path: "/work", type: "Page", badge: "Archive" },
     { title: "About Phạm Thanh Phú: Operating Principles & Horizon", path: "/about", type: "Page", badge: "Profile" },
     ...finalModes.map(mode => ({ title: mode.label, path: `/work?mode=${mode.id}`, type: "Lens", badge: "Research Mode" })),
-    ...finalWorkLibrary.map(item => ({ title: item.title, path: item.path, type: item.type, badge: `Case ${item.index}`, keywords: `${item.tags} ${item.question}` }))
+    ...finalWorkLibrary.map(item => {
+      const preview = workPreviews.find(preview => preview.path === item.path);
+      return { title: item.title, path: item.path, type: item.type, badge: `Case ${item.index}`, keywords: [item.tags, item.question, preview?.label, preview?.hook, preview?.detail].filter(Boolean).join(' ') };
+    })
   ]).replace(/</g, '\\u003c')};
 
       var cmdDialog = document.getElementById('f-cmd-dialog');
@@ -763,8 +779,8 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '', showCompan
         } else {
           cmdDialog.setAttribute('open', '');
         }
-        cmdInput.value = '';
-        renderItems(SEARCH_ITEMS);
+        cmdInput.value = location.pathname === '/work' ? new URLSearchParams(location.search).get('q') || '' : '';
+        searchItems();
         setTimeout(function(){ cmdInput.focus(); }, 50);
       }
 
@@ -803,19 +819,29 @@ function layoutFooter(label = "Ho Chi Minh City · 2026", nonce = '', showCompan
         });
       }
 
-      if (cmdInput) {
-        cmdInput.addEventListener('input', function() {
-          var q = cmdInput.value.trim().toLowerCase();
-          if (!q) {
-            renderItems(SEARCH_ITEMS);
-            return;
-          }
-          var matched = SEARCH_ITEMS.filter(function(item) {
-            return [item.title, item.badge, item.keywords || ''].some(value => value.toLowerCase().includes(q));
-          });
-          renderItems(matched);
+      function searchItems() {
+        var q = cmdInput.value.trim().toLowerCase();
+        if (!q) {
+          renderItems(SEARCH_ITEMS);
+          return;
+        }
+        var terms = q.split(/\\s+/);
+        var matched = SEARCH_ITEMS.filter(function(item) {
+          var text = [item.title, item.badge, item.keywords || ''].join(' ').toLowerCase();
+          return terms.every(function(term) { return text.includes(term); });
         });
+        var resultsUrl = new URL('/work', location.origin);
+        if (location.pathname === '/work') {
+          var params = new URLSearchParams(location.search);
+          ['mode', 'topic', 'type', 'sort', 'saved'].forEach(function(key) { if (params.has(key)) resultsUrl.searchParams.set(key, params.get(key)); });
+        }
+        resultsUrl.searchParams.set('q', cmdInput.value.trim());
+        matched.unshift({title: 'View matching works', path: resultsUrl.pathname + resultsUrl.search, type: 'Search', badge: 'Results'});
+        renderItems(matched);
+      }
 
+      if (cmdInput) {
+        cmdInput.addEventListener('input', searchItems);
         cmdInput.addEventListener('keydown', function(e) {
           if (!currentFiltered || currentFiltered.length === 0) return;
           if (e.key === 'ArrowDown') {
@@ -878,82 +904,19 @@ ${layoutHead("Phạm Thanh Phú — Business & Product Operations", "Business Op
 <body>
   <a class="f-skip" href="#main">Skip to main content</a>
   ${layoutHeader("home", nonce)}
-  <main id="main">
-    <header class="f-home-hero f-wrap">
-      <div class="f-home-identity">
-        <p class="f-home-role">Business Operations · Product Operations · Product Strategy</p>
-        <h1>I'm drawn to messy operating problems.</h1>
-        <p class="f-home-intent">I enjoy exploring how they work, and keep learning how to make systems, ownership, and the next step clearer.</p>
-        <p class="f-home-experience">6+ years in founder-side B2B operations.</p>
-      </div>
-      <figure class="f-home-photo">
-        <img src="/assets/editorial-cafe-v2.webp" alt="" width="1400" height="1050" loading="lazy" decoding="async">
-      </figure>
-    </header>
-
-    <section class="f-home-selected f-wrap" id="selected-work" aria-labelledby="selected-work-title">
-      <div class="f-home-section-head">
-        <h2 id="selected-work-title">Selected Work</h2>
-        <a class="f-editorial-link" href="/work">View all work <span aria-hidden="true">→</span></a>
-      </div>
-      <a class="f-home-feature" href="/work/vieworld" aria-labelledby="vieworld-home-title">
-        <img class="f-home-feature-image" src="/assets/vieworld-meadow.webp" alt="Meadow scene from the VieWorld prototype" width="1400" height="788" decoding="async">
-        <div class="f-home-work-copy">
-          <span class="f-home-category">Product &amp; Operations</span>
-          <h3 id="vieworld-home-title">VieWorld</h3>
-          <p>Designing an independent fandom ecosystem that feels like home.</p>
-          <span class="f-editorial-link">View case <span aria-hidden="true">→</span></span>
-        </div>
-      </a>
-      <div class="f-home-work-grid">
-        <a class="f-home-work-row" href="/work/fanme-controlled-growth" aria-labelledby="fanme-home-title">
-          <img class="f-home-artifact" src="/assets/fanme-cover.webp" alt="" width="700" height="394" loading="lazy" decoding="async">
-          <div class="f-home-work-copy">
-            <h3 id="fanme-home-title">FanMe — Controlled Growth</h3>
-            <p>A bounded artist-launch pilot, with ownership, readiness, and scale gates.</p>
-          </div>
-        </a>
-        <a class="f-home-work-row" href="/work/vinamilk-trusted-nutrition" aria-labelledby="vinamilk-home-title">
-          <img class="f-home-artifact" src="/assets/vinamilk-cover.webp" alt="" width="541" height="700" loading="lazy" decoding="async">
-          <div class="f-home-work-copy">
-            <h3 id="vinamilk-home-title">Vinamilk — Trusted Nutrition</h3>
-            <p>Connecting product-service discovery with delivery, scale, and governance.</p>
-          </div>
-        </a>
-        <a class="f-home-work-row" href="/work/shopee-account-restrictions" aria-labelledby="shopee-home-title">
-          <img class="f-home-artifact" src="/assets/shopee-cover.webp" alt="" width="500" height="281" loading="lazy" decoding="async">
-          <div class="f-home-work-copy">
-            <h3 id="shopee-home-title">Shopee — Account Restrictions</h3>
-            <p>From account resolution to preserving the customer’s commerce outcome.</p>
-          </div>
-        </a>
-        <a class="f-home-work-row" href="/work/explainable-trust" aria-labelledby="explainable-home-title">
-          <img src="/assets/explainable-cover.webp" alt="" width="500" height="500" loading="lazy" decoding="async">
-          <div class="f-home-work-copy">
-            <h3 id="explainable-home-title">Explainable Trust</h3>
-            <p>Making reasoning, sources, and case revisions visible and inspectable.</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="f-home-approach f-wrap" aria-labelledby="approach-title">
-      <h2 id="approach-title">How I work</h2>
-      <ul class="f-home-principles">
-        <li>Ground truth first</li><li>Clear ownership</li><li>Evidence visible</li>
-      </ul>
-      <a class="f-editorial-link" href="/about">More about my approach <span aria-hidden="true">→</span></a>
-    </section>
-
-  </main>
-
+  ${homeContent()}
   ${layoutFooter("Ho Chi Minh City · 2026", nonce, false)}
 </body>
 </html>`;
 }
 
 function workPage(nonce) {
-  const works = finalWorkLibrary.filter(item => item.path.startsWith('/work/'));
+  const previewByPath = new Map(workPreviews.map(preview => [preview.path, preview]));
+  const works = finalWorkLibrary.filter(item => item.path.startsWith('/work/')).sort((a, b) => {
+    const ad = previewByPath.get(a.path)?.updated || '';
+    const bd = previewByPath.get(b.path)?.updated || '';
+    return Number(!ad) - Number(!bd) || bd.localeCompare(ad) || b.index - a.index;
+  });
   const topicGroups = [
     { id: 'demo', label: 'Public Demo', paths: ['explainable-trust', 'vieworld'] },
     { id: 'fandom', label: 'Fandom & Commerce', paths: ['creator-platform-operating-model', 'post-signing-artist-label-operations', 'fanme-controlled-growth', 'datvietvac-ownership-belonging', 'datvietvac-fandom-cards', 'vieshop-fan-centred-merchandise-system', 'datvietvac-who-owns-the-fan-promise', 'vieworld', 'metub-creator-economy', 'artist-fandom-page', 'shopee-account-restrictions'] },
@@ -963,23 +926,14 @@ function workPage(nonce) {
     { id: 'discovery', label: 'Product Discovery', paths: ['vinamilk-trusted-nutrition', 'elfie-trust-safe-activation', 'datvietvac-ownership-belonging', 'datvietvac-fandom-cards', 'vieshop-fan-centred-merchandise-system', 'vieworld', 'artist-fandom-page', 'zalo-scam-emergency-mode'] }
   ];
   const bookmarkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/></svg>';
-  const sectionsHtml = finalModes.map(mode => {
-    const items = works.filter(item => item.mode === mode.id);
-    return `<section class="f-catalog-section" aria-labelledby="mode-${mode.id}">
-      <div class="f-section-head"><h2 id="mode-${mode.id}">${escapeHtml(mode.short)}</h2><span class="f-section-count-badge">${items.length} works</span></div>
-      <div class="f-title-grid">${items.map(item => {
-        const assets = (caseDocuments[item.path]?.assets || []).length;
-        const topics = topicGroups.filter(topic => topic.paths.includes(item.path.slice(6))).map(topic => topic.id).join(' ');
-        return `<article class="f-work-item" data-path="${item.path}" data-mode="${item.mode}" data-topics="${topics}" data-search="${escapeHtml([item.title, item.question, item.tags, item.type, item.maturity].join(' ').toLowerCase())}">
-          <div class="f-work-item-heading"><h3><a href="${item.path}">${escapeHtml(item.title)} <span aria-hidden="true">→</span></a></h3><button class="f-work-save" type="button" data-save-path="${item.path}" data-save-title="${escapeHtml(item.title)}" aria-pressed="false" aria-label="Save ${escapeHtml(item.title)}">${bookmarkIcon}</button></div>
-          <div class="f-work-item-meta"><span>${escapeHtml(item.maturity.split(' · ')[0])}</span></div>
-          <details class="f-work-details"><summary><span class="f-item-question">${escapeHtml(item.question)}</span></summary>
-            <p>${escapeHtml(item.type)}${assets ? ` · ${assets} artifact${assets === 1 ? '' : 's'}` : ''}</p>
-            <div class="f-paper-tags">${(item.tags || '').split(' · ').filter(Boolean).map(tag => `<button type="button" class="f-tag-click" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`).join('')}</div>
-          </details>
-        </article>`;
-      }).join('')}</div>
-    </section>`;
+  const storiesHtml = works.map(item => {
+    const preview = previewByPath.get(item.path) || { label: item.title, hook: item.question, detail: item.type, stage: item.maturity };
+    const topics = topicGroups.filter(topic => topic.paths.includes(item.path.slice(6))).map(topic => topic.id).join(' ');
+    const storyId = 'work-story-' + item.index;
+    return `<article class="f-work-item" data-path="${item.path}" data-index="${item.index}" data-title="${escapeHtml(preview.label)}" data-updated="${preview.updated || ''}" data-type="${preview.format}" data-mode="${item.mode}" data-topics="${topics}" data-search="${escapeHtml([item.title, item.question, item.tags, item.type, item.maturity, preview.label, preview.hook, preview.detail].join(' ').toLowerCase())}">
+      ${renderWorkStory(preview, { id: storyId })}
+      <button class="f-work-save" type="button" data-save-path="${item.path}" data-save-title="${escapeHtml(item.title)}" aria-pressed="false" aria-label="Save ${escapeHtml(item.title)}">${bookmarkIcon}</button>
+    </article>`;
   }).join('');
   return `<!doctype html>
 <html lang="en">
@@ -988,70 +942,73 @@ ${layoutHead('Work Library — Phạm Thanh Phú', `Research, operating case stu
   <a class="f-skip" href="#main">Skip to catalog</a>
   ${layoutHeader('work', nonce)}
   <main id="main" class="f-work-page">
-    <header class="f-work-hero f-wrap"><div class="f-work-heading"><h1>Work Library</h1>
-      <details class="f-library-about"><summary>About the library</summary><div class="f-library-about-panel">
-        <p>The cases look different on the surface, but I keep coming back to a small set of operating questions: what deserves to be built, what breaks after apparent success, what people can safely rely on, and what evidence should earn the next step.</p>
-        <p>${totalModes} research modes · ${totalArtifacts}+ downloadable artifacts</p>
-        <blockquote>Every piece in this library separates confirmed public facts from working inferences, keeping the boundary of evidence visible.</blockquote>
-      </div></details></div>
-    </header>
+    <h1 class="f-sr-only">Work collection</h1>
     <section class="f-wrap f-work-toolbar" aria-label="Find work">
-      <div class="f-work-search-row"><div class="f-search-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
-        <input class="f-search-input" id="work-search" type="search" placeholder="Search work" aria-label="Search works" autocomplete="off" aria-keyshortcuts="/">
-        <button class="f-search-clear" id="work-search-clear" type="button" aria-label="Clear search" hidden>×</button>
-      </div>
-      <details class="f-filter-panel" id="work-filters"><summary>Filters <span id="work-filter-count" hidden></span></summary><div class="f-filter-fields">
-        <label>Research mode<select id="work-mode" aria-label="Filter by research mode"><option value="all">All modes</option>${finalModes.map(mode => `<option value="${mode.id}">${escapeHtml(mode.short)}</option>`).join('')}</select></label>
-        <label>Topic<select id="work-topic" aria-label="Filter by topic"><option value="all">All topics</option>${topicGroups.map(topic => `<option value="${topic.id}">${escapeHtml(topic.label)}</option>`).join('')}</select></label>
+      <div class="f-work-results"><span id="work-count" role="status" aria-live="polite">${works.length} works</span>
         <button type="button" id="btn-filter-saved" class="f-work-saved" aria-pressed="false">${bookmarkIcon}<span>Saved (0)</span></button>
-      </div></details></div>
-      <div class="f-work-results"><span id="work-count" class="f-toolbar-count" role="status" aria-live="polite">${works.length} works</span><button type="button" id="work-clear-filters" class="f-work-clear" hidden>Clear filters</button></div>
+      </div>
+      <div class="f-work-controls">
+        <label class="f-work-select"><span>Topic:</span><select id="work-topic" aria-label="Filter by topic"><option value="all">All topics</option>${topicGroups.map(topic => `<option value="${topic.id}">${escapeHtml(topic.label)}</option>`).join('')}</select></label>
+        <label class="f-work-select"><span>Type:</span><select id="work-type" aria-label="Filter by type"><option value="all">All types</option><option value="case">Case studies</option><option value="prototype">Prototypes</option><option value="essay">Essays</option><option value="concept">Concepts</option></select></label>
+        <label class="f-work-select"><span>Sort:</span><select id="work-sort" aria-label="Sort works"><option value="newest">Latest updated</option><option value="oldest">Earliest updated</option><option value="title">Title A–Z</option></select></label>
+      </div>
+      <div class="f-work-active" id="work-active-filters" hidden><span id="work-mode-label" hidden></span><button type="button" id="work-query-clear" class="f-work-query" hidden><span></span><span aria-hidden="true">×</span></button><button type="button" id="work-clear-filters" class="f-work-clear" hidden>Clear filters</button></div>
     </section>
-    <div class="f-wrap" id="catalog-container">${sectionsHtml}</div>
+    <section class="f-wrap f-work-stories" id="catalog-container" aria-label="Work collection">${storiesHtml}</section>
     <div class="f-wrap"><div id="work-empty" class="f-work-empty" hidden><h2>No works found</h2><p id="work-empty-message">Try another keyword or clear the filters.</p><button type="button" id="work-reset-filters" class="f-editorial-link">Reset filters <span aria-hidden="true">→</span></button></div></div>
   </main>
   ${layoutFooter('Ho Chi Minh City · 2026', nonce, false)}
   <script nonce="${nonce}">
     (() => {
-      const search = document.getElementById('work-search');
-      const clearSearch = document.getElementById('work-search-clear');
+      const searchTrigger = document.getElementById('f-nav-cmd-trigger');
+      const clearQuery = document.getElementById('work-query-clear');
       const clearFilters = document.getElementById('work-clear-filters');
-      const modeSelect = document.getElementById('work-mode');
       const topic = document.getElementById('work-topic');
+      const type = document.getElementById('work-type');
+      const sort = document.getElementById('work-sort');
       const savedToggle = document.getElementById('btn-filter-saved');
-      const filters = document.getElementById('work-filters');
-      const filterCount = document.getElementById('work-filter-count');
-      const panels = [filters, document.querySelector('.f-library-about')];
+      const catalog = document.getElementById('catalog-container');
+      const modes = ${JSON.stringify(Object.fromEntries(finalModes.map(mode => [mode.id, mode.short])))};
       const items = Array.from(document.querySelectorAll('.f-work-item'));
       const saveButtons = Array.from(document.querySelectorAll('.f-work-save'));
       const knownPaths = new Set(items.map(item => item.dataset.path));
       let savedOnly = false;
+      let mode = '';
+      let displayedSort = 'newest';
+      let query = '';
       function bookmarks() {
         try { const value = JSON.parse(localStorage.getItem('f-bookmarks') || '[]'); return Array.isArray(value) ? value.filter(path => typeof path === 'string') : []; }
         catch { return []; }
       }
       function readUrl() {
         const params = new URLSearchParams(location.search);
-        for (const [select, key] of [[modeSelect, 'mode'], [topic, 'topic']]) select.value = Array.from(select.options).some(option => option.value === params.get(key)) ? params.get(key) : 'all';
-        search.value = params.get('q') || '';
+        for (const [select, key, fallback] of [[topic, 'topic', 'all'], [type, 'type', 'all'], [sort, 'sort', 'newest']]) select.value = Array.from(select.options).some(option => option.value === params.get(key)) ? params.get(key) : fallback;
+        mode = Object.hasOwn(modes, params.get('mode')) ? params.get('mode') : '';
+        query = params.get('q') || '';
         savedOnly = params.get('saved') === '1';
       }
       function writeUrl(replace) {
         const url = new URL(location.href);
-        const values = {mode: modeSelect.value === 'all' ? '' : modeSelect.value, topic: topic.value === 'all' ? '' : topic.value, q: search.value.trim(), saved: savedOnly ? '1' : ''};
+        const values = {mode, topic: topic.value === 'all' ? '' : topic.value, type: type.value === 'all' ? '' : type.value, sort: sort.value === 'newest' ? '' : sort.value, q: query.trim(), saved: savedOnly ? '1' : ''};
         url.searchParams.delete('view');
         for (const [key, value] of Object.entries(values)) value ? url.searchParams.set(key, value) : url.searchParams.delete(key);
         if (url.href !== location.href) history[replace ? 'replaceState' : 'pushState']({}, '', url);
       }
       function render() {
         const saved = new Set(bookmarks());
-        const terms = search.value.trim().toLowerCase().split(' ').filter(Boolean);
-        for (const item of items) item.hidden = !((modeSelect.value === 'all' || item.dataset.mode === modeSelect.value) && (topic.value === 'all' || item.dataset.topics.split(' ').includes(topic.value)) && (!savedOnly || saved.has(item.dataset.path)) && terms.every(term => item.dataset.search.includes(term)));
-        for (const section of document.querySelectorAll('.f-catalog-section')) {
-          const visible = Array.from(section.querySelectorAll('.f-work-item')).filter(item => !item.hidden).length;
-          section.hidden = !visible;
-          section.querySelector('.f-section-count-badge').textContent = visible + ' work' + (visible === 1 ? '' : 's');
+        const terms = query.trim().toLowerCase().split(/\\s+/).filter(Boolean);
+        const activeFilters = Number(Boolean(mode)) + Number(topic.value !== 'all') + Number(type.value !== 'all') + Number(savedOnly);
+        const filtered = activeFilters > 0 || terms.length > 0;
+        const matches = new Set(items.filter(item => (!mode || item.dataset.mode === mode) && (topic.value === 'all' || item.dataset.topics.split(' ').includes(topic.value)) && (type.value === 'all' || item.dataset.type === type.value) && (!savedOnly || saved.has(item.dataset.path)) && terms.every(term => item.dataset.search.includes(term))));
+        for (const item of items) item.hidden = !matches.has(item);
+        if (displayedSort !== sort.value) {
+          const ordered = items.slice().sort((a, b) => {
+            if (sort.value === 'title') return a.dataset.title.localeCompare(b.dataset.title, 'en') || Number(b.dataset.index) - Number(a.dataset.index);
+            const ad = a.dataset.updated, bd = b.dataset.updated;
+            return Number(!ad) - Number(!bd) || (sort.value === 'oldest' ? ad.localeCompare(bd) : bd.localeCompare(ad)) || Number(b.dataset.index) - Number(a.dataset.index);
+          });
+          catalog.append(...ordered);
+          displayedSort = sort.value;
         }
         for (const button of saveButtons) {
           const active = saved.has(button.dataset.savePath);
@@ -1060,25 +1017,25 @@ ${layoutHead('Work Library — Phạm Thanh Phú', `Research, operating case stu
         }
         savedToggle.setAttribute('aria-pressed', String(savedOnly));
         savedToggle.querySelector('span').textContent = 'Saved (' + Array.from(saved).filter(path => knownPaths.has(path)).length + ')';
-        clearSearch.hidden = !search.value;
-        const activeFilters = Number(modeSelect.value !== 'all') + Number(topic.value !== 'all') + Number(savedOnly);
-        filterCount.hidden = !activeFilters;
-        filterCount.textContent = activeFilters;
-        const filtered = activeFilters > 0 || terms.length > 0;
-        clearFilters.hidden = !filtered;
-        const visibleCount = items.filter(item => !item.hidden).length;
-        document.getElementById('work-count').textContent = visibleCount + (filtered ? ' of ' + items.length + ' works' : ' works');
+        clearQuery.hidden = !query.trim();
+        clearQuery.querySelector('span').textContent = '“' + query.trim() + '”';
+        clearQuery.setAttribute('aria-label', 'Clear search: ' + query.trim());
+        document.getElementById('work-active-filters').hidden = !filtered;
+        const modeLabel = document.getElementById('work-mode-label');
+        modeLabel.hidden = !mode;
+        modeLabel.textContent = modes[mode] || '';
+        clearFilters.hidden = !activeFilters;
+        const visibleCount = matches.size;
+        document.getElementById('work-count').textContent = visibleCount + (visibleCount === items.length ? ' works' : ' of ' + items.length + ' works');
         document.getElementById('work-empty').hidden = visibleCount > 0;
         document.getElementById('catalog-container').hidden = !visibleCount;
         document.getElementById('work-empty-message').textContent = savedOnly && !bookmarks().some(path => knownPaths.has(path)) ? 'Saved works stay in this browser. Save a work with its bookmark button to find it here.' : 'Try another keyword, or clear the filters to browse all ' + items.length + ' works.';
       }
       function update(replace = false) { writeUrl(replace); render(); }
-      function reset() { modeSelect.value = 'all'; topic.value = 'all'; search.value = ''; savedOnly = false; update(); search.focus(); }
-      modeSelect.addEventListener('change', () => update());
-      topic.addEventListener('change', () => update());
+      function reset() { mode = ''; topic.value = 'all'; type.value = 'all'; query = ''; savedOnly = false; update(); searchTrigger.focus(); }
+      for (const select of [topic, type, sort]) select.addEventListener('change', () => update());
       savedToggle.addEventListener('click', () => { savedOnly = !savedOnly; update(); });
-      search.addEventListener('input', () => update(true));
-      clearSearch.addEventListener('click', () => { search.value = ''; update(true); search.focus(); });
+      clearQuery.addEventListener('click', () => { query = ''; update(); searchTrigger.focus(); });
       clearFilters.addEventListener('click', reset);
       document.getElementById('work-reset-filters').addEventListener('click', reset);
       for (const button of saveButtons) button.addEventListener('click', () => {
@@ -1087,21 +1044,13 @@ ${layoutHead('Work Library — Phạm Thanh Phú', `Research, operating case stu
         try { localStorage.setItem('f-bookmarks', JSON.stringify(Array.from(saved))); } catch { return; }
         render();
       });
-      for (const tag of document.querySelectorAll('.f-tag-click')) tag.addEventListener('click', () => { search.value = tag.dataset.tag; update(true); search.focus(); search.scrollIntoView({block:'center'}); });
-      for (const panel of panels) panel.addEventListener('toggle', () => { if (panel.open) panels.filter(other => other !== panel).forEach(other => { other.open = false; }); });
-      document.addEventListener('click', event => panels.forEach(panel => { if (!panel.contains(event.target)) panel.open = false; }));
       window.addEventListener('popstate', () => { readUrl(); render(); });
       window.addEventListener('pageshow', () => { readUrl(); render(); });
       window.addEventListener('storage', event => { if (event.key === 'f-bookmarks') render(); });
       document.addEventListener('keydown', event => {
         if (document.querySelector('dialog[open]') || event.ctrlKey || event.metaKey || event.altKey) return;
-        if (event.key === 'Escape') {
-          const panel = panels.find(panel => panel.open);
-          if (panel) { panel.open = false; panel.querySelector('summary').focus(); return; }
-          if (event.target === search && search.value) { search.value = ''; update(true); return; }
-        }
-        if (event.target.isContentEditable || event.target.closest('input, textarea, select')) return;
-        if (event.key === '/') { event.preventDefault(); search.focus(); }
+        if (event.target.isContentEditable || event.target.closest?.('input, textarea, select')) return;
+        if (event.key === '/') { event.preventDefault(); searchTrigger.click(); }
       });
       readUrl(); render();
     })();
@@ -1111,9 +1060,27 @@ ${layoutHead('Work Library — Phạm Thanh Phú', `Research, operating case stu
 }
 
 
+function splitCaseOpening(body) {
+  const tag = /^\s*<asset-bar>/.test(body) ? 'asset-bar' : /^\s*<div class="f-asset-bar">/.test(body) ? 'div' : '';
+  if (!tag) return { sources: '', narrative: body };
+  const tags = new RegExp('<(/?)' + tag + '\\b[^>]*>', 'g');
+  let depth = 0;
+  for (const match of body.matchAll(tags)) {
+    depth += match[1] ? -1 : 1;
+    if (depth === 0) {
+      const end = match.index + match[0].length;
+      return { sources: body.slice(0, end), narrative: body.slice(end) };
+    }
+  }
+  return { sources: '', narrative: body };
+}
+
 function casePage(item, nonce) {
   const doc = caseDocuments[item.path] || { assets: [], body: "" };
-  const renderedProse = renderEditorialNotion(doc.body || "");
+  // Keep the opening source links available in the toolbar, before the narrative.
+  const opening = splitCaseOpening(doc.body || '');
+  const sourceLinks = renderEditorialNotion(opening.sources, doc.assets || []);
+  const renderedProse = renderEditorialNotion(opening.narrative, doc.assets || []);
   const guide = caseReadingGuides[item.path];
   const prototype = casePrototypes[item.path];
 
@@ -1177,20 +1144,72 @@ function casePage(item, nonce) {
     ...[...(doc.body || '').matchAll(/(?:data-driveid|driveid)="([A-Za-z0-9_-]+)"/g)].map(match => match[1])
   ])]);
 
+
+  const compactToolbar = `    <div class="f-wrap f-case-toolbar" role="group" aria-label="Reading controls">
+      <span class="f-case-read-time">${readMinutes} min<span class="f-read-label"> read</span></span>
+      ${sourceLinks ? `<details class="f-case-sources"><summary>${assetCount > 0 ? assetCount + ' artifact' + (assetCount > 1 ? 's' : '') : 'Source links'}</summary><div class="f-case-sources-panel">${sourceLinks}</div></details>` : assetCount > 0 ? `<span class="f-case-read-time">${assetCount} artifact${assetCount > 1 ? 's' : ''}</span>` : ''}
+      <details class="f-mobile-toc">
+        <summary>Contents</summary>
+        <ul id="f-mobile-toc-list" class="f-mobile-toc-list"></ul>
+      </details>
+      <details class="f-reading-tools"><summary aria-label="Reading tools"><span class="f-reading-tools-label">Reading tools</span><span class="f-reading-tools-short" aria-hidden="true">Tools</span></summary><div class="f-reading-tools-panel">
+          <div class="f-case-action-left">
+            <button type="button" id="f-btn-bookmark" class="f-action-pill" data-path="${escapeHtml(item.path)}" aria-pressed="false"><span class="bm-text">Save</span></button>
+            <button type="button" id="f-btn-copy-url" class="f-action-pill">Copy link</button>
+            <button type="button" id="f-cite-btn" class="f-action-pill" data-title="${escapeHtml(item.title)}">Cite</button>
+          </div>
+          <div class="f-case-action-right">
+            <button type="button" id="f-btn-font-dec" class="f-action-pill" aria-label="Decrease text size">A−</button>
+            <button type="button" id="f-btn-font-reset" class="f-action-pill f-reading-size" aria-label="Reset text size" title="Reset text size">18px</button>
+            <button type="button" id="f-btn-font-inc" class="f-action-pill" aria-label="Increase text size">A+</button>
+          </div>
+          ${prototype ? `<a class="f-case-prototype" href="${prototype.href}" target="_blank" rel="noreferrer">${escapeHtml(prototype.label)} <span aria-hidden="true">↗</span></a>` : ''}
+          <details class="f-case-info"><summary>About this case</summary>
+    ${guide ? `<section class="f-case-brief" aria-label="Case overview">
+      <dl><div><dt>Problem</dt><dd>${escapeHtml(guide.problem)}</dd></div><div><dt>Approach</dt><dd>${escapeHtml(guide.approach)}</dd></div><div><dt>Output &amp; next test</dt><dd>${escapeHtml(guide.output)}</dd></div></dl>
+      <p class="f-case-brief-boundary"><strong>Evidence boundary</strong> ${escapeHtml(guide.boundary)}</p>
+    </section>` : ''}
+
+    <div class="f-case-meta">
+      <dl class="f-case-meta-grid">
+        <div class="f-meta-cell">
+          <dt>Maturity</dt>
+          <dd>${escapeHtml(item.maturity)}</dd>
+        </div>
+        <div class="f-meta-cell">
+          <dt>Research Type</dt>
+          <dd>${escapeHtml(item.type)}</dd>
+        </div>
+        <div class="f-meta-cell">
+          <dt>Research Mode</dt>
+          <dd>${escapeHtml(modeLabel)}</dd>
+        </div>
+        <div class="f-meta-cell">
+          <dt>Evidence Basis</dt>
+          <dd>${escapeHtml(item.evidenceBasis || 'Outside-In · Public Evidence')}</dd>
+        </div>
+      </dl>
+    </div>
+
+    </details>
+          </div></details>
+    </div>`;
+
   const clientScript = `
     <script nonce="${nonce}">
       (()=>{
         const bar = document.getElementById('f-progress-bar');
         const prose = document.getElementById('record');
-        const readingMenus = [...document.querySelectorAll('.f-reading-tools, .f-mobile-toc')];
+        const readingMenus = [...document.querySelectorAll('.f-case-toolbar > details')];
         readingMenus.forEach(menu => menu.addEventListener('toggle', () => {
           if (menu.open) readingMenus.forEach(other => { if (other !== menu) other.open = false; });
         }));
         document.addEventListener('click', event => {
+          if (event.target.closest?.('dialog')) return;
           readingMenus.forEach(menu => { if (!menu.contains(event.target)) menu.open = false; });
         });
         document.addEventListener('keydown', event => {
-          if (event.key !== 'Escape') return;
+          if (event.key !== 'Escape' || document.querySelector('dialog[open]')) return;
           readingMenus.forEach(menu => {
             if (menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
           });
@@ -1421,7 +1440,7 @@ function casePage(item, nonce) {
           const type = opts.type || 'paper';
           const driveId = opts.driveId || '';
           const isImage = (type === 'image' || type === 'diagram');
-          const badge = opts.badge || (isImage ? 'IMAGE' : (type === 'deck' ? 'DECK' : 'PDF'));
+          const badge = opts.badge || ({ pdf: 'PDF', doc: 'DOC', docx: 'DOCX', ppt: 'PPT', pptx: 'PPTX', xls: 'XLS', xlsx: 'XLSX', deck: 'DECK' }[type]) || (isImage ? 'IMAGE' : 'DOCUMENT');
 
           if (driveId && !VALID_DRIVE_IDS.has(driveId)) return;
 
@@ -1585,49 +1604,13 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
   <main>
     <section class="f-case-hero">
       <div class="f-wrap">
-        <div class="f-crumb">
-          <a href="/work">Work Library</a>
-          <span class="f-crumb-divider" aria-hidden="true">/</span>
-          <span>${escapeHtml(modeLabel)}</span>
-        </div>
         <h1>${escapeHtml(item.title)}</h1>
         <p class="f-case-dek">${escapeHtml(item.question)}</p>
-        <div class="f-case-hero-stats">
-          <span class="f-hero-stat">${readMinutes} min read</span>
-          ${assetCount > 0 ? `<span class="f-hero-stat">${assetCount} artifact${assetCount > 1 ? 's' : ''}</span>` : ''}
-          ${prototype ? `<a class="f-case-prototype" href="${prototype.href}" target="_blank" rel="noreferrer">${escapeHtml(prototype.label)} <span aria-hidden="true">↗</span></a>` : ''}
-        </div>
+
       </div>
     </section>
 
-    <details class="f-case-info f-wrap"><summary>About this case</summary>
-    ${guide ? `<section class="f-case-brief" aria-label="Case overview">
-      <dl><div><dt>Problem</dt><dd>${escapeHtml(guide.problem)}</dd></div><div><dt>Approach</dt><dd>${escapeHtml(guide.approach)}</dd></div><div><dt>Output &amp; next test</dt><dd>${escapeHtml(guide.output)}</dd></div></dl>
-      <p class="f-case-brief-boundary"><strong>Evidence boundary</strong> ${escapeHtml(guide.boundary)}</p>
-    </section>` : ''}
-
-    <div class="f-case-meta">
-      <dl class="f-case-meta-grid">
-        <div class="f-meta-cell">
-          <dt>Maturity</dt>
-          <dd>${escapeHtml(item.maturity)}</dd>
-        </div>
-        <div class="f-meta-cell">
-          <dt>Research Type</dt>
-          <dd>${escapeHtml(item.type)}</dd>
-        </div>
-        <div class="f-meta-cell">
-          <dt>Research Mode</dt>
-          <dd>${escapeHtml(modeLabel)}</dd>
-        </div>
-        <div class="f-meta-cell">
-          <dt>Evidence Basis</dt>
-          <dd>${escapeHtml(item.evidenceBasis || 'Outside-In · Public Evidence')}</dd>
-        </div>
-      </dl>
-    </div>
-
-    </details>
+${compactToolbar}
 
     <div class="f-wrap f-case-reading">
       <aside class="f-case-rail" aria-label="Table of contents">
@@ -1639,24 +1622,7 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
       </aside>
 
       <article class="f-prose" id="record">
-        <div class="f-case-action-bar" role="group" aria-label="Reading controls">
-          <details class="f-mobile-toc">
-            <summary>Contents</summary>
-            <ul id="f-mobile-toc-list" class="f-mobile-toc-list"></ul>
-          </details>
-          <button type="button" id="f-btn-bookmark" class="f-action-pill" data-path="${escapeHtml(item.path)}" aria-pressed="false"><span class="bm-text">Save</span></button>
-          <details class="f-reading-tools"><summary>Reading tools</summary><div class="f-reading-tools-panel">
-          <div class="f-case-action-left">
-            <button type="button" id="f-btn-copy-url" class="f-action-pill">Copy link</button>
-            <button type="button" id="f-cite-btn" class="f-action-pill" data-title="${escapeHtml(item.title)}">Cite</button>
-          </div>
-          <div class="f-case-action-right">
-            <button type="button" id="f-btn-font-dec" class="f-action-pill" aria-label="Decrease text size">A−</button>
-            <button type="button" id="f-btn-font-reset" class="f-action-pill f-reading-size" aria-label="Reset text size" title="Reset text size">18px</button>
-            <button type="button" id="f-btn-font-inc" class="f-action-pill" aria-label="Increase text size">A+</button>
-          </div>
-          </div></details>
-        </div>
+
         ${renderedProse}
 
         ${relatedHtml}
@@ -1686,7 +1652,7 @@ ${layoutHead(`${item.title} — Phạm Thanh Phú`, item.question, nonce, { path
         <img id="f-modal-img" class="f-modal-img" style="display:none;" alt="Preview">
         <div id="f-modal-error" hidden role="status" style="padding:24px;text-align:center;">
           <p>Preview could not be loaded.</p>
-          <a id="f-modal-error-link" class="f-about-btn secondary" target="_blank" rel="noreferrer">Open in Google Drive ↗</a>
+          <a id="f-modal-error-link" class="f-document-link" target="_blank" rel="noreferrer">Open in Google Drive ↗</a>
         </div>
         <button id="f-modal-img-close" class="f-modal-img-close" aria-label="Close preview" title="Close">&#x2715;</button>
       </div>
@@ -1705,253 +1671,7 @@ ${layoutHead("About — Phạm Thanh Phú", "Phạm Thanh Phú — 6+ years in B
 <body>
   <a class="f-skip" href="#about-content">Skip to about content</a>
   ${layoutHeader("about", nonce)}
-  <main id="about-content">
-    <!-- Introduction and contact -->
-    <section class="f-about-hero-artistic">
-      <div class="f-wrap">
-        <h1>I learned operations by doing the work.<br><em>I’m still learning how to make it clearer.</em></h1>
-        <p class="f-about-hero-dek">
-          For <strong>6+ years</strong>, I’ve worked on the founder side of <strong>Phong Phu Stationery in Dong Thap</strong>, handling B2B accounts, suppliers, pricing, fulfilment, and the routines that keep them connected.
-        </p>
-        <p class="f-about-hero-dek">
-          I’m now based in Ho Chi Minh City and interested in Business Operations, Product Operations, and Product Strategy. My independent work gives me room to explore those interests through research, operating models, and prototypes—and to keep learning from what I find.
-        </p>
-        
-        <div class="f-about-coords-bar">
-          <span class="f-coord-tag"><strong>EXPERIENCE:</strong> B2B Operations</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>BASED:</strong> Ho Chi Minh City</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>FROM:</strong> Dong Thap</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>EDUCATION:</strong> HCMUL · Judicial Academy</span>
-          <span class="f-coord-divider">/</span>
-          <span class="f-coord-tag"><strong>INTERESTS:</strong> Business &amp; Product Ops</span>
-        </div>
-      
-        <div class="f-about-hero-actions">
-          <a href="mailto:phamthanhphu97@gmail.com?subject=Contact%20-%20Pham%20Thanh%20Phu" class="f-about-btn primary">Email me: phamthanhphu97@gmail.com ✉</a>
-          <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn ↗</a>
-          <a href="mailto:phamthanhphu97@gmail.com?subject=Request%20Full%20CV%20-%20Pham%20Thanh%20Phu" class="f-about-btn secondary">Request my CV →</a>
-        </div>
-
-      </div>
-    </section>
-
-    <div class="f-wrap">
-      <!-- Portfolio at a glance -->
-      <div class="f-impact-dashboard">
-        <div class="f-impact-stat">
-          <b>${totalWorks}</b>
-          <span>Public Research &amp; Applied Works</span>
-        </div>
-        <div class="f-impact-stat">
-          <b>1</b>
-          <span>VieWorld App Prototype</span>
-        </div>
-        <div class="f-impact-stat">
-          <b>${totalModes}</b>
-          <span>Research Modes</span>
-        </div>
-        <div class="f-impact-stat">
-          <b>Visible</b>
-          <span>Assumptions &amp; Evidence Limits</span>
-        </div>
-      </div>
-
-      <!-- Operating experience in numbers -->
-      <section class="f-about-bento-grid" aria-label="Key Operating Highlights">
-        <div class="f-bento-card">
-          <div class="f-bento-card-top">
-            <span class="f-bento-val">6+</span>
-            <span class="f-bento-unit">Years</span>
-          </div>
-          <h3>Running B2B Operations</h3>
-          <p>Business Development &amp; Operations Manager at Phong Phu Stationery, Dong Thap (July 2019–present).</p>
-          <div class="f-bento-tag">Sourcing · Pricing · Fulfilment · Quality</div>
-        </div>
-
-        <div class="f-bento-card">
-          <div class="f-bento-card-top">
-            <span class="f-bento-val">~800M</span>
-            <span class="f-bento-unit">VND / Qtr</span>
-          </div>
-          <h3>Quarterly B2B Revenue</h3>
-          <p>Average B2B and institutional supply revenue, excluding retail. Operating margin after expenses: 30–35%.</p>
-          <div class="f-bento-tag">B2B Supply · Margin After Expenses</div>
-        </div>
-
-        <div class="f-bento-card">
-          <div class="f-bento-card-top">
-            <span class="f-bento-val">~95%</span>
-            <span class="f-bento-unit">Account Retention</span>
-          </div>
-          <h3>50+ Recurring Clients</h3>
-          <p>Institutional and corporate clients, with retention measured by account count.</p>
-          <div class="f-bento-tag">Institutional &amp; Corporate Accounts</div>
-        </div>
-
-        <div class="f-bento-card">
-          <div class="f-bento-card-top">
-            <span class="f-bento-val">&gt;90%</span>
-            <span class="f-bento-unit">Delegated</span>
-          </div>
-          <h3>Operating Work Delegated</h3>
-          <p>Since summer 2025, I’ve handed over most daily operating work, supported by KiotViet, an experienced manager, part-time help, and delivery capacity.</p>
-          <div class="f-bento-tag">KiotViet · SOPs · Handover</div>
-        </div>
-      </section>
-
-      <!-- Experience and independent work -->
-      <section class="f-about-triptych" aria-label="Experience and Independent Work">
-        <!-- B2B operations -->
-        <article class="f-horizon-card">
-          <aside class="f-horizon-aside">
-            <span class="f-horizon-num">01 · Operating Experience</span>
-            <h3>The Work Behind an Order</h3>
-            <span class="f-horizon-sub">Dong Thap · 2019 – Present</span>
-          </aside>
-          <div class="f-horizon-content">
-            <p>
-              At Phong Phu Stationery, I worked with <strong>50+ institutional and corporate accounts and 10+ supplier partners</strong>. My day-to-day work connected sourcing, pricing, stock, dispatch, payment collection, and the problems that surfaced between them.
-            </p>
-            <p>
-              Customers ranged from schools, hospitals, courts, and public-sector units to factories, SMEs, and corporate branches, including Olam and Emivest. The challenge was to meet their needs while keeping purchasing, stock, delivery, margin, and cash flow workable.
-            </p>
-            <div class="f-horizon-highlights">
-              <div class="f-horizon-chip">
-                <strong>Replacing an affected product line</strong>
-                When a supplier cut the discount on a product line from 22% to 15%, I checked the policy, found five alternative suppliers and brands, and tested samples with customers. More than 80% of the affected line was replaced within one week.
-              </div>
-              <div class="f-horizon-chip">
-                <strong>Making handover possible</strong>
-                I moved product, pricing, VAT, invoice, inventory, and account data into KiotViet and recruited an experienced manager, with part-time and delivery support. That made the work easier to hand over.
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Commercial and legal support -->
-        <article class="f-horizon-card">
-          <aside class="f-horizon-aside">
-            <span class="f-horizon-num">02 · Commercial &amp; Legal Support</span>
-            <h3>Care With Records and Decisions</h3>
-            <span class="f-horizon-sub">Ho Chi Minh City &amp; Dong Thap</span>
-          </aside>
-          <div class="f-horizon-content">
-            <p>
-              I bring a <strong>Bachelor of Commercial Law from Ho Chi Minh City University of Law</strong> and a <strong>Lawyer Training Certificate from the Judicial Academy</strong> to this work. I try to keep the record clear: what was agreed, what happened, and what still needs to be checked.
-            </p>
-            <p>
-              Alongside business operations, I provide independent commercial and legal operations support to 4+ continuing clients. I help organize documents, timelines, options, and next steps, while keeping client details confidential.
-            </p>
-            <div class="f-horizon-highlights">
-              <div class="f-horizon-chip">
-                <strong>Preparing commercial matters</strong>
-                For 2+ resolved commercial matters with a combined value above VND 5B, I organized evidence, timelines, obligations, and negotiation preparation.
-              </div>
-              <div class="f-horizon-chip">
-                <strong>Keeping tax documents organized</strong>
-                I supported quarterly tax-document workflows for 5+ business households with annual revenue above VND 1B, alongside confidential handling of contract, lease, payment, vendor, and commercial records.
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Independent research and prototypes -->
-        <article class="f-horizon-card">
-          <aside class="f-horizon-aside">
-            <span class="f-horizon-num">03 · Independent Product Work</span>
-            <h3>Learning Through Product Work</h3>
-            <span class="f-horizon-sub">${totalWorks} Public Research &amp; Applied Works</span>
-          </aside>
-          <div class="f-horizon-content">
-            <p>
-              Earlier creator and community work exposed me to venue activations, short-form content, platform rules, monetization, Content ID, copyright, and account-support issues. Those experiences gave me a closer view of the day-to-day needs of creators and fans.
-            </p>
-            <p>
-              In 2026, I completed the <strong>Value Chain Management Specialization at the University of Illinois Urbana-Champaign</strong>. My ${totalWorks} public works explore HealthTech, fandom commerce, platform governance, and AI decision systems using public sources. They are independent studies and prototypes, with assumptions and unanswered questions kept visible.
-            </p>
-            <div class="f-horizon-highlights">
-              <div class="f-horizon-chip">
-                <strong>Elfie &amp; FanMe: planning what to test</strong>
-                Elfie explores activation quality, event taxonomy, user routines, safeguards, and a 0–12-week validation roadmap. FanMe lays out a controlled artist-launch plan covering onboarding, commerce, fulfilment, recovery, metrics, and go/no-go decisions.
-              </div>
-              <div class="f-horizon-chip">
-                <strong>Customer resolution &amp; Explainable Trust</strong>
-                The Shopee and Adobe studies map what a customer can understand and do when an account is restricted. Explainable Trust is now a static, interactive showcase: a fictional case makes evidence, revision history, reasoning, and unresolved gaps visible.
-              </div>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <!-- Working approach -->
-      <section class="f-about-manifesto">
-        <span class="f-manifesto-kicker">HOW I TRY TO WORK</span>
-        <blockquote>
-          “I like to start with what happened, what people need, and what the record actually supports. Then I try to make the next step clearer: who owns it, what they need, and how we’ll know it helped.”
-        </blockquote>
-        <span class="f-manifesto-author">— Phạm Thanh Phú</span>
-      </section>
-
-      <!-- Skills and learning -->
-      <section aria-label="Skills and Learning">
-        <div class="f-human-head">
-          <h2>Skills I Use &amp; Topics I’m Developing</h2>
-          <span>Built through operating experience, formal study, and independent projects.</span>
-        </div>
-        <div class="f-about-toolkit-grid">
-          <div class="f-toolkit-col">
-            <h4>Operations &amp; Delivery</h4>
-            <ul class="f-toolkit-list">
-              <li>Process mapping &amp; SOPs</li>
-              <li>Sourcing &amp; supplier coordination</li>
-              <li>Inventory &amp; KiotViet workflows</li>
-              <li>Cash flow &amp; margin tracking</li>
-              <li>Partner coordination &amp; quality checks</li>
-              <li>Handling operating exceptions</li>
-            </ul>
-          </div>
-          <div class="f-toolkit-col">
-            <h4>Product &amp; Strategy</h4>
-            <ul class="f-toolkit-list">
-              <li>Problem framing &amp; user journeys</li>
-              <li>Event taxonomy &amp; funnel metrics</li>
-              <li>Experiment plans &amp; safeguards</li>
-              <li>Value chain management (UIUC)</li>
-              <li>Pilot gates &amp; repeatability</li>
-              <li>Customer resolution &amp; review paths</li>
-            </ul>
-          </div>
-          <div class="f-toolkit-col">
-            <h4>Data, Legal &amp; AI</h4>
-            <ul class="f-toolkit-list">
-              <li>Excel, Google Sheets, SQL, Python, Tableau</li>
-              <li>Commercial records &amp; legal training</li>
-              <li>Generative AI tools (ChatGPT, Claude)</li>
-              <li>AI provenance &amp; evaluation studies</li>
-              <li>Notion, Asana, Trello</li>
-              <li>English (TOEIC 825)</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Opportunities and contact -->
-      <section class="f-about-cta-dock">
-        <div class="f-cta-dock-text">
-          <h3>Let’s talk.</h3>
-          <p>Open to roles in Business Operations, Product Operations, and Product Strategy in Ho Chi Minh City.</p>
-        </div>
-        <div class="f-cta-dock-btns">
-          <a href="mailto:phamthanhphu97@gmail.com" class="f-about-btn primary">Email me ↗</a>
-          <a href="https://www.linkedin.com/in/yunero1206/" target="_blank" rel="noreferrer" class="f-about-btn secondary">LinkedIn ↗</a>
-          <a href="/work" class="f-about-btn secondary">Browse ${totalWorks} Works →</a>
-        </div>
-      </section>
-    </div>
-  </main>
+  ${aboutContent(totalWorks)}
   ${layoutFooter("Ho Chi Minh City · 2026", nonce, true)}
 </body>
 </html>`;
